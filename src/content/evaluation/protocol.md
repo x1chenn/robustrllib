@@ -4,7 +4,7 @@ Every score of the benchmark is produced by one evaluator under one protocol. A 
 trained on the nominal task, its last checkpoint is frozen, and the checkpoint is scored on a
 grid of shift conditions.
 
-## At a glance
+## Summary
 
 | Aspect | Evaluation protocol |
 |---|---|

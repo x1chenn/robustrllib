@@ -4,12 +4,13 @@ RobustRLlib declares a deployment shift as data. A shift has a source, which say
 perturbed, and a mode, which says how the intervention is built. A shifted environment is a base
 task with one wrapper per shift, and the task code is not modified.
 
-![Four panels: a Dynamic shift that shortens a leg, an Observation shift that adds Gaussian noise to an image, an Action shift that perturbs the action, and a Reward/cost shift](../assets/figures/shifts.png){ width="720" }
+![The agent and the environment form a loop. The Observation shift sits between environment and agent, the Action shift between agent and environment, the Dynamic shift inside the environment, and the Reward/cost shift on the learning signal. The Latency shift and the Semantic shift act at several points of the loop.](../assets/figures/shift-loop.svg){ width="860" }
 
-*Four of the six shift sources: Dynamic shift, Observation shift, Action shift and Reward/cost
-shift.*
+*The six shift sources on the loop between agent and environment, in the notation of the
+paper. Four of them act on one component of the loop. The Latency shift and the Semantic shift
+act at several points, which the small tags mark.*
 
-## At a glance
+## Summary
 
 | Aspect | Shift sources and modes |
 |---|---|
@@ -32,6 +33,20 @@ A shift source names the component of the decision process that is perturbed.
 | Reward/cost shift | The reward, or a cost field in `info` | `reward`, `cost` | [Reward/cost shift](sources/reward-cost.md) |
 | Latency shift | When actions, observations and rewards arrive | `latency` | [Latency shift](sources/latency.md) |
 | Semantic shift | Colours, lights, cameras and object positions | `appearance`; `dynamics` for position offsets | [Semantic shift](sources/semantic.md) |
+
+The definitions of the figure, one shift source per row:
+
+| Shift | Definition |
+|---|---|
+| [Dynamic shift](sources/dynamic.md) | ![Dynamic shift: the next state is drawn from the transition kernel P with shift parameter theta-p, given x_t](../assets/figures/formula-dynamic.svg){ width="119" } |
+| [Observation shift](sources/observation.md) | ![Observation shift: the observation shown to the policy is drawn from the observation kernel O with shift parameter theta-o, given the state](../assets/figures/formula-observation.svg){ width="104" } |
+| [Action shift](sources/action.md) | ![Action shift: the executed action is drawn from the action kernel A with shift parameter theta-a, given the state and the intended action](../assets/figures/formula-action.svg){ width="125" } |
+| [Reward/cost shift](sources/reward-cost.md) | ![Reward/cost shift: the reward and the cost are drawn from the kernels R and C with shift parameters theta-r and theta-c, given y_t](../assets/figures/formula-reward-cost.svg){ width="224" } |
+| [Latency shift](sources/latency.md) | ![Latency shift: the observation is interpolated from the history at time t minus delta-o, the executed action is the action issued delta-a steps earlier, and the nominal transition runs with control period kappa-t](../assets/figures/formula-latency.svg){ width="381" } |
+| [Semantic shift](sources/semantic.md) | ![Semantic shift: observation, transition, reward and cost all depend on the semantic shift parameter theta-z](../assets/figures/formula-semantic.svg){ width="435" } |
+
+A parameter with a superscript belongs to one shift source. Setting every parameter to its
+nominal value gives back the nominal task.
 
 ## Shift modes
 

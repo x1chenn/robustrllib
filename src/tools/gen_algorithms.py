@@ -8,8 +8,8 @@ Writes content/algorithms/index.md (all methods), one overview page per group
 (content/algorithms/<group>/<slug>.md). The groups are the ones of the sidebar:
 standard, robust-online, robust-offline, robust-safe.
 
-A method page carries two tables of numbers, the library-wide grid and its
-breakdown by task, and nothing else about results. Both are computed here from
+A method page carries two tables of numbers, "Robust performance" on the
+library-wide grid and its breakdown "By task", and nothing else about results. Both are computed here from
 data/results/part1_master.csv with the aggregation the paper uses: condition ->
 axis -> task -> method, equal weight at every level, on the pre-registered
 selection of 220 conditions. The script re-derives the paper's headline numbers
@@ -244,7 +244,7 @@ def method_page(algo, fam, refs, p1):
     if algo.get("budget"):
         rows.append(("Training budget", algo["budget"]))
     rows.append(("Original paper", cite(refs, algo["ref"]["key"])))
-    out += ["## At a glance", "", "| Property | Value |", "|---|---|"]
+    out += ["## Features", "", "| Feature | Value |", "|---|---|"]
     out += [f"| {k} | {v} |" for k, v in rows] + [""]
 
     out += ["## Mechanism", "", algo["mechanism"].rstrip(), ""]
@@ -273,7 +273,7 @@ def method_page(algo, fam, refs, p1):
     variants = [v for v in algo["variants"] if v.get("part1")]
     if variants and group != "robust-safe":
         regime = variants[0]["part1"][0]
-        out += ["## Library-wide grid", "", GRID_NOTE, "",
+        out += ["## Robust performance", "", GRID_NOTE, "",
                 "| Method " + GRID_HEAD, "|---|" + GRID_RULE]
         shown = set()
         for v in variants:
@@ -319,7 +319,7 @@ def group_page(group, spec, p1):
     algos = [a for a in spec["algorithms"] if group_of(a) == group]
     title = GROUP_TITLE[group]
     out = ["---", f"title: {title}", "---", "", f"# {title}", "", GROUP_INTRO[group], "",
-           "## At a glance", "", f"| Aspect | {title} |", "|---|---|"]
+           "## Features", "", f"| Feature | {title} |", "|---|---|"]
     out += [f"| {k} | {v} |" for k, v in GROUP_GLANCE[group]] + [""]
 
     out += ["## Supported methods", ""]
@@ -348,7 +348,7 @@ def group_page(group, spec, p1):
                 "algorithm card, the task card and the evaluation grid of the run. **Every "
                 "method keeps its native training recipe and budget**; what is shared is the "
                 "evaluation.", "",
-                "## Library-wide grid", "", GRID_NOTE, "",
+                "## Robust performance", "", GRID_NOTE, "",
                 "| Method " + GRID_HEAD, "|---|" + GRID_RULE]
         for a in algos:
             for v in a["variants"]:

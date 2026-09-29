@@ -4,11 +4,15 @@ A Latency shift changes timing: when an action takes effect, when an observation
 long a control period lasts, and when a reward is paid. A delay changes the loop that the policy
 closes around the plant, which noise on an observation or an action cannot imitate.
 
+![The loop between agent and environment, with the Latency shift highlighted](../../assets/figures/shift-loop-latency.svg){ width="760" }
+
+*The Latency shift acts on timing: the delay of the observation, the delay of the action and the control period.*
+
 ![Two curves over time: the time stamp the policy issued a command for and the time stamp at which it is executed](../../assets/figures/latency.png){ width="720" }
 
 *Execution latency separates the time a command is issued from the time it takes effect.*
 
-## At a glance
+## Properties
 
 | Aspect | Latency shift |
 |---|---|

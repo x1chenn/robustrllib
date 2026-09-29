@@ -10,9 +10,9 @@ title: ATLA-SA
 
 ATLA plus a state-adversarial KL regulariser and a 100-step recurrent policy.
 
-## At a glance
+## Features
 
-| Property | Value |
+| Feature | Value |
 |---|---|
 | Group | [Robust Online Algorithms](index.md) |
 | Setting | Online |
@@ -51,7 +51,7 @@ python baselines/atla/train_atla.py \
 
 Training is on the nominal task. The configuration files are explained in [Run a Method](../run-a-method.md), and the evaluation of the frozen checkpoint in [Evaluation Protocol](../../evaluation/protocol.md).
 
-## Library-wide grid
+## Robust performance
 
 Normalized score of the frozen last checkpoint. Q1 to Q4 are the severity quartiles of each perturbation ladder, ordered by displacement from the nominal setting, and *All* covers every shifted condition.
 

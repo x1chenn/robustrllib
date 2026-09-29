@@ -6,9 +6,9 @@ title: Robust Online Algorithms
 
 Robust online methods learn through continued interaction with the environment. They are organised by where robustness enters: learner-centric methods change how experience is optimised, and environment-centric methods collect their rollouts in a perturbed environment.
 
-## At a glance
+## Features
 
-| Aspect | Robust Online Algorithms |
+| Feature | Robust Online Algorithms |
 |---|---|
 | Interface | One experiment file per run, launched with a training script |
 | Method selection | The `algorithm` card named by the experiment file |
@@ -52,7 +52,7 @@ Every method page gives the command for that method. [Run a Method](../run-a-met
 
 Experiment files are in `robustrllib/configs/experiment/`. Each names the algorithm card, the task card and the evaluation grid of the run. **Every method keeps its native training recipe and budget**; what is shared is the evaluation.
 
-## Library-wide grid
+## Robust performance
 
 Normalized score of the frozen last checkpoint. Q1 to Q4 are the severity quartiles of each perturbation ladder, ordered by displacement from the nominal setting, and *All* covers every shifted condition.
 

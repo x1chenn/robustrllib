@@ -36,6 +36,7 @@ The site has two parts that share one colour system:
     │   │   └── add-a-backend.md
     │   ├── evaluation/protocol.md
     │   └── assets/               # stylesheets and figures
+    ├── figures/              # LaTeX sources of the diagrams and formulas
     ├── data/
     │   ├── algorithms.yaml   # one record per algorithm: the single source of truth
     │   ├── references.yaml   # original papers
@@ -44,6 +45,7 @@ The site has two parts that share one colour system:
     └── tools/
         ├── gen_algorithms.py # data -> method pages and group overviews
         ├── sync_landing.py   # data -> algorithm table on the landing page
+        ├── render_figures.py # LaTeX -> SVG; needs pdflatex, run only when a figure changes
         ├── finalize.py       # makes the built output reproducible
         ├── check_site.py     # pre-publish scan
         ├── make_preview.py   # a copy of the site that opens from disk
@@ -56,12 +58,16 @@ The site has two parts that share one colour system:
   shift, Reward/cost shift, Latency shift and Semantic shift; the five modes are Stochastic,
   Adversarial, Parametric, Non-stationary and Composition.
 - A topic page has a noun-phrase title, an opening of at most three sentences, a first
-  section **At a glance** (a two-column table) and a closing list of rules. A section is one
-  or two sentences followed by a code block or a table.
-- No formulas. No warning or important callouts: a caveat goes into the running text with
-  its key clause in bold.
+  section that is a two-column table, and a closing list of rules. The first section is
+  called **Features** on algorithm pages, **Properties** on the pages of shift sources and
+  modes, and **Summary** elsewhere. A section is one or two sentences followed by a code
+  block or a table.
+- No formulas in the text. The definitions of the shift sources are shown in figures that
+  LaTeX typesets (`src/figures/`, rendered by `src/tools/render_figures.py`).
+- No warning or important callouts: a caveat goes into the running text with its key clause
+  in bold.
 - The documentation explains how to use the library. It does not discuss results. A method
-  page carries two tables of numbers, the library-wide grid and its breakdown by task.
+  page carries two tables of numbers, **Robust performance** and **By task**.
 
 ## Branches
 

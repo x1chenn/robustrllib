@@ -4,7 +4,7 @@ In the Non-stationary mode the intensity of a shift changes within the episode. 
 by the `schedule` field of a shift: the schedule produces a multiplier from the step counter,
 and the wrapper applies the multiplier to the intensity of the shift.
 
-## At a glance
+## Properties
 
 | Aspect | Non-stationary |
 |---|---|

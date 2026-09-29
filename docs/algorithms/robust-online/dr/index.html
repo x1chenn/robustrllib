@@ -86,6 +86,20 @@
                 <li class="toctree-l2"><a class="reference internal" href="../rarl/">RARL</a>
                 </li>
                 <li class="toctree-l2 current"><a class="reference internal current" href="#">DR</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#features">Features</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mechanism">Mechanism</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-the-method">Run the method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#robust-performance">Robust performance</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#by-task">By task</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#references">References</a>
+    </li>
+    </ul>
                 </li>
     </ul>
                   </li>
@@ -203,11 +217,11 @@
 <p class="rl-badges"><span class="rl-badge rl-setting">Online</span><span class="rl-badge rl-fam-environment">Environment-centric</span><span class="rl-badge rl-plain">Base · SAC / PPO</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 
 <p>Simulator parameters resampled every episode from fixed ranges.</p>
-<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Property</th>
+<th>Feature</th>
 <th>Value</th>
 </tr>
 </thead>
@@ -293,7 +307,7 @@ training range. DR-PPO is used on the Isaac Lab tasks.</p>
 </tbody>
 </table>
 <p>Training rollouts come from the method's own perturbed environment. The configuration files are explained in <a href="../../run-a-method/">Run a Method</a>, and the evaluation of the frozen checkpoint in <a href="../../../evaluation/protocol/">Evaluation Protocol</a>.</p>
-<h2 id="library-wide-grid">Library-wide grid<a class="headerlink" href="#library-wide-grid" title="Permanent link">&para;</a></h2>
+<h2 id="robust-performance">Robust performance<a class="headerlink" href="#robust-performance" title="Permanent link">&para;</a></h2>
 <p>Normalized score of the frozen last checkpoint. Q1 to Q4 are the severity quartiles of each perturbation ladder, ordered by displacement from the nominal setting, and <em>All</em> covers every shifted condition.</p>
 <table>
 <thead>

@@ -3,7 +3,15 @@
 An Action shift changes the command between the policy and the simulator. The policy issues one
 action and the task executes another; the result is always clipped to the action space.
 
-## At a glance
+![The loop between agent and environment, with the Action shift highlighted](../../assets/figures/shift-loop-action.svg){ width="760" }
+
+*The Action shift acts between the agent and the environment: the environment executes a perturbed action.*
+
+![A point-mass maze seen from above; two arrows show the intended and the perturbed action](../../assets/figures/example-action.png){ width="440" }
+
+*An Action shift that turns the action the policy issued.*
+
+## Properties
 
 | Aspect | Action shift |
 |---|---|

@@ -141,6 +141,26 @@
                 <li class="toctree-l2"><a class="reference internal" href="../reward-cost/">Reward/cost shift</a>
                 </li>
                 <li class="toctree-l2 current"><a class="reference internal current" href="#">Latency shift</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#properties">Properties</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-modes">Supported modes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#declare-the-shift">Declare the shift</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#delayed-actions">Delayed actions</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#variable-control-period">Variable control period</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#delayed-reward">Delayed reward</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rules">Rules</a>
+    </li>
+    </ul>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../semantic/">Semantic shift</a>
                 </li>
@@ -201,9 +221,11 @@
 <p>A Latency shift changes timing: when an action takes effect, when an observation arrives, how
 long a control period lasts, and when a reward is paid. A delay changes the loop that the policy
 closes around the plant, which noise on an observation or an action cannot imitate.</p>
+<p><img alt="The loop between agent and environment, with the Latency shift highlighted" src="../../../assets/figures/shift-loop-latency.svg" width="760" /></p>
+<p><em>The Latency shift acts on timing: the delay of the observation, the delay of the action and the control period.</em></p>
 <p><img alt="Two curves over time: the time stamp the policy issued a command for and the time stamp at which it is executed" src="../../../assets/figures/latency.png" width="720" /></p>
 <p><em>Execution latency separates the time a command is issued from the time it takes effect.</em></p>
-<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>

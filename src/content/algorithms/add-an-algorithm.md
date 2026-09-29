@@ -4,7 +4,7 @@ A new method is a class with four methods. It is registered from a configuration
 an edit to the library, and runs through the same train and evaluate pipeline as the built-in
 algorithms.
 
-## At a glance
+## Summary
 
 | Aspect | Custom algorithm |
 |---|---|

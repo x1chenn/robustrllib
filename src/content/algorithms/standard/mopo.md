@@ -10,9 +10,9 @@ title: MOPO
 
 SAC on real and model data, with rollout rewards penalised by model uncertainty.
 
-## At a glance
+## Features
 
-| Property | Value |
+| Feature | Value |
 |---|---|
 | Group | [Standard Algorithms](index.md) |
 | Setting | Offline |
@@ -43,7 +43,7 @@ python baselines/mopo/train_mopo.py \
 
 Training is on the nominal task. The configuration files are explained in [Run a Method](../run-a-method.md), and the evaluation of the frozen checkpoint in [Evaluation Protocol](../../evaluation/protocol.md).
 
-## Library-wide grid
+## Robust performance
 
 Normalized score of the frozen last checkpoint. Q1 to Q4 are the severity quartiles of each perturbation ladder, ordered by displacement from the nominal setting, and *All* covers every shifted condition.
 

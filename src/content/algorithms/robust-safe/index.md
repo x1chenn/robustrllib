@@ -6,9 +6,9 @@ title: Robust Safe Algorithms
 
 Robust safe methods add a cost constraint and make it hold under shifted dynamics. They are implemented in the online setting on a shared PPO learner and run on the Isaac Lab tasks.
 
-## At a glance
+## Features
 
-| Aspect | Robust Safe Algorithms |
+| Feature | Robust Safe Algorithms |
 |---|---|
 | Interface | The Isaac Lab training and evaluation recipe |
 | Shared learner | One PPO implementation for every method |

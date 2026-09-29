@@ -10,9 +10,9 @@ title: SPiDR
 
 Constrained learning under domain randomisation with a pessimistic cost penalty.
 
-## At a glance
+## Features
 
-| Property | Value |
+| Feature | Value |
 |---|---|
 | Group | [Robust Safe Algorithms](index.md) |
 | Setting | Online, with a cost constraint |

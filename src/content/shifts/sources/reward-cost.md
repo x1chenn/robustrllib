@@ -4,7 +4,15 @@ A Reward/cost shift changes the learning signal. It perturbs the scalar reward r
 `step`, or a cost field of the `info` dictionary, and leaves the observation, the action and
 the dynamics untouched.
 
-## At a glance
+![The loop between agent and environment, with the Reward/cost shift highlighted](../../assets/figures/shift-loop-reward-cost.svg){ width="760" }
+
+*The Reward/cost shift acts on the learning signal: the reward and the cost that reach the learner are perturbed.*
+
+![A bar chart with two series of rewards over several steps](../../assets/figures/example-reward-cost.png){ width="440" }
+
+*A Reward/cost shift changes the reward at every step.*
+
+## Properties
 
 | Aspect | Reward/cost shift |
 |---|---|

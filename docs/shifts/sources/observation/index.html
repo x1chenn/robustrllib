@@ -135,6 +135,18 @@
                 <li class="toctree-l2"><a class="reference internal" href="../dynamic/">Dynamic shift</a>
                 </li>
                 <li class="toctree-l2 current"><a class="reference internal current" href="#">Observation shift</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#properties">Properties</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-modes">Supported modes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#declare-the-shift">Declare the shift</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rules">Rules</a>
+    </li>
+    </ul>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../action/">Action shift</a>
                 </li>
@@ -200,7 +212,11 @@
                 <h1 id="observation-shift">Observation shift<a class="headerlink" href="#observation-shift" title="Permanent link">&para;</a></h1>
 <p>An Observation shift changes what the policy is shown. It perturbs the observation on its way
 from the task to the policy and leaves the state of the simulator untouched.</p>
-<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<p><img alt="The loop between agent and environment, with the Observation shift highlighted" src="../../../assets/figures/shift-loop-observation.svg" width="760" /></p>
+<p><em>The Observation shift acts between the environment and the agent: the policy is shown a perturbed observation.</em></p>
+<p><img alt="A camera image of a robot arm at a table, covered with Gaussian noise" src="../../../assets/figures/example-observation.png" width="440" /></p>
+<p><em>An Observation shift that adds Gaussian noise to the camera image.</em></p>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>

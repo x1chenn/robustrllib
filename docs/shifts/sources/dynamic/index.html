@@ -133,6 +133,18 @@
                   <li class="toctree-l1 current"><a class="reference internal current" >Shift Sources</a>
     <ul class="current">
                 <li class="toctree-l2 current"><a class="reference internal current" href="#">Dynamic shift</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#properties">Properties</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-modes">Supported modes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#declare-the-shift">Declare the shift</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rules">Rules</a>
+    </li>
+    </ul>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../observation/">Observation shift</a>
                 </li>
@@ -200,7 +212,11 @@
                 <h1 id="dynamic-shift">Dynamic shift<a class="headerlink" href="#dynamic-shift" title="Permanent link">&para;</a></h1>
 <p>A Dynamic shift changes how the world moves. It edits a physical parameter of the simulator,
 applies an external force to a body, or perturbs the simulator state between steps.</p>
-<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<p><img alt="The loop between agent and environment, with the Dynamic shift highlighted" src="../../../assets/figures/shift-loop-dynamic.svg" width="760" /></p>
+<p><em>The Dynamic shift acts inside the environment: the next state is drawn from a shifted transition.</em></p>
+<p><img alt="A legged robot on a checkerboard floor; an arrow marks the leg that is made shorter" src="../../../assets/figures/example-dynamic.png" width="440" /></p>
+<p><em>A Dynamic shift that shortens one leg of the robot.</em></p>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>

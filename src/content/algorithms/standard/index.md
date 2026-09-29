@@ -6,9 +6,9 @@ title: Standard Algorithms
 
 Standard algorithms carry no robustness mechanism. They are the base learners that the robust methods are built on, and the reference that every robust method is measured against. The library holds four offline and two online standard algorithms.
 
-## At a glance
+## Features
 
-| Aspect | Standard Algorithms |
+| Feature | Standard Algorithms |
 |---|---|
 | Role | Base learner of the robust methods, and reference for comparison |
 | Interface | One experiment file per run, launched with a training script |
@@ -51,7 +51,7 @@ Every method page gives the command for that method. [Run a Method](../run-a-met
 
 Experiment files are in `robustrllib/configs/experiment/`. Each names the algorithm card, the task card and the evaluation grid of the run. **Every method keeps its native training recipe and budget**; what is shared is the evaluation.
 
-## Library-wide grid
+## Robust performance
 
 Normalized score of the frozen last checkpoint. Q1 to Q4 are the severity quartiles of each perturbation ladder, ordered by displacement from the nominal setting, and *All* covers every shifted condition.
 

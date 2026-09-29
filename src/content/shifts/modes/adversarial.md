@@ -4,7 +4,7 @@ In the Adversarial mode the intervention is computed to counter the policy. It i
 the action the policy just chose, or of the observation the policy is about to read, and it
 needs no training of an adversary.
 
-## At a glance
+## Properties
 
 | Aspect | Adversarial |
 |---|---|

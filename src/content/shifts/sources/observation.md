@@ -3,7 +3,15 @@
 An Observation shift changes what the policy is shown. It perturbs the observation on its way
 from the task to the policy and leaves the state of the simulator untouched.
 
-## At a glance
+![The loop between agent and environment, with the Observation shift highlighted](../../assets/figures/shift-loop-observation.svg){ width="760" }
+
+*The Observation shift acts between the environment and the agent: the policy is shown a perturbed observation.*
+
+![A camera image of a robot arm at a table, covered with Gaussian noise](../../assets/figures/example-observation.png){ width="440" }
+
+*An Observation shift that adds Gaussian noise to the camera image.*
+
+## Properties
 
 | Aspect | Observation shift |
 |---|---|

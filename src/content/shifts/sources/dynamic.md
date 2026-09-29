@@ -3,7 +3,15 @@
 A Dynamic shift changes how the world moves. It edits a physical parameter of the simulator,
 applies an external force to a body, or perturbs the simulator state between steps.
 
-## At a glance
+![The loop between agent and environment, with the Dynamic shift highlighted](../../assets/figures/shift-loop-dynamic.svg){ width="760" }
+
+*The Dynamic shift acts inside the environment: the next state is drawn from a shifted transition.*
+
+![A legged robot on a checkerboard floor; an arrow marks the leg that is made shorter](../../assets/figures/example-dynamic.png){ width="440" }
+
+*A Dynamic shift that shortens one leg of the robot.*
+
+## Properties
 
 | Aspect | Dynamic shift |
 |---|---|

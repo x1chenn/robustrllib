@@ -4,7 +4,7 @@ A backend is a simulator the shift wrappers can reach into. Most shifts act on w
 through `reset` and `step` and need nothing from it; the shifts that edit the simulator go
 through a dynamics adapter.
 
-## At a glance
+## Summary
 
 | Aspect | Backend adapter |
 |---|---|

@@ -4,7 +4,7 @@ In the Composition mode several shifts act at once. It is declared by the list o
 entry becomes one wrapper, and the order of the list is the order in which the wrappers are
 stacked.
 
-## At a glance
+## Properties
 
 | Aspect | Composition |
 |---|---|

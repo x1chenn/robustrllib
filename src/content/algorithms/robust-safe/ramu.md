@@ -10,9 +10,9 @@ title: RAMU
 
 A risk measure over sampled next-state perturbations, applied to reward and cost targets.
 
-## At a glance
+## Features
 
-| Property | Value |
+| Feature | Value |
 |---|---|
 | Group | [Robust Safe Algorithms](index.md) |
 | Setting | Online, with a cost constraint |

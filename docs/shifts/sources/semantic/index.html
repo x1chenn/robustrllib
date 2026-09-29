@@ -143,6 +143,18 @@
                 <li class="toctree-l2"><a class="reference internal" href="../latency/">Latency shift</a>
                 </li>
                 <li class="toctree-l2 current"><a class="reference internal current" href="#">Semantic shift</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#properties">Properties</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-modes">Supported modes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#declare-the-shift">Declare the shift</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rules">Rules</a>
+    </li>
+    </ul>
                 </li>
     </ul>
                   </li>
@@ -200,9 +212,11 @@
                 <h1 id="semantic-shift">Semantic shift<a class="headerlink" href="#semantic-shift" title="Permanent link">&para;</a></h1>
 <p>A Semantic shift changes what the scene looks like and where things are. It edits the colour of
 objects, the lights and the cameras, and it displaces objects and cameras by a position offset.</p>
+<p><img alt="The loop between agent and environment, with the Semantic shift highlighted" src="../../../assets/figures/shift-loop-semantic.svg" width="760" /></p>
+<p><em>The Semantic shift acts on the scene, and through it on the observation, the transition and the reward.</em></p>
 <p><img alt="Three renderings of a manipulation scene: nominal, with changed object colours, and with a displaced object" src="../../../assets/figures/semantic.png" width="720" /></p>
 <p><em>A nominal scene, an appearance change and a displacement.</em></p>
-<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>

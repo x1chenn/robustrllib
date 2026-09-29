@@ -3,11 +3,15 @@
 A Semantic shift changes what the scene looks like and where things are. It edits the colour of
 objects, the lights and the cameras, and it displaces objects and cameras by a position offset.
 
+![The loop between agent and environment, with the Semantic shift highlighted](../../assets/figures/shift-loop-semantic.svg){ width="760" }
+
+*The Semantic shift acts on the scene, and through it on the observation, the transition and the reward.*
+
 ![Three renderings of a manipulation scene: nominal, with changed object colours, and with a displaced object](../../assets/figures/semantic.png){ width="720" }
 
 *A nominal scene, an appearance change and a displacement.*
 
-## At a glance
+## Properties
 
 | Aspect | Semantic shift |
 |---|---|

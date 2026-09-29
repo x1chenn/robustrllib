@@ -129,6 +129,24 @@
               <p class="caption"><span class="caption-text">Shift Sources and Modes</span></p>
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Overview</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#shift-sources">Shift sources</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#shift-modes">Shift modes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sources-by-mode">Sources by mode</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#declare-a-shift">Declare a shift</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#declare-a-shift-in-yaml">Declare a shift in YAML</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#inspect-the-stack">Inspect the stack</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#declaration-rules">Declaration rules</a>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" >Shift Sources</a>
     <ul>
@@ -200,10 +218,11 @@
 <p>RobustRLlib declares a deployment shift as data. A shift has a source, which says what is
 perturbed, and a mode, which says how the intervention is built. A shifted environment is a base
 task with one wrapper per shift, and the task code is not modified.</p>
-<p><img alt="Four panels: a Dynamic shift that shortens a leg, an Observation shift that adds Gaussian noise to an image, an Action shift that perturbs the action, and a Reward/cost shift" src="../assets/figures/shifts.png" width="720" /></p>
-<p><em>Four of the six shift sources: Dynamic shift, Observation shift, Action shift and Reward/cost
-shift.</em></p>
-<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<p><img alt="The agent and the environment form a loop. The Observation shift sits between environment and agent, the Action shift between agent and environment, the Dynamic shift inside the environment, and the Reward/cost shift on the learning signal. The Latency shift and the Semantic shift act at several points of the loop." src="../assets/figures/shift-loop.svg" width="860" /></p>
+<p><em>The six shift sources on the loop between agent and environment, in the notation of the
+paper. Four of them act on one component of the loop. The Latency shift and the Semantic shift
+act at several points, which the small tags mark.</em></p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -288,6 +307,43 @@ shift.</em></p>
 </tr>
 </tbody>
 </table>
+<p>The definitions of the figure, one shift source per row:</p>
+<table>
+<thead>
+<tr>
+<th>Shift</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="sources/dynamic/">Dynamic shift</a></td>
+<td><img alt="Dynamic shift: the next state is drawn from the transition kernel P with shift parameter theta-p, given x_t" src="../assets/figures/formula-dynamic.svg" width="119" /></td>
+</tr>
+<tr>
+<td><a href="sources/observation/">Observation shift</a></td>
+<td><img alt="Observation shift: the observation shown to the policy is drawn from the observation kernel O with shift parameter theta-o, given the state" src="../assets/figures/formula-observation.svg" width="104" /></td>
+</tr>
+<tr>
+<td><a href="sources/action/">Action shift</a></td>
+<td><img alt="Action shift: the executed action is drawn from the action kernel A with shift parameter theta-a, given the state and the intended action" src="../assets/figures/formula-action.svg" width="125" /></td>
+</tr>
+<tr>
+<td><a href="sources/reward-cost/">Reward/cost shift</a></td>
+<td><img alt="Reward/cost shift: the reward and the cost are drawn from the kernels R and C with shift parameters theta-r and theta-c, given y_t" src="../assets/figures/formula-reward-cost.svg" width="224" /></td>
+</tr>
+<tr>
+<td><a href="sources/latency/">Latency shift</a></td>
+<td><img alt="Latency shift: the observation is interpolated from the history at time t minus delta-o, the executed action is the action issued delta-a steps earlier, and the nominal transition runs with control period kappa-t" src="../assets/figures/formula-latency.svg" width="381" /></td>
+</tr>
+<tr>
+<td><a href="sources/semantic/">Semantic shift</a></td>
+<td><img alt="Semantic shift: observation, transition, reward and cost all depend on the semantic shift parameter theta-z" src="../assets/figures/formula-semantic.svg" width="435" /></td>
+</tr>
+</tbody>
+</table>
+<p>A parameter with a superscript belongs to one shift source. Setting every parameter to its
+nominal value gives back the nominal task.</p>
 <h2 id="shift-modes">Shift modes<a class="headerlink" href="#shift-modes" title="Permanent link">&para;</a></h2>
 <p>A mode names how the intervention is built. Three modes are selected by the mode name of a
 shift; the other two are selected by the <code>schedule</code> field and by the list of shifts.</p>

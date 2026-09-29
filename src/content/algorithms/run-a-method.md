@@ -4,7 +4,7 @@ A method is launched from an experiment file. The file names an algorithm card, 
 an evaluation grid, and carries the training budget. Every bundled method keeps its own training
 recipe behind this one entry.
 
-## At a glance
+## Summary
 
 | Aspect | Run a method |
 |---|---|

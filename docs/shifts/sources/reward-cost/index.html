@@ -139,6 +139,18 @@
                 <li class="toctree-l2"><a class="reference internal" href="../action/">Action shift</a>
                 </li>
                 <li class="toctree-l2 current"><a class="reference internal current" href="#">Reward/cost shift</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#properties">Properties</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-modes">Supported modes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#declare-the-shift">Declare the shift</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rules">Rules</a>
+    </li>
+    </ul>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../latency/">Latency shift</a>
                 </li>
@@ -201,7 +213,11 @@
 <p>A Reward/cost shift changes the learning signal. It perturbs the scalar reward returned by
 <code>step</code>, or a cost field of the <code>info</code> dictionary, and leaves the observation, the action and
 the dynamics untouched.</p>
-<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<p><img alt="The loop between agent and environment, with the Reward/cost shift highlighted" src="../../../assets/figures/shift-loop-reward-cost.svg" width="760" /></p>
+<p><em>The Reward/cost shift acts on the learning signal: the reward and the cost that reach the learner are perturbed.</em></p>
+<p><img alt="A bar chart with two series of rewards over several steps" src="../../../assets/figures/example-reward-cost.png" width="440" /></p>
+<p><em>A Reward/cost shift changes the reward at every step.</em></p>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>

@@ -3,7 +3,7 @@
 In the Parametric mode the intervention is fixed by its parameters. Nothing is drawn and nothing
 depends on the policy, so the same declaration gives the same shifted task in every episode.
 
-## At a glance
+## Properties
 
 | Aspect | Parametric |
 |---|---|

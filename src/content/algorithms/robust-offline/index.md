@@ -6,9 +6,9 @@ title: Robust Offline Algorithms
 
 Robust offline methods learn from a fixed dataset and never interact with the environment, so they meet every shift without having seen it. They are organised by where robustness enters: the learner, the data, or a generative model of the data.
 
-## At a glance
+## Features
 
-| Aspect | Robust Offline Algorithms |
+| Feature | Robust Offline Algorithms |
 |---|---|
 | Interface | One experiment file per run, launched with a training script |
 | Method selection | The `algorithm` card named by the experiment file |
@@ -58,7 +58,7 @@ Every method page gives the command for that method. [Run a Method](../run-a-met
 
 Experiment files are in `robustrllib/configs/experiment/`. Each names the algorithm card, the task card and the evaluation grid of the run. **Every method keeps its native training recipe and budget**; what is shared is the evaluation.
 
-## Library-wide grid
+## Robust performance
 
 Normalized score of the frozen last checkpoint. Q1 to Q4 are the severity quartiles of each perturbation ladder, ordered by displacement from the nominal setting, and *All* covers every shifted condition.
 

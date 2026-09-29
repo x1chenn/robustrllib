@@ -3,7 +3,7 @@
 In the Stochastic mode the intervention is drawn at random. The wrapper of the shift draws it
 from a random generator of its own, which is seeded, so that a stochastic shift is reproducible.
 
-## At a glance
+## Properties
 
 | Aspect | Stochastic |
 |---|---|
