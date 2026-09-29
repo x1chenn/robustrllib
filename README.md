@@ -24,7 +24,7 @@ The site has two parts that share one colour system:
     │   ├── index.md              # documentation home
     │   ├── getting-started/      # overview, quick start
     │   ├── algorithms/
-    │   │   ├── index.md          # GENERATED: all methods
+    │   │   ├── index.md          # GENERATED: the algorithm book and the tables of all methods
     │   │   ├── standard/ robust-online/ robust-offline/ robust-safe/
     │   │   │                     # GENERATED: one overview and one page per method
     │   │   ├── run-a-method.md
@@ -35,7 +35,8 @@ The site has two parts that share one colour system:
     │   │   ├── modes/            # one page per mode (five)
     │   │   └── add-a-backend.md
     │   ├── evaluation/protocol.md
-    │   └── assets/               # stylesheets and figures
+    │   └── assets/               # stylesheets, figures, and the algorithm book
+    │                             # (book.css, book.js)
     ├── figures/              # LaTeX sources of the diagrams and formulas
     ├── data/
     │   ├── algorithms.yaml   # one record per algorithm: the single source of truth
@@ -43,7 +44,7 @@ The site has two parts that share one colour system:
     │   └── results/          # frozen result table that every number is computed from
     ├── theme/                # template overrides: footer, noindex
     └── tools/
-        ├── gen_algorithms.py # data -> method pages and group overviews
+        ├── gen_algorithms.py # data -> method pages, group overviews, algorithm book
         ├── sync_landing.py   # data -> algorithm table on the landing page
         ├── render_figures.py # LaTeX -> SVG; needs pdflatex, run only when a figure changes
         ├── finalize.py       # makes the built output reproducible
@@ -68,6 +69,24 @@ The site has two parts that share one colour system:
   in bold.
 - The documentation explains how to use the library. It does not discuss results. A method
   page carries two tables of numbers, **Robust performance** and **By task**.
+
+## Algorithm book
+
+The page *All Methods* opens with a book: one spread per method, in the order Standard,
+Robust Online, Robust Offline, Robust Safe. The left page introduces the method, the right
+page lists its features and the command that runs it, and links to the full page.
+
+| To | Use |
+|---|---|
+| Turn a page | the buttons under the book, a click on the edge of a page, the arrow keys, a swipe |
+| Jump to a group | the labels on the edge of the book |
+| Link to a method | `docs/algorithms/#book-<slug>` |
+
+The book is generated from `src/data/algorithms.yaml` like every other algorithm page, so a
+new method appears in it without further work. The column of a page is narrow: commands are
+set with the directory of the experiment files in a shell variable. Below 760 px of content
+width the book shows one page at a time, and without JavaScript it is a plain list of all
+spreads.
 
 ## Branches
 

@@ -1,0 +1,172 @@
+/* The algorithm book on the All Methods page.
+   Without the script the spreads are a plain list, one below the other. The script
+   adds .is-live and either builds leaves that turn (wide screens) or shows one
+   spread at a time (narrow screens). */
+
+:root {
+  --rl-g-contents: #475569;
+  --rl-g-standard: #6b7280;
+  --rl-g-robust-online: #2f7fc1;
+  --rl-g-robust-offline: #d6557a;
+  --rl-g-robust-safe: #8b5fc7;
+  --rl-paper: #fffdf8;
+  --rl-cover: #2f3b4a;
+}
+
+.rst-content .rl-book { position: relative; margin: 8px 0 34px; }
+
+/* ---- labels ---- */
+.rst-content .rl-book-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+.rst-content .rl-tab {
+  display: inline-block; padding: 6px 12px; border-radius: 6px 6px 0 0;
+  font-size: 13.5px; font-weight: 700; line-height: 1.3; white-space: nowrap;
+  color: #ffffff; background: var(--rl-g-contents); text-decoration: none;
+  opacity: .78; transition: opacity .15s, transform .15s;
+}
+.rst-content .rl-tab:hover, .rst-content .rl-tab:focus { opacity: 1; color: #ffffff; }
+.rst-content .rl-tab.is-active { opacity: 1; box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px currentColor; }
+.rst-content .rl-tab span { font-weight: 400; opacity: .85; margin-left: 4px; }
+.rst-content .rl-tab-standard       { background: var(--rl-g-standard); }
+.rst-content .rl-tab-robust-online  { background: var(--rl-g-robust-online); }
+.rst-content .rl-tab-robust-offline { background: var(--rl-g-robust-offline); }
+.rst-content .rl-tab-robust-safe    { background: var(--rl-g-robust-safe); }
+.rst-content .rl-tab.is-active.rl-tab-contents       { color: var(--rl-g-contents); }
+.rst-content .rl-tab.is-active.rl-tab-standard       { color: var(--rl-g-standard); }
+.rst-content .rl-tab.is-active.rl-tab-robust-online  { color: var(--rl-g-robust-online); }
+.rst-content .rl-tab.is-active.rl-tab-robust-offline { color: var(--rl-g-robust-offline); }
+.rst-content .rl-tab.is-active.rl-tab-robust-safe    { color: var(--rl-g-robust-safe); }
+.rst-content .rl-tab.is-active > * , .rst-content .rl-tab.is-active { -webkit-text-fill-color: #ffffff; }
+
+/* ---- a spread: two pages ---- */
+.rst-content .rl-spread {
+  display: grid; grid-template-columns: 1fr 1fr; margin: 0 0 16px;
+  border: 8px solid var(--rl-cover); border-radius: 10px; background: var(--rl-cover);
+}
+.rst-content .rl-page {
+  position: relative; box-sizing: border-box; padding: 26px 30px 44px;
+  background: var(--rl-paper); font-size: 14.5px; line-height: 1.6; overflow: auto;
+}
+.rst-content .rl-page.rl-left  { border-radius: 4px 0 0 4px; box-shadow: inset -22px 0 26px -22px rgba(0, 0, 0, .28); }
+.rst-content .rl-page.rl-right { border-radius: 0 4px 4px 0; box-shadow: inset 22px 0 26px -22px rgba(0, 0, 0, .28); }
+.rst-content .rl-page p { margin: 0 0 12px; font-size: inherit; line-height: inherit; }
+
+.rst-content .rl-book-group {
+  margin: 0 0 18px; font-size: 12.5px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--rl-g-contents);
+}
+.rst-content .rl-spread[data-group="standard"]       .rl-book-group { color: var(--rl-g-standard); }
+.rst-content .rl-spread[data-group="robust-online"]  .rl-book-group { color: var(--rl-g-robust-online); }
+.rst-content .rl-spread[data-group="robust-offline"] .rl-book-group { color: var(--rl-g-robust-offline); }
+.rst-content .rl-spread[data-group="robust-safe"]    .rl-book-group { color: var(--rl-g-robust-safe); }
+.rst-content .rl-page .rl-book-name  { margin: 0 0 2px; font-family: "Roboto Slab", Georgia, serif; font-size: 34px; font-weight: 700; line-height: 1.15; color: #1f2937; }
+.rst-content .rl-page .rl-book-title { margin: 0 0 14px; font-size: 15.5px; color: #6b7280; }
+.rst-content .rl-page .rl-book-h     { margin: 0 0 8px; font-family: "Roboto Slab", Georgia, serif; font-size: 17px; font-weight: 700; color: #1f2937; }
+.rst-content .rl-page .rl-book-tagline { font-style: italic; color: #374151; padding-left: 12px; border-left: 3px solid #d1d5db; }
+.rst-content .rl-page .rl-badges { margin: 0 0 16px; }
+.rst-content .rl-page .rl-book-folio {
+  position: absolute; bottom: 12px; margin: 0; font-size: 12.5px; color: #9ca3af;
+  font-variant-numeric: tabular-nums;
+}
+.rst-content .rl-left  .rl-book-folio { left: 30px; }
+.rst-content .rl-right .rl-book-folio { right: 30px; }
+
+.rst-content .rl-page table,
+.rst-content .rl-page table.docutils { width: 100% !important; margin: 0 0 16px; font-size: 13.5px; border: 0 !important; }
+.rst-content .rl-page table th,
+.rst-content .rl-page table td {
+  padding: 5px 8px !important; border: 0 !important; border-bottom: 1px solid #e7e2d6 !important;
+  background: transparent !important; white-space: normal; line-height: 1.4;
+}
+.rst-content .rl-page table thead { display: none; }
+.rst-content .rl-page table td:first-child { width: 46%; color: #6b7280; }
+.rst-content .rl-page .wy-table-responsive { margin-bottom: 0; overflow: visible; }
+.rst-content .rl-page div.highlight { margin: 0 -10px 16px; }
+.rst-content .rl-page div.highlight pre,
+.rst-content .rl-page div.highlight pre code {
+  font-size: 10.5px; line-height: 1.55; white-space: pre !important;
+}
+.rst-content .rl-page div.highlight pre { padding: 9px 8px; overflow-x: auto; }
+.rst-content .rl-page div.highlight pre code { padding: 0; overflow: visible; }
+.rst-content .rl-page ul { margin: 0 0 12px; }
+.rst-content .rl-page ul li { margin-left: 18px; list-style: disc; }
+.rst-content .rl-page .rl-book-more a {
+  display: inline-block; padding: 7px 14px; border-radius: 6px; font-weight: 700; font-size: 13.5px;
+  color: #ffffff; background: #2980b9; text-decoration: none;
+}
+.rst-content .rl-page .rl-book-more a:hover { background: #1f6da0; }
+.rst-content .rl-book-toc { columns: 2; column-gap: 22px; }
+.rst-content .rl-book-toc p { break-inside: avoid; margin: 0 0 10px; }
+.rst-content .rl-book-toc .rl-book-tocg { display: block; font-weight: 700; margin-bottom: 2px; }
+.rst-content .rl-book-toc a { white-space: nowrap; }
+.rst-content .rl-page .rl-book-paper { margin-top: 16px; padding-top: 10px; border-top: 1px solid #e7e2d6; font-size: 13px; color: #6b7280; }
+.rst-content .rl-page .rl-book-paper b { display: block; color: #374151; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; }
+
+/* ---- controls ---- */
+.rst-content .rl-book-controls { display: none; align-items: center; justify-content: space-between; gap: 12px; margin: 12px 0 0; }
+.rst-content .rl-book-controls button {
+  padding: 7px 16px; border: 1px solid #c9ccd1; border-radius: 6px; background: #ffffff;
+  font: inherit; font-size: 14px; font-weight: 700; color: #1f2937; cursor: pointer;
+}
+.rst-content .rl-book-controls button:hover:not(:disabled) { background: #f3f4f6; }
+.rst-content .rl-book-controls button:disabled { opacity: .4; cursor: default; }
+.rst-content .rl-book-status { font-size: 14px; color: #4b5563; text-align: center; }
+.rst-content .rl-book-hint { margin: 8px 0 0; font-size: 13px; color: #6b7280; text-align: center; display: none; }
+
+/* ================= with the script ================= */
+.rst-content .rl-book.is-live .rl-book-controls { display: flex; }
+.rst-content .rl-book.is-live .rl-book-hint { display: block; }
+.rst-content .rl-book.is-live .rl-spread { display: none; margin: 0; }
+.rst-content .rl-book.is-live.is-narrow .rl-spread.is-current { display: grid; grid-template-columns: 1fr; }
+.rst-content .rl-book.is-live.is-narrow .rl-page { border-radius: 4px; box-shadow: none; }
+.rst-content .rl-book.is-live.is-narrow .rl-page.rl-left { border-bottom: 1px dashed #d8d2c4; padding-bottom: 26px; }
+.rst-content .rl-book.is-live.is-narrow .rl-left .rl-book-folio { display: none; }
+
+/* wide: the book lies open, its labels stick out on the right */
+.rst-content .rl-book.is-live.is-wide { padding-right: 40px; }
+.rst-content .rl-book.is-live.is-wide .rl-book-tabs {
+  position: absolute; top: 18px; right: 0; width: 40px; margin: 0; z-index: 3;
+  flex-direction: column; flex-wrap: nowrap; gap: 5px;
+}
+.rst-content .rl-book.is-live.is-wide .rl-tab {
+  writing-mode: vertical-rl; padding: 12px 8px; border-radius: 0 7px 7px 0;
+  width: 34px; box-sizing: border-box; text-align: center;
+}
+.rst-content .rl-book.is-live.is-wide .rl-tab.is-active { width: 40px; box-shadow: none; transform: none; }
+.rst-content .rl-book.is-live.is-wide .rl-tab span { margin: 4px 0 0; }
+
+.rst-content .rl-leaves {
+  position: relative; height: 600px; perspective: 2600px;
+  border: 8px solid var(--rl-cover); border-radius: 10px; background: var(--rl-cover);
+  box-shadow: 0 10px 28px -12px rgba(15, 23, 42, .55);
+}
+.rst-content .rl-leaf {
+  position: absolute; top: 0; left: 50%; width: 50%; height: 100%;
+  transform-origin: left center; transform-style: preserve-3d;
+  transition: transform .75s cubic-bezier(.35, .1, .2, 1);
+}
+.rst-content .rl-leaf.is-flipped { transform: rotateY(-180deg); }
+.rst-content .rl-face {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--rl-paper);
+}
+.rst-content .rl-face.rl-back { transform: rotateY(180deg); }
+.rst-content .rl-face .rl-page { height: 100%; overflow: hidden; }
+.rst-content .rl-book-edge {
+  position: absolute; top: 0; bottom: 0; width: 44px; z-index: 2000; border: 0; padding: 0;
+  background: transparent; cursor: pointer; color: transparent; font-size: 26px; font-weight: 700;
+}
+.rst-content .rl-book-edge:hover:not(:disabled), .rst-content .rl-book-edge:focus-visible { color: #2980b9; background: rgba(41, 128, 185, .07); }
+.rst-content .rl-book-edge:disabled { cursor: default; }
+.rst-content .rl-book-edge.rl-prev { left: 0; border-radius: 4px 0 0 4px; }
+.rst-content .rl-book-edge.rl-next { right: 0; border-radius: 0 4px 4px 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rst-content .rl-leaf { transition: none; }
+}
+@media print {
+  .rst-content .rl-book.is-live .rl-spread { display: grid !important; margin: 0 0 12px; }
+  .rst-content .rl-leaves, .rst-content .rl-book-controls, .rst-content .rl-book-tabs, .rst-content .rl-book-hint { display: none !important; }
+}
+
+/* the wrapper the script measures: it has to contain the margins of what is in it */
+.rst-content .rl-page-inner { display: flow-root; }

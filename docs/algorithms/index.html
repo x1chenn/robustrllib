@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link href="../assets/pygments.css" rel="stylesheet" />
         <link href="../assets/rl.css" rel="stylesheet" />
+        <link href="../assets/book.css" rel="stylesheet" />
     
       <script>
         // Current page data
@@ -55,6 +56,10 @@
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">All Methods</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#algorithm-book_1">Algorithm book</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#families">Families</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#standard-algorithms">Standard Algorithms</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#robust-online-algorithms">Robust Online Algorithms</a>
@@ -210,6 +215,1346 @@
               
                 <h1 id="all-methods">All Methods<a class="headerlink" href="#all-methods" title="Permanent link">&para;</a></h1>
 <p>RobustRLlib is organised around <strong>algorithm attribution</strong>. Every method records where robustness enters, which shift it claims to address, and which base algorithm realises it.</p>
+<h2 id="algorithm-book_1">Algorithm book<a class="headerlink" href="#algorithm-book_1" title="Permanent link">&para;</a></h2>
+<p>The book below holds one spread per method. Its labels open the four groups: standard, robust online, robust offline and robust safe.</p>
+<div class="rl-book" data-book="data-book" id="algorithm-book">
+<nav aria-label="Groups of the algorithm book" class="rl-book-tabs">
+<a class="rl-tab rl-tab-contents" data-group="contents" href="#book-contents">Contents</a>
+<a class="rl-tab rl-tab-standard" data-group="standard" href="#book-iql">Standard<span>6</span></a>
+<a class="rl-tab rl-tab-robust-online" data-group="robust-online" href="#book-atla">Robust Online<span>5</span></a>
+<a class="rl-tab rl-tab-robust-offline" data-group="robust-offline" href="#book-rfqi">Robust Offline<span>8</span></a>
+<a class="rl-tab rl-tab-robust-safe" data-group="robust-safe" href="#book-ramu">Robust Safe<span>2</span></a>
+</nav>
+<div class="rl-book-stage">
+<section class="rl-spread" data-group="contents" data-label="" data-name="Contents" id="book-contents">
+<div class="rl-page rl-left">
+<p class="rl-book-group">RobustRLlib</p>
+<p class="rl-book-name">The Algorithm Book</p>
+<p class="rl-book-title">22 algorithms in four groups</p>
+<p>Every method has one spread: what it is on the left, how it is configured and run on the right.</p>
+<ul>
+<li>Turn the page with the buttons, the arrow keys or a swipe.</li>
+<li>A label on the edge of the book opens a group.</li>
+<li><em>Open the full page</em> leads to the complete description of a method.</li>
+</ul>
+<p class="rl-book-folio">1</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Contents</p>
+<div class="rl-book-toc">
+<p><span class="rl-book-tocg">Standard</span><a href="#book-iql">IQL</a> · <a href="#book-td3bc">TD3+BC</a> · <a href="#book-mopo">MOPO</a> · <a href="#book-synther">SynthER</a> · <a href="#book-ppo">PPO</a> · <a href="#book-sac">SAC</a></p>
+<p><span class="rl-book-tocg">Robust Online</span><a href="#book-atla">ATLA</a> · <a href="#book-atla-sa">ATLA-SA</a> · <a href="#book-rsc">RSC</a> · <a href="#book-rarl">RARL</a> · <a href="#book-dr">DR</a></p>
+<p><span class="rl-book-tocg">Robust Offline</span><a href="#book-rfqi">RFQI</a> · <a href="#book-rorl">RORL</a> · <a href="#book-atla-iql">ATLA-IQL</a> · <a href="#book-rsc-iql">RSC-IQL</a> · <a href="#book-rambo">RAMBO</a> · <a href="#book-romb">ROMB</a> · <a href="#book-fwm">FWM</a> · <a href="#book-plr-pvl">PLR-PVL</a></p>
+<p><span class="rl-book-tocg">Robust Safe</span><a href="#book-ramu">RAMU</a> · <a href="#book-spidr">SPiDR</a></p>
+</div>
+<p class="rl-book-folio">2</p>
+</div>
+</section>
+<section class="rl-spread" data-group="standard" data-label="Standard · 1 of 6" data-name="IQL" id="book-iql">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Standard · 1 of 6</p>
+<p class="rl-book-name">IQL</p>
+<p class="rl-book-title">Implicit Q-Learning</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-standard">Standard reference</span></p>
+<p class="rl-book-tagline">Expectile-regression value learning that never queries out-of-distribution actions.</p>
+<p>IQL avoids querying out-of-distribution actions altogether. A value function is fitted to the critic by expectile regression, the twin critics bootstrap from that value function, and the actor is extracted by advantage-weighted regression.</p>
+<p class="rl-book-paper"><b>Original paper</b>Kostrikov et al. <em>Offline Reinforcement Learning with Implicit Q-Learning</em>. arXiv:2110.06169, 2021.</p>
+<p class="rl-book-folio">3</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Standard reference</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M updates, batch 256</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/iql/train_iql.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/iql_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="standard/iql/">Open the full page</a></p>
+<p class="rl-book-folio">4</p>
+</div>
+</section>
+<section class="rl-spread" data-group="standard" data-label="Standard · 2 of 6" data-name="TD3+BC" id="book-td3bc">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Standard · 2 of 6</p>
+<p class="rl-book-name">TD3+BC</p>
+<p class="rl-book-title">TD3 with Behaviour Cloning</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-standard">Standard reference</span></p>
+<p class="rl-book-tagline">TD3 with a behaviour-cloning term balanced against the critic.</p>
+<p>TD3+BC adds a behaviour-cloning term to the TD3 actor loss and normalises states. The term is balanced against the critic by dividing by the mean absolute Q-value over the batch.</p>
+<p class="rl-book-paper"><b>Original paper</b>Fujimoto and Gu <em>A Minimalist Approach to Offline Reinforcement Learning</em>. NeurIPS, 2021.</p>
+<p class="rl-book-folio">5</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Standard reference</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M updates, batch 256</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/td3bc/train_td3bc.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/td3bc_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="standard/td3bc/">Open the full page</a></p>
+<p class="rl-book-folio">6</p>
+</div>
+</section>
+<section class="rl-spread" data-group="standard" data-label="Standard · 3 of 6" data-name="MOPO" id="book-mopo">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Standard · 3 of 6</p>
+<p class="rl-book-name">MOPO</p>
+<p class="rl-book-title">Model-based Offline Policy Optimization</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-standard">Standard reference</span><span class="rl-badge rl-plain">Base · SAC</span></p>
+<p class="rl-book-tagline">SAC on real and model data, with rollout rewards penalised by model uncertainty.</p>
+<p>MOPO learns an ensemble dynamics model, branches short rollouts from dataset states, and penalises the rollout reward by the model's predicted uncertainty before running SAC on the mixture of real and model data.</p>
+<p class="rl-book-paper"><b>Original paper</b>Yu et al. <em>MOPO: Model-based Offline Policy Optimization</em>. NeurIPS, 2020.</p>
+<p class="rl-book-folio">7</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Standard reference</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>SAC</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M updates, batch 256</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/mopo/train_mopo.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/mopo_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="standard/mopo/">Open the full page</a></p>
+<p class="rl-book-folio">8</p>
+</div>
+</section>
+<section class="rl-spread" data-group="standard" data-label="Standard · 4 of 6" data-name="SynthER" id="book-synther">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Standard · 4 of 6</p>
+<p class="rl-book-name">SynthER</p>
+<p class="rl-book-title">Synthetic Experience Replay</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-standard">Standard reference</span><span class="rl-badge rl-plain">Base · IQL</span></p>
+<p class="rl-book-tagline">A diffusion model enlarges the dataset; the offline learner itself is unchanged.</p>
+<p>SynthER fits a diffusion model to logged transitions and trains an unmodified offline learner on a much larger sample from it.</p>
+<p class="rl-book-paper"><b>Original paper</b>Lu et al. <em>Synthetic Experience Replay</em>. NeurIPS, 2023.</p>
+<p class="rl-book-folio">9</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Standard reference</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>IQL</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M updates, batch 256</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+<span class="c1"># 1. fit the diffusion model on the logged</span>
+<span class="c1">#    data and sample the synthetic dataset</span>
+<span class="c1">#    with baselines/synther/train_diffuser.py;</span>
+<span class="c1">#    the task card of step 2 names the file it</span>
+<span class="c1">#    reads</span>
+<span class="c1"># 2. train the unmodified IQL learner on the</span>
+<span class="c1">#    synthetic dataset</span>
+python<span class="w"> </span>baselines/iql/train_iql.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/iql_hopper_synther.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="standard/synther/">Open the full page</a></p>
+<p class="rl-book-folio">10</p>
+</div>
+</section>
+<section class="rl-spread" data-group="standard" data-label="Standard · 5 of 6" data-name="PPO" id="book-ppo">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Standard · 5 of 6</p>
+<p class="rl-book-name">PPO</p>
+<p class="rl-book-title">Proximal Policy Optimization</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-standard">Standard reference</span></p>
+<p class="rl-book-tagline">The on-policy reference: a clipped probability-ratio surrogate with GAE.</p>
+<p>PPO is the on-policy reference: a clipped probability-ratio surrogate on trajectories from the current policy, with generalised advantage estimation. The library uses the Stable-Baselines3 implementation.</p>
+<p class="rl-book-paper"><b>Original paper</b>Schulman et al. <em>Proximal Policy Optimization Algorithms</em>. arXiv:1707.06347, 2017.</p>
+<p class="rl-book-folio">11</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Online</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Standard reference</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>2M environment steps</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>examples/robust_v2/run_experiment.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/ppo_hopper.yaml
+</code></pre></div>
+<p class="rl-book-more"><a href="standard/ppo/">Open the full page</a></p>
+<p class="rl-book-folio">12</p>
+</div>
+</section>
+<section class="rl-spread" data-group="standard" data-label="Standard · 6 of 6" data-name="SAC" id="book-sac">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Standard · 6 of 6</p>
+<p class="rl-book-name">SAC</p>
+<p class="rl-book-title">Soft Actor-Critic</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-standard">Standard reference</span></p>
+<p class="rl-book-tagline">The off-policy reference: twin critics and an entropy-regularised stochastic actor.</p>
+<p>SAC is the off-policy reference: twin critics with a clipped double-Q target and a stochastic actor whose objective adds an entropy bonus with automatically tuned temperature. The library uses the Stable-Baselines3 implementation.</p>
+<p class="rl-book-paper"><b>Original paper</b>Haarnoja et al. <em>Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor</em>. ICML, 2018.</p>
+<p class="rl-book-folio">13</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Online</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Standard reference</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M environment steps</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>examples/robust_v2/run_experiment.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/sac_hopper.yaml
+</code></pre></div>
+<p class="rl-book-more"><a href="standard/sac/">Open the full page</a></p>
+<p class="rl-book-folio">14</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-online" data-label="Robust Online · 1 of 5" data-name="ATLA" id="book-atla">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Online · 1 of 5</p>
+<p class="rl-book-name">ATLA</p>
+<p class="rl-book-title">Alternating Training with Learned Adversaries</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · PPO</span><span class="rl-badge rl-plain">Claims · observation shift</span></p>
+<p class="rl-book-tagline">A policy trained against an observation adversary that is itself an RL agent.</p>
+<p>ATLA trains a policy against an <em>optimal</em> observation adversary in the state-adversarial MDP. The adversary is itself an RL agent that outputs a bounded perturbation of the observation, is rewarded by the protagonist's negative return, and is updated in alternation with the protagonist.</p>
+<p class="rl-book-paper"><b>Original paper</b>Zhang et al. <em>Robust Reinforcement Learning on State Observations with Learned Optimal Adversary</em>. ICLR, 2021.</p>
+<p class="rl-book-folio">15</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Online</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Learner-centric</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>PPO</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Observation shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>About 5M environment steps (2441 iterations of 2048 steps)</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/atla/train_atla.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/atla_online_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-online/atla/">Open the full page</a></p>
+<p class="rl-book-folio">16</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-online" data-label="Robust Online · 2 of 5" data-name="ATLA-SA" id="book-atla-sa">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Online · 2 of 5</p>
+<p class="rl-book-name">ATLA-SA</p>
+<p class="rl-book-title">ATLA with state-adversarial regularisation and a recurrent policy</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · PPO</span><span class="rl-badge rl-plain">Claims · observation shift</span></p>
+<p class="rl-book-tagline">ATLA plus a state-adversarial KL regulariser and a 100-step recurrent policy.</p>
+<p>ATLA-SA adds the SA-PPO regulariser to ATLA: a KL penalty between the policy at a state and at the worst-case neighbour found by stochastic gradient Langevin dynamics. It also uses a recurrent (LSTM) policy with a 100-step history, so that the agent can infer a persistent perturbation from context.</p>
+<p class="rl-book-paper"><b>Original paper</b>Zhang et al. <em>Robust Reinforcement Learning on State Observations with Learned Optimal Adversary</em>. ICLR, 2021.</p>
+<p class="rl-book-folio">17</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Online</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Learner-centric</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>PPO (LSTM policy)</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Observation shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>About 5M environment steps (2441 iterations of 2048 steps)</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/atla/train_atla.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/atla_lstm_sa_hopper.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-online/atla-sa/">Open the full page</a></p>
+<p class="rl-book-folio">18</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-online" data-label="Robust Online · 3 of 5" data-name="RSC" id="book-rsc">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Online · 3 of 5</p>
+<p class="rl-book-name">RSC</p>
+<p class="rl-book-title">Robust RL against Spurious Correlation</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · SAC</span><span class="rl-badge rl-plain">Claims · semantic shift</span></p>
+<p class="rl-book-tagline">Causal counterfactual replay that removes correlations a policy would exploit.</p>
+<p>RSC learns a causal graph and a dynamics model over the state variables from replayed experience, then generates counterfactual transitions by intervening on the variables the graph marks as non-causal for the reward. Mixing these into replay removes the spurious correlations a policy would otherwise exploit.</p>
+<p class="rl-book-paper"><b>Original paper</b>Ding et al. <em>Seeing is not Believing: Robust Reinforcement Learning against Spurious Correlation</em>. NeurIPS, 2023.</p>
+<p class="rl-book-folio">19</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Online</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Learner-centric</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>SAC</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Semantic shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M environment steps</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/causaldro_online/train_causaldro.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--config<span class="w"> </span><span class="nv">$CFG</span>/causaldro_online_hopper.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-online/rsc/">Open the full page</a></p>
+<p class="rl-book-folio">20</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-online" data-label="Robust Online · 4 of 5" data-name="RARL" id="book-rarl">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Online · 4 of 5</p>
+<p class="rl-book-name">RARL</p>
+<p class="rl-book-title">Robust Adversarial Reinforcement Learning</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-environment">Environment-centric</span><span class="rl-badge rl-plain">Base · PPO / TRPO</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
+<p class="rl-book-tagline">A two-player zero-sum game against an adversary that applies external forces.</p>
+<p>RARL casts robustness as a two-player zero-sum game. An adversary applies bounded external forces to the robot and is trained to minimise the protagonist's return, and the two are updated in alternating blocks.</p>
+<p class="rl-book-paper"><b>Original paper</b>Pinto et al. <em>Robust Adversarial Reinforcement Learning</em>. ICML, 2017.</p>
+<p class="rl-book-folio">21</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Online</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Environment-centric</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>PPO / TRPO</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Dynamic shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>2M environment steps</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>baselines/rarl_hopper/train.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--algo<span class="w"> </span>ppo<span class="w"> </span>--env<span class="w"> </span>Hopper-v5<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--total-steps<span class="w"> </span><span class="m">2000000</span>
+python<span class="w"> </span>baselines/rarl_hopper/train.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--algo<span class="w"> </span>trpo<span class="w"> </span>--env<span class="w"> </span>Hopper-v5<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--total-steps<span class="w"> </span><span class="m">2000000</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-online/rarl/">Open the full page</a></p>
+<p class="rl-book-folio">22</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-online" data-label="Robust Online · 5 of 5" data-name="DR" id="book-dr">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Online · 5 of 5</p>
+<p class="rl-book-name">DR</p>
+<p class="rl-book-title">Domain Randomization</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-environment">Environment-centric</span><span class="rl-badge rl-plain">Base · SAC / PPO</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
+<p class="rl-book-tagline">Simulator parameters resampled every episode from fixed ranges.</p>
+<p>Domain randomisation samples simulator parameters from fixed ranges at every episode, so that the policy meets a distribution of dynamics during training.</p>
+<p class="rl-book-paper"><b>Original paper</b>Tobin et al. <em>Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World</em>. IROS, 2017.</p>
+<p class="rl-book-folio">23</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Online</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Environment-centric</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>SAC / PPO</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Dynamic shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M environment steps (DR-SAC)</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/dr/train_dr.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/dr_hopper_axis_narrow.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-online/dr/">Open the full page</a></p>
+<p class="rl-book-folio">24</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-offline" data-label="Robust Offline · 1 of 8" data-name="RFQI" id="book-rfqi">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Offline · 1 of 8</p>
+<p class="rl-book-name">RFQI</p>
+<p class="rl-book-title">Robust Fitted Q-Iteration</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · FQI</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
+<p class="rl-book-tagline">Worst-case Bellman update over a total-variation uncertainty set.</p>
+<p>RFQI replaces the fitted-Q target by a worst-case Bellman backup over a total-variation uncertainty set of a fixed radius around the empirical transitions. The inner maximisation is solved through a dual variable fitted per batch, and the actor and critic follow the BCQ-style architecture of the original release.</p>
+<p class="rl-book-paper"><b>Original paper</b>Panaganti et al. <em>Robust Reinforcement Learning using Offline Data</em>. NeurIPS, 2022.</p>
+<p class="rl-book-folio">25</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Learner-centric</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>FQI</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Dynamic shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>500k updates, batch 1000</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/rfqi/train_rfqi.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/rfqi_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-offline/rfqi/">Open the full page</a></p>
+<p class="rl-book-folio">26</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-offline" data-label="Robust Offline · 2 of 8" data-name="RORL" id="book-rorl">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Offline · 2 of 8</p>
+<p class="rl-book-name">RORL</p>
+<p class="rl-book-title">Robust Offline RL via Conservative Smoothing</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · SAC</span><span class="rl-badge rl-plain">Claims · observation shift</span></p>
+<p class="rl-book-tagline">Local policy and value smoothing, with an ensemble penalty at perturbed states.</p>
+<p>RORL makes an SAC learner conservative through smoothing. The critic and the policy are regularised to vary little within a small ball around dataset states, and Q-values at perturbed states are penalised by the disagreement of a ten-critic ensemble.</p>
+<p class="rl-book-paper"><b>Original paper</b>Yang et al. <em>RORL: Robust Offline Reinforcement Learning via Conservative Smoothing</em>. NeurIPS, 2022.</p>
+<p class="rl-book-folio">27</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Learner-centric</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>SAC</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Observation shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>3M updates on MuJoCo and Door, 1M elsewhere</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/rorl/train_rorl.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/rorl_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-offline/rorl/">Open the full page</a></p>
+<p class="rl-book-folio">28</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-offline" data-label="Robust Offline · 3 of 8" data-name="ATLA-IQL" id="book-atla-iql">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Offline · 3 of 8</p>
+<p class="rl-book-name">ATLA-IQL</p>
+<p class="rl-book-title">Offline adaptation of ATLA on an IQL backbone</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · IQL</span><span class="rl-badge rl-plain">Claims · observation shift</span></p>
+<p class="rl-book-tagline">A learned observation adversary, trained through the critic instead of by RL.</p>
+<p>The offline adaptation keeps ATLA's principle, a learned observation adversary alternated with the learner. Since no environment is available, the adversary is not trained by RL: it is trained by a differentiable objective on the critic, minimising the minimum Q-value at the policy's action under the perturbed state.</p>
+<p class="rl-book-paper"><b>Original paper</b>Zhang et al. <em>Robust Reinforcement Learning on State Observations with Learned Optimal Adversary</em>. ICLR, 2021.</p>
+<p class="rl-book-folio">29</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Learner-centric</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>IQL</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Observation shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M updates, batch 256</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/offline_atla_iql_hopper.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-offline/atla-iql/">Open the full page</a></p>
+<p class="rl-book-folio">30</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-offline" data-label="Robust Offline · 4 of 8" data-name="RSC-IQL" id="book-rsc-iql">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Offline · 4 of 8</p>
+<p class="rl-book-name">RSC-IQL</p>
+<p class="rl-book-title">Causal counterfactual rewriting on an IQL backbone</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-data">Data-centric</span><span class="rl-badge rl-plain">Base · IQL</span><span class="rl-badge rl-plain">Claims · semantic shift</span></p>
+<p class="rl-book-tagline">Rewrites logged transitions along the dimensions a causal mask marks as non-causal.</p>
+<p>RSC-IQL applies RSC's counterfactual rewriting to logged data. A causal mask over state dimensions is fitted from the dataset, and transitions are rewritten by permuting or perturbing the dimensions the mask marks as non-causal.</p>
+<p class="rl-book-paper"><b>Original paper</b>Ding et al. <em>Seeing is not Believing: Robust Reinforcement Learning against Spurious Correlation</em>. NeurIPS, 2023.</p>
+<p class="rl-book-folio">31</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Data-centric</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>IQL</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Semantic shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M updates, batch 256</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/causaldro_iql_hopper.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-offline/rsc-iql/">Open the full page</a></p>
+<p class="rl-book-folio">32</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-offline" data-label="Robust Offline · 5 of 8" data-name="RAMBO" id="book-rambo">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Offline · 5 of 8</p>
+<p class="rl-book-name">RAMBO</p>
+<p class="rl-book-title">Robust Adversarial Model-Based Offline RL</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-data">Data-centric</span><span class="rl-badge rl-plain">Base · SAC</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
+<p class="rl-book-tagline">Model rollouts from an ensemble that is trained adversarially against the policy.</p>
+<p>RAMBO augments the dataset with short rollouts from a learned dynamics ensemble and replaces the uncertainty penalty by adversarial training of the model. The ensemble is updated to lower the critic's value of the policy's transitions while a maximum-likelihood term keeps it close to the data. The policy is behaviour-cloned before the first epoch.</p>
+<p class="rl-book-paper"><b>Original paper</b>Rigter et al. <em>RAMBO-RL: Robust Adversarial Model-Based Offline Reinforcement Learning</em>. NeurIPS, 2022.</p>
+<p class="rl-book-folio">33</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Data-centric</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>SAC</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Dynamic shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>2M updates on MuJoCo and Door, 1M elsewhere</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/rambo/train_rambo.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/rambo_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-offline/rambo/">Open the full page</a></p>
+<p class="rl-book-folio">34</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-offline" data-label="Robust Offline · 6 of 8" data-name="ROMB" id="book-romb">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Offline · 6 of 8</p>
+<p class="rl-book-name">ROMB</p>
+<p class="rl-book-title">Policy-driven world-model adaptation</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-generative">Data-centric · generative</span><span class="rl-badge rl-plain">Base · IQL</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
+<p class="rl-book-tagline">A world model adapted against the policy under a constrained maximin objective.</p>
+<p>ROMB adapts a learned world model against the policy under a constrained maximin objective. The model is pushed toward transitions that lower the policy's value while a supervised loss keeps it on the data, and the policy is trained on rollouts from the adapted model.</p>
+<p class="rl-book-paper"><b>Original paper</b>Chen et al. <em>Policy-Driven World Model Adaptation for Robust Offline Model-based Reinforcement Learning</em>. arXiv:2505.13709, 2025.</p>
+<p class="rl-book-folio">35</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Data-centric · generative</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>IQL</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Dynamic shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M updates, batch 256</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/romb_iql_hopper.yaml<span class="w"> </span>--<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-offline/romb/">Open the full page</a></p>
+<p class="rl-book-folio">36</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-offline" data-label="Robust Offline · 7 of 8" data-name="FWM" id="book-fwm">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Offline · 7 of 8</p>
+<p class="rl-book-name">FWM</p>
+<p class="rl-book-title">Flow-matching World Model</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-generative">Data-centric · generative</span><span class="rl-badge rl-plain">Base · IQL</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
+<p class="rl-book-tagline">Multi-step critic targets whose future is sampled from a flow-matching world model.</p>
+<p>FWM transfers the multi-step future modelling of the Diffusion World Model to a flow-matching world model. Instead of a one-step bootstrap, the critic regresses a multi-step return whose future is sampled from the generative model, conditioned on the current state, action and return-to-go. The replacement is confined to how that future is produced.</p>
+<p class="rl-book-paper"><b>Original paper</b>Ding et al. <em>Diffusion World Model: Future Modeling Beyond Step-by-Step Rollout for Offline Reinforcement Learning</em>. arXiv:2402.03570, 2024.</p>
+<p class="rl-book-folio">37</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Data-centric · generative</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>IQL</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Dynamic shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M updates, batch 256</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+<span class="c1"># 1. pretrain the flow-matching world model</span>
+<span class="c1">#    (shared with PLR-PVL)</span>
+python<span class="w"> </span>baselines/fwm_iql/pretrain_fm.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--dataset<span class="w"> </span>mujoco/hopper/medium-v0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--fm-seeds<span class="w"> </span><span class="m">0</span>
+<span class="c1"># 2. train the policy</span>
+python<span class="w"> </span>baselines/fwm_iql/train_fwm_iql.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/fwm_iql_hopper.yaml
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-offline/fwm/">Open the full page</a></p>
+<p class="rl-book-folio">38</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-offline" data-label="Robust Offline · 8 of 8" data-name="PLR-PVL" id="book-plr-pvl">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Offline · 8 of 8</p>
+<p class="rl-book-name">PLR-PVL</p>
+<p class="rl-book-title">Prioritised world-model selection by positive value loss</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-generative">Data-centric · generative</span><span class="rl-badge rl-plain">Base · IQL</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
+<p class="rl-book-tagline">An ensemble of world models, prioritised per sample by the value loss they induce.</p>
+<p>PLR-PVL trains a collection of world models consistent with the offline data, treats each as a level in the sense of unsupervised environment design, and prioritises them during policy learning by the value loss they induce.</p>
+<p class="rl-book-paper"><b>Original paper</b>Berdica et al. <em>Robust Offline Learning via Adversarial World Models</em>. NeurIPS Workshop on Open-World Agents, 2024.</p>
+<p class="rl-book-folio">39</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Data-centric · generative</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>IQL</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Dynamic shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M updates, batch 256</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+<span class="c1"># 1. pretrain the flow-matching ensemble (seed</span>
+<span class="c1">#    0 is shared with FWM)</span>
+python<span class="w"> </span>baselines/fwm_iql/pretrain_fm.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--dataset<span class="w"> </span>mujoco/hopper/medium-v0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--fm-seeds<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">42</span><span class="w"> </span><span class="m">3047</span>
+<span class="c1"># 2. train the policy</span>
+python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/fmgan_iql_hopper.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p class="rl-book-more"><a href="robust-offline/plr-pvl/">Open the full page</a></p>
+<p class="rl-book-folio">40</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-safe" data-label="Robust Safe · 1 of 2" data-name="RAMU" id="book-ramu">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Safe · 1 of 2</p>
+<p class="rl-book-name">RAMU</p>
+<p class="rl-book-title">Risk-Averse Model Uncertainty</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-safe">Robust safe</span><span class="rl-badge rl-plain">Base · PPO</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
+<p class="rl-book-tagline">A risk measure over sampled next-state perturbations, applied to reward and cost targets.</p>
+<p>RAMU applies a risk measure over sampled next-state perturbations to both the reward and the cost targets. The original method is defined for TD learners; the library's row is a PPO adaptation that applies the same transform to PPO's value targets.</p>
+<p class="rl-book-paper"><b>Original paper</b>Queeney and Benosman <em>Risk-Averse Model Uncertainty for Distributionally Robust Safe Reinforcement Learning</em>. NeurIPS, 2023.</p>
+<p class="rl-book-folio">41</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Online, with a cost constraint</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Robust safe</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>PPO</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Dynamic shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>Isaac Lab recipe</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<p>Trained and evaluated with the Isaac Lab recipe, on the PPO implementation that the methods of this group share.</p>
+<p class="rl-book-more"><a href="robust-safe/ramu/">Open the full page</a></p>
+<p class="rl-book-folio">42</p>
+</div>
+</section>
+<section class="rl-spread" data-group="robust-safe" data-label="Robust Safe · 2 of 2" data-name="SPiDR" id="book-spidr">
+<div class="rl-page rl-left">
+<p class="rl-book-group">Robust Safe · 2 of 2</p>
+<p class="rl-book-name">SPiDR</p>
+<p class="rl-book-title">Zero-shot safety under domain randomisation</p>
+<p class="rl-badges"><span class="rl-badge rl-fam-safe">Robust safe</span><span class="rl-badge rl-plain">Base · PPO</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
+<p class="rl-book-tagline">Constrained learning under domain randomisation with a pessimistic cost penalty.</p>
+<p>SPiDR trains a constrained policy under domain randomisation and adds a pessimistic cost penalty proportional to the disagreement of next-state predictions across sampled dynamics. It runs with the original solver and a joint-limit cost budget.</p>
+<p class="rl-book-paper"><b>Original paper</b>As et al. <em>SPiDR: A Simple Approach for Zero-Shot Safety in Sim-to-Real Transfer</em>. NeurIPS, 2026.</p>
+<p class="rl-book-folio">43</p>
+</div>
+<div class="rl-page rl-right">
+<p class="rl-book-h">Features</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setting</td>
+<td>Online, with a cost constraint</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Robust safe</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>PPO</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>Dynamic shift</td>
+</tr>
+<tr>
+<td>Shifted-env rollout</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Adversarial network</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Learned model</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>Isaac Lab recipe</td>
+</tr>
+</tbody>
+</table>
+<p class="rl-book-h">Run the method</p>
+<p>Trained and evaluated with the Isaac Lab recipe, on the PPO implementation that the methods of this group share.</p>
+<p class="rl-book-more"><a href="robust-safe/spidr/">Open the full page</a></p>
+<p class="rl-book-folio">44</p>
+</div>
+</section>
+</div>
+<div class="rl-book-controls">
+<button type="button" class="rl-prev" aria-label="Previous page">&lsaquo; Previous</button>
+<span class="rl-book-status" role="status" aria-live="polite"></span>
+<button type="button" class="rl-next" aria-label="Next page">Next &rsaquo;</button>
+</div>
+<p class="rl-book-hint">Arrow keys turn the page once the book has the focus.</p>
+</div>
+<script src="../assets/book.js" defer></script>
+
+<h2 id="families">Families<a class="headerlink" href="#families" title="Permanent link">&para;</a></h2>
 <p class="rl-legend"><span class="rl-badge rl-fam-standard">Standard reference</span><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-fam-data">Data-centric</span><span class="rl-badge rl-fam-generative">Data-centric · generative</span><span class="rl-badge rl-fam-environment">Environment-centric</span><span class="rl-badge rl-fam-safe">Robust safe</span></p>
 
 <h2 id="standard-algorithms">Standard Algorithms<a class="headerlink" href="#standard-algorithms" title="Permanent link">&para;</a></h2>

@@ -18,7 +18,9 @@ drift away from the paper silently.
 """
 from __future__ import annotations
 
+import textwrap
 import csv
+import re
 import statistics as st
 import sys
 from collections import defaultdict
@@ -209,6 +211,41 @@ def wrap_command(cmd, width=78):
     return head + " \\\n    " + tail
 
 
+CONFIG_DIR = "robustrllib/configs/experiment"
+
+
+def wrap_book(run, width=46):
+    """The commands of a method, set for the narrow column of a page of the book.
+
+    The directory of the experiment files goes into a shell variable, every line breaks
+    between two options, and a comment is folded under its own marker.
+    """
+    short = any(CONFIG_DIR + "/" in c for c in run if not c.startswith("#"))
+    out = [f"CFG={CONFIG_DIR}"] if short else []
+    for cmd in run:
+        if cmd.startswith("#"):
+            lead = re.match(r"#\s*(\d+\.\s*)?", cmd).group(0)
+            out += textwrap.wrap(cmd[len(lead):], width=width, initial_indent=lead,
+                                 subsequent_indent="#" + " " * (len(lead) - 1),
+                                 break_long_words=False, break_on_hyphens=False)
+            continue
+        units = []
+        for tok in cmd.replace(CONFIG_DIR + "/", "$CFG/").split():
+            opens = tok.startswith("-") and not (units and units[-1] == ["--"])
+            if opens or not units:
+                units.append([tok])
+            else:
+                units[-1].append(tok)
+        lines = []
+        for unit in (" ".join(u) for u in units):
+            if lines and len(lines[-1]) + 1 + len(unit) + 2 <= width and len(lines) > 1:
+                lines[-1] += " " + unit
+            else:
+                lines.append(("    " if lines else "") + unit)
+        out.append(" \\\n".join(lines))
+    return out
+
+
 def grid_line(label, row, bold=False):
     cells = [num(row[k]) for k in COLS]
     if bold:
@@ -370,15 +407,124 @@ def group_page(group, spec, p1):
     return "\n".join(out)
 
 
+# ------------------------------------------------------------ the algorithm book
+GROUP_SHORT = {"standard": "Standard", "robust-online": "Robust Online",
+               "robust-offline": "Robust Offline", "robust-safe": "Robust Safe"}
+
+
+def book(spec, refs):
+    """The methods as a book: one spread per method, one label per group.
+
+    Written as plain spreads that read from top to bottom; assets/book.js turns
+    them into pages. Links to other pages are Markdown, so that the generator of
+    the site resolves them for every way the site is built.
+    """
+    fam = spec["families"]
+    algos = [a for grp in GROUPS for a in spec["algorithms"] if group_of(a) == grp]
+    out = ['<div class="rl-book" id="algorithm-book" data-book markdown>', "",
+           '<nav class="rl-book-tabs" aria-label="Groups of the algorithm book">',
+           '<a class="rl-tab rl-tab-contents" data-group="contents" href="#book-contents">Contents</a>']
+    for grp in GROUPS:
+        members = [a for a in algos if group_of(a) == grp]
+        out.append(f'<a class="rl-tab rl-tab-{grp}" data-group="{grp}" '
+                   f'href="#book-{members[0]["slug"]}">{GROUP_SHORT[grp]}<span>{len(members)}</span></a>')
+    out += ["</nav>", "", '<div class="rl-book-stage" markdown>', ""]
+
+    # ---- contents
+    out += ['<section class="rl-spread" id="book-contents" data-group="contents" '
+            'data-name="Contents" data-label="" markdown>', "",
+            '<div class="rl-page rl-left" markdown>',
+            '<p class="rl-book-group">RobustRLlib</p>',
+            '<p class="rl-book-name">The Algorithm Book</p>',
+            f'<p class="rl-book-title">{len(algos) + 1} algorithms in four groups</p>', "",
+            "Every method has one spread: what it is on the left, how it is configured and "
+            "run on the right.", "",
+            "- Turn the page with the buttons, the arrow keys or a swipe.",
+            "- A label on the edge of the book opens a group.",
+            "- *Open the full page* leads to the complete description of a method.", "",
+            '<p class="rl-book-folio">1</p>', "</div>", "",
+            '<div class="rl-page rl-right" markdown>',
+            '<p class="rl-book-h">Contents</p>', "", '<div class="rl-book-toc" markdown>', ""]
+    for grp in GROUPS:
+        members = [a for a in algos if group_of(a) == grp]
+        links = " · ".join(f"[{a['name']}](#book-{a['slug']})" for a in members)
+        out += [f'<span class="rl-book-tocg">{GROUP_SHORT[grp]}</span>{links}', ""]
+    out += ["</div>", "", '<p class="rl-book-folio">2</p>', "</div>", "", "</section>", ""]
+
+    # ---- one spread per method
+    for n, a in enumerate(algos):
+        grp = group_of(a)
+        members = [x for x in algos if group_of(x) == grp]
+        label = f"{GROUP_SHORT[grp]} · {members.index(a) + 1} of {len(members)}"
+        lead = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", a["mechanism"].split("\n\n")[0])
+        lead = " ".join(lead.split())
+        badges = (fam_badge(a, fam, short=False)
+                  + (badge("plain", f"Base · {a['base']}") if a.get("base") else "")
+                  + (badge("plain", f"Claims · {CLAIMED[a['claimed']].lower()}")
+                     if a["claimed"] != "none" else ""))
+        out += [f'<section class="rl-spread" id="book-{a["slug"]}" data-group="{grp}" '
+                f'data-name="{a["name"]}" data-label="{label}" markdown>', "",
+                '<div class="rl-page rl-left" markdown>',
+                f'<p class="rl-book-group">{label}</p>',
+                f'<p class="rl-book-name">{a["name"]}</p>',
+                f'<p class="rl-book-title">{a["title"]}</p>',
+                f'<p class="rl-badges">{badges}</p>',
+                f'<p class="rl-book-tagline">{a["tagline"]}</p>', "", lead, "",
+                f'<p class="rl-book-paper" markdown><b>Original paper</b>{cite(refs, a["ref"]["key"])}</p>', "",
+                f'<p class="rl-book-folio">{2 * n + 3}</p>', "</div>", ""]
+
+        base = a.get("base") or "—"
+        if a.get("base_note"):
+            base += f" ({a['base_note']})"
+        rows = [("Setting", SETTING[a["regime"]]), ("Family", fam[a["family"]]["label"]),
+                ("Base algorithm", base), ("Claimed robustness", CLAIMED[a["claimed"]])]
+        if grp != "standard":
+            t = a["traits"]
+            rows += [("Shifted-env rollout", yes(t["rollout"])),
+                     ("Adversarial network", yes(t["adversary"])),
+                     ("Learned model", yes(t["model"]))]
+        if a.get("budget"):
+            rows.append(("Training budget", a["budget"]))
+        out += ['<div class="rl-page rl-right" markdown>', '<p class="rl-book-h">Features</p>', "",
+                "| Feature | Value |", "|---|---|"] + [f"| {k} | {v} |" for k, v in rows] + [""]
+        out += ['<p class="rl-book-h">Run the method</p>', ""]
+        run = a["code"].get("run")
+        if run:
+            out += ["```bash", *wrap_book(run), "```", ""]
+        elif not a["code"].get("dir"):
+            out += ["Trained and evaluated with the Isaac Lab recipe, on the PPO implementation "
+                    "that the methods of this group share.", ""]
+        else:
+            out += [f"Launched with the experiment file `{a['code']['experiment'].rsplit('/', 1)[1]}`; "
+                    "the full page gives the steps.", ""]
+        out += [f'<p class="rl-book-more" markdown>[Open the full page]({grp}/{a["slug"]}.md)</p>', "",
+                f'<p class="rl-book-folio">{2 * n + 4}</p>', "</div>", "", "</section>", ""]
+
+    out += ["</div>", "",
+            '<div class="rl-book-controls">',
+            '<button type="button" class="rl-prev" aria-label="Previous page">&lsaquo; Previous</button>',
+            '<span class="rl-book-status" role="status" aria-live="polite"></span>',
+            '<button type="button" class="rl-next" aria-label="Next page">Next &rsaquo;</button>',
+            "</div>",
+            '<p class="rl-book-hint">Arrow keys turn the page once the book has the focus.</p>', "",
+            "</div>", "", '<script src="../assets/book.js" defer></script>', ""]
+    return out
+
+
 # ------------------------------------------------------------ all-methods page
-def index(spec):
+def index(spec, refs):
     fam = spec["families"]
     out = ["---", "title: All Methods", "---", "", "# All Methods", "",
            "RobustRLlib is organised around **algorithm attribution**. Every method records "
            "where robustness enters, which shift it claims to address, and which base "
            "algorithm realises it.", "",
-           '<p class="rl-legend">' + "".join(
-               badge(f"fam-{k}", v["label"]) for k, v in fam.items()) + "</p>", ""]
+           "## Algorithm book", "",
+           "The book below holds one spread per method. Its labels open the four groups: "
+           "standard, robust online, robust offline and robust safe.", ""]
+    out += book(spec, refs)
+    out += ["## Families", "",
+            '<p class="rl-legend">' + "".join(
+                badge(f"fam-{k}", v["label"]) for k, v in fam.items()) + "</p>", ""]
     for group in GROUPS:
         algos = [a for a in spec["algorithms"] if group_of(a) == group]
         out += [f"## {GROUP_TITLE[group]}", "",
@@ -425,7 +571,7 @@ def main():
     for a in spec["algorithms"]:
         (OUT / group_of(a) / f"{a['slug']}.md").write_text(
             method_page(a, spec["families"], refs, p1))
-    (OUT / "index.md").write_text(index(spec))
+    (OUT / "index.md").write_text(index(spec, refs))
     print(f"wrote {len(spec['algorithms'])} method pages, {len(GROUPS)} group pages "
           "and the method index")
 

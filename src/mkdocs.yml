@@ -25,6 +25,7 @@ theme:
 extra_css:
   - assets/pygments.css
   - assets/rl.css
+  - assets/book.css
 
 plugins:
   - search
