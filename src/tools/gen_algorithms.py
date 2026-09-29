@@ -430,15 +430,24 @@ def book(spec, refs):
                    f'href="#book-{members[0]["slug"]}">{GROUP_SHORT[grp]}<span>{len(members)}</span></a>')
     out += ["</nav>", "", '<div class="rl-book-stage" markdown>', ""]
 
+    # The paper counts every variant of a method; a method has one spread.
+    count = sum(max(1, len(a.get("variants") or [])) for a in algos)
+    several = [a["name"] for a in algos if len(a.get("variants") or []) > 1]
+    shared = ""
+    if several:
+        words = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+        n = len(several) + count - len(algos)
+        shared = (f"The {words[n] if n < len(words) else n} variants of "
+                  + " and ".join(several) + " share one spread.")
     # ---- contents
     out += ['<section class="rl-spread" id="book-contents" data-group="contents" '
             'data-name="Contents" data-label="" markdown>', "",
             '<div class="rl-page rl-left" markdown>',
             '<p class="rl-book-group">RobustRLlib</p>',
             '<p class="rl-book-name">The Algorithm Book</p>',
-            f'<p class="rl-book-title">{len(algos) + 1} algorithms in four groups</p>', "",
+            f'<p class="rl-book-title">{count} algorithms in four groups</p>', "",
             "Every method has one spread: what it is on the left, how it is configured and "
-            "run on the right.", "",
+            f"run on the right. {shared}", "",
             "- Turn the page with the buttons, the arrow keys or a swipe.",
             "- A label on the edge of the book opens a group.",
             "- *Open the full page* leads to the complete description of a method.", "",
