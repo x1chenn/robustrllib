@@ -225,103 +225,6 @@ own setting. Two barriers follow.</p>
 <li><strong><a href="../../algorithms/robust-safe/">Robust safe algorithms</a>.</strong> Methods that add a cost
   constraint and make it hold under shifted dynamics.</li>
 </ul>
-<h2 id="library-features">Library features<a class="headerlink" href="#library-features" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>One interface for 22 algorithms.</strong> Every method is launched from an experiment file and
-  keeps its native training recipe and budget.</li>
-<li><strong>Attribution built in.</strong> Every method records the mechanism it adds, the shift it claims to
-  address and the base algorithm that realises it.</li>
-<li><strong>Six shift sources and five modes.</strong> Shifts are declared as data and stacked in any order.
-  See <a href="../../shifts/">Shift Sources and Modes</a>.</li>
-<li><strong>One evaluation protocol.</strong> The frozen last checkpoint of every method is evaluated on the
-  same grid. See <a href="../../evaluation/protocol/">Evaluation Protocol</a>.</li>
-<li><strong>Extensible.</strong> A new algorithm implements four methods, and a new simulator backend
-  implements one adapter.</li>
-</ul>
-<h2 id="comparison-with-related-benchmarks">Comparison with related benchmarks<a class="headerlink" href="#comparison-with-related-benchmarks" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Benchmark</th>
-<th style="text-align: center;">Robust algorithms</th>
-<th style="text-align: center;">MDP shifts</th>
-<th style="text-align: center;">Latency</th>
-<th style="text-align: center;">Semantic</th>
-<th style="text-align: center;">Compound</th>
-<th style="text-align: center;">Task expansion</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RLlib</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0/4</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-</tr>
-<tr>
-<td>RRLS</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">2/4</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">◐</td>
-<td style="text-align: center;">✓</td>
-</tr>
-<tr>
-<td>ODRL</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">1/4</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-</tr>
-<tr>
-<td>Robust-Gymnasium</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">4/4</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✓</td>
-</tr>
-<tr>
-<td>RWRL Suite</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">3/4</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: center;">◐</td>
-</tr>
-<tr>
-<td>RoAd-RL</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">1/4</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: center;">✓</td>
-</tr>
-<tr>
-<td><strong>RobustRLlib</strong></td>
-<td style="text-align: center;"><strong>16</strong></td>
-<td style="text-align: center;"><strong>4/4</strong></td>
-<td style="text-align: center;"><strong>✓</strong></td>
-<td style="text-align: center;"><strong>✓</strong></td>
-<td style="text-align: center;"><strong>✓</strong></td>
-<td style="text-align: center;"><strong>✓</strong></td>
-</tr>
-</tbody>
-</table>
-<p><em>Robust algorithms</em> counts robust or robust safe methods evaluated by each benchmark, without
-standard algorithms. ✓ is explicit, evaluated support; ◐ is partial support; ✗ is absent or
-not demonstrated. <em>MDP shifts</em> counts, out of four, the components on which shift is
-evaluated: observations, actions, transitions, and reward or cost.</p>
-<h3 id="supported-algorithms">Supported algorithms<a class="headerlink" href="#supported-algorithms" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -348,14 +251,166 @@ evaluated: observations, actions, transitions, and reward or cost.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="demonstrations">Demonstrations<a class="headerlink" href="#demonstrations" title="Permanent link">&para;</a></h2>
-<h3 id="shift-sources">Shift sources<a class="headerlink" href="#shift-sources" title="Permanent link">&para;</a></h3>
-<p><img alt="Dynamic shift, Observation shift, Action shift and Reward shift" src="../../assets/figures/shifts.png" width="700" /></p>
-<p><em>A shift enters at an identifiable point of the interaction loop.</em></p>
-<h3 id="robotics-tasks">Robotics tasks<a class="headerlink" href="#robotics-tasks" title="Permanent link">&para;</a></h3>
-<p class="rl-pair"><img src="../../assets/figures/g1_rough.png" alt="Unitree G1 on rough terrain"><img src="../../assets/figures/franka_drawer.png" alt="Franka arm opening a drawer"></p>
+<h2 id="library-features">Library features<a class="headerlink" href="#library-features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>One interface for 22 algorithms.</strong> Every method is launched from an experiment file and
+  keeps its native training recipe and budget.</li>
+<li><strong>Attribution built in.</strong> Every method records the mechanism it adds, the shift it claims to
+  address and the base algorithm that realises it.</li>
+<li><strong>Six shift sources and five modes.</strong> Shifts are declared as data and stacked in any order.
+  See <a href="../../shifts/">Shift Sources and Modes</a>.</li>
+<li><strong>One evaluation protocol.</strong> The frozen last checkpoint of every method is evaluated on the
+  same grid. See <a href="../../evaluation/protocol/">Evaluation Protocol</a>.</li>
+<li><strong>Extensible.</strong> A new algorithm implements four methods, and a new simulator backend
+  implements one adapter.</li>
+</ul>
+<h2 id="comparison-with-related-benchmarks">Comparison with related benchmarks<a class="headerlink" href="#comparison-with-related-benchmarks" title="Permanent link">&para;</a></h2>
+<p>RobustRLlib extends existing RL libraries and robustness benchmarks by combining a library of
+robust algorithms with shifts on every component of the interaction loop, under one interface.</p>
+<table class="rl-compare">
+<thead><tr><th>Feature</th><th>RLlib</th><th>RRLS</th><th>ODRL</th><th>Robust-Gymnasium</th><th>RWRL Suite</th><th>RoAd-RL</th><th class="rl-ours">RobustRLlib</th></tr></thead>
+<tbody>
+<tr><th scope="row"><span class="fa fa-cubes rl-ico" aria-hidden="true"></span>Robust algorithms</th><td>0</td><td>4</td><td>0</td><td>4</td><td>0</td><td>0</td><td class="rl-ours">16</td></tr>
+<tr><th scope="row"><span class="fa fa-random rl-ico" aria-hidden="true"></span>MDP shifts</th><td>0/4</td><td>2/4</td><td>1/4</td><td>4/4</td><td>3/4</td><td>1/4</td><td class="rl-ours">4/4</td></tr>
+<tr><th scope="row"><span class="fa fa-clock-o rl-ico" aria-hidden="true"></span>Latency shift</th><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td class="rl-ours"><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td></tr>
+<tr><th scope="row"><span class="fa fa-eye rl-ico" aria-hidden="true"></span>Semantic shift</th><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td class="rl-ours"><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td></tr>
+<tr><th scope="row"><span class="fa fa-object-group rl-ico" aria-hidden="true"></span>Compound shift</th><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td><span class="fa fa-adjust rl-part" role="img" aria-label="Partial" title="Partial"></span></td><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td><td><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td class="rl-ours"><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td></tr>
+<tr><th scope="row"><span class="fa fa-plug rl-ico" aria-hidden="true"></span>Task expansion</th><td><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td><td><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td><td><span class="fa fa-adjust rl-part" role="img" aria-label="Partial" title="Partial"></span></td><td><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td><td class="rl-ours"><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td></tr>
+</tbody>
+</table>
 
-<p><em>Unitree G1 locomotion and Franka drawer manipulation in Isaac Lab.</em></p>
+<p class="rl-legend-marks"><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span> supported and evaluated &nbsp;&nbsp; <span class="fa fa-adjust rl-part" role="img" aria-label="Partial" title="Partial"></span> partial &nbsp;&nbsp; <span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span> absent or not demonstrated</p>
+
+<blockquote>
+<p><strong>RobustRLlib integrates 16 robust and robust safe methods</strong> next to 6 standard algorithms.
+It evaluates shift on <strong>all four MDP components</strong>: observations, actions, transitions, and
+reward or cost. It adds <strong>Latency shift</strong>, <strong>Semantic shift</strong> and <strong>compound shift</strong>, and
+carries the same interface to <strong>additional task backends</strong>.</p>
+</blockquote>
+<p><em>Robust algorithms</em> counts the robust or robust safe methods that a benchmark evaluates,
+without standard algorithms. <em>MDP shifts</em> counts, out of four, the components on which shift
+is evaluated. <em>Compound shift</em> requires several shift sources to be active at once. <em>Task
+expansion</em> is an interface for carrying the benchmark to further task backends.</p>
+<h2 id="code-structure">Code structure<a class="headerlink" href="#code-structure" title="Permanent link">&para;</a></h2>
+<p>The code has four parts. <strong>Configuration</strong> selects what runs, <strong>Algorithms</strong> and the
+<strong>Shifted environment</strong> interact during training, and <strong>Evaluation</strong> scores the result.</p>
+<p><img alt="Code structure: configuration selects an algorithm and a shifted environment, which interact, and evaluation scores the frozen checkpoint" src="../../assets/figures/code-structure.svg" width="860" /></p>
+<h3 id="what-each-part-provides">What each part provides<a class="headerlink" href="#what-each-part-provides" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Location</th>
+<th>Interface</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public interface</td>
+<td><code>robustrllib</code></td>
+<td><code>make_robust</code>, <code>build_pipeline</code>, <code>ShiftSpec</code>, <code>load_config</code>, <code>bind_actor</code></td>
+<td>Everything a user script imports</td>
+</tr>
+<tr>
+<td>Shift declaration</td>
+<td><code>robustrllib.spec</code></td>
+<td><code>ShiftSpec(target, mode, params, schedule, seed)</code></td>
+<td>One shift, written as data</td>
+</tr>
+<tr>
+<td>Pipeline</td>
+<td><code>robustrllib.pipeline</code></td>
+<td><code>make_robust(env_id, shifts, seed)</code></td>
+<td>Creates the task and stacks one wrapper per shift, in list order</td>
+</tr>
+<tr>
+<td>Shift wrappers</td>
+<td><code>robustrllib.shifts</code></td>
+<td><code>ShiftWrapper</code>, one subclass per target</td>
+<td>Applies a shift at <code>reset</code> and at <code>step</code></td>
+</tr>
+<tr>
+<td>Schedules</td>
+<td><code>robustrllib.schedule</code></td>
+<td><code>make_schedule(spec)</code></td>
+<td>The Non-stationary mode: a multiplier that changes within the episode</td>
+</tr>
+<tr>
+<td>Backend adapters</td>
+<td><code>robustrllib.adapters</code></td>
+<td><code>DynamicsAdapter</code>: <code>list_params</code>, <code>get_nominal</code>, <code>set_param</code>, <code>reset_all</code></td>
+<td>Reads and writes the parameters of one simulator</td>
+</tr>
+<tr>
+<td>Algorithm interface</td>
+<td><code>robustrllib.algos</code></td>
+<td><code>Algo</code>: <code>train</code>, <code>predict</code>, <code>save</code>, <code>load</code></td>
+<td>The contract a method implements to enter the library</td>
+</tr>
+<tr>
+<td>Training runtime</td>
+<td><code>robustrllib.training</code></td>
+<td><code>TrainerAdapter</code>, <code>run_trainer</code></td>
+<td>Launches a run, writes checkpoints, resumes</td>
+</tr>
+<tr>
+<td>Method implementations</td>
+<td><code>baselines/&lt;method&gt;/</code></td>
+<td><code>train_&lt;method&gt;.py -c &lt;experiment.yaml&gt;</code></td>
+<td>The native training recipe of each method</td>
+</tr>
+<tr>
+<td>Configuration</td>
+<td><code>robustrllib/configs/</code></td>
+<td>Cards: <code>algorithm</code>, <code>task</code>, <code>eval</code>, <code>experiment</code>, <code>dr</code></td>
+<td>What to train, on which task, evaluated on which grid</td>
+</tr>
+<tr>
+<td>Evaluation</td>
+<td><code>baselines/eval_final.py</code></td>
+<td><code>-c &lt;experiment.yaml&gt; --run-dir &lt;dir&gt;</code></td>
+<td>Runs the frozen checkpoint on every condition of a grid</td>
+</tr>
+<tr>
+<td>Metrics</td>
+<td><code>robustrllib.metrics</code></td>
+<td><code>normalize</code>, <code>condition_metrics</code>, <code>summary_metrics</code></td>
+<td>Turns returns into the reported scores</td>
+</tr>
+</tbody>
+</table>
+<p>Where to go next:</p>
+<table>
+<thead>
+<tr>
+<th>To</th>
+<th>Read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run an existing method</td>
+<td><a href="../../algorithms/run-a-method/">Run a Method</a></td>
+</tr>
+<tr>
+<td>Declare a shift</td>
+<td><a href="../../shifts/">Shift Sources and Modes</a></td>
+</tr>
+<tr>
+<td>Evaluate a checkpoint</td>
+<td><a href="../../evaluation/protocol/">Evaluation Protocol</a></td>
+</tr>
+<tr>
+<td>Add a method of your own</td>
+<td><a href="../../algorithms/add-an-algorithm/">Add an Algorithm</a></td>
+</tr>
+<tr>
+<td>Add a simulator</td>
+<td><a href="../../shifts/add-a-backend/">Add a Backend</a></td>
+</tr>
+</tbody>
+</table>
 <p>To install the library and run a first method, continue with <a href="../quick-start/">Quick Start</a>.</p>
               
             </div>

@@ -58,3 +58,53 @@
   display: block; padding: 6px 12px; font-size: 12px; font-weight: 700;
   background: #edf0f2; border-bottom: 1px solid #e1e4e5;
 }
+
+/* ---- comparison table: features in rows, benchmarks in columns ----
+   The theme adds the class `docutils` to every table once its script has run, and
+   styles that class with borders and zebra rows; the rules below have to win
+   against it, hence the doubled selectors and the !important on the contested ones. */
+.rst-content table.rl-compare,
+.rst-content table.docutils.rl-compare {
+  width: 100% !important; border-collapse: collapse; margin: 0 0 12px;
+  border: 0 !important; font-size: 15px;
+}
+.rst-content table.rl-compare th,
+.rst-content table.rl-compare td,
+.rst-content table.docutils.rl-compare th,
+.rst-content table.docutils.rl-compare td {
+  padding: 13px 10px; border: 0 !important; background: transparent !important;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.rst-content table.rl-compare td { text-align: center; }
+.rst-content table.rl-compare tbody th { text-align: left; font-weight: 700; }
+.rst-content table.rl-compare thead th,
+.rst-content table.docutils.rl-compare thead th {
+  text-align: center; font-weight: 700;
+  background: #f3f4f6 !important; border-bottom: 3px solid #2980b9 !important;
+}
+.rst-content table.rl-compare thead th:first-child { text-align: left; }
+.rst-content table.rl-compare tbody tr:nth-child(odd) th,
+.rst-content table.rl-compare tbody tr:nth-child(odd) td,
+.rst-content table.docutils.rl-compare tbody tr:nth-child(odd) th,
+.rst-content table.docutils.rl-compare tbody tr:nth-child(odd) td { background: #f7f8fa !important; }
+/* the highlighted column keeps its colour on every row, zebra or not */
+.rst-content table.rl-compare tbody tr td.rl-ours,
+.rst-content table.docutils.rl-compare tbody tr:nth-child(odd) td.rl-ours,
+.rst-content table.docutils.rl-compare tbody tr:nth-child(even) td.rl-ours { background: #e3eff9 !important; font-weight: 700; }
+.rst-content table.rl-compare thead tr th.rl-ours,
+.rst-content table.docutils.rl-compare thead tr th.rl-ours { background: #d3e6f5 !important; color: #1f5f8b; }
+.rst-content .wy-table-responsive:has(> table.rl-compare) { overflow-x: auto; }
+.rst-content table.rl-compare { display: table; }
+.rst-content .rl-ico { display: inline-block; width: 1.7em; color: #2980b9; }
+.rst-content .rl-yes  { color: #2e9e5b; font-size: 135%; }
+.rst-content .rl-no   { color: #e0446a; font-size: 135%; }
+.rst-content .rl-part { color: #d08a1d; font-size: 125%; }
+.rst-content .rl-legend-marks { font-size: 90%; color: #6b7280; margin: 0 0 18px; }
+.rst-content .rl-legend-marks .fa { font-size: 110%; vertical-align: -1px; }
+
+/* ---- highlighted summary below the comparison ---- */
+.rst-content blockquote {
+  margin: 0 0 24px; padding: 14px 18px; border-left: 5px solid #6b7b8c;
+  background: #f3f4f6; border-radius: 0 6px 6px 0;
+}
+.rst-content blockquote p { margin: 0; line-height: 1.7; }
