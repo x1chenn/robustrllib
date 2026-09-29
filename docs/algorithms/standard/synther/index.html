@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://robust-rllib.site/docs/algorithms/standard/synther/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>SynthER - RobustRLlib Tutorial</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link href="../../../assets/pygments.css" rel="stylesheet" />
+        <link href="../../../assets/rl.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "SynthER";
+        var mkdocs_page_input_path = "algorithms/standard/synther.md";
+        var mkdocs_page_url = "/docs/algorithms/standard/synther/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+  <meta name="robots" content="noindex">
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> RobustRLlib Tutorial
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../getting-started/overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../getting-started/quick-start/">Quick Start</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Algorithms</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">All Methods</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Standard Algorithms</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../iql/">IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../td3bc/">TD3+BC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../mopo/">MOPO</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">SynthER</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#at-a-glance">At a glance</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mechanism">Mechanism</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-the-method">Run the method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#library-wide-grid">Library-wide grid</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#by-task">By task</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#references">References</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../ppo/">PPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../sac/">SAC</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Online Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-online/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-online/atla/">ATLA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-online/atla-sa/">ATLA-SA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-online/rsc/">RSC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-online/rarl/">RARL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-online/dr/">DR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Offline Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-offline/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-offline/rfqi/">RFQI</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-offline/rorl/">RORL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-offline/atla-iql/">ATLA-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-offline/rsc-iql/">RSC-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-offline/rambo/">RAMBO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-offline/romb/">ROMB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-offline/fwm/">FWM</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-offline/plr-pvl/">PLR-PVL</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Safe Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-safe/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-safe/ramu/">RAMU</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../robust-safe/spidr/">SPiDR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../run-a-method/">Run a Method</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../add-an-algorithm/">Add an Algorithm</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Shift Sources and Modes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../shifts/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Shift Sources</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../shifts/sources/dynamic/">Dynamic shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../shifts/sources/observation/">Observation shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../shifts/sources/action/">Action shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../shifts/sources/reward-cost/">Reward/cost shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../shifts/sources/latency/">Latency shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../shifts/sources/semantic/">Semantic shift</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Shift Modes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../shifts/modes/stochastic/">Stochastic</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../shifts/modes/adversarial/">Adversarial</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../shifts/modes/parametric/">Parametric</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../shifts/modes/non-stationary/">Non-stationary</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../shifts/modes/composition/">Composition</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../shifts/add-a-backend/">Add a Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Evaluation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../evaluation/protocol/">Evaluation Protocol</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="/">Project Page</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">RobustRLlib Tutorial</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Algorithms</li>
+          <li class="breadcrumb-item">Standard Algorithms</li>
+      <li class="breadcrumb-item active">SynthER</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="synther">SynthER<a class="headerlink" href="#synther" title="Permanent link">&para;</a></h1>
+<p class="rl-subtitle">Synthetic Experience Replay</p>
+
+<p class="rl-badges"><span class="rl-badge rl-setting">Offline</span><span class="rl-badge rl-fam-standard">Standard reference</span><span class="rl-badge rl-plain">Base · IQL</span></p>
+
+<p>A diffusion model enlarges the dataset; the offline learner itself is unchanged.</p>
+<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Group</td>
+<td><a href="../">Standard Algorithms</a></td>
+</tr>
+<tr>
+<td>Setting</td>
+<td>Offline</td>
+</tr>
+<tr>
+<td>Family</td>
+<td>Standard reference</td>
+</tr>
+<tr>
+<td>Base algorithm</td>
+<td>IQL</td>
+</tr>
+<tr>
+<td>Claimed robustness</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Training budget</td>
+<td>1M updates, batch 256</td>
+</tr>
+<tr>
+<td>Original paper</td>
+<td>Lu et al. <em>Synthetic Experience Replay</em>. NeurIPS, 2023.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mechanism">Mechanism<a class="headerlink" href="#mechanism" title="Permanent link">&para;</a></h2>
+<p>SynthER fits a diffusion model to logged transitions and trains an unmodified offline learner
+on a much larger sample from it.</p>
+<p>The library counts it as data augmentation rather than a generative mechanism: it samples
+individual transitions to enlarge the dataset, where FWM and PLR-PVL sample multi-step
+futures conditioned on the current state and turn them into critic targets.</p>
+<h2 id="run-the-method">Run the method<a class="headerlink" href="#run-the-method" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. fit the diffusion model on the logged data and sample the synthetic dataset</span>
+<span class="c1">#    with baselines/synther/train_diffuser.py; the task card of step 2 names the file it reads</span>
+<span class="c1"># 2. train the unmodified IQL learner on the synthetic dataset</span>
+python<span class="w"> </span>baselines/iql/train_iql.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>robustrllib/configs/experiment/iql_hopper_synther.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Implementation</td>
+<td><code>baselines/synther</code></td>
+</tr>
+<tr>
+<td>Algorithm card</td>
+<td><code>robustrllib/configs/algorithm/synther_iql.yaml</code></td>
+</tr>
+<tr>
+<td>Experiment file</td>
+<td><code>robustrllib/configs/experiment/iql_hopper_synther.yaml</code></td>
+</tr>
+</tbody>
+</table>
+<p>Training is on the nominal task. The configuration files are explained in <a href="../../run-a-method/">Run a Method</a>, and the evaluation of the frozen checkpoint in <a href="../../../evaluation/protocol/">Evaluation Protocol</a>.</p>
+<h2 id="library-wide-grid">Library-wide grid<a class="headerlink" href="#library-wide-grid" title="Permanent link">&para;</a></h2>
+<p>Normalized score of the frozen last checkpoint. Q1 to Q4 are the severity quartiles of each perturbation ladder, ordered by displacement from the nominal setting, and <em>All</em> covers every shifted condition.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th style="text-align: right;">Nominal</th>
+<th style="text-align: right;">Q1</th>
+<th style="text-align: right;">Q2</th>
+<th style="text-align: right;">Q3</th>
+<th style="text-align: right;">Q4</th>
+<th style="text-align: right;">All</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SynthER</strong></td>
+<td style="text-align: right;"><strong>104.0</strong></td>
+<td style="text-align: right;"><strong>74.2</strong></td>
+<td style="text-align: right;"><strong>56.2</strong></td>
+<td style="text-align: right;"><strong>43.5</strong></td>
+<td style="text-align: right;"><strong>38.5</strong></td>
+<td style="text-align: right;"><strong>53.2</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="by-task">By task<a class="headerlink" href="#by-task" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th style="text-align: right;">Nominal</th>
+<th style="text-align: right;">Q1</th>
+<th style="text-align: right;">Q2</th>
+<th style="text-align: right;">Q3</th>
+<th style="text-align: right;">Q4</th>
+<th style="text-align: right;">All</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Door</td>
+<td style="text-align: right;">90.5</td>
+<td style="text-align: right;">83.4</td>
+<td style="text-align: right;">69.7</td>
+<td style="text-align: right;">53.4</td>
+<td style="text-align: right;">47.2</td>
+<td style="text-align: right;">63.4</td>
+</tr>
+<tr>
+<td>HalfCheetah</td>
+<td style="text-align: right;">114.0</td>
+<td style="text-align: right;">59.0</td>
+<td style="text-align: right;">29.4</td>
+<td style="text-align: right;">17.6</td>
+<td style="text-align: right;">15.8</td>
+<td style="text-align: right;">30.4</td>
+</tr>
+<tr>
+<td>Hopper</td>
+<td style="text-align: right;">110.7</td>
+<td style="text-align: right;">58.9</td>
+<td style="text-align: right;">48.7</td>
+<td style="text-align: right;">40.9</td>
+<td style="text-align: right;">31.0</td>
+<td style="text-align: right;">44.9</td>
+</tr>
+<tr>
+<td>LunarLander</td>
+<td style="text-align: right;">100.7</td>
+<td style="text-align: right;">93.1</td>
+<td style="text-align: right;">83.3</td>
+<td style="text-align: right;">71.5</td>
+<td style="text-align: right;">70.7</td>
+<td style="text-align: right;">80.4</td>
+</tr>
+<tr>
+<td>PointMaze</td>
+<td style="text-align: right;">86.6</td>
+<td style="text-align: right;">56.9</td>
+<td style="text-align: right;">44.6</td>
+<td style="text-align: right;">35.9</td>
+<td style="text-align: right;">33.6</td>
+<td style="text-align: right;">42.8</td>
+</tr>
+<tr>
+<td>Walker2d</td>
+<td style="text-align: right;">121.7</td>
+<td style="text-align: right;">94.2</td>
+<td style="text-align: right;">61.2</td>
+<td style="text-align: right;">41.7</td>
+<td style="text-align: right;">32.6</td>
+<td style="text-align: right;">57.4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Lu et al. <em>Synthetic Experience Replay</em>. NeurIPS, 2023.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../mopo/" class="btn btn-neutral float-left" title="MOPO"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ppo/" class="btn btn-neutral float-right" title="PPO">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>RobustRLlib · Anonymous submission under double-blind review.</p>
+  </div>
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../mopo/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ppo/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

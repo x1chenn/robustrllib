@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://robust-rllib.site/docs/algorithms/run-a-method/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Run a Method - RobustRLlib Tutorial</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link href="../../assets/pygments.css" rel="stylesheet" />
+        <link href="../../assets/rl.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Run a Method";
+        var mkdocs_page_input_path = "algorithms/run-a-method.md";
+        var mkdocs_page_url = "/docs/algorithms/run-a-method/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+  <meta name="robots" content="noindex">
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> RobustRLlib Tutorial
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../getting-started/overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../getting-started/quick-start/">Quick Start</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Algorithms</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">All Methods</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Standard Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/iql/">IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/td3bc/">TD3+BC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/mopo/">MOPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/synther/">SynthER</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/ppo/">PPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/sac/">SAC</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Online Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-online/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-online/atla/">ATLA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-online/atla-sa/">ATLA-SA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-online/rsc/">RSC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-online/rarl/">RARL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-online/dr/">DR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Offline Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/rfqi/">RFQI</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/rorl/">RORL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/atla-iql/">ATLA-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/rsc-iql/">RSC-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/rambo/">RAMBO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/romb/">ROMB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/fwm/">FWM</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/plr-pvl/">PLR-PVL</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Safe Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-safe/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-safe/ramu/">RAMU</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-safe/spidr/">SPiDR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Run a Method</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#at-a-glance">At a glance</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration-files">Configuration files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#launch-a-method">Launch a method</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#override-settings">Override settings</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#run-directory">Run directory</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#online-methods">Online methods</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#launch-rules">Launch rules</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../add-an-algorithm/">Add an Algorithm</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Shift Sources and Modes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../shifts/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Shift Sources</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/dynamic/">Dynamic shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/observation/">Observation shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/action/">Action shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/reward-cost/">Reward/cost shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/latency/">Latency shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/semantic/">Semantic shift</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Shift Modes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/stochastic/">Stochastic</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/adversarial/">Adversarial</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/parametric/">Parametric</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/non-stationary/">Non-stationary</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/composition/">Composition</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../shifts/add-a-backend/">Add a Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Evaluation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../evaluation/protocol/">Evaluation Protocol</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="/">Project Page</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">RobustRLlib Tutorial</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Algorithms</li>
+      <li class="breadcrumb-item active">Run a Method</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="run-a-method">Run a Method<a class="headerlink" href="#run-a-method" title="Permanent link">&para;</a></h1>
+<p>A method is launched from an experiment file. The file names an algorithm card, a task card and
+an evaluation grid, and carries the training budget. Every bundled method keeps its own training
+recipe behind this one entry.</p>
+<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Run a method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interface</td>
+<td>A launcher that takes an experiment YAML with <code>-c</code></td>
+</tr>
+<tr>
+<td>Method selection</td>
+<td>The <code>algorithm</code> card named in the experiment file</td>
+</tr>
+<tr>
+<td>Configuration</td>
+<td>Algorithm, task, eval and experiment cards under <code>robustrllib/configs/</code></td>
+</tr>
+<tr>
+<td>Output</td>
+<td>A run directory with <code>ckpt/epNNNN.pt</code> and <code>learning_curve.json</code></td>
+</tr>
+<tr>
+<td>Evaluation</td>
+<td><code>baselines/eval_final.py</code> on the last checkpoint</td>
+</tr>
+<tr>
+<td>Limits</td>
+<td><code>baselines/run_baseline.py</code> applies only to algorithm cards with an <code>entry</code> key</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configuration-files">Configuration files<a class="headerlink" href="#configuration-files" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Directory</th>
+<th>Holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Algorithm</td>
+<td><code>algorithm/</code></td>
+<td>Method name, implementing class, default hyperparameters</td>
+</tr>
+<tr>
+<td>Task</td>
+<td><code>task/</code></td>
+<td>Environment id and, for offline methods, the dataset</td>
+</tr>
+<tr>
+<td>Eval</td>
+<td><code>eval/</code></td>
+<td>The perturbation grid a frozen policy is scored on</td>
+</tr>
+<tr>
+<td>Experiment</td>
+<td><code>experiment/</code></td>
+<td>The three references, the budget and hyperparameter overrides</td>
+</tr>
+<tr>
+<td>DR</td>
+<td><code>dr/</code></td>
+<td>Randomization ranges for online training, as a list of shifts</td>
+</tr>
+</tbody>
+</table>
+<p>The experiment file ties the cards together.</p>
+<div class="highlight"><span class="filename">robustrllib/configs/experiment/rorl_hopper.yaml</span><pre><span></span><code><span class="c1"># Official Hopper-medium RORL hyperparameters on benchmark Minari data.</span>
+<span class="nt">algorithm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/algorithm/rorl.yaml</span>
+<span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/task/hopper_minari_medium.yaml</span>
+<span class="nt">eval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/eval/t0_mujoco.yaml</span>
+<span class="nt">hparams</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">num_samples</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="w">  </span><span class="nt">policy_smooth_eps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span>
+<span class="w">  </span><span class="nt">policy_smooth_reg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w">  </span><span class="nt">q_smooth_eps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span>
+<span class="w">  </span><span class="nt">q_ood_eps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="w">  </span><span class="nt">q_ood_reg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<span class="w">  </span><span class="nt">q_ood_uncertainty_reg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">  </span><span class="nt">q_ood_uncertainty_reg_min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w">  </span><span class="nt">q_ood_uncertainty_decay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.000001</span>
+<span class="nt">train</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">epochs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3000</span>
+<span class="w">  </span><span class="nt">updates_per_epoch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">  </span><span class="nt">batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">256</span>
+<span class="w">  </span><span class="nt">eval_every</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">eval_steps_per_epoch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">  </span><span class="nt">eval_seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="nt">max_path_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">  </span><span class="nt">save_every</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500</span>
+<span class="w">  </span><span class="nt">resume_every</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+<span class="w">  </span><span class="nt">torch_threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">  </span><span class="nt">out_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">runs/rorl/hopper_medium_seed0</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The files spell the config directory by its other name. <code>robustrllib/configs</code> is a link to
+that directory, so both spellings name the same files.</p>
+</div>
+<p>The task card names the environment and the dataset.</p>
+<div class="highlight"><span class="filename">robustrllib/configs/task/hopper_minari_medium.yaml</span><pre><span></span><code><span class="c1"># Minari medium dataset. The dataset was recorded on the -v5 env, so env_id must</span>
+<span class="c1"># match it: training and evaluation have to share the dataset's MDP.</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hopper_minari_medium</span>
+<span class="nt">env_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Hopper-v5</span>
+<span class="nt">datasets</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">mujoco/hopper/medium-v0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="nt">body_dynamics</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">torso</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.9</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.2</span><span class="p p-Indicator">],</span><span class="nt"> foot</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.9</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.2</span><span class="p p-Indicator">]}</span>
+<span class="nt">mopo_domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hopper</span>
+</code></pre></div>
+<p>The merged configuration can be inspected without starting a run.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">robustrllib.training.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">TrainingConfigBundle</span>
+
+<span class="n">bundle</span> <span class="o">=</span> <span class="n">TrainingConfigBundle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"robustrllib/configs/experiment/rorl_hopper.yaml"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">algorithm</span><span class="p">[</span><span class="s2">"name"</span><span class="p">],</span> <span class="n">bundle</span><span class="o">.</span><span class="n">task</span><span class="p">[</span><span class="s2">"env_id"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bundle</span><span class="o">.</span><span class="n">hparams</span><span class="p">),</span> <span class="n">bundle</span><span class="o">.</span><span class="n">hparams</span><span class="p">[</span><span class="s2">"hidden_size"</span><span class="p">],</span> <span class="n">bundle</span><span class="o">.</span><span class="n">hparams</span><span class="p">[</span><span class="s2">"q_smooth_eps"</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>rorl Hopper-v5
+31 256 0.005
+</code></pre></div>
+<p><code>hparams</code> of the experiment file are merged over <code>hparams</code> of the algorithm card, and <strong>the
+experiment wins</strong>. The 31 entries are the 22 defaults of the card plus the 9 keys above.</p>
+<h2 id="launch-a-method">Launch a method<a class="headerlink" href="#launch-a-method" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>baselines/rorl/train_rorl.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>robustrllib/configs/experiment/rorl_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Launcher</th>
+<th>Applies to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The train script of the method, here <code>baselines/rorl/train_rorl.py</code></td>
+<td>The method the script belongs to</td>
+</tr>
+<tr>
+<td><code>scripts/robustgym.py train --config &lt;experiment.yaml&gt;</code></td>
+<td>The registered methods listed below</td>
+</tr>
+<tr>
+<td><code>baselines/run_baseline.py -c &lt;experiment.yaml&gt;</code></td>
+<td>Algorithm cards with an <code>entry</code> key that names a train script</td>
+</tr>
+</tbody>
+</table>
+<p>The unified launcher resolves the method from the algorithm card and rejects overrides that the
+method does not support.</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>scripts/robustgym.py<span class="w"> </span>list
+python<span class="w"> </span>scripts/robustgym.py<span class="w"> </span>train<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--config<span class="w"> </span>robustrllib/configs/experiment/rorl_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Registered name</th>
+<th>Regime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>iql</code>, <code>rfqi</code>, <code>rorl</code></td>
+<td>Offline, model-free</td>
+</tr>
+<tr>
+<td><code>mopo</code>, <code>rambo</code></td>
+<td>Offline, model-based</td>
+</tr>
+<tr>
+<td><code>synther-iql</code></td>
+<td>Offline, generative</td>
+</tr>
+<tr>
+<td><code>atla</code>, <code>causaldro-online</code>, <code>dr-sac</code></td>
+<td>Online, model-free</td>
+</tr>
+</tbody>
+</table>
+<p>Arguments after <code>--</code> are passed on to the train script.</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>robustrllib/configs/experiment/td3bc_hopper.yaml<span class="w"> </span>--<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p><strong><code>baselines/run_baseline.py</code> needs an <code>entry</code> key.</strong> The card
+<code>robustrllib/configs/algorithm/rorl.yaml</code> has none, so for RORL the launcher stops with
+<code>ValueError: algorithm config has no 'entry' train script: rorl</code>.</p>
+<p>Method pages such as <a href="../robust-offline/rorl/">RORL</a> give the command of each
+method. The methods are listed under <a href="../">Algorithms</a>, in four groups:
+<a href="../standard/">standard</a>,
+<a href="../robust-online/">robust online</a>,
+<a href="../robust-offline/">robust offline</a> and
+<a href="../robust-safe/">robust safe</a>.</p>
+<h2 id="override-settings">Override settings<a class="headerlink" href="#override-settings" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>How</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Algorithm card</td>
+<td>Edit <code>hparams</code> of the card</td>
+<td>Defaults that hold for every task</td>
+</tr>
+<tr>
+<td>Experiment file</td>
+<td>Add keys under <code>hparams</code> or <code>train</code> in a copy of the file</td>
+<td>A setting of one task or one study</td>
+</tr>
+<tr>
+<td>Command line</td>
+<td>Flags of the train script</td>
+<td>Seed, device, a short test run</td>
+</tr>
+</tbody>
+</table>
+<p>The flags of <code>baselines/rorl/train_rorl.py</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Overrides</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--seed</code></td>
+<td><code>train.seed</code>, and a trailing <code>seed&lt;N&gt;</code> of the output directory</td>
+</tr>
+<tr>
+<td><code>--device</code></td>
+<td>The device. The default is CUDA when available.</td>
+</tr>
+<tr>
+<td><code>--epochs</code>, <code>--updates-per-epoch</code>, <code>--batch-size</code></td>
+<td>The keys of the same name under <code>train</code></td>
+</tr>
+<tr>
+<td><code>--eval-steps</code></td>
+<td><code>train.eval_steps_per_epoch</code></td>
+</tr>
+<tr>
+<td><code>--torch-threads</code>, <code>--out-dir</code></td>
+<td>The keys of the same name under <code>train</code></td>
+</tr>
+<tr>
+<td><code>--resume {auto,never}</code></td>
+<td>Whether the run continues from <code>ckpt/resume.pt</code></td>
+</tr>
+<tr>
+<td><code>--smoke</code></td>
+<td>One epoch of one update, written to <code>&lt;out_dir&gt;_smoke</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each training seed is one run with its own run directory.</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>baselines/rorl/train_rorl.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>robustrllib/configs/experiment/rorl_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+python<span class="w"> </span>baselines/rorl/train_rorl.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>robustrllib/configs/experiment/rorl_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Hyperparameters of the method, such as <code>q_smooth_eps</code>, have no flag. A change in the
+experiment file is recorded with the run.</p>
+</div>
+<h2 id="run-directory">Run directory<a class="headerlink" href="#run-directory" title="Permanent link">&para;</a></h2>
+<p>A finished RORL run writes to <code>runs/rorl/hopper_medium_seed0/</code>.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ckpt/epNNNN.pt</code></td>
+<td>The policy after <code>NNNN</code> epochs, saved every <code>save_every</code> epochs and at the end</td>
+</tr>
+<tr>
+<td><code>resolved_config.json</code></td>
+<td>Both cards, the merged hyperparameters, the resolved training settings, a dataset summary</td>
+</tr>
+<tr>
+<td><code>run_manifest.json</code></td>
+<td>Method, seed, run directory, formal-result flag</td>
+</tr>
+<tr>
+<td><code>learning_curve.json</code></td>
+<td>One row per epoch: nominal return during training and the losses</td>
+</tr>
+<tr>
+<td><code>checkpoint_index.json</code></td>
+<td>The saved checkpoints with epoch and update count</td>
+</tr>
+<tr>
+<td><code>training_complete.json</code></td>
+<td>Written last; marks the run as finished</td>
+</tr>
+<tr>
+<td><code>unified_adapter.json</code></td>
+<td>Written only by <code>scripts/robustgym.py</code></td>
+</tr>
+</tbody>
+</table>
+<p>The checkpoint with the highest number is the last checkpoint, and <strong>it is the one the
+benchmark evaluates</strong>. A run directory that contains <code>training_complete.json</code> is not
+overwritten: the trainer refuses to start.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Every <code>resume_every</code> epochs</td>
+<td>The full training state is written to <code>ckpt/resume.pt</code></td>
+</tr>
+<tr>
+<td>The same command is run again</td>
+<td>Training continues from <code>ckpt/resume.pt</code></td>
+</tr>
+<tr>
+<td><code>SIGTERM</code> or <code>SIGUSR1</code></td>
+<td>The state is saved at the next epoch boundary; exit code 75</td>
+</tr>
+<tr>
+<td>Completion</td>
+<td><code>ckpt/resume.pt</code> is removed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="online-methods">Online methods<a class="headerlink" href="#online-methods" title="Permanent link">&para;</a></h2>
+<p>An online method has no dataset and measures its budget in environment steps.</p>
+<div class="highlight"><span class="filename">robustrllib/configs/experiment/dr_hopper_axis_narrow.yaml (comments omitted)</span><pre><span></span><code><span class="nt">algorithm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/algorithm/sac_dr.yaml</span>
+<span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/task/hopper_online.yaml</span>
+<span class="nt">dr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/dr/mujoco_axis_narrow.yaml</span>
+<span class="nt">eval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/eval/t0_mujoco.yaml</span>
+<span class="nt">train</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">eval_seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">  </span><span class="nt">total_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000000</span>
+<span class="w">  </span><span class="nt">stage_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100000</span>
+<span class="w">  </span><span class="nt">eval_every_stages</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">eval_episodes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">  </span><span class="nt">out_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">runs/dr/hopper_axis_narrow_seed0</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>scripts/robustgym.py<span class="w"> </span>train<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--config<span class="w"> </span>robustrllib/configs/experiment/dr_hopper_axis_narrow.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Offline (RORL)</th>
+<th>Online (domain randomization with SAC)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Task card</td>
+<td><code>hopper_minari_medium.yaml</code>, with <code>datasets</code></td>
+<td><code>hopper_online.yaml</code>, without a dataset</td>
+</tr>
+<tr>
+<td>Budget</td>
+<td><code>epochs</code> times <code>updates_per_epoch</code> updates</td>
+<td><code>total_steps</code> environment steps in stages of <code>stage_steps</code></td>
+</tr>
+<tr>
+<td>Training environment</td>
+<td>None</td>
+<td>Built with <code>make_robust</code></td>
+</tr>
+<tr>
+<td>Extra card</td>
+<td>None</td>
+<td><code>dr</code></td>
+</tr>
+<tr>
+<td>Last checkpoint</td>
+<td><code>ckpt/ep3000.pt</code>, named after the epoch</td>
+<td><code>ckpt/ep1000.pt</code>, named after the steps in thousands</td>
+</tr>
+<tr>
+<td>Extra output</td>
+<td>None</td>
+<td><code>dr_provenance.json</code></td>
+</tr>
+</tbody>
+</table>
+<p>The <code>dr</code> card is where shifts enter training.</p>
+<div class="highlight"><span class="filename">robustrllib/configs/dr/mujoco_axis_narrow.yaml (comments omitted)</span><pre><span></span><code><span class="nt">randomization</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">param</span><span class="p">:</span><span class="w"> </span><span class="nv">gravity</span><span class="p p-Indicator">,</span><span class="nt">                    distribution</span><span class="p">:</span><span class="w"> </span><span class="nv">uniform</span><span class="p p-Indicator">,</span><span class="nt"> low</span><span class="p">:</span><span class="w"> </span><span class="nv">0.90</span><span class="p p-Indicator">,</span><span class="nt"> high</span><span class="p">:</span><span class="w"> </span><span class="nv">1.10</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">param</span><span class="p">:</span><span class="w"> </span><span class="nv">body_pos_xyz</span><span class="p p-Indicator">,</span><span class="nt"> index</span><span class="p">:</span><span class="w"> </span><span class="nv">all</span><span class="p p-Indicator">,</span><span class="nt">   distribution</span><span class="p">:</span><span class="w"> </span><span class="nv">uniform</span><span class="p p-Indicator">,</span><span class="nt"> low</span><span class="p">:</span><span class="w"> </span><span class="nv">0.90</span><span class="p p-Indicator">,</span><span class="nt"> high</span><span class="p">:</span><span class="w"> </span><span class="nv">1.10</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">param</span><span class="p">:</span><span class="w"> </span><span class="nv">actuator_gear</span><span class="p p-Indicator">,</span><span class="nt"> index</span><span class="p">:</span><span class="w"> </span><span class="nv">all</span><span class="p p-Indicator">,</span><span class="nt">  distribution</span><span class="p">:</span><span class="w"> </span><span class="nv">uniform</span><span class="p p-Indicator">,</span><span class="nt"> low</span><span class="p">:</span><span class="w"> </span><span class="nv">0.90</span><span class="p p-Indicator">,</span><span class="nt"> high</span><span class="p">:</span><span class="w"> </span><span class="nv">1.10</span><span class="p p-Indicator">}</span>
+<span class="nt">curriculum</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="nv">constant</span><span class="p p-Indicator">,</span><span class="nt"> end</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">}</span>
+</code></pre></div>
+<p>Each entry becomes one <a href="../../shifts/sources/dynamic/">Dynamic shift</a> in the
+<a href="../../shifts/modes/stochastic/">Stochastic</a> mode, on the target <code>dynamics</code>, drawn anew at every
+<code>reset</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">robustrllib</span><span class="w"> </span><span class="kn">import</span> <span class="n">ShiftSpec</span>
+
+<span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"uniform"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"gravity"</span><span class="p">,</span> <span class="s2">"low"</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">:</span> <span class="mf">1.1</span><span class="p">})</span>
+</code></pre></div>
+<p>With <code>robustrllib/configs/dr/nodr.yaml</code>, whose list is empty, the same trainer runs plain SAC on
+the nominal task.</p>
+<p>Experiments written for the <code>Algo</code> interface train, evaluate and save in one process. See
+<a href="../add-an-algorithm/">Add an Algorithm</a>.</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>examples/robust_v2/run_experiment.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>robustrllib/configs/experiment/sac_hopper.yaml
+</code></pre></div>
+<h2 id="launch-rules">Launch rules<a class="headerlink" href="#launch-rules" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Commands are run from the root of the checkout, and config references are relative to it.</li>
+<li>The task card is nominal; no condition of the evaluation grid is applied during training.</li>
+<li>Whatever a method adds to its training environment, such as randomization ranges, is part of
+  the method.</li>
+<li>Each training seed is a separate run with its own run directory.</li>
+<li>Method hyperparameters are changed in the experiment file, not on the command line.</li>
+<li>The return in <code>learning_curve.json</code> is a training diagnostic; reported scores come from the
+  <a href="../../evaluation/protocol/">Evaluation Protocol</a>.</li>
+<li>A finished run directory is never reused; a new seed or <code>--out-dir</code> starts a new one.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../robust-safe/spidr/" class="btn btn-neutral float-left" title="SPiDR"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../add-an-algorithm/" class="btn btn-neutral float-right" title="Add an Algorithm">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>RobustRLlib · Anonymous submission under double-blind review.</p>
+  </div>
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../robust-safe/spidr/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../add-an-algorithm/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

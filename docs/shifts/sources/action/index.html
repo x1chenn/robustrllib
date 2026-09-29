@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://robust-rllib.site/docs/shifts/sources/action/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Action shift - RobustRLlib Tutorial</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link href="../../../assets/pygments.css" rel="stylesheet" />
+        <link href="../../../assets/rl.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Action shift";
+        var mkdocs_page_input_path = "shifts/sources/action.md";
+        var mkdocs_page_url = "/docs/shifts/sources/action/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+  <meta name="robots" content="noindex">
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> RobustRLlib Tutorial
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../getting-started/overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../getting-started/quick-start/">Quick Start</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Algorithms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithms/">All Methods</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Standard Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/iql/">IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/td3bc/">TD3+BC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/mopo/">MOPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/synther/">SynthER</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/ppo/">PPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/sac/">SAC</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Online Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/atla/">ATLA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/atla-sa/">ATLA-SA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/rsc/">RSC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/rarl/">RARL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/dr/">DR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Offline Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/rfqi/">RFQI</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/rorl/">RORL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/atla-iql/">ATLA-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/rsc-iql/">RSC-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/rambo/">RAMBO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/romb/">ROMB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/fwm/">FWM</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/plr-pvl/">PLR-PVL</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Safe Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-safe/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-safe/ramu/">RAMU</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-safe/spidr/">SPiDR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithms/run-a-method/">Run a Method</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithms/add-an-algorithm/">Add an Algorithm</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Shift Sources and Modes</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Shift Sources</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../dynamic/">Dynamic shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../observation/">Observation shift</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Action shift</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#at-a-glance">At a glance</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-modes">Supported modes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#declare-the-shift">Declare the shift</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rules">Rules</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../reward-cost/">Reward/cost shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../latency/">Latency shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../semantic/">Semantic shift</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Shift Modes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/stochastic/">Stochastic</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/adversarial/">Adversarial</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/parametric/">Parametric</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/non-stationary/">Non-stationary</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/composition/">Composition</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../add-a-backend/">Add a Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Evaluation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../evaluation/protocol/">Evaluation Protocol</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="/">Project Page</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">RobustRLlib Tutorial</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Shift Sources and Modes</li>
+          <li class="breadcrumb-item">Shift Sources</li>
+      <li class="breadcrumb-item active">Action shift</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="action-shift">Action shift<a class="headerlink" href="#action-shift" title="Permanent link">&para;</a></h1>
+<p>An Action shift changes the command between the policy and the simulator. The policy issues one
+action and the task executes another; the result is always clipped to the action space.</p>
+<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Action shift</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Perturbs</td>
+<td>The action passed to <code>step</code>, before it reaches the simulator</td>
+</tr>
+<tr>
+<td>Target in code</td>
+<td><code>action</code></td>
+</tr>
+<tr>
+<td>Modes</td>
+<td>Stochastic, Adversarial, Parametric, Non-stationary, Composition</td>
+</tr>
+<tr>
+<td>Spaces</td>
+<td>Continuous action spaces; <code>rotate</code> needs two dimensions</td>
+</tr>
+<tr>
+<td>Acts on a frozen policy</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Backends</td>
+<td>Any; <code>oppose_goal</code> needs a goal-conditioned maze task</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-modes">Supported modes<a class="headerlink" href="#supported-modes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Mode name in code</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../modes/stochastic/">Stochastic</a></td>
+<td><code>gauss</code></td>
+<td>Adds Gaussian noise to every action component</td>
+</tr>
+<tr>
+<td><a href="../../modes/stochastic/">Stochastic</a></td>
+<td><code>uniform</code></td>
+<td>Adds uniform noise to every action component</td>
+</tr>
+<tr>
+<td><a href="../../modes/adversarial/">Adversarial</a></td>
+<td><code>oppose</code></td>
+<td>Subtracts a fixed magnitude along the direction of the action</td>
+</tr>
+<tr>
+<td><a href="../../modes/adversarial/">Adversarial</a></td>
+<td><code>rotate</code></td>
+<td>Turns the action by an angle and keeps its magnitude</td>
+</tr>
+<tr>
+<td><a href="../../modes/adversarial/">Adversarial</a></td>
+<td><code>oppose_goal</code></td>
+<td>Removes the component of the action that points at the goal</td>
+</tr>
+<tr>
+<td><a href="../../modes/adversarial/">Adversarial</a></td>
+<td><code>adversarial</code></td>
+<td>Builds one of the three above, chosen by the parameter <code>kind</code></td>
+</tr>
+<tr>
+<td><a href="../../modes/parametric/">Parametric</a></td>
+<td><code>shift</code></td>
+<td>Adds the same constant offset to every action component</td>
+</tr>
+<tr>
+<td><a href="../../modes/non-stationary/">Non-stationary</a></td>
+<td><code>schedule</code> on any of the seven mode names</td>
+<td>Varies the noise level, the offset, the magnitude or the angle within the episode</td>
+</tr>
+<tr>
+<td><a href="../../modes/composition/">Composition</a></td>
+<td>Several shifts in one list</td>
+<td>The last shift in the list sees the action first</td>
+</tr>
+</tbody>
+</table>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Mode name</th>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>all</td>
+<td><code>clip_first</code></td>
+<td>bool</td>
+<td><code>False</code></td>
+<td>Clip the command to the action space before it is perturbed</td>
+</tr>
+<tr>
+<td><code>gauss</code></td>
+<td><code>mu</code></td>
+<td>float</td>
+<td><code>0.0</code></td>
+<td>Mean of the noise</td>
+</tr>
+<tr>
+<td></td>
+<td><code>sigma</code></td>
+<td>float</td>
+<td><code>0.05</code></td>
+<td>Standard deviation of the noise</td>
+</tr>
+<tr>
+<td><code>uniform</code></td>
+<td><code>low</code>, <code>high</code></td>
+<td>float</td>
+<td>minus <code>range</code>, <code>range</code></td>
+<td>Bounds of the noise</td>
+</tr>
+<tr>
+<td></td>
+<td><code>range</code></td>
+<td>float</td>
+<td><code>0.1</code></td>
+<td>Shorthand for a symmetric interval</td>
+</tr>
+<tr>
+<td><code>shift</code></td>
+<td><code>shift</code></td>
+<td>float</td>
+<td><code>value</code>, else <code>0.0</code></td>
+<td>The offset</td>
+</tr>
+<tr>
+<td><code>oppose</code></td>
+<td><code>eps</code></td>
+<td>float</td>
+<td><code>0.2</code></td>
+<td>Magnitude that is subtracted</td>
+</tr>
+<tr>
+<td><code>rotate</code></td>
+<td><code>degrees</code></td>
+<td>float</td>
+<td><code>60.0</code></td>
+<td>Angle the action is turned by</td>
+</tr>
+<tr>
+<td><code>oppose_goal</code></td>
+<td><code>eps</code></td>
+<td>float</td>
+<td><code>1.0</code></td>
+<td>Share of the goal-directed component that is removed; 1 cancels it and 2 reverses it</td>
+</tr>
+<tr>
+<td><code>adversarial</code></td>
+<td><code>kind</code></td>
+<td>str</td>
+<td><code>"oppose"</code></td>
+<td><code>"oppose"</code>, <code>"rotate"</code> or <code>"oppose_goal"</code></td>
+</tr>
+<tr>
+<td></td>
+<td>the parameters of the member</td>
+<td></td>
+<td></td>
+<td>As in the three rows above</td>
+</tr>
+</tbody>
+</table>
+<p><code>clip_first</code> changes nothing for a policy that stays inside the action space. For a policy
+whose output leaves the action space, it makes the shift reach the simulator instead of being
+clipped away.</p>
+<h2 id="declare-the-shift">Declare the shift<a class="headerlink" href="#declare-the-shift" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">robustrllib</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_robust</span><span class="p">,</span> <span class="n">ShiftSpec</span>
+
+<span class="n">STOCHASTIC</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"gauss"</span><span class="p">:</span>   <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"gauss"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"sigma"</span><span class="p">:</span> <span class="mf">0.10</span><span class="p">,</span> <span class="s2">"clip_first"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span>
+    <span class="s2">"uniform"</span><span class="p">:</span> <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"uniform"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"low"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.10</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">:</span> <span class="mf">0.10</span><span class="p">,</span> <span class="s2">"clip_first"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span>
+<span class="p">}</span>
+<span class="n">PARAMETRIC</span> <span class="o">=</span> <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"shift"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"shift"</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span> <span class="s2">"clip_first"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+</code></pre></div>
+<p>Adversarial, on any continuous action space:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ADVERSARIAL</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"oppose"</span><span class="p">:</span>      <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"oppose"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"eps"</span><span class="p">:</span> <span class="mf">0.10</span><span class="p">,</span> <span class="s2">"clip_first"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span>
+    <span class="s2">"adversarial"</span><span class="p">:</span> <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"adversarial"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"oppose"</span><span class="p">,</span> <span class="s2">"eps"</span><span class="p">:</span> <span class="mf">0.10</span><span class="p">,</span> <span class="s2">"clip_first"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Adversarial, on a goal-conditioned maze task with a two-dimensional action:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ADVERSARIAL_MAZE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"rotate"</span><span class="p">:</span>      <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"rotate"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"degrees"</span><span class="p">:</span> <span class="mi">60</span><span class="p">}),</span>
+    <span class="s2">"oppose_goal"</span><span class="p">:</span> <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"oppose_goal"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"eps"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}),</span>
+    <span class="s2">"adversarial"</span><span class="p">:</span> <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"adversarial"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"rotate"</span><span class="p">,</span> <span class="s2">"degrees"</span><span class="p">:</span> <span class="mi">60</span><span class="p">}),</span>
+<span class="p">}</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">make_robust</span><span class="p">(</span><span class="s2">"PointMaze_UMaze-v3"</span><span class="p">,</span> <span class="n">shifts</span><span class="o">=</span><span class="p">[</span><span class="n">ADVERSARIAL_MAZE</span><span class="p">[</span><span class="s2">"rotate"</span><span class="p">]],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p>Non-stationary, with an opposition that grows within the episode:</p>
+<div class="highlight"><pre><span></span><code><span class="n">NON_STATIONARY</span> <span class="o">=</span> <span class="n">ShiftSpec</span><span class="p">(</span>
+    <span class="s2">"action"</span><span class="p">,</span> <span class="s2">"oppose"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"eps"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span> <span class="s2">"clip_first"</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="n">schedule</span><span class="o">=</span><span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"linear"</span><span class="p">,</span> <span class="s2">"start"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">"t0"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"t1"</span><span class="p">:</span> <span class="mi">500</span><span class="p">},</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Composition with a Latency shift. The noise is added to the command, and the noisy command is
+then delayed:</p>
+<div class="highlight"><pre><span></span><code><span class="n">COMPOSITION</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"latency"</span><span class="p">,</span> <span class="s2">"fixed"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"steps"</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+    <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"gauss"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"sigma"</span><span class="p">:</span> <span class="mf">0.10</span><span class="p">,</span> <span class="s2">"clip_first"</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>A recording wrapper between the task and the shift shows the action that is executed.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">robustrllib.gym</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gym</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">robustrllib</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_pipeline</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Recorder</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Wrapper</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executed</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">action</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">executed</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">env_id</span><span class="o">=</span><span class="s2">"Hopper-v5"</span><span class="p">):</span>
+    <span class="n">recorder</span> <span class="o">=</span> <span class="n">Recorder</span><span class="p">(</span><span class="n">make_robust</span><span class="p">(</span><span class="n">env_id</span><span class="p">))</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">build_pipeline</span><span class="p">(</span><span class="n">recorder</span><span class="p">,</span> <span class="p">[</span><span class="n">spec</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">action</span><span class="p">))</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">recorder</span><span class="o">.</span><span class="n">executed</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">executed</span><span class="p">(</span><span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"oppose"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"eps"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">}),</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">executed</span><span class="p">(</span><span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"oppose"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"eps"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">}),</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">executed</span><span class="p">(</span><span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"action"</span><span class="p">,</span> <span class="s2">"rotate"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"degrees"</span><span class="p">:</span> <span class="mi">60</span><span class="p">}),</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="s2">"PointMaze_UMaze-v3"</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[0.3 0.  0. ]
+[-0.1  0.   0. ]
+[0.25  0.433]
+</code></pre></div>
+<p><code>oppose</code> takes the same magnitude from a large and from a small action, so the small action is
+reversed. <code>rotate</code> keeps the magnitude of 0.5 and changes the direction.</p>
+<h2 id="rules">Rules<a class="headerlink" href="#rules" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>clip_first</code> is set on the Action shifts of an evaluation grid, so that the shift reaches the
+  simulator for every policy.</li>
+<li><strong><code>rotate</code> is defined for two-dimensional action spaces</strong>; on <code>Hopper-v5</code> it raises
+  <code>ValueError</code> at the first <code>step</code>.</li>
+<li><strong><code>oppose_goal</code> is defined for goal-conditioned maze tasks</strong>; on other tasks it raises
+  <code>ValueError</code> at the first <code>step</code>.</li>
+<li><code>adversarial</code> with <code>kind</code> and the member written as the mode name build the same shift.</li>
+<li>A value of <code>kind</code> other than the three members raises <code>ValueError</code> when the environment is
+  built.</li>
+<li>The executed action never leaves the action space.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../observation/" class="btn btn-neutral float-left" title="Observation shift"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../reward-cost/" class="btn btn-neutral float-right" title="Reward/cost shift">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>RobustRLlib · Anonymous submission under double-blind review.</p>
+  </div>
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../observation/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../reward-cost/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://robust-rllib.site/docs/shifts/sources/dynamic/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Dynamic shift - RobustRLlib Tutorial</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link href="../../../assets/pygments.css" rel="stylesheet" />
+        <link href="../../../assets/rl.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Dynamic shift";
+        var mkdocs_page_input_path = "shifts/sources/dynamic.md";
+        var mkdocs_page_url = "/docs/shifts/sources/dynamic/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+  <meta name="robots" content="noindex">
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> RobustRLlib Tutorial
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../getting-started/overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../getting-started/quick-start/">Quick Start</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Algorithms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithms/">All Methods</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Standard Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/iql/">IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/td3bc/">TD3+BC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/mopo/">MOPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/synther/">SynthER</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/ppo/">PPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/sac/">SAC</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Online Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/atla/">ATLA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/atla-sa/">ATLA-SA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/rsc/">RSC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/rarl/">RARL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/dr/">DR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Offline Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/rfqi/">RFQI</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/rorl/">RORL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/atla-iql/">ATLA-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/rsc-iql/">RSC-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/rambo/">RAMBO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/romb/">ROMB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/fwm/">FWM</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/plr-pvl/">PLR-PVL</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Safe Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-safe/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-safe/ramu/">RAMU</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-safe/spidr/">SPiDR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithms/run-a-method/">Run a Method</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithms/add-an-algorithm/">Add an Algorithm</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Shift Sources and Modes</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Shift Sources</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Dynamic shift</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#at-a-glance">At a glance</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-modes">Supported modes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#declare-the-shift">Declare the shift</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rules">Rules</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../observation/">Observation shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../action/">Action shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../reward-cost/">Reward/cost shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../latency/">Latency shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../semantic/">Semantic shift</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Shift Modes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/stochastic/">Stochastic</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/adversarial/">Adversarial</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/parametric/">Parametric</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/non-stationary/">Non-stationary</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/composition/">Composition</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../add-a-backend/">Add a Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Evaluation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../evaluation/protocol/">Evaluation Protocol</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="/">Project Page</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">RobustRLlib Tutorial</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Shift Sources and Modes</li>
+          <li class="breadcrumb-item">Shift Sources</li>
+      <li class="breadcrumb-item active">Dynamic shift</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="dynamic-shift">Dynamic shift<a class="headerlink" href="#dynamic-shift" title="Permanent link">&para;</a></h1>
+<p>A Dynamic shift changes how the world moves. It edits a physical parameter of the simulator,
+applies an external force to a body, or perturbs the simulator state between steps.</p>
+<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Dynamic shift</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Perturbs</td>
+<td>Physical parameters, external forces, the simulator state</td>
+</tr>
+<tr>
+<td>Targets in code</td>
+<td><code>dynamics</code> and <code>transition</code></td>
+</tr>
+<tr>
+<td>Modes</td>
+<td>Stochastic, Parametric, Non-stationary, Composition</td>
+</tr>
+<tr>
+<td>Applied</td>
+<td>Parameter edits at every <code>reset</code>; forces during a push; state noise after every step</td>
+</tr>
+<tr>
+<td>Acts on a frozen policy</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Backends</td>
+<td>MuJoCo for every mode name; Box2D for parameter edits</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-modes">Supported modes<a class="headerlink" href="#supported-modes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Mode name in code</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../modes/stochastic/">Stochastic</a></td>
+<td><code>gauss</code>, <code>uniform</code>, <code>loguniform</code></td>
+<td>Draws a factor once per episode and multiplies the nominal value by it</td>
+</tr>
+<tr>
+<td><a href="../../modes/stochastic/">Stochastic</a></td>
+<td><code>push</code></td>
+<td>Applies a force to one body for a few steps, at regular intervals, with a drawn direction and phase</td>
+</tr>
+<tr>
+<td><a href="../../modes/stochastic/">Stochastic</a></td>
+<td><code>gauss</code> on the target <code>transition</code></td>
+<td>Adds Gaussian noise to positions and velocities after every step</td>
+</tr>
+<tr>
+<td><a href="../../modes/parametric/">Parametric</a></td>
+<td><code>scale</code></td>
+<td>Sets the parameter to its nominal value times a factor</td>
+</tr>
+<tr>
+<td><a href="../../modes/parametric/">Parametric</a></td>
+<td><code>set</code></td>
+<td>Sets the parameter to an absolute value</td>
+</tr>
+<tr>
+<td><a href="../../modes/parametric/">Parametric</a></td>
+<td><code>translate</code></td>
+<td>Adds an offset in metres to a position</td>
+</tr>
+<tr>
+<td><a href="../../modes/non-stationary/">Non-stationary</a></td>
+<td><code>schedule</code> on <code>scale</code>, <code>translate</code>, <code>push</code> and <code>transition</code></td>
+<td>Varies the factor, offset, force or noise within the episode</td>
+</tr>
+<tr>
+<td><a href="../../modes/composition/">Composition</a></td>
+<td>Several shifts in one list</td>
+<td>Edits several parameters at once</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The target <code>transition</code> accepts only the mode name <code>gauss</code></strong>; any other mode name raises
+<code>ValueError</code> when the environment is built. The Adversarial mode is not defined for this shift.</p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<p>Parameter edits on the target <code>dynamics</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Mode name</th>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>all but <code>push</code></td>
+<td><code>param</code></td>
+<td>str</td>
+<td>required</td>
+<td>Name of the physical parameter</td>
+</tr>
+<tr>
+<td></td>
+<td><code>index</code></td>
+<td>int, str or <code>"all"</code></td>
+<td><code>None</code></td>
+<td>Entity by position or by name, or every entity</td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td><code>factor</code></td>
+<td>float</td>
+<td><code>1.0</code></td>
+<td>Factor on the nominal value</td>
+</tr>
+<tr>
+<td><code>set</code></td>
+<td><code>value</code></td>
+<td>float or list</td>
+<td>required</td>
+<td>Absolute value</td>
+</tr>
+<tr>
+<td><code>gauss</code></td>
+<td><code>mu</code>, <code>sigma</code></td>
+<td>float</td>
+<td><code>1.0</code>, <code>0.1</code></td>
+<td>Mean and standard deviation of the factor</td>
+</tr>
+<tr>
+<td><code>uniform</code></td>
+<td><code>low</code>, <code>high</code></td>
+<td>float</td>
+<td><code>0.8</code>, <code>1.2</code></td>
+<td>Bounds of the factor</td>
+</tr>
+<tr>
+<td><code>loguniform</code></td>
+<td><code>low</code>, <code>high</code></td>
+<td>float</td>
+<td><code>0.8</code>, <code>1.2</code></td>
+<td>Bounds of a factor drawn uniformly in log space; both positive</td>
+</tr>
+<tr>
+<td><code>gauss</code>, <code>uniform</code>, <code>loguniform</code></td>
+<td><code>operation</code></td>
+<td>str</td>
+<td><code>"scale"</code></td>
+<td>With <code>"set"</code> the drawn number is the value itself</td>
+</tr>
+<tr>
+<td></td>
+<td><code>nominal</code></td>
+<td>float</td>
+<td>required with <code>"set"</code></td>
+<td>The value a schedule multiplier of 0 maps to</td>
+</tr>
+<tr>
+<td><code>translate</code></td>
+<td><code>offset</code></td>
+<td>list of float</td>
+<td>required</td>
+<td>Offset in metres</td>
+</tr>
+</tbody>
+</table>
+<p>External force and state noise:</p>
+<table>
+<thead>
+<tr>
+<th>Mode name</th>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>push</code></td>
+<td><code>body</code></td>
+<td>str</td>
+<td><code>"torso"</code></td>
+<td>Body that receives the force</td>
+</tr>
+<tr>
+<td></td>
+<td><code>interval</code></td>
+<td>int</td>
+<td><code>200</code></td>
+<td>Control steps between the onsets of two pushes</td>
+</tr>
+<tr>
+<td></td>
+<td><code>duration</code></td>
+<td>int</td>
+<td><code>10</code></td>
+<td>Control steps a push lasts</td>
+</tr>
+<tr>
+<td></td>
+<td><code>force</code></td>
+<td>float</td>
+<td><code>50.0</code></td>
+<td>Magnitude in newtons</td>
+</tr>
+<tr>
+<td></td>
+<td><code>direction</code></td>
+<td>str or list</td>
+<td><code>"random_xy"</code></td>
+<td><code>"random_xy"</code>, <code>"random_x"</code>, or a fixed vector of three numbers</td>
+</tr>
+<tr>
+<td><code>gauss</code> on <code>transition</code></td>
+<td><code>q_sigma</code></td>
+<td>float</td>
+<td><code>sigma</code>, else <code>0.0</code></td>
+<td>Standard deviation of the noise on positions</td>
+</tr>
+<tr>
+<td></td>
+<td><code>v_sigma</code></td>
+<td>float</td>
+<td><code>sigma</code>, else <code>0.0</code></td>
+<td>Standard deviation of the noise on velocities</td>
+</tr>
+</tbody>
+</table>
+<p>Names of physical parameters on MuJoCo tasks:</p>
+<table>
+<thead>
+<tr>
+<th><code>param</code></th>
+<th>Edits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gravity</code>, <code>wind</code></td>
+<td>One component of the gravity or wind vector; by default the vertical component of gravity</td>
+</tr>
+<tr>
+<td><code>body_mass</code>, <code>body_inertia</code></td>
+<td>Mass of a body; first component of its inertia</td>
+</tr>
+<tr>
+<td><code>body_pos</code>, <code>body_pos_xyz</code></td>
+<td>Vertical component, or the full vector, of the offset of a body from its parent; the full vector scales limb length</td>
+</tr>
+<tr>
+<td><code>dof_damping</code>, <code>dof_frictionloss</code></td>
+<td>Damping and dry friction of a joint</td>
+</tr>
+<tr>
+<td><code>geom_friction</code></td>
+<td>Sliding friction of a geom</td>
+</tr>
+<tr>
+<td><code>geom_size</code>, <code>geom_size_xyz</code></td>
+<td>First size component, or the full size vector, of a geom</td>
+</tr>
+<tr>
+<td><code>actuator_gear</code></td>
+<td>Gear of an actuator, its control authority</td>
+</tr>
+<tr>
+<td><code>freejoint_pos</code></td>
+<td>Position of a free-floating body</td>
+</tr>
+</tbody>
+</table>
+<p>Box2D tasks use the names <code>gravity</code>, <code>enable_wind</code>, <code>wind_power</code>, <code>turbulence_power</code>,
+<code>main_engine_power</code>, <code>side_engine_power</code>, <code>engine_power</code> and <code>friction</code>.</p>
+<h2 id="declare-the-shift">Declare the shift<a class="headerlink" href="#declare-the-shift" title="Permanent link">&para;</a></h2>
+<p>Every example on this page passes the check below.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">robustrllib</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_robust</span><span class="p">,</span> <span class="n">ShiftSpec</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">env_id</span><span class="o">=</span><span class="s2">"Hopper-v5"</span><span class="p">):</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">make_robust</span><span class="p">(</span><span class="n">env_id</span><span class="p">,</span> <span class="n">shifts</span><span class="o">=</span><span class="p">[</span><span class="n">spec</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">())</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<p>Parametric:</p>
+<div class="highlight"><pre><span></span><code><span class="n">PARAMETRIC</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"scale"</span><span class="p">:</span>     <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"scale"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"body_mass"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"torso"</span><span class="p">,</span> <span class="s2">"factor"</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">}),</span>
+    <span class="s2">"set"</span><span class="p">:</span>       <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"set"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"dof_frictionloss"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"all"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}),</span>
+    <span class="s2">"translate"</span><span class="p">:</span> <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"translate"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"body_pos_xyz"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"foot"</span><span class="p">,</span>
+                                                     <span class="s2">"offset"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]}),</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Stochastic:</p>
+<div class="highlight"><pre><span></span><code><span class="n">STOCHASTIC</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"gauss"</span><span class="p">:</span>      <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"gauss"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"gravity"</span><span class="p">,</span> <span class="s2">"mu"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">"sigma"</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">}),</span>
+    <span class="s2">"uniform"</span><span class="p">:</span>    <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"uniform"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"actuator_gear"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"all"</span><span class="p">,</span>
+                                                    <span class="s2">"low"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">}),</span>
+    <span class="s2">"loguniform"</span><span class="p">:</span> <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"loguniform"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"dof_damping"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"all"</span><span class="p">,</span>
+                                                       <span class="s2">"low"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">}),</span>
+    <span class="s2">"absolute"</span><span class="p">:</span>   <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"uniform"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"dof_frictionloss"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"all"</span><span class="p">,</span>
+                                                    <span class="s2">"operation"</span><span class="p">:</span> <span class="s2">"set"</span><span class="p">,</span> <span class="s2">"nominal"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+                                                    <span class="s2">"low"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}),</span>
+    <span class="s2">"push"</span><span class="p">:</span>       <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"push"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"body"</span><span class="p">:</span> <span class="s2">"torso"</span><span class="p">,</span> <span class="s2">"interval"</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span> <span class="s2">"duration"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                                                 <span class="s2">"force"</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">,</span> <span class="s2">"direction"</span><span class="p">:</span> <span class="s2">"random_x"</span><span class="p">}),</span>
+    <span class="s2">"transition"</span><span class="p">:</span> <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"transition"</span><span class="p">,</span> <span class="s2">"gauss"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"q_sigma"</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span> <span class="s2">"v_sigma"</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">}),</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Non-stationary, with the factor range written into the schedule:</p>
+<div class="highlight"><pre><span></span><code><span class="n">NON_STATIONARY</span> <span class="o">=</span> <span class="n">ShiftSpec</span><span class="p">(</span>
+    <span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"scale"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"actuator_gear"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"all"</span><span class="p">,</span> <span class="s2">"factor"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>
+    <span class="n">schedule</span><span class="o">=</span><span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"sine"</span><span class="p">,</span> <span class="s2">"start"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s2">"period"</span><span class="p">:</span> <span class="mi">200</span><span class="p">},</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Composition, and the values it writes into the model:</p>
+<div class="highlight"><pre><span></span><code><span class="n">env</span> <span class="o">=</span> <span class="n">make_robust</span><span class="p">(</span><span class="s2">"Hopper-v5"</span><span class="p">,</span> <span class="n">shifts</span><span class="o">=</span><span class="p">[</span>
+    <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"scale"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"gravity"</span><span class="p">,</span> <span class="s2">"factor"</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">}),</span>
+    <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"scale"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"actuator_gear"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"all"</span><span class="p">,</span> <span class="s2">"factor"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">}),</span>
+<span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">unwrapped</span><span class="o">.</span><span class="n">model</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">gravity</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span> <span class="n">model</span><span class="o">.</span><span class="n">actuator_gear</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>-11.772 [160. 160. 160.]
+</code></pre></div>
+<p>The names a task accepts are listed by its adapter.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">robustrllib.adapters</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_adapter</span>
+
+<span class="n">names</span> <span class="o">=</span> <span class="n">get_adapter</span><span class="p">(</span><span class="n">make_robust</span><span class="p">(</span><span class="s2">"Hopper-v5"</span><span class="p">))</span><span class="o">.</span><span class="n">list_params</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="rules">Rules<a class="headerlink" href="#rules" title="Permanent link">&para;</a></h2>
+<ul>
+<li>A parameter of one entity is always written with <code>index</code>; <strong>without <code>index</code> the shift
+  addresses entity 0</strong>, which for MuJoCo bodies is the world body.</li>
+<li>A factor is relative to the nominal value, so repeated resets do not compound it.</li>
+<li>One parameter and index is addressed by one shift only; of two shifts on the same parameter
+  the later one wins.</li>
+<li>A parameter whose nominal value is zero is randomized with <code>operation: set</code> and a <code>nominal</code>.</li>
+<li><code>translate</code> is written for position vectors: <code>body_pos_xyz</code>, <code>freejoint_pos</code>, <code>cam_pos</code> and
+  <code>light_pos</code>.</li>
+<li>The drawn mode names are not combined with a schedule, because they would then draw at every
+  step.</li>
+<li><code>push</code>, <code>transition</code> and <code>translate</code> need a MuJoCo task.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../observation/" class="btn btn-neutral float-right" title="Observation shift">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>RobustRLlib · Anonymous submission under double-blind review.</p>
+  </div>
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../observation/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

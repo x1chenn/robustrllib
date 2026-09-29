@@ -19,9 +19,8 @@
       <a href="#disruptor">Disruptor</a>
       <a href="#evaluation">Evaluation</a>
       <a href="#findings">Findings</a>
-      <a href="#tasks">Tasks</a>
-      <a href="#tutorial">Tutorial</a>
       <a href="#bibtex">BibTeX</a>
+      <a class="doc" href="docs/">Tutorial</a>
     </div>
   </div>
 </nav>
@@ -50,9 +49,7 @@
     <div class="btn-row">
       <a class="btn primary" href="#" data-blocked="paper"><span class="ic">▤</span> Paper <span style="opacity:.75;font-weight:500">(coming soon)</span></a>
       <a class="btn" href="#" data-blocked="code"><span class="ic">⌘</span> Code</a>
-      <a class="btn" href="#" data-blocked="docs"><span class="ic">▦</span> Docs</a>
-      <a class="btn" href="#evaluation"><span class="ic">▥</span> Results</a>
-      <a class="btn" href="#" data-blocked="data"><span class="ic">◈</span> Dataset</a>
+      <a class="btn" href="docs/"><span class="ic">▦</span> Tutorial</a>
       <a class="btn" href="#bibtex"><span class="ic">❞</span> BibTeX</a>
     </div>
 
@@ -82,7 +79,7 @@
       benchmark that addresses both challenges. It integrates <b>16 representative robust online, offline, and safe
       RL methods</b> under a unified interface for substantially improved reusability, together with an enhanced
       evaluation platform spanning diverse real-world shifts and advanced humanoid and vision–language–action tasks.
-      Systematic evaluation provides an up-to-date capability map of current robust RL algorithms, revealing where
+      Systematic evaluation over 273 perturbation configurations provides an up-to-date capability map of current robust RL algorithms, revealing where
       they remain effective and where substantial robustness gaps persist. As an open-source, user-friendly platform,
       RobustRLlib offers a reproducible and extensible codebase for applying existing methods to new problems and
       developing new robust RL algorithms.
@@ -201,51 +198,47 @@
       </div>
     </div>
 
+    <!-- algo-table:start -->
     <div class="table-scroll">
       <table class="data">
         <thead>
           <tr>
-            <th>Regime</th>
-            <th>Family</th>
-            <th>Method</th>
-            <th class="c">Shifted data</th>
-            <th class="c">Generative model</th>
-            <th class="c">Extra network</th>
-            <th>Claimed robustness</th>
-            <th>Base algorithm</th>
+            <th>Family</th><th>Method</th><th>Claimed<br>robustness</th><th>Base<br>algorithm</th>
+            <th class="c">Shifted-env<br>rollout</th><th class="c">Adversarial<br>network</th><th class="c">Learned<br>model</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="grp"><td colspan="8">Robust Offline — learns from a fixed dataset without environment interaction</td></tr>
-          <tr><td rowspan="3">Robust Offline</td><td rowspan="3">Learner-centric</td><td>RFQI</td><td class="c">—</td><td class="c"></td><td class="c"></td><td>Dynamic</td><td>FQI</td></tr>
-          <tr><td>RORL</td><td class="c">—</td><td class="c"></td><td class="c"></td><td>Observation</td><td>SAC</td></tr>
-          <tr><td>ATLA</td><td class="c">—</td><td class="c"></td><td class="c tick">✓</td><td>Observation</td><td>IQL</td></tr>
-          <tr><td rowspan="5"></td><td rowspan="5">Data-centric</td><td>RSC-IQL</td><td class="c">—</td><td class="c"></td><td class="c tick">✓</td><td>Semantics</td><td>IQL</td></tr>
-          <tr><td>RAMBO</td><td class="c">—</td><td class="c"></td><td class="c tick">✓</td><td>Dynamic</td><td>SAC</td></tr>
-          <tr><td>ROMB</td><td class="c">—</td><td class="c tick">✓</td><td class="c tick">✓</td><td>Dynamic</td><td>IQL</td></tr>
-          <tr><td>FWM</td><td class="c">—</td><td class="c tick">✓</td><td class="c tick">✓</td><td>Dynamic</td><td>IQL</td></tr>
-          <tr><td>PLR-PVL</td><td class="c">—</td><td class="c tick">✓</td><td class="c tick">✓</td><td>Dynamic</td><td>IQL</td></tr>
-
-          <tr class="grp"><td colspan="8">Robust Online — learns through continued environment interaction</td></tr>
-          <tr><td rowspan="3">Robust Online</td><td rowspan="3">Learner-centric</td><td>ATLA</td><td class="c tick">✓</td><td class="c">—</td><td class="c tick">✓</td><td>Observation</td><td>PPO</td></tr>
-          <tr><td>ATLA-SA</td><td class="c tick">✓</td><td class="c">—</td><td class="c tick">✓</td><td>Observation</td><td>PPO</td></tr>
-          <tr><td>RSC</td><td class="c tick">✓</td><td class="c">—</td><td class="c tick">✓</td><td>Semantics</td><td>SAC</td></tr>
-          <tr><td rowspan="2"></td><td rowspan="2">Environment-centric</td><td>RARL</td><td class="c tick">✓</td><td class="c">—</td><td class="c tick">✓</td><td>Dynamic</td><td>PPO / TRPO</td></tr>
-          <tr><td>DR</td><td class="c tick">✓</td><td class="c">—</td><td class="c"></td><td>Dynamic</td><td>SAC</td></tr>
-
-          <tr class="grp"><td colspan="8">Robust Safe — adds cost constraints, including robust-safe methods implemented in the online setting</td></tr>
-          <tr><td rowspan="2">Robust Safe</td><td rowspan="2">Robust Safe</td><td>RAMU</td><td class="c tick">✓</td><td class="c">—</td><td class="c"></td><td>Dynamic</td><td>PPO</td></tr>
-          <tr><td>SPiDR</td><td class="c tick">✓</td><td class="c">—</td><td class="c tick">✓</td><td>Dynamic</td><td>PPO</td></tr>
+          <tr class="grp"><td colspan="7">Robust Offline — learns from a fixed dataset without environment interaction</td></tr>
+          <tr><td rowspan="3" style="white-space:nowrap">Learner-centric</td><td style="white-space:nowrap"><a href="docs/algorithms/robust-offline/rfqi/"><b>RFQI</b></a></td><td>Dynamic</td><td>FQI</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+          <tr><td style="white-space:nowrap"><a href="docs/algorithms/robust-offline/rorl/"><b>RORL</b></a></td><td>Observation</td><td>SAC</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+          <tr><td style="white-space:nowrap"><a href="docs/algorithms/robust-offline/atla-iql/"><b>ATLA-IQL</b></a></td><td>Observation</td><td>IQL</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
+          <tr><td rowspan="2" style="white-space:nowrap">Data-centric</td><td style="white-space:nowrap"><a href="docs/algorithms/robust-offline/rsc-iql/"><b>RSC-IQL</b></a></td><td>Semantics</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
+          <tr><td style="white-space:nowrap"><a href="docs/algorithms/robust-offline/rambo/"><b>RAMBO</b></a></td><td>Dynamic</td><td>SAC</td><td class="c"></td><td class="c tick">✓</td><td class="c tick">✓</td></tr>
+          <tr><td rowspan="3" style="white-space:nowrap">Data-centric · generative</td><td style="white-space:nowrap"><a href="docs/algorithms/robust-offline/romb/"><b>ROMB</b></a></td><td>Dynamic</td><td>IQL</td><td class="c"></td><td class="c tick">✓</td><td class="c tick">✓</td></tr>
+          <tr><td style="white-space:nowrap"><a href="docs/algorithms/robust-offline/fwm/"><b>FWM</b></a></td><td>Dynamic</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
+          <tr><td style="white-space:nowrap"><a href="docs/algorithms/robust-offline/plr-pvl/"><b>PLR-PVL</b></a></td><td>Dynamic</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
+          <tr class="grp"><td colspan="7">Robust Online — learns through continued environment interaction</td></tr>
+          <tr><td rowspan="3" style="white-space:nowrap">Learner-centric</td><td style="white-space:nowrap"><a href="docs/algorithms/robust-online/atla/"><b>ATLA</b></a></td><td>Observation</td><td>PPO</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
+          <tr><td style="white-space:nowrap"><a href="docs/algorithms/robust-online/atla-sa/"><b>ATLA-SA</b></a></td><td>Observation</td><td>PPO</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
+          <tr><td style="white-space:nowrap"><a href="docs/algorithms/robust-online/rsc/"><b>RSC</b></a></td><td>Semantics</td><td>SAC</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
+          <tr><td rowspan="2" style="white-space:nowrap">Environment-centric</td><td style="white-space:nowrap"><a href="docs/algorithms/robust-online/rarl/"><b>RARL</b></a></td><td>Dynamic</td><td>PPO / TRPO</td><td class="c tick">✓</td><td class="c tick">✓</td><td class="c"></td></tr>
+          <tr><td style="white-space:nowrap"><a href="docs/algorithms/robust-online/dr/"><b>DR</b></a></td><td>Dynamic</td><td>SAC / PPO</td><td class="c tick">✓</td><td class="c"></td><td class="c"></td></tr>
+          <tr class="grp"><td colspan="7">Robust Safe — adds a cost constraint that must hold under shift</td></tr>
+          <tr><td rowspan="2" style="white-space:nowrap">Robust safe</td><td style="white-space:nowrap"><a href="docs/algorithms/robust-safe/ramu/"><b>RAMU</b></a></td><td>Dynamic</td><td>PPO</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+          <tr><td style="white-space:nowrap"><a href="docs/algorithms/robust-safe/spidr/"><b>SPiDR</b></a></td><td>Dynamic</td><td>PPO</td><td class="c tick">✓</td><td class="c"></td><td class="c tick">✓</td></tr>
         </tbody>
       </table>
     </div>
     <p class="tbl-note">
-      <b>Structural comparison of the robust methods in the library.</b> <em>Shifted data</em> indicates whether the
-      algorithm can obtain access to a shifted environment; <em>generative model</em> marks methods that explicitly
-      learn a distribution over transitions or future trajectories; <em>extra network</em> marks methods that train an
-      additional adversary or transition model; <em>claimed robustness</em> records the intended shift target.
-      Standard references (PPO, TRPO, SAC, IQL, TD3+BC, MOPO, SynthER) are excluded from the table.
+      <b>Structural comparison of the robust methods in the library.</b>
+      <em>Shifted-env rollout</em> marks rollouts collected from a deliberately perturbed
+      environment; <em>adversarial network</em> marks a learned adversary optimised against the
+      policy; <em>learned model</em> marks a trained next-state predictor used by the robustness
+      mechanism; <em>claimed robustness</em> records the intended shift target. The six standard
+      references are documented with the other methods on the
+      <a href="docs/algorithms/">algorithm pages</a>.
     </p>
+    <!-- algo-table:end -->
 
     <h3>How a method is compared to its own backbone</h3>
     <p>
@@ -262,10 +255,10 @@
         </thead>
         <tbody>
           <tr><td>RLlib</td><td class="c">0</td><td class="c">0/4</td><td class="c cross">✗</td><td class="c cross">✗</td><td class="c cross">✗</td><td class="c tick">✓</td></tr>
-          <tr><td>RRLS</td><td class="c">4</td><td class="c">1/4</td><td class="c cross">✗</td><td class="c cross">✗</td><td class="c part-t">◐</td><td class="c part-t">◐</td></tr>
+          <tr><td>RRLS</td><td class="c">4</td><td class="c">2/4</td><td class="c cross">✗</td><td class="c cross">✗</td><td class="c part-t">◐</td><td class="c tick">✓</td></tr>
           <tr><td>ODRL</td><td class="c">0</td><td class="c">1/4</td><td class="c cross">✗</td><td class="c cross">✗</td><td class="c cross">✗</td><td class="c cross">✗</td></tr>
           <tr><td>Robust-Gymnasium</td><td class="c">4</td><td class="c">4/4</td><td class="c cross">✗</td><td class="c tick">✓</td><td class="c tick">✓</td><td class="c tick">✓</td></tr>
-          <tr><td>RWRL Suite</td><td class="c">0</td><td class="c">3/4</td><td class="c tick">✓</td><td class="c cross">✗</td><td class="c tick">✓</td><td class="c cross">✗</td></tr>
+          <tr><td>RWRL Suite</td><td class="c">0</td><td class="c">3/4</td><td class="c tick">✓</td><td class="c cross">✗</td><td class="c tick">✓</td><td class="c part-t">◐</td></tr>
           <tr><td>RoAd-RL</td><td class="c">0</td><td class="c">1/4</td><td class="c cross">✗</td><td class="c cross">✗</td><td class="c cross">✗</td><td class="c tick">✓</td></tr>
           <tr class="hi"><td><b>RobustRLlib (ours)</b></td><td class="c"><b>16</b></td><td class="c"><b>4/4</b></td><td class="c tick">✓</td><td class="c tick">✓</td><td class="c tick">✓</td><td class="c tick">✓</td></tr>
         </tbody>
@@ -336,13 +329,13 @@
         <div class="h"><span class="sym">θᵗ</span> Latency</div>
         <p class="d">Governs <em>when</em> information and commands arrive: observation delay δ<sub>o</sub> (fractional,
           interpolated), action delay δ<sub>a</sub>, and control period κ.</p>
-        <p class="ops">buffer · substep · interp · fixed</p>
+        <p class="ops">fixed · buffer · substep · interp · delay</p>
       </div>
       <div class="chan c-r">
         <div class="h"><span class="sym">θʳ,θᶜ</span> Reward / cost</div>
         <p class="d">Noisy or biased supervision on the learning signal, kept separate from the underlying transition;
           reward and cost channels are distinct.</p>
-        <p class="ops">gauss · uniform · shift · delay</p>
+        <p class="ops">gauss · uniform · shift</p>
       </div>
       <div class="chan c-z">
         <div class="h"><span class="sym">θᶻ</span> Task semantics</div>
@@ -667,41 +660,31 @@
       <div class="step"><div class="n">3</div><h4>Train and evaluate</h4><p>Train under the nominal specification, freeze the policy, and evaluate it on the same grid for every method, with paired episode seeds and a predeclared checkpoint rule.</p></div>
     </div>
 
-    <h4 style="margin-top:26px">Declaring isolated shifts</h4>
-<pre class="code"><span class="cm"># A deployment condition is one parameter vector, declared channel by channel.</span>
-<span class="kw">from</span> robustrllib <span class="kw">import</span> make_shifted_env, ShiftSpec
+    <h4 style="margin-top:26px">Declaring a shifted environment</h4>
+<pre class="code"><span class="cm"># A deployment condition is an ordered list of shifts. The list order is the stacking order.</span>
+<span class="kw">from</span> robustrllib <span class="kw">import</span> make_robust, ShiftSpec
 
-specs = [
-    <span class="cm"># theta^p — a randomised physical parameter, drawn once per reset</span>
-    ShiftSpec(channel=<span class="st">"dynamics"</span>,  mode=<span class="st">"loguniform"</span>, param=<span class="st">"mass"</span>,    severity=<span class="st">[0.7, 1.4]</span>, resample=<span class="st">"per_reset"</span>),
-    <span class="cm"># theta^o — an adversarial observation perturbation at an L-infinity radius</span>
-    ShiftSpec(channel=<span class="st">"observation"</span>, mode=<span class="st">"adversarial"</span>,                severity=<span class="st">0.10</span>,      resample=<span class="st">"per_step"</span>),
-    <span class="cm"># theta^tau — an interpolated observation delay of 4 control steps</span>
-    ShiftSpec(channel=<span class="st">"latency"</span>,    mode=<span class="st">"interp"</span>, param=<span class="st">"obs_delay"</span>,       severity=<span class="st">4</span>,         resample=<span class="st">"per_episode"</span>),
-]
+env = <span class="fn">make_robust</span>(<span class="st">"Hopper-v5"</span>, shifts=[
+    <span class="cm"># theta^p — gravity scaled to 1.3 of its nominal value</span>
+    <span class="fn">ShiftSpec</span>(<span class="st">"dynamics"</span>,    <span class="st">"scale"</span>, {<span class="st">"param"</span>: <span class="st">"gravity"</span>, <span class="st">"factor"</span>: <span class="st">1.3</span>}),
+    <span class="cm"># theta^o — Gaussian noise on the observation</span>
+    <span class="fn">ShiftSpec</span>(<span class="st">"observation"</span>, <span class="st">"gauss"</span>, {<span class="st">"sigma"</span>: <span class="st">0.05</span>}),
+], seed=<span class="st">0</span>)                                  <span class="cm"># a standard Gymnasium environment</span></pre>
 
-env = <span class="fn">make_shifted_env</span>(<span class="st">"Hopper-v5"</span>, specs, seed=<span class="st">0</span>)</pre>
+    <h4>Training a method and evaluating it under shift</h4>
+<pre class="code"><span class="cm"># Train on the nominal task with the method's native recipe.</span>
+python baselines/rorl/train_rorl.py \
+    -c robustrllib/configs/experiment/rorl_hopper.yaml --seed <span class="st">0</span>
 
-    <h4>Graded sim-to-real conditions and evaluation</h4>
-<pre class="code"><span class="cm"># L1 / L2 / L3 nest progressively: L1 is theta^p only, L3 adds the timing channel</span>
-<span class="cm"># together with a time-varying schedule g(t; phi).</span>
-<span class="kw">from</span> robustrllib <span class="kw">import</span> scenario, evaluate
-
-env = <span class="fn">scenario</span>(<span class="st">"L3"</span>, <span class="st">"Unitree-G1"</span>, schedule=<span class="st">"drift"</span>)
-
-report = <span class="fn">evaluate</span>(
-    policy, env,
-    nominal=True,                       <span class="cm"># include the unshifted condition</span>
-    severities=<span class="st">"quartiles"</span>,              <span class="cm"># report Q1-Q4 of this ladder's own length</span>
-    episodes=<span class="st">20</span>, seeds=<span class="st">5</span>,             <span class="cm"># 5 training seeds x 20 paired episodes</span>
-    checkpoint=<span class="st">"exact_last"</span>,           <span class="cm"># predeclared rule, logged in the run manifest</span>
-)
-<span class="fn">print</span>(report.normalized_score)          <span class="cm"># S(R) = 100 (R - R_min) / (R_max - R_min)</span>
-<span class="fn">print</span>(report.paired_gain_over_base)    <span class="cm"># gain over the method's own backbone</span></pre>
+<span class="cm"># Freeze the last checkpoint and evaluate it on the shared perturbation grid:</span>
+<span class="cm"># 20 episodes per condition, the same episodes for every method, unclipped normalized score.</span>
+python baselines/eval_final.py \
+    -c robustrllib/configs/experiment/rorl_hopper.yaml \
+    --run-dir runs/rorl/hopper_medium_seed0</pre>
 
     <p class="tbl-note">
-      Code, trained policies and the full evaluation records are released with the benchmark; the API names shown here
-      mirror the released package layout.
+      The <a href="docs/">tutorial</a> goes from installation to a first evaluated method, and on to
+      adding an algorithm or a simulator backend.
     </p>
   </div>
 </section>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://robust-rllib.site/docs/shifts/sources/semantic/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Semantic shift - RobustRLlib Tutorial</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link href="../../../assets/pygments.css" rel="stylesheet" />
+        <link href="../../../assets/rl.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Semantic shift";
+        var mkdocs_page_input_path = "shifts/sources/semantic.md";
+        var mkdocs_page_url = "/docs/shifts/sources/semantic/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+  <meta name="robots" content="noindex">
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> RobustRLlib Tutorial
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../getting-started/overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../getting-started/quick-start/">Quick Start</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Algorithms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithms/">All Methods</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Standard Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/iql/">IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/td3bc/">TD3+BC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/mopo/">MOPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/synther/">SynthER</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/ppo/">PPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/standard/sac/">SAC</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Online Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/atla/">ATLA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/atla-sa/">ATLA-SA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/rsc/">RSC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/rarl/">RARL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-online/dr/">DR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Offline Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/rfqi/">RFQI</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/rorl/">RORL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/atla-iql/">ATLA-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/rsc-iql/">RSC-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/rambo/">RAMBO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/romb/">ROMB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/fwm/">FWM</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-offline/plr-pvl/">PLR-PVL</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Safe Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-safe/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-safe/ramu/">RAMU</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../algorithms/robust-safe/spidr/">SPiDR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithms/run-a-method/">Run a Method</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../algorithms/add-an-algorithm/">Add an Algorithm</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Shift Sources and Modes</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Shift Sources</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../dynamic/">Dynamic shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../observation/">Observation shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../action/">Action shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../reward-cost/">Reward/cost shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../latency/">Latency shift</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Semantic shift</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#at-a-glance">At a glance</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-modes">Supported modes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#declare-the-shift">Declare the shift</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rules">Rules</a>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Shift Modes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/stochastic/">Stochastic</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/adversarial/">Adversarial</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/parametric/">Parametric</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/non-stationary/">Non-stationary</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../modes/composition/">Composition</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../add-a-backend/">Add a Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Evaluation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../evaluation/protocol/">Evaluation Protocol</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="/">Project Page</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">RobustRLlib Tutorial</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Shift Sources and Modes</li>
+          <li class="breadcrumb-item">Shift Sources</li>
+      <li class="breadcrumb-item active">Semantic shift</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="semantic-shift">Semantic shift<a class="headerlink" href="#semantic-shift" title="Permanent link">&para;</a></h1>
+<p>A Semantic shift changes what the scene looks like and where things are. It edits the colour of
+objects, the lights and the cameras, and it displaces objects and cameras by a position offset.</p>
+<p><img alt="Three renderings of a manipulation scene: nominal, with changed object colours, and with a displaced object" src="../../../assets/figures/semantic.png" width="720" /></p>
+<p><em>A nominal scene, an appearance change and a displacement.</em></p>
+<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Semantic shift</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Perturbs</td>
+<td>Geom colours, lights, cameras, and the position of objects and cameras</td>
+</tr>
+<tr>
+<td>Targets in code</td>
+<td><code>appearance</code>; <code>dynamics</code> with the mode name <code>translate</code> for position offsets</td>
+</tr>
+<tr>
+<td>Modes</td>
+<td>Stochastic, Parametric, Non-stationary, Composition</td>
+</tr>
+<tr>
+<td>Applied</td>
+<td>At every <code>reset</code>; with a schedule before every step</td>
+</tr>
+<tr>
+<td>Acts on a frozen policy</td>
+<td>Yes, for policies that read rendered images or object positions</td>
+</tr>
+<tr>
+<td>Backends</td>
+<td>MuJoCo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-modes">Supported modes<a class="headerlink" href="#supported-modes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Mode name in code</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../modes/parametric/">Parametric</a></td>
+<td><code>hue</code></td>
+<td>Rotates the colour of a geom in hue and keeps saturation and brightness</td>
+</tr>
+<tr>
+<td><a href="../../modes/parametric/">Parametric</a></td>
+<td><code>tint</code></td>
+<td>Sets the colour of a geom to a saturated hue</td>
+</tr>
+<tr>
+<td><a href="../../modes/parametric/">Parametric</a></td>
+<td><code>swap</code></td>
+<td>Exchanges the colours of two geoms</td>
+</tr>
+<tr>
+<td><a href="../../modes/parametric/">Parametric</a></td>
+<td><code>scale</code>, <code>set</code></td>
+<td>Scales or sets a light or camera parameter</td>
+</tr>
+<tr>
+<td><a href="../../modes/parametric/">Parametric</a></td>
+<td><code>translate</code></td>
+<td>Adds an offset in metres to the position of an object, a camera or a light</td>
+</tr>
+<tr>
+<td><a href="../../modes/stochastic/">Stochastic</a></td>
+<td><code>gauss</code>, <code>uniform</code>, <code>loguniform</code></td>
+<td>Draws a factor on a light or camera parameter once per episode</td>
+</tr>
+<tr>
+<td><a href="../../modes/non-stationary/">Non-stationary</a></td>
+<td><code>schedule</code> on <code>hue</code>, <code>tint</code>, <code>swap</code>, <code>scale</code> and <code>translate</code></td>
+<td>Varies the rotation, the blend or the offset within the episode</td>
+</tr>
+<tr>
+<td><a href="../../modes/composition/">Composition</a></td>
+<td>Several shifts in one list</td>
+<td>Crosses an appearance change with a displacement</td>
+</tr>
+</tbody>
+</table>
+<p>The Adversarial mode is not defined for this shift.</p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
+<p>Colour mode names on the target <code>appearance</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Mode name</th>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hue</code>, <code>tint</code></td>
+<td><code>geom_prefix</code></td>
+<td>str or list</td>
+<td>none</td>
+<td>Every visible geom whose name starts with the prefix</td>
+</tr>
+<tr>
+<td></td>
+<td><code>geoms</code></td>
+<td>list</td>
+<td>none</td>
+<td>Geoms by name or position</td>
+</tr>
+<tr>
+<td></td>
+<td><code>geom</code></td>
+<td>str or int</td>
+<td>none</td>
+<td>One geom</td>
+</tr>
+<tr>
+<td><code>hue</code></td>
+<td><code>degrees</code></td>
+<td>float</td>
+<td><code>0.0</code></td>
+<td>Rotation of the hue</td>
+</tr>
+<tr>
+<td><code>tint</code></td>
+<td><code>degrees</code></td>
+<td>float</td>
+<td><code>0.0</code></td>
+<td>Hue of the colour that is set, as an angle</td>
+</tr>
+<tr>
+<td></td>
+<td><code>saturation</code></td>
+<td>float</td>
+<td><code>0.85</code></td>
+<td>Saturation of that colour</td>
+</tr>
+<tr>
+<td></td>
+<td><code>value</code></td>
+<td>float</td>
+<td><code>1.0</code></td>
+<td>Brightness of that colour</td>
+</tr>
+<tr>
+<td><code>swap</code></td>
+<td><code>geom_a</code>, <code>geom_b</code></td>
+<td>str or int</td>
+<td>required</td>
+<td>The two geoms that exchange colours</td>
+</tr>
+</tbody>
+</table>
+<p>One of <code>geom_prefix</code>, <code>geoms</code> and <code>geom</code> is required; the first one present in this order is
+used.</p>
+<p>Lights, cameras and positions:</p>
+<table>
+<thead>
+<tr>
+<th>Mode name</th>
+<th>Target</th>
+<th>Parameter</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scale</code>, <code>set</code>, <code>gauss</code>, <code>uniform</code>, <code>loguniform</code></td>
+<td><code>appearance</code></td>
+<td><code>param</code>, <code>index</code> and the parameters of the mode name</td>
+<td>As for the <a href="../dynamic/">Dynamic shift</a>, on the names below</td>
+</tr>
+<tr>
+<td><code>translate</code></td>
+<td><code>appearance</code></td>
+<td><code>param</code>, <code>index</code>, <code>offset</code></td>
+<td>Offset on <code>light_pos</code> or <code>cam_pos</code></td>
+</tr>
+<tr>
+<td><code>translate</code></td>
+<td><code>dynamics</code></td>
+<td><code>param</code>, <code>index</code>, <code>offset</code></td>
+<td>Offset on <code>cam_pos</code>, <code>body_pos_xyz</code> or <code>freejoint_pos</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>param</code></th>
+<th>Edits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>geom_rgba</code>, <code>mat_rgba</code></td>
+<td>Colour of a geom or of a material</td>
+</tr>
+<tr>
+<td><code>light_diffuse</code>, <code>light_ambient</code>, <code>light_pos</code></td>
+<td>Colour and position of a light</td>
+</tr>
+<tr>
+<td><code>cam_pos</code>, <code>cam_quat</code>, <code>cam_fovy</code></td>
+<td>Position, orientation and field of view of a camera</td>
+</tr>
+<tr>
+<td><code>body_pos_xyz</code></td>
+<td>Position of a body that is fixed to its parent</td>
+</tr>
+<tr>
+<td><code>freejoint_pos</code></td>
+<td>Position of a free-floating object</td>
+</tr>
+</tbody>
+</table>
+<h2 id="declare-the-shift">Declare the shift<a class="headerlink" href="#declare-the-shift" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">robustrllib</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_robust</span><span class="p">,</span> <span class="n">ShiftSpec</span>
+
+<span class="n">BODY</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"torso_geom"</span><span class="p">,</span> <span class="s2">"thigh_geom"</span><span class="p">,</span> <span class="s2">"leg_geom"</span><span class="p">,</span> <span class="s2">"foot_geom"</span><span class="p">]</span>
+
+<span class="n">PARAMETRIC</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"hue"</span><span class="p">:</span>   <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"appearance"</span><span class="p">,</span> <span class="s2">"hue"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"geoms"</span><span class="p">:</span> <span class="n">BODY</span><span class="p">,</span> <span class="s2">"degrees"</span><span class="p">:</span> <span class="mi">60</span><span class="p">}),</span>
+    <span class="s2">"tint"</span><span class="p">:</span>  <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"appearance"</span><span class="p">,</span> <span class="s2">"tint"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"geom"</span><span class="p">:</span> <span class="s2">"torso_geom"</span><span class="p">,</span> <span class="s2">"degrees"</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">"saturation"</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">}),</span>
+    <span class="s2">"swap"</span><span class="p">:</span>  <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"appearance"</span><span class="p">,</span> <span class="s2">"swap"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"geom_a"</span><span class="p">:</span> <span class="s2">"torso_geom"</span><span class="p">,</span> <span class="s2">"geom_b"</span><span class="p">:</span> <span class="s2">"floor"</span><span class="p">}),</span>
+    <span class="s2">"scale"</span><span class="p">:</span> <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"appearance"</span><span class="p">,</span> <span class="s2">"scale"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"light_diffuse"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"all"</span><span class="p">,</span> <span class="s2">"factor"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}),</span>
+    <span class="s2">"set"</span><span class="p">:</span>   <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"appearance"</span><span class="p">,</span> <span class="s2">"set"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"cam_fovy"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"track"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">}),</span>
+<span class="p">}</span>
+<span class="n">STOCHASTIC</span> <span class="o">=</span> <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"appearance"</span><span class="p">,</span> <span class="s2">"uniform"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"light_diffuse"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"all"</span><span class="p">,</span>
+                                                 <span class="s2">"low"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">})</span>
+</code></pre></div>
+<p>Position offsets, as the semantic grids write them:</p>
+<div class="highlight"><pre><span></span><code><span class="n">DISPLACEMENT</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"camera"</span><span class="p">:</span> <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"translate"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"cam_pos"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"track"</span><span class="p">,</span>
+                                                  <span class="s2">"offset"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]}),</span>
+    <span class="s2">"body"</span><span class="p">:</span>   <span class="n">ShiftSpec</span><span class="p">(</span><span class="s2">"dynamics"</span><span class="p">,</span> <span class="s2">"translate"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"param"</span><span class="p">:</span> <span class="s2">"body_pos_xyz"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span> <span class="s2">"foot"</span><span class="p">,</span>
+                                                  <span class="s2">"offset"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]}),</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Non-stationary, with a colour that changes gradually within the episode:</p>
+<div class="highlight"><pre><span></span><code><span class="n">NON_STATIONARY</span> <span class="o">=</span> <span class="n">ShiftSpec</span><span class="p">(</span>
+    <span class="s2">"appearance"</span><span class="p">,</span> <span class="s2">"hue"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"geoms"</span><span class="p">:</span> <span class="n">BODY</span><span class="p">,</span> <span class="s2">"degrees"</span><span class="p">:</span> <span class="mi">120</span><span class="p">},</span>
+    <span class="n">schedule</span><span class="o">=</span><span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"linear"</span><span class="p">,</span> <span class="s2">"start"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">"t0"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"t1"</span><span class="p">:</span> <span class="mi">500</span><span class="p">},</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Composition of an appearance change and a displacement:</p>
+<div class="highlight"><pre><span></span><code><span class="n">COMPOSITION</span> <span class="o">=</span> <span class="p">[</span><span class="n">PARAMETRIC</span><span class="p">[</span><span class="s2">"hue"</span><span class="p">],</span> <span class="n">DISPLACEMENT</span><span class="p">[</span><span class="s2">"body"</span><span class="p">]]</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">make_robust</span><span class="p">(</span><span class="s2">"Hopper-v5"</span><span class="p">,</span> <span class="n">shifts</span><span class="o">=</span><span class="n">COMPOSITION</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p>The colour of a geom is read from the model.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">nominal</span> <span class="o">=</span> <span class="n">make_robust</span><span class="p">(</span><span class="s2">"Hopper-v5"</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">nominal</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">shifted</span> <span class="o">=</span> <span class="n">make_robust</span><span class="p">(</span><span class="s2">"Hopper-v5"</span><span class="p">,</span> <span class="n">shifts</span><span class="o">=</span><span class="p">[</span><span class="n">ShiftSpec</span><span class="p">(</span>
+    <span class="s2">"appearance"</span><span class="p">,</span> <span class="s2">"hue"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"geom"</span><span class="p">:</span> <span class="s2">"torso_geom"</span><span class="p">,</span> <span class="s2">"degrees"</span><span class="p">:</span> <span class="mi">180</span><span class="p">})],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">shifted</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">torso</span> <span class="o">=</span> <span class="mi">1</span>          <span class="c1"># position of torso_geom in the model</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">nominal</span><span class="o">.</span><span class="n">unwrapped</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">geom_rgba</span><span class="p">[</span><span class="n">torso</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">shifted</span><span class="o">.</span><span class="n">unwrapped</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">geom_rgba</span><span class="p">[</span><span class="n">torso</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[0.8 0.6 0.4]
+[0.4 0.6 0.8]
+</code></pre></div>
+<p>On a task whose object changes between resets, a prefix names the object instead of its geoms.
+The grid entries below tint two objects of a manipulation scene.</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="nv">appearance</span><span class="p p-Indicator">,</span><span class="nt"> mode</span><span class="p">:</span><span class="w"> </span><span class="nv">tint</span><span class="p p-Indicator">,</span><span class="nt"> params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">geom_prefix</span><span class="p">:</span><span class="w"> </span><span class="nv">obj_0</span><span class="p p-Indicator">,</span><span class="nt"> degrees</span><span class="p">:</span><span class="w"> </span><span class="nv">210</span><span class="p p-Indicator">}}</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="nv">appearance</span><span class="p p-Indicator">,</span><span class="nt"> mode</span><span class="p">:</span><span class="w"> </span><span class="nv">tint</span><span class="p p-Indicator">,</span><span class="nt"> params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">geom_prefix</span><span class="p">:</span><span class="w"> </span><span class="nv">obj_1</span><span class="p p-Indicator">,</span><span class="nt"> degrees</span><span class="p">:</span><span class="w"> </span><span class="nv">30</span><span class="p p-Indicator">}}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The observation of <code>Hopper-v5</code> is a state vector, so a colour change does not alter it. The
+shift matters for policies that read rendered images.</p>
+</div>
+<h2 id="rules">Rules<a class="headerlink" href="#rules" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>hue</code> is written for geoms whose own colour is rendered; <code>tint</code> for geoms whose colour comes
+  from a texture.</li>
+<li><strong>A colour shift that cannot change the rendered colour raises <code>ValueError</code></strong>: <code>hue</code> on a
+  white, grey or black geom, and <code>swap</code> between two geoms of the same colour.</li>
+<li><code>swap</code> is written when the instruction names a colour and two objects should exchange theirs.</li>
+<li>A displacement is an offset in metres, written with <code>translate</code>; a scale factor cannot express
+  it.</li>
+<li>The offset is added to the position the task gave the entity in the current episode.</li>
+<li><code>geom_prefix</code> is written for objects whose number of geoms changes between resets.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../latency/" class="btn btn-neutral float-left" title="Latency shift"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../modes/stochastic/" class="btn btn-neutral float-right" title="Stochastic">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>RobustRLlib · Anonymous submission under double-blind review.</p>
+  </div>
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../latency/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../modes/stochastic/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

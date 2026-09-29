@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://robust-rllib.site/docs/getting-started/overview/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Overview - RobustRLlib Tutorial</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link href="../../assets/pygments.css" rel="stylesheet" />
+        <link href="../../assets/rl.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Overview";
+        var mkdocs_page_input_path = "getting-started/overview.md";
+        var mkdocs_page_url = "/docs/getting-started/overview/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+  <meta name="robots" content="noindex">
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> RobustRLlib Tutorial
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Overview</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#why-an-algorithm-centric-library">Why an algorithm-centric library?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#algorithm-groups">Algorithm groups</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#library-features">Library features</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#comparison-with-related-benchmarks">Comparison with related benchmarks</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-algorithms">Supported algorithms</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#demonstrations">Demonstrations</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#shift-sources">Shift sources</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#robotics-tasks">Robotics tasks</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../quick-start/">Quick Start</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Algorithms</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithms/">All Methods</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Standard Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/standard/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/standard/iql/">IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/standard/td3bc/">TD3+BC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/standard/mopo/">MOPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/standard/synther/">SynthER</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/standard/ppo/">PPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/standard/sac/">SAC</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Online Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-online/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-online/atla/">ATLA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-online/atla-sa/">ATLA-SA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-online/rsc/">RSC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-online/rarl/">RARL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-online/dr/">DR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Offline Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-offline/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-offline/rfqi/">RFQI</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-offline/rorl/">RORL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-offline/atla-iql/">ATLA-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-offline/rsc-iql/">RSC-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-offline/rambo/">RAMBO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-offline/romb/">ROMB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-offline/fwm/">FWM</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-offline/plr-pvl/">PLR-PVL</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Safe Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-safe/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-safe/ramu/">RAMU</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../algorithms/robust-safe/spidr/">SPiDR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithms/run-a-method/">Run a Method</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../algorithms/add-an-algorithm/">Add an Algorithm</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Shift Sources and Modes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../shifts/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Shift Sources</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/dynamic/">Dynamic shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/observation/">Observation shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/action/">Action shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/reward-cost/">Reward/cost shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/latency/">Latency shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/semantic/">Semantic shift</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Shift Modes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/stochastic/">Stochastic</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/adversarial/">Adversarial</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/parametric/">Parametric</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/non-stationary/">Non-stationary</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/composition/">Composition</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../shifts/add-a-backend/">Add a Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Evaluation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../evaluation/protocol/">Evaluation Protocol</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="/">Project Page</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">RobustRLlib Tutorial</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Getting Started</li>
+      <li class="breadcrumb-item active">Overview</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
+<p>RobustRLlib is a library and benchmark for robust reinforcement learning that takes the
+<strong>algorithm</strong> as its unit of comparison. It holds 16 robust and robust safe methods and 6
+standard algorithms behind one interface, a toolbox that declares deployment shifts, and one
+evaluation protocol that is applied to all of them.</p>
+<h2 id="why-an-algorithm-centric-library">Why an algorithm-centric library?<a class="headerlink" href="#why-an-algorithm-centric-library" title="Permanent link">&para;</a></h2>
+<p>Robust RL has produced many mechanisms, but each is developed, trained and reported inside its
+own setting. Two barriers follow.</p>
+<ul>
+<li><strong>Algorithms are not reusable.</strong> Methods are spread over separate implementations and
+  training pipelines. There is no single interface through which a broad collection of robust
+  methods can be tried on a new problem.</li>
+<li><strong>The capability boundary is unclear.</strong> Methods are reported under different tasks, budgets
+  and shift definitions, sometimes under the very shift their mechanism targets.</li>
+</ul>
+<h2 id="algorithm-groups">Algorithm groups<a class="headerlink" href="#algorithm-groups" title="Permanent link">&para;</a></h2>
+<p>The library has four groups. Robust methods are split further by where robustness enters.</p>
+<ul>
+<li><strong><a href="../../algorithms/standard/">Standard algorithms</a>.</strong> The base learners that the
+  robust methods are built on, and the reference for every comparison.</li>
+<li><strong><a href="../../algorithms/robust-online/">Robust online algorithms</a>.</strong> Learner-centric
+  methods train against an adversary or on counterfactual replay, and environment-centric
+  methods collect their rollouts in a perturbed environment.</li>
+<li><strong><a href="../../algorithms/robust-offline/">Robust offline algorithms</a>.</strong> Learner-centric
+  methods change the backup or the regulariser, data-centric methods reshape the training
+  distribution, and generative methods train on futures sampled from a learned model.</li>
+<li><strong><a href="../../algorithms/robust-safe/">Robust safe algorithms</a>.</strong> Methods that add a cost
+  constraint and make it hold under shifted dynamics.</li>
+</ul>
+<h2 id="library-features">Library features<a class="headerlink" href="#library-features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>One interface for 22 algorithms.</strong> Every method is launched from an experiment file and
+  keeps its native training recipe and budget.</li>
+<li><strong>Attribution built in.</strong> Every method records the mechanism it adds, the shift it claims to
+  address and the base algorithm that realises it.</li>
+<li><strong>Six shift sources and five modes.</strong> Shifts are declared as data and stacked in any order.
+  See <a href="../../shifts/">Shift Sources and Modes</a>.</li>
+<li><strong>One evaluation protocol.</strong> The frozen last checkpoint of every method is evaluated on the
+  same grid. See <a href="../../evaluation/protocol/">Evaluation Protocol</a>.</li>
+<li><strong>Extensible.</strong> A new algorithm implements four methods, and a new simulator backend
+  implements one adapter.</li>
+</ul>
+<h2 id="comparison-with-related-benchmarks">Comparison with related benchmarks<a class="headerlink" href="#comparison-with-related-benchmarks" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th style="text-align: center;">Robust algorithms</th>
+<th style="text-align: center;">MDP shifts</th>
+<th style="text-align: center;">Latency</th>
+<th style="text-align: center;">Semantic</th>
+<th style="text-align: center;">Compound</th>
+<th style="text-align: center;">Task expansion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RLlib</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0/4</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td>RRLS</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2/4</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">◐</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td>ODRL</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1/4</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+</tr>
+<tr>
+<td>Robust-Gymnasium</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4/4</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td>RWRL Suite</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">3/4</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">◐</td>
+</tr>
+<tr>
+<td>RoAd-RL</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1/4</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><strong>RobustRLlib</strong></td>
+<td style="text-align: center;"><strong>16</strong></td>
+<td style="text-align: center;"><strong>4/4</strong></td>
+<td style="text-align: center;"><strong>✓</strong></td>
+<td style="text-align: center;"><strong>✓</strong></td>
+<td style="text-align: center;"><strong>✓</strong></td>
+<td style="text-align: center;"><strong>✓</strong></td>
+</tr>
+</tbody>
+</table>
+<p><em>Robust algorithms</em> counts robust or robust safe methods evaluated by each benchmark, without
+standard algorithms. ✓ is explicit, evaluated support; ◐ is partial support; ✗ is absent or
+not demonstrated. <em>MDP shifts</em> counts, out of four, the components on which shift is
+evaluated: observations, actions, transitions, and reward or cost.</p>
+<h3 id="supported-algorithms">Supported algorithms<a class="headerlink" href="#supported-algorithms" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Methods</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard</td>
+<td><a href="../../algorithms/standard/iql/">IQL</a>, <a href="../../algorithms/standard/td3bc/">TD3+BC</a>, <a href="../../algorithms/standard/mopo/">MOPO</a>, <a href="../../algorithms/standard/synther/">SynthER</a>, <a href="../../algorithms/standard/ppo/">PPO</a>, <a href="../../algorithms/standard/sac/">SAC</a></td>
+</tr>
+<tr>
+<td>Robust online</td>
+<td><a href="../../algorithms/robust-online/atla/">ATLA</a>, <a href="../../algorithms/robust-online/atla-sa/">ATLA-SA</a>, <a href="../../algorithms/robust-online/rsc/">RSC</a>, <a href="../../algorithms/robust-online/rarl/">RARL</a>, <a href="../../algorithms/robust-online/dr/">DR</a></td>
+</tr>
+<tr>
+<td>Robust offline</td>
+<td><a href="../../algorithms/robust-offline/rfqi/">RFQI</a>, <a href="../../algorithms/robust-offline/rorl/">RORL</a>, <a href="../../algorithms/robust-offline/atla-iql/">ATLA-IQL</a>, <a href="../../algorithms/robust-offline/rsc-iql/">RSC-IQL</a>, <a href="../../algorithms/robust-offline/rambo/">RAMBO</a>, <a href="../../algorithms/robust-offline/romb/">ROMB</a>, <a href="../../algorithms/robust-offline/fwm/">FWM</a>, <a href="../../algorithms/robust-offline/plr-pvl/">PLR-PVL</a></td>
+</tr>
+<tr>
+<td>Robust safe</td>
+<td><a href="../../algorithms/robust-safe/ramu/">RAMU</a>, <a href="../../algorithms/robust-safe/spidr/">SPiDR</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="demonstrations">Demonstrations<a class="headerlink" href="#demonstrations" title="Permanent link">&para;</a></h2>
+<h3 id="shift-sources">Shift sources<a class="headerlink" href="#shift-sources" title="Permanent link">&para;</a></h3>
+<p><img alt="Dynamic shift, Observation shift, Action shift and Reward shift" src="../../assets/figures/shifts.png" width="700" /></p>
+<p><em>A shift enters at an identifiable point of the interaction loop.</em></p>
+<h3 id="robotics-tasks">Robotics tasks<a class="headerlink" href="#robotics-tasks" title="Permanent link">&para;</a></h3>
+<p class="rl-pair"><img src="../../assets/figures/g1_rough.png" alt="Unitree G1 on rough terrain"><img src="../../assets/figures/franka_drawer.png" alt="Franka arm opening a drawer"></p>
+
+<p><em>Unitree G1 locomotion and Franka drawer manipulation in Isaac Lab.</em></p>
+<p>To install the library and run a first method, continue with <a href="../quick-start/">Quick Start</a>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../.." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../quick-start/" class="btn btn-neutral float-right" title="Quick Start">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>RobustRLlib · Anonymous submission under double-blind review.</p>
+  </div>
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../.." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../quick-start/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

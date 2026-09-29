@@ -1,0 +1,60 @@
+/* RobustRLlib documentation: additions to the Read the Docs theme.
+   Family colours follow the palette of the paper's figures, so a family has the
+   same hue in a figure, a badge and a table. */
+
+:root {
+  --rl-fam-standard: #b7b7b7;
+  --rl-fam-learner: #a9cbe5;
+  --rl-fam-data: #bfdcac;
+  --rl-fam-generative: #e9a0a0;
+  --rl-fam-environment: #9ed9d0;
+  --rl-fam-safe: #f2cf8e;
+}
+
+/* ---- page width and tables ---- */
+.wy-nav-content { max-width: 980px; }
+.wy-table-responsive table td,
+.wy-table-responsive table th { white-space: normal; }
+.rst-content table.docutils th { line-height: 1.35; vertical-align: bottom; }
+.rst-content table.docutils td:first-child a { white-space: nowrap; }
+.rst-content table.docutils td,
+.rst-content table.docutils th { font-variant-numeric: tabular-nums; }
+
+/* ---- method header ---- */
+.rst-content .rl-subtitle { margin: -12px 0 12px; font-size: 110%; color: #6b7280; }
+.rst-content .rl-badges,
+.rst-content .rl-legend { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; }
+.rst-content .rl-badge {
+  display: inline-block;
+  padding: 1px 10px;
+  border-radius: 999px;
+  font-size: 80%;
+  font-weight: 700;
+  line-height: 1.7;
+  white-space: nowrap;
+  color: #111827;
+  background: #e5e7eb;
+}
+.rst-content .rl-plain { background: transparent; border: 1px solid #c9ccd1; font-weight: 600; }
+.rst-content .rl-setting { background: #343131; color: #ffffff; }
+.rst-content .rl-fam-standard    { background: var(--rl-fam-standard); }
+.rst-content .rl-fam-learner     { background: var(--rl-fam-learner); }
+.rst-content .rl-fam-data        { background: var(--rl-fam-data); }
+.rst-content .rl-fam-generative  { background: var(--rl-fam-generative); }
+.rst-content .rl-fam-environment { background: var(--rl-fam-environment); }
+.rst-content .rl-fam-safe        { background: var(--rl-fam-safe); }
+
+/* ---- figures: centred, caption directly below ---- */
+.rst-content p > img { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+.rst-content p > img + em,
+.rst-content img + br + em { display: block; text-align: center; }
+.rst-content .rl-pair { display: flex; gap: 12px; margin: 0 0 12px; }
+.rst-content .rl-pair img { width: 50%; min-width: 0; height: auto; }
+
+/* ---- code blocks: highlighted at build time ---- */
+.rst-content div.highlight { background: #f8f8f8; border: 1px solid #e1e4e5; margin: 1px 0 24px; }
+.rst-content div.highlight pre { padding: 12px; font-size: 12px; line-height: 1.5; overflow-x: auto; }
+.rst-content div.highlight span.filename {
+  display: block; padding: 6px 12px; font-size: 12px; font-weight: 700;
+  background: #edf0f2; border-bottom: 1px solid #e1e4e5;
+}

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://robust-rllib.site/docs/algorithms/robust-online/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Overview - RobustRLlib Tutorial</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link href="../../assets/pygments.css" rel="stylesheet" />
+        <link href="../../assets/rl.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Overview";
+        var mkdocs_page_input_path = "algorithms/robust-online/index.md";
+        var mkdocs_page_url = "/docs/algorithms/robust-online/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+  <meta name="robots" content="noindex">
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> RobustRLlib Tutorial
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../getting-started/overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../getting-started/quick-start/">Quick Start</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Algorithms</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">All Methods</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Standard Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/iql/">IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/td3bc/">TD3+BC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/mopo/">MOPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/synther/">SynthER</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/ppo/">PPO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../standard/sac/">SAC</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Robust Online Algorithms</a>
+    <ul class="current">
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Overview</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#at-a-glance">At a glance</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-methods">Supported methods</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-a-method">Run a method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#library-wide-grid">Library-wide grid</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#method-pages">Method pages</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="atla/">ATLA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="atla-sa/">ATLA-SA</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="rsc/">RSC</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="rarl/">RARL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="dr/">DR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Offline Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/rfqi/">RFQI</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/rorl/">RORL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/atla-iql/">ATLA-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/rsc-iql/">RSC-IQL</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/rambo/">RAMBO</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/romb/">ROMB</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/fwm/">FWM</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-offline/plr-pvl/">PLR-PVL</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Robust Safe Algorithms</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-safe/">Overview</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-safe/ramu/">RAMU</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../robust-safe/spidr/">SPiDR</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../run-a-method/">Run a Method</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../add-an-algorithm/">Add an Algorithm</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Shift Sources and Modes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../shifts/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Shift Sources</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/dynamic/">Dynamic shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/observation/">Observation shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/action/">Action shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/reward-cost/">Reward/cost shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/latency/">Latency shift</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/sources/semantic/">Semantic shift</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Shift Modes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/stochastic/">Stochastic</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/adversarial/">Adversarial</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/parametric/">Parametric</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/non-stationary/">Non-stationary</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../shifts/modes/composition/">Composition</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../shifts/add-a-backend/">Add a Backend</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Evaluation</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../evaluation/protocol/">Evaluation Protocol</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="/">Project Page</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">RobustRLlib Tutorial</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Algorithms</li>
+          <li class="breadcrumb-item">Robust Online Algorithms</li>
+      <li class="breadcrumb-item active">Overview</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="robust-online-algorithms">Robust Online Algorithms<a class="headerlink" href="#robust-online-algorithms" title="Permanent link">&para;</a></h1>
+<p>Robust online methods learn through continued interaction with the environment. They are organised by where robustness enters: learner-centric methods change how experience is optimised, and environment-centric methods collect their rollouts in a perturbed environment.</p>
+<h2 id="at-a-glance">At a glance<a class="headerlink" href="#at-a-glance" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Robust Online Algorithms</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interface</td>
+<td>One experiment file per run, launched with a training script</td>
+</tr>
+<tr>
+<td>Method selection</td>
+<td>The <code>algorithm</code> card named by the experiment file</td>
+</tr>
+<tr>
+<td>Training data</td>
+<td>Rollouts collected during training</td>
+</tr>
+<tr>
+<td>Training environment</td>
+<td>Nominal, except for environment-centric methods</td>
+</tr>
+<tr>
+<td>Budget</td>
+<td>Environment steps, native to each method</td>
+</tr>
+<tr>
+<td>Evaluation</td>
+<td>The frozen last checkpoint, on the grid named by the <code>eval</code> card</td>
+</tr>
+</tbody>
+</table>
+<h2 id="supported-methods">Supported methods<a class="headerlink" href="#supported-methods" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Family</th>
+<th>Base</th>
+<th>Claimed<br>robustness</th>
+<th style="text-align: center;">Shifted-env<br>rollout</th>
+<th style="text-align: center;">Adversarial<br>network</th>
+<th style="text-align: center;">Learned<br>model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="atla/"><strong>ATLA</strong></a></td>
+<td><span class="rl-badge rl-fam-learner">Learner-centric</span></td>
+<td>PPO</td>
+<td>Observation</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td><a href="atla-sa/"><strong>ATLA-SA</strong></a></td>
+<td><span class="rl-badge rl-fam-learner">Learner-centric</span></td>
+<td>PPO</td>
+<td>Observation</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td><a href="rsc/"><strong>RSC</strong></a></td>
+<td><span class="rl-badge rl-fam-learner">Learner-centric</span></td>
+<td>SAC</td>
+<td>Semantic</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><a href="rarl/"><strong>RARL</strong></a></td>
+<td><span class="rl-badge rl-fam-environment">Environment-centric</span></td>
+<td>PPO / TRPO</td>
+<td>Dynamic</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td><a href="dr/"><strong>DR</strong></a></td>
+<td><span class="rl-badge rl-fam-environment">Environment-centric</span></td>
+<td>SAC / PPO</td>
+<td>Dynamic</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p><em>Claimed robustness</em> is the shift the original paper targets.</p>
+<h2 id="run-a-method">Run a method<a class="headerlink" href="#run-a-method" title="Permanent link">&para;</a></h2>
+<p>Every method is launched from an experiment file. ATLA-SA on Hopper:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>baselines/atla/train_atla.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>robustrllib/configs/experiment/atla_lstm_sa_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p>Every method page gives the command for that method. <a href="../run-a-method/">Run a Method</a> explains the experiment file, the overrides and the run directory.</p>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Implementation</th>
+<th>Experiment file</th>
+<th>Training budget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="atla/">ATLA</a></td>
+<td><code>baselines/atla</code></td>
+<td><code>atla_online_hopper.yaml</code></td>
+<td>About 5M environment steps (2441 iterations of 2048 steps)</td>
+</tr>
+<tr>
+<td><a href="atla-sa/">ATLA-SA</a></td>
+<td><code>baselines/atla</code></td>
+<td><code>atla_lstm_sa_hopper.yaml</code></td>
+<td>About 5M environment steps (2441 iterations of 2048 steps)</td>
+</tr>
+<tr>
+<td><a href="rsc/">RSC</a></td>
+<td><code>baselines/causaldro_online</code></td>
+<td><code>causaldro_online_hopper.yaml</code></td>
+<td>1M environment steps</td>
+</tr>
+<tr>
+<td><a href="rarl/">RARL</a></td>
+<td><code>baselines/rarl_hopper</code></td>
+<td>—</td>
+<td>2M environment steps</td>
+</tr>
+<tr>
+<td><a href="dr/">DR</a></td>
+<td><code>baselines/dr</code></td>
+<td><code>dr_hopper_axis_narrow.yaml</code></td>
+<td>1M environment steps (DR-SAC)</td>
+</tr>
+</tbody>
+</table>
+<p>Experiment files are in <code>robustrllib/configs/experiment/</code>. Each names the algorithm card, the task card and the evaluation grid of the run. <strong>Every method keeps its native training recipe and budget</strong>; what is shared is the evaluation.</p>
+<h2 id="library-wide-grid">Library-wide grid<a class="headerlink" href="#library-wide-grid" title="Permanent link">&para;</a></h2>
+<p>Normalized score of the frozen last checkpoint. Q1 to Q4 are the severity quartiles of each perturbation ladder, ordered by displacement from the nominal setting, and <em>All</em> covers every shifted condition.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th style="text-align: right;">Nominal</th>
+<th style="text-align: right;">Q1</th>
+<th style="text-align: right;">Q2</th>
+<th style="text-align: right;">Q3</th>
+<th style="text-align: right;">Q4</th>
+<th style="text-align: right;">All</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="atla/">ATLA</a></td>
+<td style="text-align: right;">72.4</td>
+<td style="text-align: right;">65.9</td>
+<td style="text-align: right;">57.2</td>
+<td style="text-align: right;">51.4</td>
+<td style="text-align: right;">39.3</td>
+<td style="text-align: right;">53.4</td>
+</tr>
+<tr>
+<td><a href="atla-sa/">ATLA-SA</a></td>
+<td style="text-align: right;">77.6</td>
+<td style="text-align: right;">72.1</td>
+<td style="text-align: right;">65.0</td>
+<td style="text-align: right;">56.3</td>
+<td style="text-align: right;">45.5</td>
+<td style="text-align: right;">59.6</td>
+</tr>
+<tr>
+<td><a href="rsc/">RSC</a></td>
+<td style="text-align: right;">77.9</td>
+<td style="text-align: right;">67.7</td>
+<td style="text-align: right;">61.8</td>
+<td style="text-align: right;">44.1</td>
+<td style="text-align: right;">38.2</td>
+<td style="text-align: right;">52.7</td>
+</tr>
+<tr>
+<td><a href="rarl/">RARL-PPO</a></td>
+<td style="text-align: right;">76.3</td>
+<td style="text-align: right;">65.2</td>
+<td style="text-align: right;">49.4</td>
+<td style="text-align: right;">43.8</td>
+<td style="text-align: right;">38.4</td>
+<td style="text-align: right;">49.4</td>
+</tr>
+<tr>
+<td><a href="rarl/">RARL-TRPO</a></td>
+<td style="text-align: right;">72.8</td>
+<td style="text-align: right;">64.4</td>
+<td style="text-align: right;">51.9</td>
+<td style="text-align: right;">45.3</td>
+<td style="text-align: right;">37.7</td>
+<td style="text-align: right;">49.8</td>
+</tr>
+<tr>
+<td><a href="dr/">DR</a></td>
+<td style="text-align: right;">91.1</td>
+<td style="text-align: right;">84.7</td>
+<td style="text-align: right;">76.9</td>
+<td style="text-align: right;">58.3</td>
+<td style="text-align: right;">48.2</td>
+<td style="text-align: right;">66.8</td>
+</tr>
+</tbody>
+</table>
+<p>Scores are not clipped: 0 and 100 are reference points, not bounds. The protocol is described in <a href="../../evaluation/protocol/">Evaluation Protocol</a>.</p>
+<h2 id="method-pages">Method pages<a class="headerlink" href="#method-pages" title="Permanent link">&para;</a></h2>
+<p><strong>Learner-centric</strong></p>
+<ul>
+<li><a href="atla/">ATLA</a>: A policy trained against an observation adversary that is itself an RL agent.</li>
+<li><a href="atla-sa/">ATLA-SA</a>: ATLA plus a state-adversarial KL regulariser and a 100-step recurrent policy.</li>
+<li><a href="rsc/">RSC</a>: Causal counterfactual replay that removes correlations a policy would exploit.</li>
+</ul>
+<p><strong>Environment-centric</strong></p>
+<ul>
+<li><a href="rarl/">RARL</a>: A two-player zero-sum game against an adversary that applies external forces.</li>
+<li><a href="dr/">DR</a>: Simulator parameters resampled every episode from fixed ranges.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../standard/sac/" class="btn btn-neutral float-left" title="SAC"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="atla/" class="btn btn-neutral float-right" title="ATLA">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>RobustRLlib · Anonymous submission under double-blind review.</p>
+  </div>
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../standard/sac/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="atla/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
