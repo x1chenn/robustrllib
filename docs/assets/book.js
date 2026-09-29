@@ -1,5 +1,5 @@
-/* The algorithm book: turns the list of spreads on the All Methods page into a
-   book whose pages turn. No dependency, no request. */
+/* The algorithm book: turns the list of spreads into a book whose pages turn.
+   Used by the All Methods page and by the landing page. No dependency, no request. */
 (function () {
   "use strict";
   var book = document.querySelector("[data-book]");
@@ -220,7 +220,7 @@
   }, { passive: true });
   window.addEventListener("hashchange", function () {
     var index = indexOfId(window.location.hash.slice(1));
-    if (index >= 0) { go(index, true); }
+    if (index >= 0) { go(index, true); reveal(); }
   });
   var pending = null;
   window.addEventListener("resize", function () {
@@ -236,4 +236,8 @@
   if (start > 0) { current = start; }
   layout();
   describe();
+  // A spread that is not showing cannot be scrolled to, so the book is: now, and once
+  // more when the images above it have loaded and moved it down the page.
+  function reveal() { if (book.scrollIntoView) { book.scrollIntoView(); } }
+  if (start >= 0) { reveal(); window.addEventListener("load", reveal); }
 }());

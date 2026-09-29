@@ -64,7 +64,7 @@ def landing_links():
     """Links from the hand-written landing page into the built documentation."""
     html = (REPO / "index.html").read_text()
     missing = []
-    for href in sorted(set(re.findall(r'href="(docs/[^"#]*)', html))):
+    for href in sorted(set(re.findall(r'(?:href|src)="(docs/[^"#]*)', html))):
         target = REPO / href
         if not ((target / "index.html").is_file() or target.is_file()):
             missing.append(("index.html", "broken link", href))

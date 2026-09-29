@@ -2,14 +2,8 @@
    Family colours follow the palette of the paper's figures, so a family has the
    same hue in a figure, a badge and a table. */
 
-:root {
-  --rl-fam-standard: #b7b7b7;
-  --rl-fam-learner: #a9cbe5;
-  --rl-fam-data: #bfdcac;
-  --rl-fam-generative: #e9a0a0;
-  --rl-fam-environment: #9ed9d0;
-  --rl-fam-safe: #f2cf8e;
-}
+/* The colours themselves (--rl-fam-*) are defined in book.css, which the landing page
+   loads as well. */
 
 /* ---- page width and tables ---- */
 .wy-nav-content { max-width: 980px; }

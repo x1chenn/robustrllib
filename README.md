@@ -7,15 +7,15 @@ The site has two parts that share one colour system:
 
 | Part | URL | Source | Build |
 |---|---|---|---|
-| Landing page | `/` | `index.html`, `assets/` | none, hand-written |
+| Landing page | `/` | `index.html`, `assets/` | hand-written; the algorithm book in it is generated |
 | Documentation | `/docs/` | `src/` | MkDocs, output committed to `docs/` |
 
 ## Structure
 
 ```
-├── index.html                # landing page
+├── index.html                # landing page; the block between the `algo-book` markers is GENERATED
 ├── 404.html                  # BUILT: copy of the documentation's not-found page
-├── assets/                   # landing page style and figures
+├── assets/                   # landing page style and its two figures
 ├── docs/                     # BUILT documentation. Never edit by hand.
 └── src/
     ├── mkdocs.yml            # navigation and theme (Read the Docs theme)
@@ -45,7 +45,7 @@ The site has two parts that share one colour system:
     ├── theme/                # template overrides: footer, noindex
     └── tools/
         ├── gen_algorithms.py # data -> method pages, group overviews, algorithm book
-        ├── sync_landing.py   # data -> algorithm table on the landing page
+        ├── sync_landing.py   # data -> algorithm book on the landing page
         ├── render_figures.py # LaTeX -> SVG; needs pdflatex, run only when a figure changes
         ├── finalize.py       # makes the built output reproducible
         ├── check_site.py     # pre-publish scan
@@ -72,21 +72,31 @@ The site has two parts that share one colour system:
 
 ## Algorithm book
 
-The page *All Methods* opens with a book: one spread per method, in the order Standard,
-Robust Online, Robust Offline, Robust Safe. The left page introduces the method, the right
-page lists its features and the command that runs it, and links to the full page.
+The landing page and the page *All Methods* of the documentation hold the same book: one
+spread per method, in the order Standard, Robust Online, Robust Offline, Robust Safe. The
+left page introduces the method, the right page lists its features and the command that
+runs it, and links to the full page.
 
 | To | Use |
 |---|---|
 | Turn a page | the buttons under the book, a click on the edge of a page, the arrow keys, a swipe |
 | Jump to a group | the labels on the edge of the book |
-| Link to a method | `docs/algorithms/#book-<slug>` |
+| Link to a method | `/#book-<slug>` or `docs/algorithms/#book-<slug>` |
 
 The book is generated from `src/data/algorithms.yaml` like every other algorithm page, so a
-new method appears in it without further work. The column of a page is narrow: commands are
+new method appears in both copies without further work. Its style and script
+(`src/content/assets/book.css`, `book.js`) rely on neither the landing page nor the theme of
+the documentation; the landing page loads them from `docs/assets/`. The column of a page is narrow: commands are
 set with the directory of the experiment files in a shell variable. Below 760 px of content
 width the book shows one page at a time, and without JavaScript it is a plain list of all
 spreads.
+
+## Landing page
+
+The landing page is short on purpose. It holds the abstract, the highlights with the
+comparison of benchmarks, the algorithm book, the shift sources and modes, the findings as
+one line each, a quick start and the BibTeX entry. Explanations belong to the documentation,
+and every block of the landing page links to the page that explains it.
 
 ## Branches
 
@@ -103,7 +113,7 @@ python -m venv .venv
 PY=.venv/bin/python src/tools/build.sh
 ```
 
-`build.sh` regenerates the algorithm pages, syncs the landing page table, builds
+`build.sh` regenerates the algorithm pages, syncs the book of the landing page, builds
 `docs/` in strict mode, removes what changes with the clock, and runs the pre-publish scan. It stops at the first failure.
 
 ## Preview
@@ -120,7 +130,7 @@ python3 -m http.server 8000
 | Add or change an algorithm | `src/data/algorithms.yaml`, and `nav` in `src/mkdocs.yml` for a new one | `build.sh` |
 | Update the numbers | replace the table in `src/data/results/` | `build.sh` |
 | Add a topic page | new file under `src/content/`, and `nav` in `src/mkdocs.yml` | `build.sh` |
-| Change the landing page | `index.html`, `assets/style.css` | `src/tools/check_site.py` |
+| Change the landing page | `index.html`, `assets/style.css`; never the block between the `algo-book` markers | `build.sh` |
 
 Numbers are never typed into a page. `gen_algorithms.py` computes them from
 `src/data/results/` and refuses to write pages when the headline numbers of the

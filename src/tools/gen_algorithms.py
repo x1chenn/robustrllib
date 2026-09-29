@@ -412,13 +412,18 @@ GROUP_SHORT = {"standard": "Standard", "robust-online": "Robust Online",
                "robust-offline": "Robust Offline", "robust-safe": "Robust Safe"}
 
 
-def book(spec, refs):
+def book(spec, refs, page=None, script="../assets/book.js"):
     """The methods as a book: one spread per method, one label per group.
 
     Written as plain spreads that read from top to bottom; assets/book.js turns
     them into pages. Links to other pages are Markdown, so that the generator of
     the site resolves them for every way the site is built.
+
+    `page(group, slug)` gives the address of a method page and `script` the address
+    of book.js, both as seen from the page that holds the book. The defaults are
+    those of the All Methods page; the landing page passes its own.
     """
+    page = page or (lambda group, slug: f"{group}/{slug}.md")
     fam = spec["families"]
     algos = [a for grp in GROUPS for a in spec["algorithms"] if group_of(a) == grp]
     out = ['<div class="rl-book" id="algorithm-book" data-book markdown>', "",
@@ -506,7 +511,7 @@ def book(spec, refs):
         else:
             out += [f"Launched with the experiment file `{a['code']['experiment'].rsplit('/', 1)[1]}`; "
                     "the full page gives the steps.", ""]
-        out += [f'<p class="rl-book-more" markdown>[Open the full page]({grp}/{a["slug"]}.md)</p>', "",
+        out += [f'<p class="rl-book-more" markdown>[Open the full page]({page(grp, a["slug"])})</p>', "",
                 f'<p class="rl-book-folio">{2 * n + 4}</p>', "</div>", "", "</section>", ""]
 
     out += ["</div>", "",
@@ -516,7 +521,9 @@ def book(spec, refs):
             '<button type="button" class="rl-next" aria-label="Next page">Next &rsaquo;</button>',
             "</div>",
             '<p class="rl-book-hint">Arrow keys turn the page once the book has the focus.</p>', "",
-            "</div>", "", '<script src="../assets/book.js" defer></script>', ""]
+            "</div>", ""]
+    if script:
+        out += [f'<script src="{script}" defer></script>', ""]
     return out
 
 

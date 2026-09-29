@@ -139,8 +139,7 @@ h4 { font-size: 15.6px; margin: 20px 0 6px; font-weight: 700; }
 p { margin: 0 0 14px; }
 .lead { font-size: 17.4px; line-height: 1.7; color: var(--ink-2); }
 
-ul.clean { margin: 10px 0 16px; padding-left: 20px; }
-ul.clean li { margin-bottom: 7px; }
+.more { margin: 22px 0 0; }
 
 /* ---------------- cards & grids ---------------- */
 .grid { display: grid; gap: 18px; }
@@ -158,13 +157,13 @@ ul.clean li { margin-bottom: 7px; }
 .card p:last-child { margin-bottom: 0; }
 .card .cap { font-size: 13.6px; color: var(--muted); margin: 0; }
 
+.stats { margin: 18px 0; }
 .stat { padding: 18px 16px; text-align: center; }
 .stat .v {
   font-size: 30px; font-weight: 800; letter-spacing: -.03em; color: var(--blue);
   line-height: 1.1; display: block;
 }
 .stat .k { font-size: 17px; font-weight: 700; letter-spacing: -.01em; display: block; }
-.stat .d { font-size: 13.2px; color: var(--muted); display: block; margin-top: 4px; line-height: 1.45; }
 
 .pill {
   display: inline-block; font-size: 12.4px; font-weight: 650;
@@ -211,13 +210,7 @@ figcaption b { color: var(--ink-2); }
 .fig-2 figure { margin: 0; }
 .fig-narrow { max-width: 780px; margin-left: auto; margin-right: auto; }
 
-/* ---------------- equations / code ---------------- */
-.eq {
-  background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--blue);
-  border-radius: 8px; padding: 14px 18px; margin: 16px 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 14.6px; color: var(--ink); overflow-x: auto;
-}
+/* ---------------- code ---------------- */
 pre.code {
   background: var(--code-bg); color: var(--code-ink);
   border-radius: 12px; padding: 16px 18px; overflow-x: auto;
@@ -233,57 +226,25 @@ code.inl {
   font-size: 13.6px; color: #1f2937; border: 1px solid #e3e7ee;
 }
 
-/* ---------------- shift channel cards ---------------- */
+/* ---------------- shift sources and modes ---------------- */
 .channels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.channels.five { grid-template-columns: repeat(5, 1fr); }
 .chan {
-  background: #fff; border: 1px solid var(--line); border-radius: 12px;
-  padding: 15px 16px; position: relative; overflow: hidden;
+  display: block; background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  padding: 14px 16px; position: relative; overflow: hidden; color: var(--ink);
+  transition: transform .12s ease, box-shadow .12s ease;
 }
+.chan:hover { text-decoration: none; transform: translateY(-1px); box-shadow: var(--shadow); }
 .chan::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--c, var(--blue)); }
-.chan .h { font-weight: 700; font-size: 15.4px; display: flex; align-items: center; gap: 8px; }
-.chan .sym {
-  font-family: ui-monospace, Menlo, monospace; font-size: 12.6px; font-weight: 700;
-  color: var(--c, var(--blue)); background: color-mix(in srgb, var(--c, var(--blue)) 10%, #fff);
-  padding: 2px 6px; border-radius: 5px;
-}
-.chan .d { font-size: 13.6px; color: var(--ink-2); margin: 7px 0 0; line-height: 1.55; }
-.chan .ops { font-size: 12.5px; color: var(--muted); margin: 9px 0 0; line-height: 1.5; }
+.chan .h { display: block; font-weight: 700; font-size: 15.4px; }
+.chan .d { display: block; font-size: 13.6px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
 .chan.c-o { --c: #2563eb; }
 .chan.c-a { --c: #7c3aed; }
 .chan.c-p { --c: #0d9488; }
 .chan.c-t { --c: #d97706; }
 .chan.c-r { --c: #db2777; }
 .chan.c-z { --c: #b45309; }
-
-/* ---------------- tracks ---------------- */
-.track { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-.track header {
-  padding: 14px 18px; border-bottom: 1px solid var(--line-soft);
-  display: flex; align-items: center; gap: 12px; background: #fcfdff;
-}
-.track header .idx {
-  font-size: 12.4px; font-weight: 800; letter-spacing: .05em; color: #fff;
-  background: var(--c, var(--blue)); padding: 3px 8px; border-radius: 6px;
-}
-.track header .nm { font-weight: 720; font-size: 16.4px; }
-.track .body { padding: 14px 18px 16px; font-size: 14.6px; color: var(--ink-2); }
-.track .body ul { margin: 8px 0 0; padding-left: 18px; }
-.track .body li { margin-bottom: 5px; }
-.t-robust { --c: #2563eb; }
-.t-disrupt { --c: #7c3aed; }
-.t-map { --c: #0d9488; }
-.t-safe { --c: #d97706; }
-
-/* ---------------- steps ---------------- */
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; counter-reset: s; }
-.step { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 17px 18px; position: relative; }
-.step .n {
-  width: 27px; height: 27px; border-radius: 8px; background: var(--blue); color: #fff;
-  display: inline-flex; align-items: center; justify-content: center;
-  font-size: 14px; font-weight: 750; margin-bottom: 10px;
-}
-.step h4 { margin: 0 0 6px; font-size: 15.6px; }
-.step p { font-size: 14.3px; color: var(--ink-2); margin: 0; line-height: 1.6; }
+.chan.mode { --c: #475569; }
 
 /* ---------------- find list ---------------- */
 ol.find { list-style: none; counter-reset: f; padding: 0; margin: 0; display: grid; gap: 12px; }
@@ -297,8 +258,7 @@ ol.find li::before {
   border: 1px solid #dbe6ff; color: var(--blue-dark);
   display: flex; align-items: center; justify-content: center; font-weight: 750; font-size: 13.4px;
 }
-ol.find li b { display: block; font-size: 15.5px; letter-spacing: -.008em; margin-bottom: 3px; }
-ol.find li span { font-size: 14.5px; color: var(--ink-2); }
+ol.find li b { display: block; font-size: 15.5px; letter-spacing: -.008em; }
 
 /* overview figure framing */
 .hero-fig { margin-top: 34px; }
@@ -314,11 +274,11 @@ footer {
 
 @media (max-width: 880px) {
   body { font-size: 16px; }
-  .g3, .g4, .g5, .channels, .steps, .fig-2 { grid-template-columns: 1fr 1fr; }
+  .g3, .g4, .g5, .channels, .channels.five, .fig-2 { grid-template-columns: 1fr 1fr; }
   .nav-links { display: none; }
 }
 @media (max-width: 620px) {
-  .g2, .g3, .g4, .g5, .channels, .steps, .fig-2 { grid-template-columns: 1fr; }
+  .g2, .g3, .g4, .g5, .channels, .channels.five, .fig-2 { grid-template-columns: 1fr; }
   section { padding: 40px 0; }
   .wrap, .wrap-narrow { padding: 0 18px; }
   h1.title { font-size: 29px; }
