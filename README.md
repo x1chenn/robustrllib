@@ -14,6 +14,7 @@ The site has two parts that share one colour system:
 
 ```
 ├── index.html                # landing page
+├── 404.html                  # BUILT: copy of the documentation's not-found page
 ├── assets/                   # landing page style and figures
 ├── docs/                     # BUILT documentation. Never edit by hand.
 └── src/
@@ -61,6 +62,13 @@ The site has two parts that share one colour system:
   its key clause in bold.
 - The documentation explains how to use the library. It does not discuss results. A method
   page carries two tables of numbers, the library-wide grid and its breakdown by task.
+
+## Branches
+
+| Branch | Holds | Updated by |
+|---|---|---|
+| `main` | Everything: landing page, sources, built documentation, tools | Commits |
+| `gh-pages` | The built site only, adapted to the address of a project page | A script, as a whole. Never edit it by hand |
 
 ## Build
 
