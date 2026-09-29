@@ -18,7 +18,7 @@ theme:
   navigation_depth: 4
   collapse_navigation: true
   sticky_navigation: true
-  titles_only: false
+  titles_only: true           # the sidebar stops at page titles; sections stay on the page
   include_homepage_in_sidebar: true
   prev_next_buttons_location: bottom
 
