@@ -249,7 +249,7 @@ PPO is the on-policy reference: a clipped probability-ratio surrogate on traject
 
 ```bash
 CFG=robustrllib/configs/experiment
-python examples/robust_v2/run_experiment.py \
+python examples/run_experiment.py \
     -c $CFG/ppo_hopper.yaml
 ```
 
@@ -288,7 +288,7 @@ SAC is the off-policy reference: twin critics with a clipped double-Q target and
 
 ```bash
 CFG=robustrllib/configs/experiment
-python examples/robust_v2/run_experiment.py \
+python examples/run_experiment.py \
     -c $CFG/sac_hopper.yaml
 ```
 

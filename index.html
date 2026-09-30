@@ -466,7 +466,7 @@ python<span class="w"> </span>baselines/iql/train_iql.py<span class="w"> </span>
 </table>
 <p class="rl-book-h">Run the method</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
-python<span class="w"> </span>examples/robust_v2/run_experiment.py<span class="w"> </span><span class="se">\</span>
+python<span class="w"> </span>examples/run_experiment.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/ppo_hopper.yaml
 </code></pre></div>
 <p class="rl-book-more"><a href="docs/algorithms/standard/ppo/">Open the full page</a></p>
@@ -506,7 +506,7 @@ python<span class="w"> </span>examples/robust_v2/run_experiment.py<span class="w
 </table>
 <p class="rl-book-h">Run the method</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
-python<span class="w"> </span>examples/robust_v2/run_experiment.py<span class="w"> </span><span class="se">\</span>
+python<span class="w"> </span>examples/run_experiment.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/sac_hopper.yaml
 </code></pre></div>
 <p class="rl-book-more"><a href="docs/algorithms/standard/sac/">Open the full page</a></p>
@@ -1421,12 +1421,12 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
       <g class="ln" style="--i:0">
         <rect x="378" y="28" width="324" height="82" rx="9" fill="#ecebe3" stroke="#87867f" stroke-width="1.5"/>
         <text x="540.0" y="61" font-size="18" font-weight="700" fill="#87867f" text-anchor="middle" ><tspan dy="0.0" font-size="18.0">Agent</tspan></text>
-        <text x="540.0" y="92" font-size="17" font-weight="400" fill="#141413" text-anchor="middle" ><tspan dy="0.0" font-size="17.0">a</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> ~ π(· | õ</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
+        <text x="540.0" y="92" font-size="17" font-weight="400" fill="#141413" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="17.0">a</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> ~ π(· | õ</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
       </g>
       <g class="ln" style="--i:2">
         <rect x="729" y="151" width="294" height="94" rx="9" fill="#e6dee6" stroke="#8c6a8f" stroke-width="1.5"/><rect x="730.5" y="152.5" width="6" height="91" rx="3" fill="#8c6a8f"/>
         <text x="876.0" y="187" font-size="18" font-weight="700" fill="#8c6a8f" text-anchor="middle" ><tspan dy="0.0" font-size="18.0">Action shift</tspan></text>
-        <text x="876.0" y="219" font-size="17" font-weight="400" fill="#141413" text-anchor="middle" ><tspan dy="0.0" font-size="17.0">ã</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> ~ A</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">a</tspan><tspan dy="-0.2" font-size="17.0">(· | s</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">, a</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
+        <text x="876.0" y="219" font-size="17" font-weight="400" fill="#141413" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="17.0">ã</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> ~ A</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">a</tspan><tspan dy="-0.2" font-size="17.0">(· | s</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">, a</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
       </g>
       <g class="ln" style="--i:4">
         <rect x="378" y="253" width="324" height="154" rx="9" fill="#ecebe3" stroke="#87867f" stroke-width="1.5"/>
@@ -1435,91 +1435,91 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
         <rect x="399" y="311" width="282" height="84" rx="8" fill="#dfe9dd" stroke="#6f9a63" stroke-width="1.6"/>
         <rect x="400.5" y="312.5" width="6" height="81" rx="3" fill="#6f9a63"/>
         <text x="540" y="343" font-size="18" font-weight="700" fill="#6f9a63" text-anchor="middle" ><tspan dy="0.0" font-size="18.0">Dynamic shift</tspan></text>
-        <text x="540" y="375" font-size="17" font-weight="400" fill="#141413" text-anchor="middle" ><tspan dy="0.0" font-size="17.0">s</tspan><tspan dy="5.4" font-size="12.6">t+1</tspan><tspan dy="-5.4" font-size="17.0"> ~ P</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">p</tspan><tspan dy="-0.2" font-size="17.0">(· | x</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
+        <text x="540" y="375" font-size="17" font-weight="400" fill="#141413" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="17.0">s</tspan><tspan dy="5.4" font-size="12.6">t+1</tspan><tspan dy="-5.4" font-size="17.0"> ~ P</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">p</tspan><tspan dy="-0.2" font-size="17.0">(· | x</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
       </g>
       <g class="ln" style="--i:6">
         <rect x="57" y="151" width="294" height="94" rx="9" fill="#f3ddd5" stroke="#c96442" stroke-width="1.5"/><rect x="58.5" y="152.5" width="6" height="91" rx="3" fill="#c96442"/>
         <text x="204.0" y="187" font-size="18" font-weight="700" fill="#c96442" text-anchor="middle" ><tspan dy="0.0" font-size="18.0">Observation shift</tspan></text>
-        <text x="204.0" y="219" font-size="17" font-weight="400" fill="#141413" text-anchor="middle" ><tspan dy="0.0" font-size="17.0">õ</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> ~ O</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">o</tspan><tspan dy="-0.2" font-size="17.0">(· | s</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
+        <text x="204.0" y="219" font-size="17" font-weight="400" fill="#141413" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="17.0">õ</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> ~ O</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">o</tspan><tspan dy="-0.2" font-size="17.0">(· | s</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
       </g>
       <g class="ln" style="--i:9">
         <rect x="294" y="478" width="492" height="94" rx="9" fill="#efd2d2" stroke="#b53333" stroke-width="1.5"/><rect x="295.5" y="479.5" width="6" height="91" rx="3" fill="#b53333"/>
         <text x="540.0" y="514" font-size="18" font-weight="700" fill="#b53333" text-anchor="middle" ><tspan dy="0.0" font-size="18.0">Reward/cost shift</tspan></text>
-        <text x="540.0" y="546" font-size="17" font-weight="400" fill="#141413" text-anchor="middle" xml:space="preserve" ><tspan dy="0.0" font-size="17.0">r̃</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> ~ R</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">r</tspan><tspan dy="-0.2" font-size="17.0">(· | y</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">),        c̃</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> ~ C</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">c</tspan><tspan dy="-0.2" font-size="17.0">(· | y</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
+        <text x="540.0" y="546" font-size="17" font-weight="400" fill="#141413" text-anchor="middle" class="lf" xml:space="preserve" ><tspan dy="0.0" font-size="17.0">r̃</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> ~ R</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">r</tspan><tspan dy="-0.2" font-size="17.0">(· | y</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">),        c̃</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> ~ C</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">c</tspan><tspan dy="-0.2" font-size="17.0">(· | y</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
       </g>
       <g class="le" style="--i:1">
         <path id="loop-e-a" d="M702 69 H876 V151" pathLength="1" fill="none" stroke="#c4c0b3" stroke-width="2.4" marker-end="url(#loop-arrow-act)"/>
         <path class="le-flow" d="M702 69 H876 V151" fill="none" stroke="#8c6a8f" stroke-width="2.4" stroke-dasharray="11 9" stroke-linecap="round"/>
-        <rect x="752" y="48" width="28" height="20" rx="3" fill="#f5f4ed"/><text x="766" y="63" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" ><tspan dy="0.0" font-size="15.0">a</tspan><tspan dy="4.8" font-size="11.1">t</tspan></text>
+        <rect x="752" y="48" width="28" height="20" rx="3" fill="#f5f4ed"/><text x="766" y="63" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="15.0">a</tspan><tspan dy="4.8" font-size="11.1">t</tspan></text>
       </g>
       <g class="le" style="--i:3">
         <path id="loop-e-at" d="M876 245 V330 H702" pathLength="1" fill="none" stroke="#c4c0b3" stroke-width="2.4" marker-end="url(#loop-arrow-act)"/>
         <path class="le-flow" d="M876 245 V330 H702" fill="none" stroke="#8c6a8f" stroke-width="2.4" stroke-dasharray="11 9" stroke-linecap="round"/>
-        <rect x="753" y="308" width="28" height="20" rx="3" fill="#f5f4ed"/><text x="767" y="323" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" ><tspan dy="0.0" font-size="15.0">ã</tspan><tspan dy="4.8" font-size="11.1">t</tspan></text>
+        <rect x="753" y="308" width="28" height="20" rx="3" fill="#f5f4ed"/><text x="767" y="323" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="15.0">ã</tspan><tspan dy="4.8" font-size="11.1">t</tspan></text>
       </g>
       <g class="le" style="--i:5">
         <path id="loop-e-s" d="M378 330 H204 V245" pathLength="1" fill="none" stroke="#c4c0b3" stroke-width="2.4" marker-end="url(#loop-arrow-dyn)"/>
         <path class="le-flow" d="M378 330 H204 V245" fill="none" stroke="#6f9a63" stroke-width="2.4" stroke-dasharray="11 9" stroke-linecap="round"/>
-        <rect x="300" y="308" width="28" height="20" rx="3" fill="#f5f4ed"/><text x="314" y="323" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" ><tspan dy="0.0" font-size="15.0">s</tspan><tspan dy="4.8" font-size="11.1">t</tspan></text>
+        <rect x="300" y="308" width="28" height="20" rx="3" fill="#f5f4ed"/><text x="314" y="323" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="15.0">s</tspan><tspan dy="4.8" font-size="11.1">t</tspan></text>
       </g>
       <g class="le" style="--i:7">
         <path id="loop-e-ot" d="M204 151 V82 H378" pathLength="1" fill="none" stroke="#c4c0b3" stroke-width="2.4" marker-end="url(#loop-arrow-obs)"/>
         <path class="le-flow" d="M204 151 V82 H378" fill="none" stroke="#c96442" stroke-width="2.4" stroke-dasharray="11 9" stroke-linecap="round"/>
-        <rect x="303" y="61" width="28" height="20" rx="3" fill="#f5f4ed"/><text x="317" y="76" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" ><tspan dy="0.0" font-size="15.0">õ</tspan><tspan dy="4.8" font-size="11.1">t</tspan></text>
+        <rect x="303" y="61" width="28" height="20" rx="3" fill="#f5f4ed"/><text x="317" y="76" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="15.0">õ</tspan><tspan dy="4.8" font-size="11.1">t</tspan></text>
       </g>
       <g class="le" style="--i:8">
         <path id="loop-e-rc" d="M540 407 V478" pathLength="1" fill="none" stroke="#c4c0b3" stroke-width="2.4" marker-end="url(#loop-arrow-rew)"/>
         <path class="le-flow" d="M540 407 V478" fill="none" stroke="#b53333" stroke-width="2.4" stroke-dasharray="11 9" stroke-linecap="round"/>
-        <rect x="547" y="433" width="61" height="20" rx="3" fill="#f5f4ed"/><text x="578" y="448" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" ><tspan dy="0.0" font-size="15.0">r</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0">, c</tspan><tspan dy="4.8" font-size="11.1">t</tspan></text>
+        <rect x="547" y="433" width="61" height="20" rx="3" fill="#f5f4ed"/><text x="578" y="448" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="15.0">r</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0">, c</tspan><tspan dy="4.8" font-size="11.1">t</tspan></text>
       </g>
       <g class="le" style="--i:10">
         <path id="loop-e-learn" d="M294 525 H33 V51 H378" pathLength="1" fill="none" stroke="#c4c0b3" stroke-width="2.4" marker-end="url(#loop-arrow-rew)"/>
         <path class="le-flow" d="M294 525 H33 V51 H378" fill="none" stroke="#b53333" stroke-width="2.4" stroke-dasharray="5 9" stroke-linecap="round"/>
-        <rect x="-75" y="288" width="217" height="20" rx="3" fill="#f5f4ed" transform="rotate(-90 33 300)"/><text x="33" y="303" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" transform="rotate(-90 33 300)"><tspan dy="0.0" font-size="15.0">learning signal  r̃</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0">, c̃</tspan><tspan dy="4.8" font-size="11.1">t</tspan></text>
+        <rect x="-75" y="288" width="217" height="20" rx="3" fill="#f5f4ed" transform="rotate(-90 33 300)"/><text x="33" y="303" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" class="lf" transform="rotate(-90 33 300)"><tspan dy="0.0" font-size="15.0">learning signal  r̃</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0">, c̃</tspan><tspan dy="4.8" font-size="11.1">t</tspan></text>
       </g>
       <g class="lt" style="--i:11">
         <rect x="183.0" y="262" width="42" height="22" rx="4" fill="#f1e5d1" stroke="#c08a2e" stroke-width="1.3"/>
-        <text x="204.0" y="277" font-size="14" font-weight="700" fill="#c08a2e" text-anchor="middle" ><tspan dy="0.0" font-size="14.0">δ</tspan><tspan dy="4.5" font-size="10.4">o</tspan></text>
+        <text x="204.0" y="277" font-size="14" font-weight="700" fill="#c08a2e" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="14.0">δ</tspan><tspan dy="4.5" font-size="10.4">o</tspan></text>
       </g>
       <g class="lt" style="--i:11">
         <rect x="855.0" y="262" width="42" height="22" rx="4" fill="#f1e5d1" stroke="#c08a2e" stroke-width="1.3"/>
-        <text x="876.0" y="277" font-size="14" font-weight="700" fill="#c08a2e" text-anchor="middle" ><tspan dy="0.0" font-size="14.0">δ</tspan><tspan dy="4.5" font-size="10.4">a</tspan></text>
+        <text x="876.0" y="277" font-size="14" font-weight="700" fill="#c08a2e" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="14.0">δ</tspan><tspan dy="4.5" font-size="10.4">a</tspan></text>
       </g>
       <g class="lt" style="--i:11">
         <rect x="653" y="260" width="42" height="22" rx="4" fill="#f1e5d1" stroke="#c08a2e" stroke-width="1.3"/>
-        <text x="674.0" y="275" font-size="14" font-weight="700" fill="#c08a2e" text-anchor="middle" ><tspan dy="0.0" font-size="14.0">κ</tspan><tspan dy="4.5" font-size="10.4">t</tspan></text>
+        <text x="674.0" y="275" font-size="14" font-weight="700" fill="#c08a2e" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="14.0">κ</tspan><tspan dy="4.5" font-size="10.4">t</tspan></text>
       </g>
       <g class="lt" style="--i:11">
         <rect x="303" y="157" width="42" height="22" rx="4" fill="#e5dbd4" stroke="#8a5a3c" stroke-width="1.3"/>
-        <text x="324.0" y="172" font-size="14" font-weight="700" fill="#8a5a3c" text-anchor="middle" ><tspan dy="0.0" font-size="14.0">θ</tspan><tspan dy="-5.9" font-size="10.4">z</tspan></text>
+        <text x="324.0" y="172" font-size="14" font-weight="700" fill="#8a5a3c" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="14.0">θ</tspan><tspan dy="-5.9" font-size="10.4">z</tspan></text>
       </g>
       <g class="lt" style="--i:11">
         <rect x="385" y="260" width="42" height="22" rx="4" fill="#e5dbd4" stroke="#8a5a3c" stroke-width="1.3"/>
-        <text x="406.0" y="275" font-size="14" font-weight="700" fill="#8a5a3c" text-anchor="middle" ><tspan dy="0.0" font-size="14.0">θ</tspan><tspan dy="-5.9" font-size="10.4">z</tspan></text>
+        <text x="406.0" y="275" font-size="14" font-weight="700" fill="#8a5a3c" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="14.0">θ</tspan><tspan dy="-5.9" font-size="10.4">z</tspan></text>
       </g>
       <g class="lt" style="--i:11">
         <rect x="738" y="484" width="42" height="22" rx="4" fill="#e5dbd4" stroke="#8a5a3c" stroke-width="1.3"/>
-        <text x="759.0" y="499" font-size="14" font-weight="700" fill="#8a5a3c" text-anchor="middle" ><tspan dy="0.0" font-size="14.0">θ</tspan><tspan dy="-5.9" font-size="10.4">z</tspan></text>
+        <text x="759.0" y="499" font-size="14" font-weight="700" fill="#8a5a3c" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="14.0">θ</tspan><tspan dy="-5.9" font-size="10.4">z</tspan></text>
       </g>
       <g class="lc" style="--i:12">
         <rect x="41" y="615" width="490" height="216" rx="9" fill="#f1e5d1" stroke="#c08a2e" stroke-width="1.5"/>
         <rect x="42.5" y="616.5" width="6" height="213" rx="3" fill="#c08a2e"/>
         <text x="61" y="653" font-size="19" font-weight="700" fill="#c08a2e" text-anchor="start" ><tspan dy="0.0" font-size="19.0">Latency shift</tspan></text>
         <rect x="423" y="635" width="90" height="22" rx="4" fill="#faf9f5" stroke="#c08a2e" stroke-width="1.2"/>
-        <text x="468.0" y="651" font-size="14" font-weight="700" fill="#c08a2e" text-anchor="middle" ><tspan dy="0.0" font-size="14.0">δ</tspan><tspan dy="4.5" font-size="10.4">o</tspan><tspan dy="-4.5" font-size="14.0">, δ</tspan><tspan dy="4.5" font-size="10.4">a</tspan><tspan dy="-4.5" font-size="14.0">, κ</tspan><tspan dy="4.5" font-size="10.4">t</tspan></text>
+        <text x="468.0" y="651" font-size="14" font-weight="700" fill="#c08a2e" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="14.0">δ</tspan><tspan dy="4.5" font-size="10.4">o</tspan><tspan dy="-4.5" font-size="14.0">, δ</tspan><tspan dy="4.5" font-size="10.4">a</tspan><tspan dy="-4.5" font-size="14.0">, κ</tspan><tspan dy="4.5" font-size="10.4">t</tspan></text>
         <text x="61" y="683" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="start" font-style="italic" ><tspan dy="0.0" font-size="15.0">the timing of sensing, execution and control</tspan></text>
-        <text x="61" y="727" font-size="17" font-weight="400" fill="#141413" text-anchor="start" ><tspan dy="0.0" font-size="17.0">õ</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> = I(H</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">, t − δ</tspan><tspan dy="5.4" font-size="12.6">o</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text><text x="61" y="763" font-size="17" font-weight="400" fill="#141413" text-anchor="start" ><tspan dy="0.0" font-size="17.0">ã</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> = a</tspan><tspan dy="5.4" font-size="12.6">t−δ</tspan><tspan dy="4.0" font-size="9.3">a</tspan></text><text x="61" y="799" font-size="17" font-weight="400" fill="#141413" text-anchor="start" ><tspan dy="0.0" font-size="17.0">s</tspan><tspan dy="5.4" font-size="12.6">t+1</tspan><tspan dy="-5.4" font-size="17.0"> ~ P</tspan><tspan dy="5.4" font-size="12.6">0</tspan><tspan dy="-12.6" font-size="12.6">(κ</tspan><tspan dy="4.0" font-size="9.3">t</tspan><tspan dy="-4.0" font-size="12.6">)</tspan><tspan dy="7.1" font-size="17.0">(· | s</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">, ã</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
+        <text x="61" y="727" font-size="17" font-weight="400" fill="#141413" text-anchor="start" class="lf" ><tspan dy="0.0" font-size="17.0">õ</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> = I(H</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">, t − δ</tspan><tspan dy="5.4" font-size="12.6">o</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text><text x="61" y="763" font-size="17" font-weight="400" fill="#141413" text-anchor="start" class="lf" ><tspan dy="0.0" font-size="17.0">ã</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> = a</tspan><tspan dy="5.4" font-size="12.6">t−δ</tspan><tspan dy="4.0" font-size="9.3">a</tspan></text><text x="61" y="799" font-size="17" font-weight="400" fill="#141413" text-anchor="start" class="lf" ><tspan dy="0.0" font-size="17.0">s</tspan><tspan dy="5.4" font-size="12.6">t+1</tspan><tspan dy="-5.4" font-size="17.0"> ~ P</tspan><tspan dy="5.4" font-size="12.6">0</tspan><tspan dy="-12.6" font-size="12.6">(κ</tspan><tspan dy="4.0" font-size="9.3">t</tspan><tspan dy="-4.0" font-size="12.6">)</tspan><tspan dy="7.1" font-size="17.0">(· | s</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">, ã</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
       </g>
       <g class="lc" style="--i:12">
         <rect x="549" y="615" width="490" height="216" rx="9" fill="#e5dbd4" stroke="#8a5a3c" stroke-width="1.5"/>
         <rect x="550.5" y="616.5" width="6" height="213" rx="3" fill="#8a5a3c"/>
         <text x="569" y="653" font-size="19" font-weight="700" fill="#8a5a3c" text-anchor="start" ><tspan dy="0.0" font-size="19.0">Semantic shift</tspan></text>
         <rect x="990" y="635" width="31" height="22" rx="4" fill="#faf9f5" stroke="#8a5a3c" stroke-width="1.2"/>
-        <text x="1005.6" y="651" font-size="14" font-weight="700" fill="#8a5a3c" text-anchor="middle" ><tspan dy="0.0" font-size="14.0">θ</tspan><tspan dy="-5.9" font-size="10.4">z</tspan></text>
+        <text x="1005.6" y="651" font-size="14" font-weight="700" fill="#8a5a3c" text-anchor="middle" class="lf" ><tspan dy="0.0" font-size="14.0">θ</tspan><tspan dy="-5.9" font-size="10.4">z</tspan></text>
         <text x="569" y="683" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="start" font-style="italic" ><tspan dy="0.0" font-size="15.0">the scene, the appearance and the task layout</tspan></text>
-        <text x="569" y="727" font-size="17" font-weight="400" fill="#141413" text-anchor="start" ><tspan dy="0.0" font-size="17.0">o</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> ~ O</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">z</tspan><tspan dy="-0.2" font-size="17.0">(· | s</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text><text x="569" y="763" font-size="17" font-weight="400" fill="#141413" text-anchor="start" ><tspan dy="0.0" font-size="17.0">s</tspan><tspan dy="5.4" font-size="12.6">t+1</tspan><tspan dy="-5.4" font-size="17.0"> ~ P</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">z</tspan><tspan dy="-0.2" font-size="17.0">(· | x</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text><text x="569" y="799" font-size="17" font-weight="400" fill="#141413" text-anchor="start" ><tspan dy="0.0" font-size="17.0">(r</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">, c</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">) ~ (R</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">z</tspan><tspan dy="-0.2" font-size="17.0">, C</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">z</tspan><tspan dy="-0.2" font-size="17.0">)(· | y</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
+        <text x="569" y="727" font-size="17" font-weight="400" fill="#141413" text-anchor="start" class="lf" ><tspan dy="0.0" font-size="17.0">o</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0"> ~ O</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">z</tspan><tspan dy="-0.2" font-size="17.0">(· | s</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text><text x="569" y="763" font-size="17" font-weight="400" fill="#141413" text-anchor="start" class="lf" ><tspan dy="0.0" font-size="17.0">s</tspan><tspan dy="5.4" font-size="12.6">t+1</tspan><tspan dy="-5.4" font-size="17.0"> ~ P</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">z</tspan><tspan dy="-0.2" font-size="17.0">(· | x</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text><text x="569" y="799" font-size="17" font-weight="400" fill="#141413" text-anchor="start" class="lf" ><tspan dy="0.0" font-size="17.0">(r</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">, c</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">) ~ (R</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">z</tspan><tspan dy="-0.2" font-size="17.0">, C</tspan><tspan dy="5.4" font-size="12.6">θ</tspan><tspan dy="-5.3" font-size="9.3">z</tspan><tspan dy="-0.2" font-size="17.0">)(· | y</tspan><tspan dy="5.4" font-size="12.6">t</tspan><tspan dy="-5.4" font-size="17.0">)</tspan></text>
       </g>
-      <g class="lc" style="--i:13"><text x="540" y="866" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" xml:space="preserve" ><tspan dy="0.0" font-size="15.0">x</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0"> = (s</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0">, ã</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0">)        y</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0"> = (s</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0">, ã</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0">, s</tspan><tspan dy="4.8" font-size="11.1">t+1</tspan><tspan dy="-4.8" font-size="15.0">)        θ with a superscript is the parameter of the shift</tspan></text></g>
+      <g class="lc" style="--i:13"><text x="540" y="866" font-size="15" font-weight="400" fill="#5e5d59" text-anchor="middle" class="lf" xml:space="preserve" ><tspan dy="0.0" font-size="15.0">x</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0"> = (s</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0">, ã</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0">)        y</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0"> = (s</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0">, ã</tspan><tspan dy="4.8" font-size="11.1">t</tspan><tspan dy="-4.8" font-size="15.0">, s</tspan><tspan dy="4.8" font-size="11.1">t+1</tspan><tspan dy="-4.8" font-size="15.0">)        θ with a superscript is the parameter of the shift</tspan></text></g>
     </svg>
     </div>
     <!-- shift-loop:end -->

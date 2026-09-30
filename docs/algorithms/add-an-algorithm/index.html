@@ -209,7 +209,7 @@ algorithms.</p>
 </tr>
 <tr>
 <td>Runner</td>
-<td><code>examples/robust_v2/run_experiment.py -c &lt;experiment.yaml&gt;</code></td>
+<td><code>examples/run_experiment.py -c &lt;experiment.yaml&gt;</code></td>
 </tr>
 <tr>
 <td>Evaluation</td>
@@ -328,7 +328,7 @@ appends <code>.pt</code> to the path in both.</p>
 <p>Registration is one line in an algorithm config.</p>
 <div class="highlight"><span class="filename">robustrllib/configs/algorithm/reinforce.yaml</span><pre><span></span><code><span class="c1"># Custom algorithm plugged in by import path -- no framework edit needed.</span>
 <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reinforce</span>
-<span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium.robust.algos.template_reinforce:Reinforce</span>
+<span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robustrllib.algos.template_reinforce:Reinforce</span>
 <span class="nt">hparams</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">lr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0003</span>
 <span class="w">  </span><span class="nt">gamma</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.99</span>
@@ -416,7 +416,7 @@ path to a card or an inline dictionary.</p>
 <span class="w">      </span><span class="nt">shifts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[{</span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="nv">observation</span><span class="p p-Indicator">,</span><span class="nt"> mode</span><span class="p">:</span><span class="w"> </span><span class="nv">gauss</span><span class="p p-Indicator">,</span><span class="nt"> params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">sigma</span><span class="p">:</span><span class="w"> </span><span class="nv">0.05</span><span class="p p-Indicator">}}]</span>
 <span class="nt">output_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">results/reinforce</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>examples/robust_v2/run_experiment.py<span class="w"> </span>-c<span class="w"> </span>hopper_reinforce.yaml
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>examples/run_experiment.py<span class="w"> </span>-c<span class="w"> </span>hopper_reinforce.yaml
 </code></pre></div>
 <table>
 <thead>

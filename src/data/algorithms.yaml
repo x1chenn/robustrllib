@@ -380,7 +380,7 @@ algorithms:
       config: robustrllib/configs/algorithm/ppo_hopper.yaml
       experiment: robustrllib/configs/experiment/ppo_hopper.yaml
       run:
-        - "python examples/robust_v2/run_experiment.py -c robustrllib/configs/experiment/ppo_hopper.yaml"
+        - "python examples/run_experiment.py -c robustrllib/configs/experiment/ppo_hopper.yaml"
     variants:
       - {label: PPO, part1: [online, PPO], part3: [[hopper_online, PPO], [pusher, PPO]]}
 
@@ -406,7 +406,7 @@ algorithms:
       config: robustrllib/configs/algorithm/sac.yaml
       experiment: robustrllib/configs/experiment/sac_hopper.yaml
       run:
-        - "python examples/robust_v2/run_experiment.py -c robustrllib/configs/experiment/sac_hopper.yaml"
+        - "python examples/run_experiment.py -c robustrllib/configs/experiment/sac_hopper.yaml"
     variants:
       - {label: SAC, part1: [online, SAC], part3: [[hopper_online, SAC], [pusher, SAC]]}
 

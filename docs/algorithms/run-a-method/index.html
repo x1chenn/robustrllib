@@ -257,9 +257,9 @@ recipe behind this one entry.</p>
 file of its own on top of these: the randomization ranges it trains under, kept in <code>dr/</code> and
 described with the method <a href="#an-online-method-with-a-training-environment">below</a>.</p>
 <div class="highlight"><span class="filename">robustrllib/configs/experiment/rorl_hopper.yaml</span><pre><span></span><code><span class="c1"># Official Hopper-medium RORL hyperparameters on benchmark Minari data.</span>
-<span class="nt">algorithm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/algorithm/rorl.yaml</span>
-<span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/task/hopper_minari_medium.yaml</span>
-<span class="nt">eval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/eval/t0_mujoco.yaml</span>
+<span class="nt">algorithm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robustrllib/configs/algorithm/rorl.yaml</span>
+<span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robustrllib/configs/task/hopper_minari_medium.yaml</span>
+<span class="nt">eval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robustrllib/configs/eval/t0_mujoco.yaml</span>
 <span class="nt">hparams</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">num_samples</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
 <span class="w">  </span><span class="nt">policy_smooth_eps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span>
@@ -530,10 +530,10 @@ overwritten: the trainer refuses to start.</p>
 </table>
 <h2 id="online-methods">Online methods<a class="headerlink" href="#online-methods" title="Permanent link">&para;</a></h2>
 <p>An online method has no dataset and measures its budget in environment steps.</p>
-<div class="highlight"><span class="filename">robustrllib/configs/experiment/dr_hopper_axis_narrow.yaml (comments omitted)</span><pre><span></span><code><span class="nt">algorithm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/algorithm/sac_dr.yaml</span>
-<span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/task/hopper_online.yaml</span>
-<span class="nt">dr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/dr/mujoco_axis_narrow.yaml</span>
-<span class="nt">eval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/eval/t0_mujoco.yaml</span>
+<div class="highlight"><span class="filename">robustrllib/configs/experiment/dr_hopper_axis_narrow.yaml (comments omitted)</span><pre><span></span><code><span class="nt">algorithm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robustrllib/configs/algorithm/sac_dr.yaml</span>
+<span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robustrllib/configs/task/hopper_online.yaml</span>
+<span class="nt">dr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robustrllib/configs/dr/mujoco_axis_narrow.yaml</span>
+<span class="nt">eval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robustrllib/configs/eval/t0_mujoco.yaml</span>
 <span class="nt">train</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
 <span class="w">  </span><span class="nt">eval_seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
@@ -605,7 +605,7 @@ overwritten: the trainer refuses to start.</p>
 the nominal task.</p>
 <p>Experiments written for the <code>Algo</code> interface train, evaluate and save in one process. See
 <a href="../add-an-algorithm/">Add an Algorithm</a>.</p>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>examples/robust_v2/run_experiment.py<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>examples/run_experiment.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-c<span class="w"> </span>robustrllib/configs/experiment/sac_hopper.yaml
 </code></pre></div>
 <h2 id="launch-rules">Launch rules<a class="headerlink" href="#launch-rules" title="Permanent link">&para;</a></h2>

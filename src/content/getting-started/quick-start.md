@@ -46,7 +46,7 @@ The feature tour builds several shifted environments, edits a physical parameter
 runs a scheduled shift and compares two seeded rollouts. It ends with `All sections ran.`
 
 ```bash
-python examples/robust_v2/mujoco_quickstart.py Hopper-v5
+python examples/mujoco_quickstart.py Hopper-v5
 ```
 
 The import prints `Overriding environment ... already in registry` warnings. They come from the

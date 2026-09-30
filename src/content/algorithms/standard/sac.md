@@ -33,7 +33,7 @@ SAC is the backbone of DR-SAC and RSC-SAC.
 ## Run the method
 
 ```bash
-python examples/robust_v2/run_experiment.py \
+python examples/run_experiment.py \
     -c robustrllib/configs/experiment/sac_hopper.yaml
 ```
 
