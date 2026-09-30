@@ -33,7 +33,7 @@ PPO is the backbone of ATLA, ATLA-SA and RARL-PPO.
 ## Run the method
 
 ```bash
-python examples/robust_v2/run_experiment.py \
+python examples/run_experiment.py \
     -c robustrllib/configs/experiment/ppo_hopper.yaml
 ```
 

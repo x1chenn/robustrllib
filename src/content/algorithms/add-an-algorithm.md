@@ -11,7 +11,7 @@ algorithms.
 | Interface | A subclass of `Algo` with `train`, `predict`, `save` and `load` |
 | Registration | The `class` key of an algorithm config, written `module.path:ClassName` |
 | Configuration | `hparams` of the algorithm config, passed to the constructor |
-| Runner | `examples/robust_v2/run_experiment.py -c <experiment.yaml>` |
+| Runner | `examples/run_experiment.py -c <experiment.yaml>` |
 | Evaluation | The shift grid of the experiment's `eval` section |
 | Limits | The shared evaluator reads checkpoints named `ckpt/ep*.pt` |
 
@@ -115,7 +115,7 @@ Registration is one line in an algorithm config.
 ```yaml title="robustrllib/configs/algorithm/reinforce.yaml"
 # Custom algorithm plugged in by import path -- no framework edit needed.
 name: reinforce
-class: robust_gymnasium.robust.algos.template_reinforce:Reinforce
+class: robustrllib.algos.template_reinforce:Reinforce
 hparams:
   lr: 0.0003
   gamma: 0.99
@@ -197,7 +197,7 @@ output_dir: results/reinforce
 ```
 
 ```bash
-python examples/robust_v2/run_experiment.py -c hopper_reinforce.yaml
+python examples/run_experiment.py -c hopper_reinforce.yaml
 ```
 
 | Step | Call |

@@ -47,7 +47,7 @@ TEXT_EXT = {".html", ".htm", ".css", ".js", ".json", ".md", ".yml", ".yaml", ".t
             ".csv", ".py", ".sh", ".in", ".svg", ".map", ""}
 # Third-party bundles: scanned for paths, not for short identity tokens or URLs,
 # because minified code contains arbitrary character runs and vendor links.
-VENDORED = ("docs/search/", "docs/assets/pygments.css", "src/content/assets/pygments.css")
+VENDORED = ("docs/search/", "docs/assets/pygments.css", "src/content/assets/pygments.css", "assets/fonts/")
 SKIP_DIRS = {".git", "__pycache__", ".venv", ".venv-site", "node_modules"}
 # This file lists the forbidden terms, so it would flag itself.
 SELF = "src/tools/check_site.py"

@@ -30,9 +30,9 @@ described with the method [below](#an-online-method-with-a-training-environment)
 
 ```yaml title="robustrllib/configs/experiment/rorl_hopper.yaml"
 # Official Hopper-medium RORL hyperparameters on benchmark Minari data.
-algorithm: robust_gymnasium/configs/algorithm/rorl.yaml
-task: robust_gymnasium/configs/task/hopper_minari_medium.yaml
-eval: robust_gymnasium/configs/eval/t0_mujoco.yaml
+algorithm: robustrllib/configs/algorithm/rorl.yaml
+task: robustrllib/configs/task/hopper_minari_medium.yaml
+eval: robustrllib/configs/eval/t0_mujoco.yaml
 hparams:
   num_samples: 20
   policy_smooth_eps: 0.005
@@ -203,10 +203,10 @@ overwritten: the trainer refuses to start.
 An online method has no dataset and measures its budget in environment steps.
 
 ```yaml title="robustrllib/configs/experiment/dr_hopper_axis_narrow.yaml (comments omitted)"
-algorithm: robust_gymnasium/configs/algorithm/sac_dr.yaml
-task: robust_gymnasium/configs/task/hopper_online.yaml
-dr: robust_gymnasium/configs/dr/mujoco_axis_narrow.yaml
-eval: robust_gymnasium/configs/eval/t0_mujoco.yaml
+algorithm: robustrllib/configs/algorithm/sac_dr.yaml
+task: robustrllib/configs/task/hopper_online.yaml
+dr: robustrllib/configs/dr/mujoco_axis_narrow.yaml
+eval: robustrllib/configs/eval/t0_mujoco.yaml
 train:
   seed: 0
   eval_seed: 3
@@ -258,7 +258,7 @@ Experiments written for the `Algo` interface train, evaluate and save in one pro
 [Add an Algorithm](add-an-algorithm.md).
 
 ```bash
-python examples/robust_v2/run_experiment.py \
+python examples/run_experiment.py \
     -c robustrllib/configs/experiment/sac_hopper.yaml
 ```
 
