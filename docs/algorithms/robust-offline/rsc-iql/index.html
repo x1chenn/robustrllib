@@ -244,7 +244,11 @@
 dimensions is fitted from the dataset, and transitions are rewritten by permuting or
 perturbing the dimensions the mask marks as non-causal.</p>
 <h2 id="run-the-method">Run the method<a class="headerlink" href="#run-the-method" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. fit the causal mask the experiment card names under mask_path</span>
+python<span class="w"> </span>baselines/causaldro_iql/fit_causal_mask.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span>robustrllib/configs/experiment/causaldro_iql_hopper.yaml<span class="w"> </span>--out<span class="w"> </span>runs/causaldro_iql/masks/hopper_medium_seed0_sw05.npz<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+<span class="c1"># 2. train</span>
+python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-c<span class="w"> </span>robustrllib/configs/experiment/causaldro_iql_hopper.yaml<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
 </code></pre></div>

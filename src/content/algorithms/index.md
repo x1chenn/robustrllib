@@ -204,10 +204,12 @@ SynthER fits a diffusion model to logged transitions and trains an unmodified of
 ```bash
 CFG=robustrllib/configs/experiment
 # 1. fit the diffusion model on the logged
-#    data and sample the synthetic dataset
-#    with baselines/synther/train_diffuser.py;
-#    the task card of step 2 names the file it
-#    reads
+#    data and sample the synthetic dataset the
+#    task card reads
+python baselines/synther/train_diffuser.py \
+    --task hopper --quality medium \
+    --results_folder runs/synther/hopper_medium \
+    --save_samples
 # 2. train the unmodified IQL learner on the
 #    synthetic dataset
 python baselines/iql/train_iql.py \
@@ -249,6 +251,12 @@ PPO is the on-policy reference: a clipped probability-ratio surrogate on traject
 
 ```bash
 CFG=robustrllib/configs/experiment
+# the paper's checkpoints: Stable-Baselines3
+# defaults, 2M steps
+python experiments/sb3_default_runs/train.py \
+    --algorithm ppo --task hopper --seed 0 \
+    --total-steps 2000000
+# the same learner through the library runner
 python examples/run_experiment.py \
     -c $CFG/ppo_hopper.yaml
 ```
@@ -288,6 +296,12 @@ SAC is the off-policy reference: twin critics with a clipped double-Q target and
 
 ```bash
 CFG=robustrllib/configs/experiment
+# the paper's checkpoints: Stable-Baselines3
+# defaults, 1M steps
+python experiments/sb3_default_runs/train.py \
+    --algorithm sac --task hopper --seed 0 \
+    --total-steps 1000000
+# the same learner through the library runner
 python examples/run_experiment.py \
     -c $CFG/sac_hopper.yaml
 ```
@@ -458,12 +472,14 @@ RARL casts robustness as a two-player zero-sum game. An adversary applies bounde
 <p class="rl-book-h">Run the method</p>
 
 ```bash
-python baselines/rarl_hopper/train.py \
+python experiments/rarl_hopper_v5/train.py \
     --algo ppo --env Hopper-v5 --seed 0 \
     --total-steps 2000000
-python baselines/rarl_hopper/train.py \
+python experiments/rarl_hopper_v5/train.py \
     --algo trpo --env Hopper-v5 --seed 0 \
     --total-steps 2000000
+# the same recipe on Pusher-v5s:
+# baselines/rarl_pusher/train.py
 ```
 
 <p class="rl-book-more" markdown>[Open the full page](robust-online/rarl.md)</p>
@@ -507,6 +523,11 @@ CFG=robustrllib/configs/experiment
 python baselines/dr/train_dr.py \
     -c $CFG/dr_hopper_axis_narrow.yaml \
     --seed 0
+# the isolated-shift rows of the paper: the
+# SB3 trainer of the online methods
+python experiments/dr_sac_mujoco_v5/train.py \
+    --env Hopper-v5 --seed 0 \
+    --total-steps 1000000
 ```
 
 <p class="rl-book-more" markdown>[Open the full page](robust-online/dr.md)</p>
@@ -590,7 +611,8 @@ RORL makes an SAC learner conservative through smoothing.
 ```bash
 CFG=robustrllib/configs/experiment
 python baselines/rorl/train_rorl.py \
-    -c $CFG/rorl_hopper.yaml --seed 0
+    -c $CFG/rorl_hopper_bcreg_full.yaml \
+    --seed 0
 ```
 
 <p class="rl-book-more" markdown>[Open the full page](robust-offline/rorl.md)</p>
@@ -674,6 +696,14 @@ RSC-IQL applies RSC's counterfactual rewriting to logged data. A causal mask ove
 
 ```bash
 CFG=robustrllib/configs/experiment
+# 1. fit the causal mask the experiment card
+#    names under mask_path
+python \
+    baselines/causaldro_iql/fit_causal_mask.py \
+    -c $CFG/causaldro_iql_hopper.yaml \
+    --out runs/causaldro_iql/masks/hopper_medium_seed0_sw05.npz \
+    --seed 0
+# 2. train
 python baselines/run_baseline.py \
     -c $CFG/causaldro_iql_hopper.yaml \
     -- --seed 0

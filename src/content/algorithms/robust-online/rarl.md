@@ -37,10 +37,11 @@ the library only as the base of RARL-TRPO.
 ## Run the method
 
 ```bash
-python baselines/rarl_hopper/train.py \
+python experiments/rarl_hopper_v5/train.py \
     --algo ppo  --env Hopper-v5 --seed 0 --total-steps 2000000
-python baselines/rarl_hopper/train.py \
+python experiments/rarl_hopper_v5/train.py \
     --algo trpo --env Hopper-v5 --seed 0 --total-steps 2000000
+# the same recipe on Pusher-v5s: baselines/rarl_pusher/train.py
 ```
 
 | File | Path |

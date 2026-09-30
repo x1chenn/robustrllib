@@ -420,10 +420,12 @@ python<span class="w"> </span>baselines/mopo/train_mopo.py<span class="w"> </spa
 <p class="rl-book-h">Run the method</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
 <span class="c1"># 1. fit the diffusion model on the logged</span>
-<span class="c1">#    data and sample the synthetic dataset</span>
-<span class="c1">#    with baselines/synther/train_diffuser.py;</span>
-<span class="c1">#    the task card of step 2 names the file it</span>
-<span class="c1">#    reads</span>
+<span class="c1">#    data and sample the synthetic dataset the</span>
+<span class="c1">#    task card reads</span>
+python<span class="w"> </span>baselines/synther/train_diffuser.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--task<span class="w"> </span>hopper<span class="w"> </span>--quality<span class="w"> </span>medium<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--results_folder<span class="w"> </span>runs/synther/hopper_medium<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--save_samples
 <span class="c1"># 2. train the unmodified IQL learner on the</span>
 <span class="c1">#    synthetic dataset</span>
 python<span class="w"> </span>baselines/iql/train_iql.py<span class="w"> </span><span class="se">\</span>
@@ -466,6 +468,12 @@ python<span class="w"> </span>baselines/iql/train_iql.py<span class="w"> </span>
 </table>
 <p class="rl-book-h">Run the method</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+<span class="c1"># the paper's checkpoints: Stable-Baselines3</span>
+<span class="c1"># defaults, 2M steps</span>
+python<span class="w"> </span>experiments/sb3_default_runs/train.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--algorithm<span class="w"> </span>ppo<span class="w"> </span>--task<span class="w"> </span>hopper<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--total-steps<span class="w"> </span><span class="m">2000000</span>
+<span class="c1"># the same learner through the library runner</span>
 python<span class="w"> </span>examples/run_experiment.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/ppo_hopper.yaml
 </code></pre></div>
@@ -506,6 +514,12 @@ python<span class="w"> </span>examples/run_experiment.py<span class="w"> </span>
 </table>
 <p class="rl-book-h">Run the method</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+<span class="c1"># the paper's checkpoints: Stable-Baselines3</span>
+<span class="c1"># defaults, 1M steps</span>
+python<span class="w"> </span>experiments/sb3_default_runs/train.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--algorithm<span class="w"> </span>sac<span class="w"> </span>--task<span class="w"> </span>hopper<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--total-steps<span class="w"> </span><span class="m">1000000</span>
+<span class="c1"># the same learner through the library runner</span>
 python<span class="w"> </span>examples/run_experiment.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/sac_hopper.yaml
 </code></pre></div>
@@ -716,12 +730,14 @@ python<span class="w"> </span><span class="se">\</span>
 </tbody>
 </table>
 <p class="rl-book-h">Run the method</p>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>baselines/rarl_hopper/train.py<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>experiments/rarl_hopper_v5/train.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--algo<span class="w"> </span>ppo<span class="w"> </span>--env<span class="w"> </span>Hopper-v5<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--total-steps<span class="w"> </span><span class="m">2000000</span>
-python<span class="w"> </span>baselines/rarl_hopper/train.py<span class="w"> </span><span class="se">\</span>
+python<span class="w"> </span>experiments/rarl_hopper_v5/train.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--algo<span class="w"> </span>trpo<span class="w"> </span>--env<span class="w"> </span>Hopper-v5<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--total-steps<span class="w"> </span><span class="m">2000000</span>
+<span class="c1"># the same recipe on Pusher-v5s:</span>
+<span class="c1"># baselines/rarl_pusher/train.py</span>
 </code></pre></div>
 <p class="rl-book-more"><a href="docs/algorithms/robust-online/rarl/">Open the full page</a></p>
 <p class="rl-book-folio">22</p>
@@ -775,6 +791,11 @@ python<span class="w"> </span>baselines/rarl_hopper/train.py<span class="w"> </s
 python<span class="w"> </span>baselines/dr/train_dr.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/dr_hopper_axis_narrow.yaml<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--seed<span class="w"> </span><span class="m">0</span>
+<span class="c1"># the isolated-shift rows of the paper: the</span>
+<span class="c1"># SB3 trainer of the online methods</span>
+python<span class="w"> </span>experiments/dr_sac_mujoco_v5/train.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--env<span class="w"> </span>Hopper-v5<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--total-steps<span class="w"> </span><span class="m">1000000</span>
 </code></pre></div>
 <p class="rl-book-more"><a href="docs/algorithms/robust-online/dr/">Open the full page</a></p>
 <p class="rl-book-folio">24</p>
@@ -878,7 +899,8 @@ python<span class="w"> </span>baselines/rfqi/train_rfqi.py<span class="w"> </spa
 <p class="rl-book-h">Run the method</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
 python<span class="w"> </span>baselines/rorl/train_rorl.py<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/rorl_hopper.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/rorl_hopper_bcreg_full.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--seed<span class="w"> </span><span class="m">0</span>
 </code></pre></div>
 <p class="rl-book-more"><a href="docs/algorithms/robust-offline/rorl/">Open the full page</a></p>
 <p class="rl-book-folio">28</p>
@@ -982,6 +1004,14 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
 </table>
 <p class="rl-book-h">Run the method</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
+<span class="c1"># 1. fit the causal mask the experiment card</span>
+<span class="c1">#    names under mask_path</span>
+python<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>baselines/causaldro_iql/fit_causal_mask.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/causaldro_iql_hopper.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--out<span class="w"> </span>runs/causaldro_iql/masks/hopper_medium_seed0_sw05.npz<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--seed<span class="w"> </span><span class="m">0</span>
+<span class="c1"># 2. train</span>
 python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-c<span class="w"> </span><span class="nv">$CFG</span>/causaldro_iql_hopper.yaml<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>

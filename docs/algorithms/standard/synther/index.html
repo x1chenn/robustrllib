@@ -234,8 +234,9 @@ on a much larger sample from it.</p>
 individual transitions to enlarge the dataset, where FWM and PLR-PVL sample multi-step
 futures conditioned on the current state and turn them into critic targets.</p>
 <h2 id="run-the-method">Run the method<a class="headerlink" href="#run-the-method" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. fit the diffusion model on the logged data and sample the synthetic dataset</span>
-<span class="c1">#    with baselines/synther/train_diffuser.py; the task card of step 2 names the file it reads</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. fit the diffusion model on the logged data and sample the synthetic dataset the task card reads</span>
+python<span class="w"> </span>baselines/synther/train_diffuser.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--task<span class="w"> </span>hopper<span class="w"> </span>--quality<span class="w"> </span>medium<span class="w"> </span>--results_folder<span class="w"> </span>runs/synther/hopper_medium<span class="w"> </span>--save_samples
 <span class="c1"># 2. train the unmodified IQL learner on the synthetic dataset</span>
 python<span class="w"> </span>baselines/iql/train_iql.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-c<span class="w"> </span>robustrllib/configs/experiment/iql_hopper_synther.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>

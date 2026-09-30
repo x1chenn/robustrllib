@@ -122,8 +122,8 @@ algorithms:
       config: robustrllib/configs/algorithm/synther_iql.yaml
       experiment: robustrllib/configs/experiment/iql_hopper_synther.yaml
       run:
-        - "# 1. fit the diffusion model on the logged data and sample the synthetic dataset"
-        - "#    with baselines/synther/train_diffuser.py; the task card of step 2 names the file it reads"
+        - "# 1. fit the diffusion model on the logged data and sample the synthetic dataset the task card reads"
+        - "python baselines/synther/train_diffuser.py --task hopper --quality medium --results_folder runs/synther/hopper_medium --save_samples"
         - "# 2. train the unmodified IQL learner on the synthetic dataset"
         - "python baselines/iql/train_iql.py -c robustrllib/configs/experiment/iql_hopper_synther.yaml --seed 0"
     variants:
@@ -177,9 +177,9 @@ algorithms:
     code:
       dir: baselines/rorl
       config: robustrllib/configs/algorithm/rorl.yaml
-      experiment: robustrllib/configs/experiment/rorl_hopper.yaml
+      experiment: robustrllib/configs/experiment/rorl_hopper_bcreg_full.yaml
       run:
-        - "python baselines/rorl/train_rorl.py -c robustrllib/configs/experiment/rorl_hopper.yaml --seed 0"
+        - "python baselines/rorl/train_rorl.py -c robustrllib/configs/experiment/rorl_hopper_bcreg_full.yaml --seed 0"
     variants:
       - {label: RORL, part1: [offline, RORL], part2: [offline, RORL], part3: [[hopper_offline, RORL]]}
 
@@ -229,6 +229,9 @@ algorithms:
       config: robustrllib/configs/algorithm/causaldro_iql.yaml
       experiment: robustrllib/configs/experiment/causaldro_iql_hopper.yaml
       run:
+        - "# 1. fit the causal mask the experiment card names under mask_path"
+        - "python baselines/causaldro_iql/fit_causal_mask.py -c robustrllib/configs/experiment/causaldro_iql_hopper.yaml --out runs/causaldro_iql/masks/hopper_medium_seed0_sw05.npz --seed 0"
+        - "# 2. train"
         - "python baselines/run_baseline.py -c robustrllib/configs/experiment/causaldro_iql_hopper.yaml -- --seed 0"
     variants:
       - {label: RSC-IQL, part1: [offline, RSC], part2: [offline, RSC-IQL], part3: [[hopper_offline, RSC-IQL]], backbone: IQL}
@@ -380,6 +383,9 @@ algorithms:
       config: robustrllib/configs/algorithm/ppo_hopper.yaml
       experiment: robustrllib/configs/experiment/ppo_hopper.yaml
       run:
+        - "# the paper's checkpoints: Stable-Baselines3 defaults, 2M steps"
+        - "python experiments/sb3_default_runs/train.py --algorithm ppo --task hopper --seed 0 --total-steps 2000000"
+        - "# the same learner through the library runner"
         - "python examples/run_experiment.py -c robustrllib/configs/experiment/ppo_hopper.yaml"
     variants:
       - {label: PPO, part1: [online, PPO], part3: [[hopper_online, PPO], [pusher, PPO]]}
@@ -406,6 +412,9 @@ algorithms:
       config: robustrllib/configs/algorithm/sac.yaml
       experiment: robustrllib/configs/experiment/sac_hopper.yaml
       run:
+        - "# the paper's checkpoints: Stable-Baselines3 defaults, 1M steps"
+        - "python experiments/sb3_default_runs/train.py --algorithm sac --task hopper --seed 0 --total-steps 1000000"
+        - "# the same learner through the library runner"
         - "python examples/run_experiment.py -c robustrllib/configs/experiment/sac_hopper.yaml"
     variants:
       - {label: SAC, part1: [online, SAC], part3: [[hopper_online, SAC], [pusher, SAC]]}
@@ -513,8 +522,9 @@ algorithms:
       config: null
       experiment: null
       run:
-        - "python baselines/rarl_hopper/train.py --algo ppo  --env Hopper-v5 --seed 0 --total-steps 2000000"
-        - "python baselines/rarl_hopper/train.py --algo trpo --env Hopper-v5 --seed 0 --total-steps 2000000"
+        - "python experiments/rarl_hopper_v5/train.py --algo ppo  --env Hopper-v5 --seed 0 --total-steps 2000000"
+        - "python experiments/rarl_hopper_v5/train.py --algo trpo --env Hopper-v5 --seed 0 --total-steps 2000000"
+        - "# the same recipe on Pusher-v5s: baselines/rarl_pusher/train.py"
     variants:
       - {label: RARL-PPO,  part1: [online, RARL-PPO],  part2: [online, RARL-PPO],  part3: [[hopper_online, RARL-PPO], [pusher, RARL]], backbone: PPO}
       - {label: RARL-TRPO, part1: [online, RARL-TRPO], part2: [online, RARL-TRPO], part3: [[hopper_online, RARL-TRPO]], base: TRPO}
@@ -546,6 +556,8 @@ algorithms:
       randomization: robustrllib/configs/dr/mujoco_axis_narrow.yaml
       run:
         - "python baselines/dr/train_dr.py -c robustrllib/configs/experiment/dr_hopper_axis_narrow.yaml --seed 0"
+        - "# the isolated-shift rows of the paper: the SB3 trainer of the online methods"
+        - "python experiments/dr_sac_mujoco_v5/train.py --env Hopper-v5 --seed 0 --total-steps 1000000"
     variants:
       - {label: DR-SAC, part1: [online, DR-SAC], part2: [online, DR-SAC], part3: [[hopper_online, DR-SAC], [pusher, DR-SAC]], backbone: SAC}
 

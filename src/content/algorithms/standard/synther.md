@@ -34,8 +34,9 @@ futures conditioned on the current state and turn them into critic targets.
 ## Run the method
 
 ```bash
-# 1. fit the diffusion model on the logged data and sample the synthetic dataset
-#    with baselines/synther/train_diffuser.py; the task card of step 2 names the file it reads
+# 1. fit the diffusion model on the logged data and sample the synthetic dataset the task card reads
+python baselines/synther/train_diffuser.py \
+    --task hopper --quality medium --results_folder runs/synther/hopper_medium --save_samples
 # 2. train the unmodified IQL learner on the synthetic dataset
 python baselines/iql/train_iql.py \
     -c robustrllib/configs/experiment/iql_hopper_synther.yaml --seed 0

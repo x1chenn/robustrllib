@@ -41,6 +41,9 @@ training range. DR-PPO is used on the Isaac Lab tasks.
 ```bash
 python baselines/dr/train_dr.py \
     -c robustrllib/configs/experiment/dr_hopper_axis_narrow.yaml --seed 0
+# the isolated-shift rows of the paper: the SB3 trainer of the online methods
+python experiments/dr_sac_mujoco_v5/train.py \
+    --env Hopper-v5 --seed 0 --total-steps 1000000
 ```
 
 | File | Path |

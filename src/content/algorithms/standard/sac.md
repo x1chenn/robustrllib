@@ -33,6 +33,10 @@ SAC is the backbone of DR-SAC and RSC-SAC.
 ## Run the method
 
 ```bash
+# the paper's checkpoints: Stable-Baselines3 defaults, 1M steps
+python experiments/sb3_default_runs/train.py \
+    --algorithm sac --task hopper --seed 0 --total-steps 1000000
+# the same learner through the library runner
 python examples/run_experiment.py \
     -c robustrllib/configs/experiment/sac_hopper.yaml
 ```

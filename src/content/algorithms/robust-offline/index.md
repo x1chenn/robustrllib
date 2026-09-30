@@ -38,7 +38,7 @@ Every method is launched from an experiment file. RORL on Hopper:
 
 ```bash
 python baselines/rorl/train_rorl.py \
-    -c robustrllib/configs/experiment/rorl_hopper.yaml --seed 0
+    -c robustrllib/configs/experiment/rorl_hopper_bcreg_full.yaml --seed 0
 ```
 
 Every method page gives the command for that method. [Run a Method](../run-a-method.md) explains the experiment file, the overrides and the run directory.
@@ -48,7 +48,7 @@ Every method page gives the command for that method. [Run a Method](../run-a-met
 | Method | Implementation | Experiment file | Training budget |
 |---|---|---|---|
 | [RFQI](rfqi.md) | `baselines/rfqi` | `rfqi_hopper.yaml` | 500k updates, batch 1000 |
-| [RORL](rorl.md) | `baselines/rorl` | `rorl_hopper.yaml` | 3M updates on MuJoCo and Door, 1M elsewhere |
+| [RORL](rorl.md) | `baselines/rorl` | `rorl_hopper_bcreg_full.yaml` | 3M updates on MuJoCo and Door, 1M elsewhere |
 | [ATLA-IQL](atla-iql.md) | `baselines/offline_atla_iql` | `offline_atla_iql_hopper.yaml` | 1M updates, batch 256 |
 | [RSC-IQL](rsc-iql.md) | `baselines/causaldro_iql` | `causaldro_iql_hopper.yaml` | 1M updates, batch 256 |
 | [RAMBO](rambo.md) | `baselines/rambo` | `rambo_hopper.yaml` | 2M updates on MuJoCo and Door, 1M elsewhere |

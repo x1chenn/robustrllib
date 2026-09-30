@@ -221,6 +221,40 @@ grid of shift conditions.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="which-evaluator">Which evaluator<a class="headerlink" href="#which-evaluator" title="Permanent link">&para;</a></h2>
+<p><code>baselines/eval_final.py</code> reads a checkpoint of the form <code>ckpt/ep*.pt</code> and covers the
+offline methods and DR. The online methods keep the evaluators of their own training
+stacks, on the same grids:</p>
+<table>
+<thead>
+<tr>
+<th>Methods</th>
+<th>Evaluator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IQL, TD3+BC, MOPO, SynthER, RFQI, RORL, ATLA-IQL, RSC-IQL, RAMBO, ROMB, FWM, PLR-PVL, DR</td>
+<td><code>baselines/eval_final.py -c &lt;experiment.yaml&gt; --run-dir &lt;dir&gt;</code></td>
+</tr>
+<tr>
+<td>ATLA, ATLA-SA</td>
+<td><code>baselines/atla/eval_atla_ood.py -c &lt;experiment.yaml&gt; --run-dir &lt;dir&gt;</code></td>
+</tr>
+<tr>
+<td>RSC (online)</td>
+<td><code>baselines/causaldro_online/scripts/eval_ood.py</code></td>
+</tr>
+<tr>
+<td>PPO, SAC, RARL, DR-SAC (the Stable-Baselines3 runs)</td>
+<td><code>experiments/sb3_default_runs/evaluate_grid.py</code>, <code>experiments/&lt;method&gt;/test_grid.py</code></td>
+</tr>
+<tr>
+<td>Observation attack (adversarial mode)</td>
+<td><code>scripts/spec_obs_attack_eval.py</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="evaluation-grids">Evaluation grids<a class="headerlink" href="#evaluation-grids" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -615,6 +649,8 @@ the launcher that trained them; see <a href="../../algorithms/add-an-algorithm/"
         <nav class="bk-toc-tree" aria-label="Sections">
           <ul class="bk-toc-list bk-toc-depth-1">
   <li><a class="bk-toc-link" href="#summary">Summary</a>
+  </li>
+  <li><a class="bk-toc-link" href="#which-evaluator">Which evaluator</a>
   </li>
   <li><a class="bk-toc-link" href="#evaluation-grids">Evaluation grids</a>
   </li>

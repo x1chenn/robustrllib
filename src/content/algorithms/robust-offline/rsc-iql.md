@@ -34,6 +34,10 @@ perturbing the dimensions the mask marks as non-causal.
 ## Run the method
 
 ```bash
+# 1. fit the causal mask the experiment card names under mask_path
+python baselines/causaldro_iql/fit_causal_mask.py \
+    -c robustrllib/configs/experiment/causaldro_iql_hopper.yaml --out runs/causaldro_iql/masks/hopper_medium_seed0_sw05.npz --seed 0
+# 2. train
 python baselines/run_baseline.py \
     -c robustrllib/configs/experiment/causaldro_iql_hopper.yaml \
     -- --seed 0

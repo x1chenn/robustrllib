@@ -15,6 +15,20 @@ grid of shift conditions.
 | Seeds | A fixed evaluation seed, offset by the episode index; conditions are paired |
 | Score | The return rescaled so that a random policy scores 0 and the reference policy scores 100; not clipped |
 
+## Which evaluator
+
+`baselines/eval_final.py` reads a checkpoint of the form `ckpt/ep*.pt` and covers the
+offline methods and DR. The online methods keep the evaluators of their own training
+stacks, on the same grids:
+
+| Methods | Evaluator |
+|---|---|
+| IQL, TD3+BC, MOPO, SynthER, RFQI, RORL, ATLA-IQL, RSC-IQL, RAMBO, ROMB, FWM, PLR-PVL, DR | `baselines/eval_final.py -c <experiment.yaml> --run-dir <dir>` |
+| ATLA, ATLA-SA | `baselines/atla/eval_atla_ood.py -c <experiment.yaml> --run-dir <dir>` |
+| RSC (online) | `baselines/causaldro_online/scripts/eval_ood.py` |
+| PPO, SAC, RARL, DR-SAC (the Stable-Baselines3 runs) | `experiments/sb3_default_runs/evaluate_grid.py`, `experiments/<method>/test_grid.py` |
+| Observation attack (adversarial mode) | `scripts/spec_obs_attack_eval.py` |
+
 ## Evaluation grids
 
 | Key | Type | Meaning |

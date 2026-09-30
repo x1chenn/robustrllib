@@ -33,6 +33,10 @@ PPO is the backbone of ATLA, ATLA-SA and RARL-PPO.
 ## Run the method
 
 ```bash
+# the paper's checkpoints: Stable-Baselines3 defaults, 2M steps
+python experiments/sb3_default_runs/train.py \
+    --algorithm ppo --task hopper --seed 0 --total-steps 2000000
+# the same learner through the library runner
 python examples/run_experiment.py \
     -c robustrllib/configs/experiment/ppo_hopper.yaml
 ```
