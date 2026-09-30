@@ -1,107 +1,62 @@
-/* RobustRLlib documentation: additions to the Read the Docs theme.
-   Family colours follow the palette of the paper's figures, so a family has the
-   same hue in a figure, a badge and a table. */
-
-/* The colours themselves (--rl-fam-*) are defined in book.css, which the landing page
-   loads as well. */
-
-/* ---- page width and tables ---- */
-.wy-nav-content { max-width: 980px; }
-.wy-table-responsive table td,
-.wy-table-responsive table th { white-space: normal; }
-.rst-content table.docutils th { line-height: 1.35; vertical-align: bottom; }
-.rst-content table.docutils td:first-child a { white-space: nowrap; }
-.rst-content table.docutils td,
-.rst-content table.docutils th { font-variant-numeric: tabular-nums; }
+/* RobustRLlib documentation: the parts that are particular to this site. The theme
+   itself is theme/css/site.css. Family colours follow the palette of the paper's
+   figures, so a family has the same hue in a figure, a badge and a table; the colours
+   (--rl-fam-*) are defined in book.css, which the landing page loads as well. */
 
 /* ---- method header ---- */
-.rst-content .rl-subtitle { margin: -12px 0 12px; font-size: 110%; color: #6b7280; }
-.rst-content .rl-badges,
-.rst-content .rl-legend { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; }
-.rst-content .rl-badge {
-  display: inline-block;
-  padding: 1px 10px;
-  border-radius: 999px;
-  font-size: 80%;
-  font-weight: 700;
-  line-height: 1.7;
-  white-space: nowrap;
-  color: #111827;
-  background: #e5e7eb;
+.bk-article .rl-subtitle { margin: -.6rem 0 .8rem; font-size: 1.15rem; color: var(--bk-faint); }
+.bk-article .rl-badges,
+.bk-article .rl-legend { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 1.15rem; }
+.bk-article .rl-badge {
+  display: inline-block; padding: 1px 10px; border-radius: 999px;
+  font-size: .8rem; font-weight: 700; line-height: 1.7; white-space: nowrap;
+  color: #111827; background: #e5e7eb;
 }
-.rst-content .rl-plain { background: transparent; border: 1px solid #c9ccd1; font-weight: 600; }
-.rst-content .rl-setting { background: #343131; color: #ffffff; }
-.rst-content .rl-fam-standard    { background: var(--rl-fam-standard); }
-.rst-content .rl-fam-learner     { background: var(--rl-fam-learner); }
-.rst-content .rl-fam-data        { background: var(--rl-fam-data); }
-.rst-content .rl-fam-generative  { background: var(--rl-fam-generative); }
-.rst-content .rl-fam-environment { background: var(--rl-fam-environment); }
-.rst-content .rl-fam-safe        { background: var(--rl-fam-safe); }
+.bk-article .rl-plain { background: transparent; border: 1px solid #c9ccd1; font-weight: 600; }
+.bk-article .rl-setting { background: #343131; color: #ffffff; }
+.bk-article .rl-fam-standard    { background: var(--rl-fam-standard); }
+.bk-article .rl-fam-learner     { background: var(--rl-fam-learner); }
+.bk-article .rl-fam-data        { background: var(--rl-fam-data); }
+.bk-article .rl-fam-generative  { background: var(--rl-fam-generative); }
+.bk-article .rl-fam-environment { background: var(--rl-fam-environment); }
+.bk-article .rl-fam-safe        { background: var(--rl-fam-safe); }
 
 /* ---- figures: centred, caption directly below ---- */
-.rst-content p > img { display: block; margin: 0 auto; max-width: 100%; height: auto; }
-.rst-content p > img + em,
-.rst-content img + br + em { display: block; text-align: center; }
-.rst-content .rl-pair { display: flex; gap: 12px; margin: 0 0 12px; }
-.rst-content .rl-pair img { width: 50%; min-width: 0; height: auto; }
+.bk-article p > img { display: block; margin: 0 auto; }
+.bk-article p > img + em,
+.bk-article img + br + em { display: block; text-align: center; font-size: .92rem; color: var(--bk-muted); }
+.bk-article .rl-pair { display: flex; gap: 12px; margin: 0 0 12px; }
+.bk-article .rl-pair img { width: 50%; min-width: 0; height: auto; }
 
-/* ---- code blocks: highlighted at build time ---- */
-.rst-content div.highlight { background: #f8f8f8; border: 1px solid #e1e4e5; margin: 1px 0 24px; }
-.rst-content div.highlight pre { padding: 12px; font-size: 12px; line-height: 1.5; overflow-x: auto; }
-.rst-content div.highlight span.filename {
-  display: block; padding: 6px 12px; font-size: 12px; font-weight: 700;
-  background: #edf0f2; border-bottom: 1px solid #e1e4e5;
+/* ---- comparison table: features in rows, benchmarks in columns ---- */
+.bk-article .rl-scroll { overflow-x: auto; margin: 0 0 .8rem; }
+.bk-article table.rl-compare {
+  display: table; width: 100%; max-width: none; overflow: visible; margin: 0; font-size: .95rem;
 }
-
-/* ---- comparison table: features in rows, benchmarks in columns ----
-   The theme adds the class `docutils` to every table once its script has run, and
-   styles that class with borders and zebra rows; the rules below have to win
-   against it, hence the doubled selectors and the !important on the contested ones. */
-.rst-content table.rl-compare,
-.rst-content table.docutils.rl-compare {
-  width: 100% !important; border-collapse: collapse; margin: 0 0 12px;
-  border: 0 !important; font-size: 15px;
+.bk-article table.rl-compare th,
+.bk-article table.rl-compare td { padding: 13px 10px; border: 0; white-space: nowrap; vertical-align: middle; }
+.bk-article table.rl-compare td { text-align: center; }
+.bk-article table.rl-compare tbody th { text-align: left; font-weight: 700; }
+.bk-article table.rl-compare thead th {
+  text-align: center; background: var(--bk-surface); border-bottom: 3px solid var(--bk-primary);
 }
-.rst-content table.rl-compare th,
-.rst-content table.rl-compare td,
-.rst-content table.docutils.rl-compare th,
-.rst-content table.docutils.rl-compare td {
-  padding: 13px 10px; border: 0 !important; background: transparent !important;
-  font-variant-numeric: tabular-nums; white-space: nowrap;
-}
-.rst-content table.rl-compare td { text-align: center; }
-.rst-content table.rl-compare tbody th { text-align: left; font-weight: 700; }
-.rst-content table.rl-compare thead th,
-.rst-content table.docutils.rl-compare thead th {
-  text-align: center; font-weight: 700;
-  background: #f3f4f6 !important; border-bottom: 3px solid #2980b9 !important;
-}
-.rst-content table.rl-compare thead th:first-child { text-align: left; }
-.rst-content table.rl-compare tbody tr:nth-child(odd) th,
-.rst-content table.rl-compare tbody tr:nth-child(odd) td,
-.rst-content table.docutils.rl-compare tbody tr:nth-child(odd) th,
-.rst-content table.docutils.rl-compare tbody tr:nth-child(odd) td { background: #f7f8fa !important; }
+.bk-article table.rl-compare thead th:first-child { text-align: left; }
+.bk-article table.rl-compare tbody tr:hover { background: transparent; }
+.bk-article table.rl-compare tbody tr:nth-child(odd) th,
+.bk-article table.rl-compare tbody tr:nth-child(odd) td { background: #f7f8fa; }
 /* the highlighted column keeps its colour on every row, zebra or not */
-.rst-content table.rl-compare tbody tr td.rl-ours,
-.rst-content table.docutils.rl-compare tbody tr:nth-child(odd) td.rl-ours,
-.rst-content table.docutils.rl-compare tbody tr:nth-child(even) td.rl-ours { background: #e3eff9 !important; font-weight: 700; }
-.rst-content table.rl-compare thead tr th.rl-ours,
-.rst-content table.docutils.rl-compare thead tr th.rl-ours { background: #d3e6f5 !important; color: #1f5f8b; }
-.rst-content .wy-table-responsive:has(> table.rl-compare) { overflow-x: auto; }
-.rst-content table.rl-compare { display: table; }
-.rst-content .rl-ico { display: inline-block; width: 1.7em; color: #2980b9; }
-.rst-content .rl-yes  { color: #2e9e5b; font-size: 135%; }
-.rst-content .rl-no   { color: #e0446a; font-size: 135%; }
-.rst-content .rl-part { color: #d08a1d; font-size: 125%; }
-.rst-content .rl-legend-marks { font-size: 90%; color: #6b7280; margin: 0 0 18px; }
-.rst-content .rl-legend-marks .fa { font-size: 110%; vertical-align: -1px; }
+.bk-article table.rl-compare tbody tr td.rl-ours { background: #e3edff; font-weight: 700; }
+.bk-article table.rl-compare thead tr th.rl-ours { background: #d3e2ff; color: var(--bk-primary-dark); }
+.bk-article .rl-ico { display: inline-block; width: 1.7em; color: var(--bk-primary); }
+.bk-article .rl-yes  { color: #2e9e5b; font-size: 135%; }
+.bk-article .rl-no   { color: #e0446a; font-size: 135%; }
+.bk-article .rl-part { color: #d08a1d; font-size: 125%; }
+.bk-article .rl-legend-marks { font-size: .9rem; color: var(--bk-faint); margin: 0 0 1.15rem; }
+.bk-article .rl-legend-marks .fa { font-size: 110%; vertical-align: -1px; }
 
 /* ---- highlighted summary below the comparison ---- */
-.rst-content blockquote {
-  margin: 0 0 24px; padding: 14px 18px; border-left: 5px solid #6b7b8c;
-  background: #f3f4f6; border-radius: 0 6px 6px 0;
+.bk-article blockquote {
+  margin: 0 0 1.4rem; padding: 14px 18px; border-left: 5px solid #6b7b8c;
+  background: var(--bk-surface); border-radius: 0 6px 6px 0;
 }
-.rst-content blockquote p { margin: 0; line-height: 1.7; }
-
-/* ---- formulas in a table cell: images that LaTeX typeset ---- */
-.rst-content table td img { vertical-align: middle; max-width: none; }
+.bk-article blockquote p { margin: 0; line-height: 1.7; }

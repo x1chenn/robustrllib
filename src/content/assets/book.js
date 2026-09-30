@@ -151,7 +151,8 @@
     }
   }
 
-  /* The book is as tall as its fullest page, so that no page has to scroll. */
+  /* The book is as tall as its fullest page, so that no page has to scroll, and never
+     flatter than an open book, whose spread is about 1.6 times as wide as it is tall. */
   function fit() {
     if (!shelf || shelf.style.display === "none") { return; }
     var need = 0;
@@ -164,7 +165,18 @@
     var cover = window.getComputedStyle(shelf);
     var frame = cover.boxSizing === "border-box"
       ? parseFloat(cover.borderTopWidth) + parseFloat(cover.borderBottomWidth) : 0;
-    shelf.style.height = Math.max(520, Math.ceil(need + frame) + 2) + "px";
+    var floor = Math.round(shelf.getBoundingClientRect().width / 1.6);
+    shelf.style.height = Math.max(floor, Math.ceil(need + frame) + 2) + "px";
+    // the labels on the edge shrink until they fit the height of the book
+    var tabs = book.querySelector(".rl-book-tabs");
+    if (tabs) {
+      var size = 13.5;
+      tabs.style.setProperty("--rl-tab-size", size + "px");
+      while (tabs.scrollHeight > shelf.offsetHeight - 20 && size > 9.5) {
+        size -= 0.5;
+        tabs.style.setProperty("--rl-tab-size", size + "px");
+      }
+    }
   }
 
   var laidOutAt = -1;

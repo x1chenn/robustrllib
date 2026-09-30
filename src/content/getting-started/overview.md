@@ -60,6 +60,7 @@ The library has four groups. Robust methods are split further by where robustnes
 RobustRLlib extends existing RL libraries and robustness benchmarks by combining a library of
 robust algorithms with shifts on every component of the interaction loop, under one interface.
 
+<div class="rl-scroll">
 <table class="rl-compare">
 <thead><tr><th>Feature</th><th>RLlib</th><th>RRLS</th><th>ODRL</th><th>Robust-Gymnasium</th><th>RWRL Suite</th><th>RoAd-RL</th><th class="rl-ours">RobustRLlib</th></tr></thead>
 <tbody>
@@ -71,6 +72,7 @@ robust algorithms with shifts on every component of the interaction loop, under 
 <tr><th scope="row"><span class="fa fa-plug rl-ico" aria-hidden="true"></span>Task expansion</th><td><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td><td><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td><td><span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span></td><td><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td><td><span class="fa fa-adjust rl-part" role="img" aria-label="Partial" title="Partial"></span></td><td><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td><td class="rl-ours"><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span></td></tr>
 </tbody>
 </table>
+</div>
 
 <p class="rl-legend-marks"><span class="fa fa-check-square rl-yes" role="img" aria-label="Supported" title="Supported"></span> supported and evaluated &nbsp;&nbsp; <span class="fa fa-adjust rl-part" role="img" aria-label="Partial" title="Partial"></span> partial &nbsp;&nbsp; <span class="fa fa-times rl-no" role="img" aria-label="Not supported" title="Not supported"></span> absent or not demonstrated</p>
 

@@ -6,8 +6,8 @@
 
 @font-face {
   font-family: "Roboto Slab"; font-style: normal; font-weight: 700; font-display: swap;
-  src: url("../css/fonts/Roboto-Slab-Bold.woff2") format("woff2"),
-       url("../css/fonts/Roboto-Slab-Bold.woff") format("woff");
+  src: url("../fonts/Roboto-Slab-Bold.woff2") format("woff2"),
+       url("../fonts/Roboto-Slab-Bold.woff") format("woff");
 }
 
 :root {
@@ -33,7 +33,7 @@
 .rl-book-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
 .rl-book .rl-tab {
   display: inline-block; padding: 6px 12px; border-radius: 6px 6px 0 0;
-  font-size: 13.5px; font-weight: 700; line-height: 1.3; white-space: nowrap;
+  font-size: var(--rl-tab-size, 13.5px); font-weight: 700; line-height: 1.3; white-space: nowrap;
   color: #ffffff; background: var(--rl-g-contents); text-decoration: none;
   opacity: .78; transition: opacity .15s, transform .15s;
 }
@@ -57,29 +57,29 @@
   border: 8px solid var(--rl-cover); border-radius: 10px; background: var(--rl-cover);
 }
 .rl-book .rl-page {
-  position: relative; box-sizing: border-box; padding: 26px 30px 44px;
-  background: var(--rl-paper); font-size: 14.5px; line-height: 1.6; overflow: auto;
+  position: relative; box-sizing: border-box; padding: 22px 26px 36px;
+  background: var(--rl-paper); font-size: 13px; line-height: 1.45; overflow: auto;
 }
 .rl-book .rl-page.rl-left  { border-radius: 4px 0 0 4px; box-shadow: inset -22px 0 26px -22px rgba(0, 0, 0, .28); }
 .rl-book .rl-page.rl-right { border-radius: 0 4px 4px 0; box-shadow: inset 22px 0 26px -22px rgba(0, 0, 0, .28); }
-.rl-book .rl-page p { margin: 0 0 12px; font-size: inherit; line-height: inherit; }
+.rl-book .rl-page p { margin: 0 0 9px; font-size: inherit; line-height: inherit; }
 
-.rl-book-group {
-  margin: 0 0 18px; font-size: 12.5px; font-weight: 700; letter-spacing: .06em;
+.rl-book .rl-book-group {
+  margin: 0 0 10px; font-size: 11.5px; font-weight: 700; letter-spacing: .06em;
   text-transform: uppercase; color: var(--rl-g-contents);
 }
 .rl-book .rl-spread[data-group="standard"]       .rl-book-group { color: var(--rl-g-standard); }
 .rl-book .rl-spread[data-group="robust-online"]  .rl-book-group { color: var(--rl-g-robust-online); }
 .rl-book .rl-spread[data-group="robust-offline"] .rl-book-group { color: var(--rl-g-robust-offline); }
 .rl-book .rl-spread[data-group="robust-safe"]    .rl-book-group { color: var(--rl-g-robust-safe); }
-.rl-book .rl-page .rl-book-name  { margin: 0 0 2px; font-family: "Roboto Slab", Georgia, serif; font-size: 34px; font-weight: 700; line-height: 1.15; color: #1f2937; }
-.rl-book .rl-page .rl-book-title { margin: 0 0 14px; font-size: 15.5px; color: #6b7280; }
-.rl-book .rl-page .rl-book-h     { margin: 0 0 8px; font-family: "Roboto Slab", Georgia, serif; font-size: 17px; font-weight: 700; color: #1f2937; }
-.rl-book .rl-page .rl-book-tagline { font-style: italic; color: #374151; padding-left: 12px; border-left: 3px solid #d1d5db; }
-.rl-book .rl-page .rl-badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 16px; }
+.rl-book .rl-page .rl-book-name  { margin: 0 0 2px; font-family: "Roboto Slab", Georgia, serif; font-size: 27px; font-weight: 700; line-height: 1.15; color: #1f2937; }
+.rl-book .rl-page .rl-book-title { margin: 0 0 9px; font-size: 13.5px; line-height: 1.35; color: #6b7280; }
+.rl-book .rl-page .rl-book-h     { margin: 0 0 6px; font-family: "Roboto Slab", Georgia, serif; font-size: 15px; font-weight: 700; color: #1f2937; }
+.rl-book .rl-page .rl-book-tagline { font-style: italic; color: #374151; padding-left: 10px; border-left: 3px solid #d1d5db; }
+.rl-book .rl-page .rl-badges { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 10px; }
 .rl-book .rl-badge {
-  display: inline-block; padding: 1px 10px; border-radius: 999px;
-  font-size: 12px; font-weight: 700; line-height: 1.7; white-space: nowrap;
+  display: inline-block; padding: 0 9px; border-radius: 999px;
+  font-size: 11.5px; font-weight: 700; line-height: 1.7; white-space: nowrap;
   color: #111827; background: #e5e7eb;
 }
 .rl-book .rl-badge.rl-plain { background: transparent; border: 1px solid #c9ccd1; font-weight: 600; }
@@ -90,50 +90,52 @@
 .rl-book .rl-badge.rl-fam-environment { background: var(--rl-fam-environment); }
 .rl-book .rl-badge.rl-fam-safe        { background: var(--rl-fam-safe); }
 .rl-book .rl-page .rl-book-folio {
-  position: absolute; bottom: 12px; margin: 0; font-size: 12.5px; color: #9ca3af;
+  position: absolute; bottom: 10px; margin: 0; font-size: 11.5px; color: #9ca3af;
   font-variant-numeric: tabular-nums;
 }
-.rl-book .rl-left  .rl-book-folio { left: 30px; }
-.rl-book .rl-right .rl-book-folio { right: 30px; }
+.rl-book .rl-left  .rl-book-folio { left: 26px; }
+.rl-book .rl-right .rl-book-folio { right: 26px; }
 
 .rl-book .rl-page table,
 .rl-book .rl-page table.docutils {
-  width: 100% !important; margin: 0 0 16px; font-size: 13.5px; border: 0 !important;
-  border-collapse: collapse; border-spacing: 0;
+  display: table; width: 100% !important; max-width: none; overflow: visible;
+  margin: 0 0 12px; font-size: 12.5px; line-height: 1.35; border: 0 !important;
+  border-collapse: collapse; border-spacing: 0; box-shadow: none; border-radius: 0;
 }
 .rl-book .rl-page table th,
 .rl-book .rl-page table td {
-  padding: 5px 8px !important; border: 0 !important; border-bottom: 1px solid #e7e2d6 !important;
+  padding: 4px 6px !important; border: 0 !important; border-bottom: 1px solid #e7e2d6 !important;
   background: transparent !important; white-space: normal; line-height: 1.4;
   text-align: left; vertical-align: top;
 }
 .rl-book .rl-page table thead { display: none; }
 .rl-book .rl-page table td:first-child { width: 46%; color: #6b7280; }
-.rl-book .rl-page .wy-table-responsive { margin-bottom: 0; overflow: visible; }
+.rl-book .rl-page table tbody tr:hover { background: transparent; }
 .rl-book .rl-page div.highlight {
-  margin: 0 -10px 16px; padding: 0; border: 1px solid #e7e2d6; border-radius: 4px; background: #f7f4ea;
+  margin: 0 -10px 12px; padding: 0; border: 1px solid #e7e2d6; border-radius: 4px; background: #f7f4ea;
 }
 .rl-book .rl-page div.highlight pre,
 .rl-book .rl-page div.highlight pre code {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 10.5px; line-height: 1.55; white-space: pre !important;
+  font-size: 10.5px; line-height: 1.4; white-space: pre !important;
   color: #1f2937; background: transparent; border: 0;
 }
-.rl-book .rl-page div.highlight pre { margin: 0; padding: 9px 8px; overflow-x: auto; }
+.rl-book .rl-page div.highlight pre { margin: 0; padding: 8px; overflow-x: auto; }
 .rl-book .rl-page div.highlight pre code { padding: 0; overflow: visible; }
-.rl-book .rl-page ul { margin: 0 0 12px; padding: 0; }
+.rl-book .rl-page ul { margin: 0 0 9px; padding: 0; }
 .rl-book .rl-page ul li { margin-left: 18px; list-style: disc; }
 .rl-book .rl-page .rl-book-more a {
-  display: inline-block; padding: 7px 14px; border-radius: 6px; font-weight: 700; font-size: 13.5px;
+  display: inline-block; padding: 6px 13px; border-radius: 6px; font-weight: 700; font-size: 12.5px;
   color: #ffffff; background: #2980b9; text-decoration: none;
 }
 .rl-book .rl-page .rl-book-more a:hover { background: #1f6da0; color: #ffffff; text-decoration: none; }
-.rl-book-toc { columns: 2; column-gap: 22px; }
-.rl-book-toc p { break-inside: avoid; margin: 0 0 10px; }
+.rl-book .rl-book-toc { columns: 2; column-gap: 18px; }
+.rl-book .rl-book-toc p { break-inside: avoid; margin: 0 0 8px; }
 .rl-book-toc .rl-book-tocg { display: block; font-weight: 700; margin-bottom: 2px; }
-.rl-book-toc a { white-space: nowrap; }
-.rl-book .rl-page .rl-book-paper { margin-top: 16px; padding-top: 10px; border-top: 1px solid #e7e2d6; font-size: 13px; color: #6b7280; }
-.rl-book .rl-page .rl-book-paper b { display: block; color: #374151; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; }
+.rl-book-toc a { white-space: nowrap; text-decoration: none; }
+.rl-book .rl-book-toc a:hover { text-decoration: underline; }
+.rl-book .rl-page .rl-book-paper { margin-top: 10px; padding-top: 8px; border-top: 1px solid #e7e2d6; font-size: 12px; line-height: 1.4; color: #6b7280; }
+.rl-book .rl-page .rl-book-paper b { display: block; margin-bottom: 2px; color: #374151; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; }
 
 /* ---- controls ---- */
 .rl-book-controls { display: none; align-items: center; justify-content: space-between; gap: 12px; margin: 12px 0 0; }
@@ -162,7 +164,7 @@
   flex-direction: column; flex-wrap: nowrap; gap: 5px;
 }
 .rl-book.is-live.is-wide .rl-tab {
-  writing-mode: vertical-rl; padding: 12px 8px; border-radius: 0 7px 7px 0;
+  writing-mode: vertical-rl; padding: 10px 8px; border-radius: 0 7px 7px 0;
   width: 34px; box-sizing: border-box; text-align: center;
 }
 .rl-book.is-live.is-wide .rl-tab.is-active { width: 40px; box-shadow: none; transform: none; }

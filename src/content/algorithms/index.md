@@ -79,10 +79,7 @@ IQL avoids querying out-of-distribution actions altogether. A value function is 
 
 | Feature | Value |
 |---|---|
-| Setting | Offline |
-| Family | Standard reference |
 | Base algorithm | — |
-| Claimed robustness | — |
 | Training budget | 1M updates, batch 256 |
 
 <p class="rl-book-h">Run the method</p>
@@ -121,10 +118,7 @@ TD3+BC adds a behaviour-cloning term to the TD3 actor loss and normalises states
 
 | Feature | Value |
 |---|---|
-| Setting | Offline |
-| Family | Standard reference |
 | Base algorithm | — |
-| Claimed robustness | — |
 | Training budget | 1M updates, batch 256 |
 
 <p class="rl-book-h">Run the method</p>
@@ -163,10 +157,7 @@ MOPO learns an ensemble dynamics model, branches short rollouts from dataset sta
 
 | Feature | Value |
 |---|---|
-| Setting | Offline |
-| Family | Standard reference |
 | Base algorithm | SAC |
-| Claimed robustness | — |
 | Training budget | 1M updates, batch 256 |
 
 <p class="rl-book-h">Run the method</p>
@@ -205,10 +196,7 @@ SynthER fits a diffusion model to logged transitions and trains an unmodified of
 
 | Feature | Value |
 |---|---|
-| Setting | Offline |
-| Family | Standard reference |
 | Base algorithm | IQL |
-| Claimed robustness | — |
 | Training budget | 1M updates, batch 256 |
 
 <p class="rl-book-h">Run the method</p>
@@ -254,10 +242,7 @@ PPO is the on-policy reference: a clipped probability-ratio surrogate on traject
 
 | Feature | Value |
 |---|---|
-| Setting | Online |
-| Family | Standard reference |
 | Base algorithm | — |
-| Claimed robustness | — |
 | Training budget | 2M environment steps |
 
 <p class="rl-book-h">Run the method</p>
@@ -296,10 +281,7 @@ SAC is the off-policy reference: twin critics with a clipped double-Q target and
 
 | Feature | Value |
 |---|---|
-| Setting | Online |
-| Family | Standard reference |
 | Base algorithm | — |
-| Claimed robustness | — |
 | Training budget | 1M environment steps |
 
 <p class="rl-book-h">Run the method</p>
@@ -326,7 +308,7 @@ python examples/robust_v2/run_experiment.py \
 <p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · PPO</span><span class="rl-badge rl-plain">Claims · observation shift</span></p>
 <p class="rl-book-tagline">A policy trained against an observation adversary that is itself an RL agent.</p>
 
-ATLA trains a policy against an *optimal* observation adversary in the state-adversarial MDP. The adversary is itself an RL agent that outputs a bounded perturbation of the observation, is rewarded by the protagonist's negative return, and is updated in alternation with the protagonist.
+ATLA trains a policy against an *optimal* observation adversary in the state-adversarial MDP.
 
 <p class="rl-book-paper" markdown><b>Original paper</b>Zhang et al. *Robust Reinforcement Learning on State Observations with Learned Optimal Adversary*. ICLR, 2021.</p>
 
@@ -338,10 +320,7 @@ ATLA trains a policy against an *optimal* observation adversary in the state-adv
 
 | Feature | Value |
 |---|---|
-| Setting | Online |
-| Family | Learner-centric |
 | Base algorithm | PPO |
-| Claimed robustness | Observation shift |
 | Shifted-env rollout | No |
 | Adversarial network | Yes |
 | Learned model | No |
@@ -371,7 +350,7 @@ python baselines/atla/train_atla.py \
 <p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · PPO</span><span class="rl-badge rl-plain">Claims · observation shift</span></p>
 <p class="rl-book-tagline">ATLA plus a state-adversarial KL regulariser and a 100-step recurrent policy.</p>
 
-ATLA-SA adds the SA-PPO regulariser to ATLA: a KL penalty between the policy at a state and at the worst-case neighbour found by stochastic gradient Langevin dynamics. It also uses a recurrent (LSTM) policy with a 100-step history, so that the agent can infer a persistent perturbation from context.
+ATLA-SA adds the SA-PPO regulariser to ATLA: a KL penalty between the policy at a state and at the worst-case neighbour found by stochastic gradient Langevin dynamics.
 
 <p class="rl-book-paper" markdown><b>Original paper</b>Zhang et al. *Robust Reinforcement Learning on State Observations with Learned Optimal Adversary*. ICLR, 2021.</p>
 
@@ -383,10 +362,7 @@ ATLA-SA adds the SA-PPO regulariser to ATLA: a KL penalty between the policy at 
 
 | Feature | Value |
 |---|---|
-| Setting | Online |
-| Family | Learner-centric |
 | Base algorithm | PPO (LSTM policy) |
-| Claimed robustness | Observation shift |
 | Shifted-env rollout | No |
 | Adversarial network | Yes |
 | Learned model | No |
@@ -417,7 +393,7 @@ python baselines/atla/train_atla.py \
 <p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · SAC</span><span class="rl-badge rl-plain">Claims · semantic shift</span></p>
 <p class="rl-book-tagline">Causal counterfactual replay that removes correlations a policy would exploit.</p>
 
-RSC learns a causal graph and a dynamics model over the state variables from replayed experience, then generates counterfactual transitions by intervening on the variables the graph marks as non-causal for the reward. Mixing these into replay removes the spurious correlations a policy would otherwise exploit.
+RSC learns a causal graph and a dynamics model over the state variables from replayed experience, then generates counterfactual transitions by intervening on the variables the graph marks as non-causal for the reward.
 
 <p class="rl-book-paper" markdown><b>Original paper</b>Ding et al. *Seeing is not Believing: Robust Reinforcement Learning against Spurious Correlation*. NeurIPS, 2023.</p>
 
@@ -429,10 +405,7 @@ RSC learns a causal graph and a dynamics model over the state variables from rep
 
 | Feature | Value |
 |---|---|
-| Setting | Online |
-| Family | Learner-centric |
 | Base algorithm | SAC |
-| Claimed robustness | Semantic shift |
 | Shifted-env rollout | No |
 | Adversarial network | No |
 | Learned model | Yes |
@@ -442,7 +415,8 @@ RSC learns a causal graph and a dynamics model over the state variables from rep
 
 ```bash
 CFG=robustrllib/configs/experiment
-python baselines/causaldro_online/train_causaldro.py \
+python \
+    baselines/causaldro_online/train_causaldro.py \
     --config $CFG/causaldro_online_hopper.yaml \
     --seed 0
 ```
@@ -475,10 +449,7 @@ RARL casts robustness as a two-player zero-sum game. An adversary applies bounde
 
 | Feature | Value |
 |---|---|
-| Setting | Online |
-| Family | Environment-centric |
 | Base algorithm | PPO / TRPO |
-| Claimed robustness | Dynamic shift |
 | Shifted-env rollout | Yes |
 | Adversarial network | Yes |
 | Learned model | No |
@@ -523,10 +494,7 @@ Domain randomisation samples simulator parameters from fixed ranges at every epi
 
 | Feature | Value |
 |---|---|
-| Setting | Online |
-| Family | Environment-centric |
 | Base algorithm | SAC / PPO |
-| Claimed robustness | Dynamic shift |
 | Shifted-env rollout | Yes |
 | Adversarial network | No |
 | Learned model | No |
@@ -557,7 +525,7 @@ python baselines/dr/train_dr.py \
 <p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · FQI</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 <p class="rl-book-tagline">Worst-case Bellman update over a total-variation uncertainty set.</p>
 
-RFQI replaces the fitted-Q target by a worst-case Bellman backup over a total-variation uncertainty set of a fixed radius around the empirical transitions. The inner maximisation is solved through a dual variable fitted per batch, and the actor and critic follow the BCQ-style architecture of the original release.
+RFQI replaces the fitted-Q target by a worst-case Bellman backup over a total-variation uncertainty set of a fixed radius around the empirical transitions.
 
 <p class="rl-book-paper" markdown><b>Original paper</b>Panaganti et al. *Robust Reinforcement Learning using Offline Data*. NeurIPS, 2022.</p>
 
@@ -569,10 +537,7 @@ RFQI replaces the fitted-Q target by a worst-case Bellman backup over a total-va
 
 | Feature | Value |
 |---|---|
-| Setting | Offline |
-| Family | Learner-centric |
 | Base algorithm | FQI |
-| Claimed robustness | Dynamic shift |
 | Shifted-env rollout | No |
 | Adversarial network | No |
 | Learned model | No |
@@ -602,7 +567,7 @@ python baselines/rfqi/train_rfqi.py \
 <p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · SAC</span><span class="rl-badge rl-plain">Claims · observation shift</span></p>
 <p class="rl-book-tagline">Local policy and value smoothing, with an ensemble penalty at perturbed states.</p>
 
-RORL makes an SAC learner conservative through smoothing. The critic and the policy are regularised to vary little within a small ball around dataset states, and Q-values at perturbed states are penalised by the disagreement of a ten-critic ensemble.
+RORL makes an SAC learner conservative through smoothing.
 
 <p class="rl-book-paper" markdown><b>Original paper</b>Yang et al. *RORL: Robust Offline Reinforcement Learning via Conservative Smoothing*. NeurIPS, 2022.</p>
 
@@ -614,10 +579,7 @@ RORL makes an SAC learner conservative through smoothing. The critic and the pol
 
 | Feature | Value |
 |---|---|
-| Setting | Offline |
-| Family | Learner-centric |
 | Base algorithm | SAC |
-| Claimed robustness | Observation shift |
 | Shifted-env rollout | No |
 | Adversarial network | No |
 | Learned model | No |
@@ -647,7 +609,7 @@ python baselines/rorl/train_rorl.py \
 <p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · IQL</span><span class="rl-badge rl-plain">Claims · observation shift</span></p>
 <p class="rl-book-tagline">A learned observation adversary, trained through the critic instead of by RL.</p>
 
-The offline adaptation keeps ATLA's principle, a learned observation adversary alternated with the learner. Since no environment is available, the adversary is not trained by RL: it is trained by a differentiable objective on the critic, minimising the minimum Q-value at the policy's action under the perturbed state.
+The offline adaptation keeps ATLA's principle, a learned observation adversary alternated with the learner.
 
 <p class="rl-book-paper" markdown><b>Original paper</b>Zhang et al. *Robust Reinforcement Learning on State Observations with Learned Optimal Adversary*. ICLR, 2021.</p>
 
@@ -659,10 +621,7 @@ The offline adaptation keeps ATLA's principle, a learned observation adversary a
 
 | Feature | Value |
 |---|---|
-| Setting | Offline |
-| Family | Learner-centric |
 | Base algorithm | IQL |
-| Claimed robustness | Observation shift |
 | Shifted-env rollout | No |
 | Adversarial network | Yes |
 | Learned model | No |
@@ -705,10 +664,7 @@ RSC-IQL applies RSC's counterfactual rewriting to logged data. A causal mask ove
 
 | Feature | Value |
 |---|---|
-| Setting | Offline |
-| Family | Data-centric |
 | Base algorithm | IQL |
-| Claimed robustness | Semantic shift |
 | Shifted-env rollout | No |
 | Adversarial network | No |
 | Learned model | Yes |
@@ -739,7 +695,7 @@ python baselines/run_baseline.py \
 <p class="rl-badges"><span class="rl-badge rl-fam-data">Data-centric</span><span class="rl-badge rl-plain">Base · SAC</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 <p class="rl-book-tagline">Model rollouts from an ensemble that is trained adversarially against the policy.</p>
 
-RAMBO augments the dataset with short rollouts from a learned dynamics ensemble and replaces the uncertainty penalty by adversarial training of the model. The ensemble is updated to lower the critic's value of the policy's transitions while a maximum-likelihood term keeps it close to the data. The policy is behaviour-cloned before the first epoch.
+RAMBO augments the dataset with short rollouts from a learned dynamics ensemble and replaces the uncertainty penalty by adversarial training of the model.
 
 <p class="rl-book-paper" markdown><b>Original paper</b>Rigter et al. *RAMBO-RL: Robust Adversarial Model-Based Offline Reinforcement Learning*. NeurIPS, 2022.</p>
 
@@ -751,10 +707,7 @@ RAMBO augments the dataset with short rollouts from a learned dynamics ensemble 
 
 | Feature | Value |
 |---|---|
-| Setting | Offline |
-| Family | Data-centric |
 | Base algorithm | SAC |
-| Claimed robustness | Dynamic shift |
 | Shifted-env rollout | No |
 | Adversarial network | Yes |
 | Learned model | Yes |
@@ -784,7 +737,7 @@ python baselines/rambo/train_rambo.py \
 <p class="rl-badges"><span class="rl-badge rl-fam-generative">Data-centric · generative</span><span class="rl-badge rl-plain">Base · IQL</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 <p class="rl-book-tagline">A world model adapted against the policy under a constrained maximin objective.</p>
 
-ROMB adapts a learned world model against the policy under a constrained maximin objective. The model is pushed toward transitions that lower the policy's value while a supervised loss keeps it on the data, and the policy is trained on rollouts from the adapted model.
+ROMB adapts a learned world model against the policy under a constrained maximin objective.
 
 <p class="rl-book-paper" markdown><b>Original paper</b>Chen et al. *Policy-Driven World Model Adaptation for Robust Offline Model-based Reinforcement Learning*. arXiv:2505.13709, 2025.</p>
 
@@ -796,10 +749,7 @@ ROMB adapts a learned world model against the policy under a constrained maximin
 
 | Feature | Value |
 |---|---|
-| Setting | Offline |
-| Family | Data-centric · generative |
 | Base algorithm | IQL |
-| Claimed robustness | Dynamic shift |
 | Shifted-env rollout | No |
 | Adversarial network | Yes |
 | Learned model | Yes |
@@ -829,7 +779,7 @@ python baselines/run_baseline.py \
 <p class="rl-badges"><span class="rl-badge rl-fam-generative">Data-centric · generative</span><span class="rl-badge rl-plain">Base · IQL</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 <p class="rl-book-tagline">Multi-step critic targets whose future is sampled from a flow-matching world model.</p>
 
-FWM transfers the multi-step future modelling of the Diffusion World Model to a flow-matching world model. Instead of a one-step bootstrap, the critic regresses a multi-step return whose future is sampled from the generative model, conditioned on the current state, action and return-to-go. The replacement is confined to how that future is produced.
+FWM transfers the multi-step future modelling of the Diffusion World Model to a flow-matching world model.
 
 <p class="rl-book-paper" markdown><b>Original paper</b>Ding et al. *Diffusion World Model: Future Modeling Beyond Step-by-Step Rollout for Offline Reinforcement Learning*. arXiv:2402.03570, 2024.</p>
 
@@ -841,10 +791,7 @@ FWM transfers the multi-step future modelling of the Diffusion World Model to a 
 
 | Feature | Value |
 |---|---|
-| Setting | Offline |
-| Family | Data-centric · generative |
 | Base algorithm | IQL |
-| Claimed robustness | Dynamic shift |
 | Shifted-env rollout | No |
 | Adversarial network | No |
 | Learned model | Yes |
@@ -892,10 +839,7 @@ PLR-PVL trains a collection of world models consistent with the offline data, tr
 
 | Feature | Value |
 |---|---|
-| Setting | Offline |
-| Family | Data-centric · generative |
 | Base algorithm | IQL |
-| Claimed robustness | Dynamic shift |
 | Shifted-env rollout | No |
 | Adversarial network | No |
 | Learned model | Yes |
@@ -932,7 +876,7 @@ python baselines/run_baseline.py \
 <p class="rl-badges"><span class="rl-badge rl-fam-safe">Robust safe</span><span class="rl-badge rl-plain">Base · PPO</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 <p class="rl-book-tagline">A risk measure over sampled next-state perturbations, applied to reward and cost targets.</p>
 
-RAMU applies a risk measure over sampled next-state perturbations to both the reward and the cost targets. The original method is defined for TD learners; the library's row is a PPO adaptation that applies the same transform to PPO's value targets.
+RAMU applies a risk measure over sampled next-state perturbations to both the reward and the cost targets.
 
 <p class="rl-book-paper" markdown><b>Original paper</b>Queeney and Benosman *Risk-Averse Model Uncertainty for Distributionally Robust Safe Reinforcement Learning*. NeurIPS, 2023.</p>
 
@@ -944,10 +888,7 @@ RAMU applies a risk measure over sampled next-state perturbations to both the re
 
 | Feature | Value |
 |---|---|
-| Setting | Online, with a cost constraint |
-| Family | Robust safe |
 | Base algorithm | PPO |
-| Claimed robustness | Dynamic shift |
 | Shifted-env rollout | No |
 | Adversarial network | No |
 | Learned model | No |
@@ -973,7 +914,7 @@ Trained and evaluated with the Isaac Lab recipe, on the PPO implementation that 
 <p class="rl-badges"><span class="rl-badge rl-fam-safe">Robust safe</span><span class="rl-badge rl-plain">Base · PPO</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 <p class="rl-book-tagline">Constrained learning under domain randomisation with a pessimistic cost penalty.</p>
 
-SPiDR trains a constrained policy under domain randomisation and adds a pessimistic cost penalty proportional to the disagreement of next-state predictions across sampled dynamics. It runs with the original solver and a joint-limit cost budget.
+SPiDR trains a constrained policy under domain randomisation and adds a pessimistic cost penalty proportional to the disagreement of next-state predictions across sampled dynamics.
 
 <p class="rl-book-paper" markdown><b>Original paper</b>As et al. *SPiDR: A Simple Approach for Zero-Shot Safety in Sim-to-Real Transfer*. NeurIPS, 2026.</p>
 
@@ -985,10 +926,7 @@ SPiDR trains a constrained policy under domain randomisation and adds a pessimis
 
 | Feature | Value |
 |---|---|
-| Setting | Online, with a cost constraint |
-| Family | Robust safe |
 | Base algorithm | PPO |
-| Claimed robustness | Dynamic shift |
 | Shifted-env rollout | Yes |
 | Adversarial network | No |
 | Learned model | Yes |

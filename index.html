@@ -191,19 +191,7 @@
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Offline</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Standard reference</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
-<td>—</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
 <td>—</td>
 </tr>
 <tr>
@@ -243,19 +231,7 @@ python<span class="w"> </span>baselines/iql/train_iql.py<span class="w"> </span>
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Offline</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Standard reference</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
-<td>—</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
 <td>—</td>
 </tr>
 <tr>
@@ -295,20 +271,8 @@ python<span class="w"> </span>baselines/td3bc/train_td3bc.py<span class="w"> </s
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Offline</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Standard reference</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>SAC</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>—</td>
 </tr>
 <tr>
 <td>Training budget</td>
@@ -347,20 +311,8 @@ python<span class="w"> </span>baselines/mopo/train_mopo.py<span class="w"> </spa
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Offline</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Standard reference</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>IQL</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>—</td>
 </tr>
 <tr>
 <td>Training budget</td>
@@ -406,19 +358,7 @@ python<span class="w"> </span>baselines/iql/train_iql.py<span class="w"> </span>
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Online</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Standard reference</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
-<td>—</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
 <td>—</td>
 </tr>
 <tr>
@@ -458,19 +398,7 @@ python<span class="w"> </span>examples/robust_v2/run_experiment.py<span class="w
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Online</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Standard reference</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
-<td>—</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
 <td>—</td>
 </tr>
 <tr>
@@ -495,7 +423,7 @@ python<span class="w"> </span>examples/robust_v2/run_experiment.py<span class="w
 <p class="rl-book-title">Alternating Training with Learned Adversaries</p>
 <p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · PPO</span><span class="rl-badge rl-plain">Claims · observation shift</span></p>
 <p class="rl-book-tagline">A policy trained against an observation adversary that is itself an RL agent.</p>
-<p>ATLA trains a policy against an <em>optimal</em> observation adversary in the state-adversarial MDP. The adversary is itself an RL agent that outputs a bounded perturbation of the observation, is rewarded by the protagonist's negative return, and is updated in alternation with the protagonist.</p>
+<p>ATLA trains a policy against an <em>optimal</em> observation adversary in the state-adversarial MDP.</p>
 <p class="rl-book-paper"><b>Original paper</b>Zhang et al. <em>Robust Reinforcement Learning on State Observations with Learned Optimal Adversary</em>. ICLR, 2021.</p>
 <p class="rl-book-folio">15</p>
 </div>
@@ -510,20 +438,8 @@ python<span class="w"> </span>examples/robust_v2/run_experiment.py<span class="w
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Online</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Learner-centric</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>PPO</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Observation shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -559,7 +475,7 @@ python<span class="w"> </span>baselines/atla/train_atla.py<span class="w"> </spa
 <p class="rl-book-title">ATLA with state-adversarial regularisation and a recurrent policy</p>
 <p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · PPO</span><span class="rl-badge rl-plain">Claims · observation shift</span></p>
 <p class="rl-book-tagline">ATLA plus a state-adversarial KL regulariser and a 100-step recurrent policy.</p>
-<p>ATLA-SA adds the SA-PPO regulariser to ATLA: a KL penalty between the policy at a state and at the worst-case neighbour found by stochastic gradient Langevin dynamics. It also uses a recurrent (LSTM) policy with a 100-step history, so that the agent can infer a persistent perturbation from context.</p>
+<p>ATLA-SA adds the SA-PPO regulariser to ATLA: a KL penalty between the policy at a state and at the worst-case neighbour found by stochastic gradient Langevin dynamics.</p>
 <p class="rl-book-paper"><b>Original paper</b>Zhang et al. <em>Robust Reinforcement Learning on State Observations with Learned Optimal Adversary</em>. ICLR, 2021.</p>
 <p class="rl-book-folio">17</p>
 </div>
@@ -574,20 +490,8 @@ python<span class="w"> </span>baselines/atla/train_atla.py<span class="w"> </spa
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Online</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Learner-centric</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>PPO (LSTM policy)</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Observation shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -624,7 +528,7 @@ python<span class="w"> </span>baselines/atla/train_atla.py<span class="w"> </spa
 <p class="rl-book-title">Robust RL against Spurious Correlation</p>
 <p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · SAC</span><span class="rl-badge rl-plain">Claims · semantic shift</span></p>
 <p class="rl-book-tagline">Causal counterfactual replay that removes correlations a policy would exploit.</p>
-<p>RSC learns a causal graph and a dynamics model over the state variables from replayed experience, then generates counterfactual transitions by intervening on the variables the graph marks as non-causal for the reward. Mixing these into replay removes the spurious correlations a policy would otherwise exploit.</p>
+<p>RSC learns a causal graph and a dynamics model over the state variables from replayed experience, then generates counterfactual transitions by intervening on the variables the graph marks as non-causal for the reward.</p>
 <p class="rl-book-paper"><b>Original paper</b>Ding et al. <em>Seeing is not Believing: Robust Reinforcement Learning against Spurious Correlation</em>. NeurIPS, 2023.</p>
 <p class="rl-book-folio">19</p>
 </div>
@@ -639,20 +543,8 @@ python<span class="w"> </span>baselines/atla/train_atla.py<span class="w"> </spa
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Online</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Learner-centric</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>SAC</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Semantic shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -674,7 +566,8 @@ python<span class="w"> </span>baselines/atla/train_atla.py<span class="w"> </spa
 </table>
 <p class="rl-book-h">Run the method</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CFG</span><span class="o">=</span>robustrllib/configs/experiment
-python<span class="w"> </span>baselines/causaldro_online/train_causaldro.py<span class="w"> </span><span class="se">\</span>
+python<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>baselines/causaldro_online/train_causaldro.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--config<span class="w"> </span><span class="nv">$CFG</span>/causaldro_online_hopper.yaml<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--seed<span class="w"> </span><span class="m">0</span>
 </code></pre></div>
@@ -704,20 +597,8 @@ python<span class="w"> </span>baselines/causaldro_online/train_causaldro.py<span
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Online</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Environment-centric</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>PPO / TRPO</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Dynamic shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -771,20 +652,8 @@ python<span class="w"> </span>baselines/rarl_hopper/train.py<span class="w"> </s
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Online</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Environment-centric</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>SAC / PPO</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Dynamic shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -821,7 +690,7 @@ python<span class="w"> </span>baselines/dr/train_dr.py<span class="w"> </span><s
 <p class="rl-book-title">Robust Fitted Q-Iteration</p>
 <p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · FQI</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 <p class="rl-book-tagline">Worst-case Bellman update over a total-variation uncertainty set.</p>
-<p>RFQI replaces the fitted-Q target by a worst-case Bellman backup over a total-variation uncertainty set of a fixed radius around the empirical transitions. The inner maximisation is solved through a dual variable fitted per batch, and the actor and critic follow the BCQ-style architecture of the original release.</p>
+<p>RFQI replaces the fitted-Q target by a worst-case Bellman backup over a total-variation uncertainty set of a fixed radius around the empirical transitions.</p>
 <p class="rl-book-paper"><b>Original paper</b>Panaganti et al. <em>Robust Reinforcement Learning using Offline Data</em>. NeurIPS, 2022.</p>
 <p class="rl-book-folio">25</p>
 </div>
@@ -836,20 +705,8 @@ python<span class="w"> </span>baselines/dr/train_dr.py<span class="w"> </span><s
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Offline</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Learner-centric</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>FQI</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Dynamic shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -885,7 +742,7 @@ python<span class="w"> </span>baselines/rfqi/train_rfqi.py<span class="w"> </spa
 <p class="rl-book-title">Robust Offline RL via Conservative Smoothing</p>
 <p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · SAC</span><span class="rl-badge rl-plain">Claims · observation shift</span></p>
 <p class="rl-book-tagline">Local policy and value smoothing, with an ensemble penalty at perturbed states.</p>
-<p>RORL makes an SAC learner conservative through smoothing. The critic and the policy are regularised to vary little within a small ball around dataset states, and Q-values at perturbed states are penalised by the disagreement of a ten-critic ensemble.</p>
+<p>RORL makes an SAC learner conservative through smoothing.</p>
 <p class="rl-book-paper"><b>Original paper</b>Yang et al. <em>RORL: Robust Offline Reinforcement Learning via Conservative Smoothing</em>. NeurIPS, 2022.</p>
 <p class="rl-book-folio">27</p>
 </div>
@@ -900,20 +757,8 @@ python<span class="w"> </span>baselines/rfqi/train_rfqi.py<span class="w"> </spa
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Offline</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Learner-centric</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>SAC</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Observation shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -949,7 +794,7 @@ python<span class="w"> </span>baselines/rorl/train_rorl.py<span class="w"> </spa
 <p class="rl-book-title">Offline adaptation of ATLA on an IQL backbone</p>
 <p class="rl-badges"><span class="rl-badge rl-fam-learner">Learner-centric</span><span class="rl-badge rl-plain">Base · IQL</span><span class="rl-badge rl-plain">Claims · observation shift</span></p>
 <p class="rl-book-tagline">A learned observation adversary, trained through the critic instead of by RL.</p>
-<p>The offline adaptation keeps ATLA's principle, a learned observation adversary alternated with the learner. Since no environment is available, the adversary is not trained by RL: it is trained by a differentiable objective on the critic, minimising the minimum Q-value at the policy's action under the perturbed state.</p>
+<p>The offline adaptation keeps ATLA's principle, a learned observation adversary alternated with the learner.</p>
 <p class="rl-book-paper"><b>Original paper</b>Zhang et al. <em>Robust Reinforcement Learning on State Observations with Learned Optimal Adversary</em>. ICLR, 2021.</p>
 <p class="rl-book-folio">29</p>
 </div>
@@ -964,20 +809,8 @@ python<span class="w"> </span>baselines/rorl/train_rorl.py<span class="w"> </spa
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Offline</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Learner-centric</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>IQL</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Observation shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -1029,20 +862,8 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Offline</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Data-centric</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>IQL</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Semantic shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -1079,7 +900,7 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
 <p class="rl-book-title">Robust Adversarial Model-Based Offline RL</p>
 <p class="rl-badges"><span class="rl-badge rl-fam-data">Data-centric</span><span class="rl-badge rl-plain">Base · SAC</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 <p class="rl-book-tagline">Model rollouts from an ensemble that is trained adversarially against the policy.</p>
-<p>RAMBO augments the dataset with short rollouts from a learned dynamics ensemble and replaces the uncertainty penalty by adversarial training of the model. The ensemble is updated to lower the critic's value of the policy's transitions while a maximum-likelihood term keeps it close to the data. The policy is behaviour-cloned before the first epoch.</p>
+<p>RAMBO augments the dataset with short rollouts from a learned dynamics ensemble and replaces the uncertainty penalty by adversarial training of the model.</p>
 <p class="rl-book-paper"><b>Original paper</b>Rigter et al. <em>RAMBO-RL: Robust Adversarial Model-Based Offline Reinforcement Learning</em>. NeurIPS, 2022.</p>
 <p class="rl-book-folio">33</p>
 </div>
@@ -1094,20 +915,8 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Offline</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Data-centric</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>SAC</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Dynamic shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -1143,7 +952,7 @@ python<span class="w"> </span>baselines/rambo/train_rambo.py<span class="w"> </s
 <p class="rl-book-title">Policy-driven world-model adaptation</p>
 <p class="rl-badges"><span class="rl-badge rl-fam-generative">Data-centric · generative</span><span class="rl-badge rl-plain">Base · IQL</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 <p class="rl-book-tagline">A world model adapted against the policy under a constrained maximin objective.</p>
-<p>ROMB adapts a learned world model against the policy under a constrained maximin objective. The model is pushed toward transitions that lower the policy's value while a supervised loss keeps it on the data, and the policy is trained on rollouts from the adapted model.</p>
+<p>ROMB adapts a learned world model against the policy under a constrained maximin objective.</p>
 <p class="rl-book-paper"><b>Original paper</b>Chen et al. <em>Policy-Driven World Model Adaptation for Robust Offline Model-based Reinforcement Learning</em>. arXiv:2505.13709, 2025.</p>
 <p class="rl-book-folio">35</p>
 </div>
@@ -1158,20 +967,8 @@ python<span class="w"> </span>baselines/rambo/train_rambo.py<span class="w"> </s
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Offline</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Data-centric · generative</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>IQL</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Dynamic shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -1207,7 +1004,7 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
 <p class="rl-book-title">Flow-matching World Model</p>
 <p class="rl-badges"><span class="rl-badge rl-fam-generative">Data-centric · generative</span><span class="rl-badge rl-plain">Base · IQL</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 <p class="rl-book-tagline">Multi-step critic targets whose future is sampled from a flow-matching world model.</p>
-<p>FWM transfers the multi-step future modelling of the Diffusion World Model to a flow-matching world model. Instead of a one-step bootstrap, the critic regresses a multi-step return whose future is sampled from the generative model, conditioned on the current state, action and return-to-go. The replacement is confined to how that future is produced.</p>
+<p>FWM transfers the multi-step future modelling of the Diffusion World Model to a flow-matching world model.</p>
 <p class="rl-book-paper"><b>Original paper</b>Ding et al. <em>Diffusion World Model: Future Modeling Beyond Step-by-Step Rollout for Offline Reinforcement Learning</em>. arXiv:2402.03570, 2024.</p>
 <p class="rl-book-folio">37</p>
 </div>
@@ -1222,20 +1019,8 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Offline</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Data-centric · generative</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>IQL</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Dynamic shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -1292,20 +1077,8 @@ python<span class="w"> </span>baselines/fwm_iql/train_fwm_iql.py<span class="w">
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Offline</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Data-centric · generative</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>IQL</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Dynamic shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -1348,7 +1121,7 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
 <p class="rl-book-title">Risk-Averse Model Uncertainty</p>
 <p class="rl-badges"><span class="rl-badge rl-fam-safe">Robust safe</span><span class="rl-badge rl-plain">Base · PPO</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 <p class="rl-book-tagline">A risk measure over sampled next-state perturbations, applied to reward and cost targets.</p>
-<p>RAMU applies a risk measure over sampled next-state perturbations to both the reward and the cost targets. The original method is defined for TD learners; the library's row is a PPO adaptation that applies the same transform to PPO's value targets.</p>
+<p>RAMU applies a risk measure over sampled next-state perturbations to both the reward and the cost targets.</p>
 <p class="rl-book-paper"><b>Original paper</b>Queeney and Benosman <em>Risk-Averse Model Uncertainty for Distributionally Robust Safe Reinforcement Learning</em>. NeurIPS, 2023.</p>
 <p class="rl-book-folio">41</p>
 </div>
@@ -1363,20 +1136,8 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Online, with a cost constraint</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Robust safe</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>PPO</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Dynamic shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>
@@ -1409,7 +1170,7 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
 <p class="rl-book-title">Zero-shot safety under domain randomisation</p>
 <p class="rl-badges"><span class="rl-badge rl-fam-safe">Robust safe</span><span class="rl-badge rl-plain">Base · PPO</span><span class="rl-badge rl-plain">Claims · dynamic shift</span></p>
 <p class="rl-book-tagline">Constrained learning under domain randomisation with a pessimistic cost penalty.</p>
-<p>SPiDR trains a constrained policy under domain randomisation and adds a pessimistic cost penalty proportional to the disagreement of next-state predictions across sampled dynamics. It runs with the original solver and a joint-limit cost budget.</p>
+<p>SPiDR trains a constrained policy under domain randomisation and adds a pessimistic cost penalty proportional to the disagreement of next-state predictions across sampled dynamics.</p>
 <p class="rl-book-paper"><b>Original paper</b>As et al. <em>SPiDR: A Simple Approach for Zero-Shot Safety in Sim-to-Real Transfer</em>. NeurIPS, 2026.</p>
 <p class="rl-book-folio">43</p>
 </div>
@@ -1424,20 +1185,8 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
 </thead>
 <tbody>
 <tr>
-<td>Setting</td>
-<td>Online, with a cost constraint</td>
-</tr>
-<tr>
-<td>Family</td>
-<td>Robust safe</td>
-</tr>
-<tr>
 <td>Base algorithm</td>
 <td>PPO</td>
-</tr>
-<tr>
-<td>Claimed robustness</td>
-<td>Dynamic shift</td>
 </tr>
 <tr>
 <td>Shifted-env rollout</td>

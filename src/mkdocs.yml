@@ -11,16 +11,13 @@ docs_dir: content
 site_dir: ../docs
 use_directory_urls: true
 
+# The theme is the site's own, in theme/: the pages on the left, the text in the middle,
+# the sections of the page on the right. It loads nothing from outside the site.
 theme:
-  name: readthedocs          # the Read the Docs theme, same stylesheet as the Sphinx one
-  custom_dir: theme          # footer without outbound links, noindex
-  highlightjs: false         # code is highlighted at build time; no script from a CDN
-  navigation_depth: 4
-  collapse_navigation: true
-  sticky_navigation: true
-  titles_only: false          # the sidebar lists the sections of the current page
-  include_homepage_in_sidebar: true
-  prev_next_buttons_location: bottom
+  name: null
+  custom_dir: theme
+  static_templates:
+    - 404.html
 
 extra_css:
   - assets/pygments.css
@@ -52,7 +49,7 @@ nav:
       - Quick Start: getting-started/quick-start.md
   - Algorithms:
       - All Methods: algorithms/index.md
-      - Standard Algorithms:
+      - Standard:
           - Overview: algorithms/standard/index.md
           - IQL: algorithms/standard/iql.md
           - TD3+BC: algorithms/standard/td3bc.md
@@ -60,14 +57,14 @@ nav:
           - SynthER: algorithms/standard/synther.md
           - PPO: algorithms/standard/ppo.md
           - SAC: algorithms/standard/sac.md
-      - Robust Online Algorithms:
+      - Robust Online:
           - Overview: algorithms/robust-online/index.md
           - ATLA: algorithms/robust-online/atla.md
           - ATLA-SA: algorithms/robust-online/atla-sa.md
           - RSC: algorithms/robust-online/rsc.md
           - RARL: algorithms/robust-online/rarl.md
           - DR: algorithms/robust-online/dr.md
-      - Robust Offline Algorithms:
+      - Robust Offline:
           - Overview: algorithms/robust-offline/index.md
           - RFQI: algorithms/robust-offline/rfqi.md
           - RORL: algorithms/robust-offline/rorl.md
@@ -77,7 +74,7 @@ nav:
           - ROMB: algorithms/robust-offline/romb.md
           - FWM: algorithms/robust-offline/fwm.md
           - PLR-PVL: algorithms/robust-offline/plr-pvl.md
-      - Robust Safe Algorithms:
+      - Robust Safe:
           - Overview: algorithms/robust-safe/index.md
           - RAMU: algorithms/robust-safe/ramu.md
           - SPiDR: algorithms/robust-safe/spidr.md

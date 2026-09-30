@@ -214,6 +214,17 @@ def wrap_command(cmd, width=78):
 CONFIG_DIR = "robustrllib/configs/experiment"
 
 
+def opening(text, limit=240):
+    """The first sentences of a paragraph, as many as fit in `limit` characters."""
+    sentences = re.split(r"(?<=[.!?])\s+(?=[A-Z])", text)
+    out = sentences[0]
+    for s in sentences[1:]:
+        if len(out) + 1 + len(s) > limit:
+            break
+        out += " " + s
+    return out
+
+
 def wrap_book(run, width=46):
     """The commands of a method, set for the narrow column of a page of the book.
 
@@ -236,6 +247,9 @@ def wrap_book(run, width=46):
                 units.append([tok])
             else:
                 units[-1].append(tok)
+        # a program with a long path: the path goes on a line of its own
+        if len(units[0]) > 1 and len(" ".join(units[0])) + 2 > width:
+            units[:1] = [units[0][:1], units[0][1:]]
         lines = []
         for unit in (" ".join(u) for u in units):
             if lines and len(lines[-1]) + 1 + len(unit) + 2 <= width and len(lines) > 1:
@@ -471,7 +485,7 @@ def book(spec, refs, page=None, script="../assets/book.js"):
         members = [x for x in algos if group_of(x) == grp]
         label = f"{GROUP_SHORT[grp]} · {members.index(a) + 1} of {len(members)}"
         lead = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", a["mechanism"].split("\n\n")[0])
-        lead = " ".join(lead.split())
+        lead = opening(" ".join(lead.split()))
         badges = (fam_badge(a, fam, short=False)
                   + (badge("plain", f"Base · {a['base']}") if a.get("base") else "")
                   + (badge("plain", f"Claims · {CLAIMED[a['claimed']].lower()}")
@@ -490,8 +504,8 @@ def book(spec, refs, page=None, script="../assets/book.js"):
         base = a.get("base") or "—"
         if a.get("base_note"):
             base += f" ({a['base_note']})"
-        rows = [("Setting", SETTING[a["regime"]]), ("Family", fam[a["family"]]["label"]),
-                ("Base algorithm", base), ("Claimed robustness", CLAIMED[a["claimed"]])]
+        # The setting, the family and the claimed shift are on the badges of the left page.
+        rows = [("Base algorithm", base)]
         if grp != "standard":
             t = a["traits"]
             rows += [("Shifted-env rollout", yes(t["rollout"])),

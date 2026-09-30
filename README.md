@@ -18,7 +18,7 @@ The site has two parts that share one colour system:
 ├── assets/                   # landing page style and its two figures
 ├── docs/                     # BUILT documentation. Never edit by hand.
 └── src/
-    ├── mkdocs.yml            # navigation and theme (Read the Docs theme)
+    ├── mkdocs.yml            # navigation, Markdown extensions
     ├── requirements.txt
     ├── content/              # Markdown pages
     │   ├── index.md              # documentation home
@@ -42,7 +42,7 @@ The site has two parts that share one colour system:
     │   ├── algorithms.yaml   # one record per algorithm: the single source of truth
     │   ├── references.yaml   # original papers
     │   └── results/          # frozen result table that every number is computed from
-    ├── theme/                # template overrides: footer, noindex
+    ├── theme/                # the site's own theme: main.html, 404.html, css/, js/, fonts/
     └── tools/
         ├── gen_algorithms.py # data -> method pages, group overviews, algorithm book
         ├── sync_landing.py   # data -> algorithm book on the landing page
@@ -52,6 +52,15 @@ The site has two parts that share one colour system:
         ├── make_preview.py   # a copy of the site that opens from disk
         └── build.sh          # generate, sync, build, scan
 ```
+
+## Theme
+
+The documentation has a theme of its own (`src/theme/`), in the form of the Gymnasium
+documentation: a bar across the top, the pages on a grey ground on the left, the text in
+the middle, the sections of the current page on the right. The window widths at which the
+side columns move behind buttons are in `css/site.css`. The theme loads nothing from outside
+the site: system fonts, and the icon font and the book's typeface are in `theme/fonts/`.
+The search is MkDocs' own, in a dialog that opens from the field on the left or with Ctrl+K.
 
 ## Page form
 
