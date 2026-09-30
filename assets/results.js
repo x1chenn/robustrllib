@@ -9,12 +9,15 @@
   var DATA;
   try { DATA = JSON.parse(node.textContent); } catch (e) { return; }
 
-  // ---- colours: validated categorical slots (see WEBSITE.md); text never wears them
-  var FAMILY_COLOR = { standard: "#87867f", learner_on: "#3a7bbf", data_on: "#5f9a3f",
-                       learner_off: "#7b5cc4", data_off: "#2a9d8f", generative: "#d0524f" };
-  var CELL_COLOR = { nominal: "#87867f", theta_p: "#2a78d6", theta_a: "#eb6834", theta_tau: "#1baf7a",
-                     theta_o: "#eda100", theta_z: "#e87ba4", compound: "#4a3aa7" };
-  var ACCENT = "#3a7bbf", GRAY = "#87867f", INK = "#141413", MUTED = "#5e5d59", FAINT = "#87867f",
+  // ---- colours: the families in the tints of the paper's figures (its base colours
+  //      blended 22 % towards white); pale, so every bar also carries its family in
+  //      text, its value beside it, and a table twin. Text never wears a data colour.
+  var FAMILY_COLOR = { standard: "#b7b7b7", learner_on: "#bcd6eb", data_on: "#b3e1da",
+                       learner_off: "#d5c8ed", data_off: "#cde4be", generative: "#eb8787" };
+  // the cells of the compound scenarios: the same pale key, one tint per shift
+  var CELL_COLOR = { nominal: "#b7b7b7", theta_p: "#6aa0e2", theta_a: "#f08e67", theta_tau: "#76cfaf",
+                     theta_o: "#f2b840", theta_z: "#ee9cbb", compound: "#897fc6" };
+  var GRAY = "#b7b7b7", INK = "#141413", MUTED = "#5e5d59", FAINT = "#87867f",
       GRID = "#e8e6dc", AXIS = "#c2c0b6", SURFACE = "#faf9f5";
   var NS = "http://www.w3.org/2000/svg";
 
@@ -354,14 +357,15 @@
       var semantic = state.view === "paper:theta_z";
       mount(host, controls, describe(state.view), function () {
         var wrap = el("div", { class: "viz-chart" });
-        wrap.appendChild(legend([{ color: ACCENT, label: "Robust method" }, { color: GRAY, label: "Standard reference" }].concat(semantic ? [] : [{ tick: true, label: "Nominal (no shift)" }, { color: null, label: "— ± sd across seeds" }])));
+        var present = DATA.library.families.filter(function (f) { return rows.some(function (e) { return e.rec.family === f.key; }); });
+        wrap.appendChild(legend(present.map(function (f) { return { color: FAMILY_COLOR[f.key], label: f.label }; }).concat(semantic ? [] : [{ tick: true, label: "Nominal (no shift)" }, { color: null, label: "— ± sd across seeds" }])));
         if (!rows.length) { wrap.appendChild(el("p", { class: "viz-empty", text: "No method has a value here." })); return wrap; }
         wrap.appendChild(barChart(rows.map(function (e) {
           var nom = semantic ? null : (P.nominal[e.mi] ? P.nominal[e.mi][0] : null);
           return { name: e.rec.name, sub: FAMILY_SHORT[e.rec.family], value: e.value, sd: e.sd, nominal: nom,
-                   color: e.rec.family === "standard" ? GRAY : ACCENT,
+                   color: FAMILY_COLOR[e.rec.family],
                    rows: function () { return [{ text: e.rec.name + " · " + familyOf(e.rec).label + " · " + e.rec.regime, strong: true },
-                                               { text: "Score " + fmt(e.value) + " ± " + fmt(e.sd) + " (n = " + e.n + ")", color: e.rec.family === "standard" ? GRAY : ACCENT },
+                                               { text: "Score " + fmt(e.value) + " ± " + fmt(e.sd) + " (n = " + e.n + ")", color: FAMILY_COLOR[e.rec.family] },
                                                nom === null ? null : { text: "Score " + fmt(nom) + " at nominal" }].filter(Boolean); } };
         }), { title: "Channel leaderboard: normalized score per method" }));
         return wrap;

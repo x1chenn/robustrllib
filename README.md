@@ -136,8 +136,10 @@ paper's channel scores and stops the build if they differ from `part2_channel_su
 on the same grids, read from the same evaluation files with the same normalization; the
 paper's tables show the robust methods only.
 
-The chart colours are categorical slots checked for colour-vision safety (the families in
-their fixed order; the shift cells in the order they appear); text never wears a data colour.
+The chart colours are the paper's: each family in the tint the paper's figures use, and the
+shift cells of the compound chart in the same pale key. Pale colours are hard to tell apart
+for some readers, so every bar also carries its family or cell in text, its value beside it,
+a legend, and the table twin; text never wears a data colour.
 
 ## Shift toolbox
 
