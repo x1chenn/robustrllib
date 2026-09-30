@@ -56,12 +56,7 @@
     var scene = document.getElementById("shift-loop-scene");
     if (!scene) { return; }
     var steps = parseInt(scene.getAttribute("data-steps") || "12", 10);
-    function flow() {
-      scene.classList.add("flow");
-      Array.prototype.forEach.call(scene.querySelectorAll("animateMotion"), function (a) {
-        try { a.beginElement(); } catch (e) { /* no SMIL: the packets stay put */ }
-      });
-    }
+    function flow() { scene.classList.add("flow"); }
     function play() {
       scene.classList.add("play");
       window.setTimeout(flow, steps * 260 + 700);
