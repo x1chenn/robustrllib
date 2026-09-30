@@ -197,6 +197,21 @@
 .rl-book-edge.rl-prev { left: 0; border-radius: 4px 0 0 4px; }
 .rl-book-edge.rl-next { right: 0; border-radius: 0 4px 4px 0; }
 
+/* the front cover: the face of the first leaf, shown while the book lies closed */
+.rl-book .rl-face.rl-cover { background: var(--rl-cover); }
+.rl-book .rl-cover-front {
+  height: 100%; box-sizing: border-box; padding: 24px 28px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  color: #faf9f5; border-left: 6px solid rgba(255, 255, 255, .08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, 0) 60%);
+}
+.rl-book .rl-cover-front p { margin: 0; }
+.rl-book .rl-cover-kicker { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; opacity: .72; margin-bottom: 12px !important; }
+.rl-book .rl-cover-title { font-family: "Roboto Slab", Georgia, serif; font-size: 36px; font-weight: 700; line-height: 1.1; margin-bottom: 10px !important; }
+.rl-book .rl-cover-sub { font-size: 14px; opacity: .8; margin-bottom: 22px !important; }
+.rl-book .rl-cover-blocks { display: flex; gap: 8px; }
+.rl-book .rl-cover-blocks i { display: block; width: 28px; height: 18px; border-radius: 4px; }
+
 @media (prefers-reduced-motion: reduce) {
   .rl-book .rl-leaf { transition: none; }
 }

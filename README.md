@@ -208,3 +208,7 @@ and publish only when it reports `clean`. The scan covers identity terms, machin
 paths, author metadata in figures and external URLs. The documentation configuration
 must not gain a repository link, an edit link, an author or copyright line, analytics,
 or any plugin that reads version-control history.
+
+## Motion
+
+Everything animates locally, nothing is fetched: sections come in as they scroll into view (`assets/landing.js`, `.reveal`), the five numbers count up, the algorithm book lies closed until it is in view and then opens (`data-open-on-view`, `book.js`), the loop of the six sources builds up from the agent and then flows (the inline SVG between the `shift-loop` markers of `index.html`; regenerate it with the generator kept outside this repository), and the chart bars grow when drawn. All of it is static under `prefers-reduced-motion: reduce`.

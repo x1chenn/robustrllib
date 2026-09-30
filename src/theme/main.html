@@ -74,6 +74,9 @@
   <meta name="description" content="{{ config.site_description }}">
   {%- endif %}
   <title>{% block title %}{% if page and page.title and not page.is_homepage %}{{ page.title|striptags }} - {% endif %}{{ config.site_name }}{% endblock %}</title>
+  <link rel="icon" type="image/svg+xml" href="{{ 'assets/favicon.svg'|url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/favicon-32.png'|url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ 'assets/apple-touch-icon.png'|url }}">
   <link rel="stylesheet" href="{{ 'css/site.css'|url }}">
   {%- for path in config.extra_css %}
   <link rel="stylesheet" href="{{ path|url }}">

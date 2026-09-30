@@ -339,3 +339,41 @@ footer::before { content: ""; display: block; max-width: 960px; margin: 0 auto 2
   .channels, .channels.five { grid-template-columns: 1fr; }
   .btn-row .btn { padding: 10px 16px; font-size: 14px; }
 }
+
+/* ---------------- motion: sections come in as they scroll into view ---------------- */
+.has-js .reveal {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .65s ease, transform .65s cubic-bezier(.2, .7, .2, 1);
+  transition-delay: calc(var(--d, 0) * 90ms);
+}
+.has-js .reveal.is-visible { opacity: 1; transform: none; }
+
+/* the charts grow when they are drawn */
+.viz-svg path.viz-fill { transform-box: fill-box; transform-origin: left center; animation: viz-grow .55s cubic-bezier(.2, .7, .2, 1) both; }
+.viz-svg .viz-col path.viz-fill { transform-origin: center bottom; animation-name: viz-rise; }
+@keyframes viz-grow { from { transform: scaleX(0); } }
+@keyframes viz-rise { from { transform: scaleY(0); } }
+
+/* the loop of the six sources: nodes, edges, tags and cards appear one step after
+   another (`--i`), then the packets travel along the edges */
+.loop-scene { max-width: 900px; margin: 0 auto; }
+.loop-scene svg { display: block; width: 100%; height: auto; font-family: inherit; }
+.loop-scene .ln, .loop-scene .lt, .loop-scene .lc {
+  opacity: 0; transform: translateY(10px); transform-box: fill-box;
+  transition: opacity .5s ease, transform .5s ease; transition-delay: calc(var(--i, 0) * .26s);
+}
+.loop-scene .le { opacity: 0; transition: opacity .45s ease; transition-delay: calc(var(--i, 0) * .26s); }
+.loop-scene .le path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .55s ease; transition-delay: calc(var(--i, 0) * .26s + .1s); }
+.loop-scene .le-dash path { stroke-dasharray: .028 .018; stroke-dashoffset: 0; }
+.loop-scene .lp { opacity: 0; transition: opacity .6s ease; }
+.loop-scene.play .ln, .loop-scene.play .lt, .loop-scene.play .lc { opacity: 1; transform: none; }
+.loop-scene.play .le { opacity: 1; }
+.loop-scene.play .le path { stroke-dashoffset: 0; }
+.loop-scene.flow .lp { opacity: 1; }
+.loop-scene.still .lp { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .has-js .reveal { opacity: 1; transform: none; transition: none; }
+  .viz-svg path.viz-fill { animation: none; }
+  .loop-scene .ln, .loop-scene .lt, .loop-scene .lc, .loop-scene .le, .loop-scene .le path, .loop-scene .lp { transition: none; }
+}

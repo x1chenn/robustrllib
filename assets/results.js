@@ -127,7 +127,7 @@
       } else {
         d = "M" + x1 + " " + y0 + "h-" + Math.max(0, w - r) + "a" + r + " " + r + " 0 0 0 -" + r + " " + r + "v" + (h - 2 * r) + "a" + r + " " + r + " 0 0 0 " + r + " " + r + "h" + Math.max(0, w - r) + "z";
       }
-      g.appendChild(sv("path", { d: d, fill: e.color }));
+      g.appendChild(sv("path", { d: d, fill: e.color, class: "viz-fill" }));
       if (e.sd) {
         g.appendChild(sv("line", { x1: x(e.value - e.sd), x2: x(e.value + e.sd), y1: y0 + h / 2, y2: y0 + h / 2, stroke: INK, "stroke-opacity": .45, "stroke-width": 1.5 }));
       }
@@ -171,7 +171,7 @@
         var d = v.value >= 0
           ? "M" + x + " " + (yb + h) + "v-" + Math.max(0, h - r) + "a" + r + " " + r + " 0 0 1 " + r + " -" + r + "h" + (barW - 2 * r) + "a" + r + " " + r + " 0 0 1 " + r + " " + r + "v" + Math.max(0, h - r) + "z"
           : "M" + x + " " + yb + "v" + Math.max(0, h - r) + "a" + r + " " + r + " 0 0 0 " + r + " " + r + "h" + (barW - 2 * r) + "a" + r + " " + r + " 0 0 0 " + r + " -" + r + "v-" + Math.max(0, h - r) + "z";
-        grp.appendChild(sv("path", { d: d, fill: s.color }));
+        grp.appendChild(sv("path", { d: d, fill: s.color, class: "viz-fill" }));
         if (v.sd) {
           grp.appendChild(sv("line", { x1: x + barW / 2, x2: x + barW / 2, y1: y(v.value - v.sd), y2: y(v.value + v.sd), stroke: INK, "stroke-opacity": .45, "stroke-width": 1.5 }));
         }

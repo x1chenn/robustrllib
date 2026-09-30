@@ -1,6 +1,77 @@
-/* The project page: the shift toolbox, and the buttons that lead nowhere yet. */
+/* The project page: the sections that come in as they scroll into view, the counted
+   numbers, the loop of the six sources, the shift toolbox, and the buttons that lead
+   nowhere yet. */
 (function () {
   "use strict";
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var observe = window.IntersectionObserver && !reduced;
+  document.documentElement.classList.add("has-js");
+
+  // ---- every block of a section comes in when it scrolls into view, one after another
+  (function () {
+    var wraps = document.querySelectorAll("section > .wrap, .hero");
+    var items = [];
+    Array.prototype.forEach.call(wraps, function (wrap) {
+      var i = 0;
+      Array.prototype.forEach.call(wrap.children, function (child) {
+        if (child.matches("script, style, .rl-book, [data-no-reveal]")) { return; }
+        child.classList.add("reveal");
+        child.style.setProperty("--d", String(Math.min(i, 6)));
+        items.push(child);
+        i += 1;
+      });
+    });
+    if (!observe) { items.forEach(function (el) { el.classList.add("is-visible"); }); return; }
+    var io = new window.IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add("is-visible"); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -36px 0px" });
+    items.forEach(function (el) { io.observe(el); });
+  }());
+
+  // ---- the five numbers count up once
+  (function () {
+    var nums = document.querySelectorAll("[data-count]");
+    if (!nums.length) { return; }
+    function run(el) {
+      var target = parseInt(el.getAttribute("data-count"), 10), t0 = null, dur = 1100;
+      function step(ts) {
+        if (t0 === null) { t0 = ts; }
+        var p = Math.min((ts - t0) / dur, 1), eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = String(Math.round(eased * target));
+        if (p < 1) { window.requestAnimationFrame(step); } else { el.textContent = String(target); }
+      }
+      window.requestAnimationFrame(step);
+    }
+    if (!observe) { return; }
+    var io = new window.IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) { if (entry.isIntersecting) { run(entry.target); io.unobserve(entry.target); } });
+    }, { threshold: 0.5 });
+    Array.prototype.forEach.call(nums, function (n) { io.observe(n); });
+  }());
+
+  // ---- the loop of the six sources: the chain appears from the agent on, then flows
+  (function () {
+    var scene = document.getElementById("shift-loop-scene");
+    if (!scene) { return; }
+    var steps = parseInt(scene.getAttribute("data-steps") || "12", 10);
+    function flow() {
+      scene.classList.add("flow");
+      Array.prototype.forEach.call(scene.querySelectorAll("animateMotion"), function (a) {
+        try { a.beginElement(); } catch (e) { /* no SMIL: the packets stay put */ }
+      });
+    }
+    function play() {
+      scene.classList.add("play");
+      window.setTimeout(flow, steps * 260 + 700);
+    }
+    if (!observe) { scene.classList.add("play", "still"); return; }
+    var io = new window.IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); play(); }
+    }, { threshold: 0.25 });
+    io.observe(scene);
+  }());
 
   // ---- links that are not live yet shake instead of leaving the page
   document.querySelectorAll("[data-blocked]").forEach(function (el) {

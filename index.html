@@ -6,6 +6,9 @@
 <title>RobustRLlib: A Unified Library and Benchmark for Robust Reinforcement Learning Algorithms</title>
 <meta name="description" content="RobustRLlib is an algorithm-centric library and benchmark for robust reinforcement learning: 22 algorithms behind one interface, evaluated under six shift sources and five modes. Anonymous submission.">
 <meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="docs/assets/pygments.css">
 <link rel="stylesheet" href="docs/assets/book.css">
@@ -144,11 +147,11 @@
   </div>
 
   <ul class="stats" aria-label="The benchmark in numbers">
-    <li><b>22</b><span>algorithms</span></li>
-    <li><b>16</b><span>robust methods</span></li>
-    <li><b>6</b><span>shift sources</span></li>
-    <li><b>5</b><span>shift modes</span></li>
-    <li><b>273</b><span>configurations</span></li>
+    <li><b data-count="22">22</b><span>algorithms</span></li>
+    <li><b data-count="16">16</b><span>robust methods</span></li>
+    <li><b data-count="6">6</b><span>shift sources</span></li>
+    <li><b data-count="5">5</b><span>shift modes</span></li>
+    <li><b data-count="273">273</b><span>configurations</span></li>
   </ul>
 </header>
 
@@ -230,7 +233,7 @@
     <p class="sub">The labels on the edge of the book open the four groups: standard, robust online, robust offline and robust safe.</p>
 
 <!-- algo-book:start -->
-<div class="rl-book" data-book="data-book" id="algorithm-book">
+<div class="rl-book" data-book="data-book" id="algorithm-book" data-open-on-view="">
 <nav aria-label="Groups of the algorithm book" class="rl-book-tabs">
 <a class="rl-tab rl-tab-contents" data-group="contents" href="#book-contents">Contents</a>
 <a class="rl-tab rl-tab-standard" data-group="standard" href="#book-iql">Standard<span>6</span></a>
@@ -1397,9 +1400,117 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
 <!-- shift-toolbox:end -->
 
     <h3>Where the six sources act</h3>
-    <figure class="fig-narrow">
-      <div class="framed"><img src="docs/assets/figures/shift-loop.svg" alt="The six shift sources on the loop between agent and environment."></div>
-    </figure>
+    <!-- shift-loop:start -->
+    <div class="loop-scene" id="shift-loop-scene" data-steps="13">
+    <svg viewBox="0 0 1080 870" role="img" aria-labelledby="loop-title">
+      <title id="loop-title">The six shift sources on the loop between agent and environment: the action shift on the way to the environment, the dynamic shift inside it, the observation shift on the way back, the reward/cost shift on the learning signal, and the latency and semantic shifts across the loop.</title>
+      <defs>
+        <marker id="loop-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="#5e5d59"/>
+        </marker>
+      </defs>
+      <g class="ln" style="--i:0">
+        <rect x="378" y="28" width="324" height="82" rx="9" fill="#f0eee6" stroke="#87867f" stroke-width="1.6"/>
+        <text x="540.0" y="60" font-size="17" font-weight="700" fill="#87867f" text-anchor="middle" >Agent</text>
+        <text x="540.0" y="90" font-size="15" font-weight="400" fill="#141413" text-anchor="middle" >a<tspan baseline-shift="sub" font-size="72%">t</tspan> ~ π(· | õ<tspan baseline-shift="sub" font-size="72%">t</tspan>)</text>
+      </g>
+      <g class="ln" style="--i:2">
+        <rect x="729" y="151" width="294" height="94" rx="9" fill="#f0ebf1" stroke="#8c6a8f" stroke-width="1.6"/>
+        <text x="876.0" y="185" font-size="17" font-weight="700" fill="#8c6a8f" text-anchor="middle" >Action shift</text>
+        <text x="876.0" y="215" font-size="15" font-weight="400" fill="#141413" text-anchor="middle" >ã<tspan baseline-shift="sub" font-size="72%">t</tspan> ~ A<tspan baseline-shift="sub" font-size="72%">θ<tspan baseline-shift="super" font-size="72%">a</tspan></tspan>(· | s<tspan baseline-shift="sub" font-size="72%">t</tspan>, a<tspan baseline-shift="sub" font-size="72%">t</tspan>)</text>
+      </g>
+      <g class="ln" style="--i:4">
+        <rect x="378" y="253" width="324" height="154" rx="9" fill="#f0eee6" stroke="#87867f" stroke-width="1.6"/>
+        <text x="540.0" y="279" font-size="17" font-weight="700" fill="#87867f" text-anchor="middle" >Environment</text>
+        
+        <rect x="399" y="311" width="282" height="84" rx="8" fill="#edf2ea" stroke="#6f9a63" stroke-width="1.6"/>
+        <text x="540" y="343" font-size="17" font-weight="700" fill="#6f9a63" text-anchor="middle" >Dynamic shift</text>
+        <text x="540" y="373" font-size="15" font-weight="400" fill="#141413" text-anchor="middle" >s<tspan baseline-shift="sub" font-size="72%">t+1</tspan> ~ P<tspan baseline-shift="sub" font-size="72%">θ<tspan baseline-shift="super" font-size="72%">p</tspan></tspan>(· | x<tspan baseline-shift="sub" font-size="72%">t</tspan>)</text>
+      </g>
+      <g class="ln" style="--i:6">
+        <rect x="57" y="151" width="294" height="94" rx="9" fill="#f8ebe5" stroke="#c96442" stroke-width="1.6"/>
+        <text x="204.0" y="185" font-size="17" font-weight="700" fill="#c96442" text-anchor="middle" >Observation shift</text>
+        <text x="204.0" y="215" font-size="15" font-weight="400" fill="#141413" text-anchor="middle" >õ<tspan baseline-shift="sub" font-size="72%">t</tspan> ~ O<tspan baseline-shift="sub" font-size="72%">θ<tspan baseline-shift="super" font-size="72%">o</tspan></tspan>(· | s<tspan baseline-shift="sub" font-size="72%">t</tspan>)</text>
+      </g>
+      <g class="ln" style="--i:9">
+        <rect x="294" y="478" width="492" height="94" rx="9" fill="#f6e6e6" stroke="#b53333" stroke-width="1.6"/>
+        <text x="540.0" y="512" font-size="17" font-weight="700" fill="#b53333" text-anchor="middle" >Reward/cost shift</text>
+        <text x="540.0" y="542" font-size="15" font-weight="400" fill="#141413" text-anchor="middle" xml:space="preserve" >r̃<tspan baseline-shift="sub" font-size="72%">t</tspan> ~ R<tspan baseline-shift="sub" font-size="72%">θ<tspan baseline-shift="super" font-size="72%">r</tspan></tspan>(· | y<tspan baseline-shift="sub" font-size="72%">t</tspan>),        c̃<tspan baseline-shift="sub" font-size="72%">t</tspan> ~ C<tspan baseline-shift="sub" font-size="72%">θ<tspan baseline-shift="super" font-size="72%">c</tspan></tspan>(· | y<tspan baseline-shift="sub" font-size="72%">t</tspan>)</text>
+      </g>
+      <g class="le" style="--i:1">
+        <path id="loop-e-a" d="M702 69 H876 V151" pathLength="1" fill="none" stroke="#5e5d59" stroke-width="1.7" marker-end="url(#loop-arrow)"/>
+        <rect x="754" y="51" width="24" height="18" rx="3" fill="#f5f4ed"/><text x="766" y="65" font-size="14" font-weight="400" fill="#5e5d59" text-anchor="middle" >a<tspan baseline-shift="sub" font-size="72%">t</tspan></text>
+      </g>
+      <circle class="lp" r="5.5" fill="#8c6a8f"><animateMotion dur="2.0s" repeatCount="indefinite" begin="indefinite" rotate="0"><mpath href="#loop-e-a"/></animateMotion></circle>
+      <g class="le" style="--i:3">
+        <path id="loop-e-at" d="M876 245 V330 H702" pathLength="1" fill="none" stroke="#5e5d59" stroke-width="1.7" marker-end="url(#loop-arrow)"/>
+        <rect x="755" y="311" width="24" height="18" rx="3" fill="#f5f4ed"/><text x="767" y="325" font-size="14" font-weight="400" fill="#5e5d59" text-anchor="middle" >ã<tspan baseline-shift="sub" font-size="72%">t</tspan></text>
+      </g>
+      <circle class="lp" r="5.5" fill="#8c6a8f"><animateMotion dur="2.0s" repeatCount="indefinite" begin="indefinite" rotate="0"><mpath href="#loop-e-at"/></animateMotion></circle>
+      <g class="le" style="--i:5">
+        <path id="loop-e-s" d="M378 330 H204 V245" pathLength="1" fill="none" stroke="#5e5d59" stroke-width="1.7" marker-end="url(#loop-arrow)"/>
+        <rect x="302" y="311" width="24" height="18" rx="3" fill="#f5f4ed"/><text x="314" y="325" font-size="14" font-weight="400" fill="#5e5d59" text-anchor="middle" >s<tspan baseline-shift="sub" font-size="72%">t</tspan></text>
+      </g>
+      <circle class="lp" r="5.5" fill="#6f9a63"><animateMotion dur="2.0s" repeatCount="indefinite" begin="indefinite" rotate="0"><mpath href="#loop-e-s"/></animateMotion></circle>
+      <g class="le" style="--i:7">
+        <path id="loop-e-ot" d="M204 151 V82 H378" pathLength="1" fill="none" stroke="#5e5d59" stroke-width="1.7" marker-end="url(#loop-arrow)"/>
+        <rect x="305" y="64" width="24" height="18" rx="3" fill="#f5f4ed"/><text x="317" y="78" font-size="14" font-weight="400" fill="#5e5d59" text-anchor="middle" >õ<tspan baseline-shift="sub" font-size="72%">t</tspan></text>
+      </g>
+      <circle class="lp" r="5.5" fill="#c96442"><animateMotion dur="1.9s" repeatCount="indefinite" begin="indefinite" rotate="0"><mpath href="#loop-e-ot"/></animateMotion></circle>
+      <g class="le" style="--i:8">
+        <path id="loop-e-rc" d="M540 407 V478" pathLength="1" fill="none" stroke="#5e5d59" stroke-width="1.7" marker-end="url(#loop-arrow)"/>
+        <rect x="547" y="434" width="53" height="18" rx="3" fill="#f5f4ed"/><text x="574" y="448" font-size="14" font-weight="400" fill="#5e5d59" text-anchor="middle" >r<tspan baseline-shift="sub" font-size="72%">t</tspan>, c<tspan baseline-shift="sub" font-size="72%">t</tspan></text>
+      </g>
+      <circle class="lp" r="5.5" fill="#b53333"><animateMotion dur="0.8s" repeatCount="indefinite" begin="indefinite" rotate="0"><mpath href="#loop-e-rc"/></animateMotion></circle>
+      <g class="le le-dash" style="--i:10">
+        <path id="loop-e-learn" d="M294 525 H33 V51 H378" pathLength="1" fill="none" stroke="#5e5d59" stroke-width="1.7" stroke-dasharray=".028 .018" marker-end="url(#loop-arrow)"/>
+        <rect x="-62" y="289" width="190" height="18" rx="3" fill="#f5f4ed" transform="rotate(-90 33 300)"/><text x="33" y="303" font-size="14" font-weight="400" fill="#5e5d59" text-anchor="middle" transform="rotate(-90 33 300)">learning signal  r̃<tspan baseline-shift="sub" font-size="72%">t</tspan>, c̃<tspan baseline-shift="sub" font-size="72%">t</tspan></text>
+      </g>
+      <circle class="lp" r="5.5" fill="#b53333"><animateMotion dur="6.5s" repeatCount="indefinite" begin="indefinite" rotate="0"><mpath href="#loop-e-learn"/></animateMotion></circle>
+      <g class="lt" style="--i:11">
+        <rect x="184.0" y="262" width="40" height="21" rx="4" fill="#f7efdf" stroke="#c08a2e" stroke-width="1.2"/>
+        <text x="204.0" y="277" font-size="13" font-weight="700" fill="#c08a2e" text-anchor="middle" >δ<tspan baseline-shift="sub" font-size="72%">o</tspan></text>
+      </g>
+      <g class="lt" style="--i:11">
+        <rect x="856.0" y="262" width="40" height="21" rx="4" fill="#f7efdf" stroke="#c08a2e" stroke-width="1.2"/>
+        <text x="876.0" y="277" font-size="13" font-weight="700" fill="#c08a2e" text-anchor="middle" >δ<tspan baseline-shift="sub" font-size="72%">a</tspan></text>
+      </g>
+      <g class="lt" style="--i:11">
+        <rect x="655" y="260" width="40" height="21" rx="4" fill="#f7efdf" stroke="#c08a2e" stroke-width="1.2"/>
+        <text x="675.0" y="275" font-size="13" font-weight="700" fill="#c08a2e" text-anchor="middle" >κ<tspan baseline-shift="sub" font-size="72%">t</tspan></text>
+      </g>
+      <g class="lt" style="--i:11">
+        <rect x="305" y="157" width="40" height="21" rx="4" fill="#f2eae4" stroke="#8a5a3c" stroke-width="1.2"/>
+        <text x="325.0" y="172" font-size="13" font-weight="700" fill="#8a5a3c" text-anchor="middle" >θ<tspan baseline-shift="super" font-size="72%">z</tspan></text>
+      </g>
+      <g class="lt" style="--i:11">
+        <rect x="385" y="260" width="40" height="21" rx="4" fill="#f2eae4" stroke="#8a5a3c" stroke-width="1.2"/>
+        <text x="405.0" y="275" font-size="13" font-weight="700" fill="#8a5a3c" text-anchor="middle" >θ<tspan baseline-shift="super" font-size="72%">z</tspan></text>
+      </g>
+      <g class="lt" style="--i:11">
+        <rect x="740" y="484" width="40" height="21" rx="4" fill="#f2eae4" stroke="#8a5a3c" stroke-width="1.2"/>
+        <text x="760.0" y="499" font-size="13" font-weight="700" fill="#8a5a3c" text-anchor="middle" >θ<tspan baseline-shift="super" font-size="72%">z</tspan></text>
+      </g>
+      <g class="lc" style="--i:12">
+        <rect x="41" y="615" width="490" height="200" rx="9" fill="#f7efdf" stroke="#c08a2e" stroke-width="1.6"/>
+        <text x="59" y="651" font-size="18" font-weight="700" fill="#c08a2e" text-anchor="start" >Latency shift</text>
+        <rect x="423" y="635" width="90" height="22" rx="4" fill="#faf9f5" stroke="#c08a2e" stroke-width="1.2"/>
+        <text x="468.0" y="650" font-size="13" font-weight="700" fill="#c08a2e" text-anchor="middle" >δ<tspan baseline-shift="sub" font-size="72%">o</tspan>, δ<tspan baseline-shift="sub" font-size="72%">a</tspan>, κ<tspan baseline-shift="sub" font-size="72%">t</tspan></text>
+        <text x="59" y="679" font-size="14" font-weight="400" fill="#5e5d59" text-anchor="start" font-style="italic" >the timing of sensing, execution and control</text>
+        <text x="59" y="723" font-size="15" font-weight="400" fill="#141413" text-anchor="start" >õ<tspan baseline-shift="sub" font-size="72%">t</tspan> = I(H<tspan baseline-shift="sub" font-size="72%">t</tspan>, t − δ<tspan baseline-shift="sub" font-size="72%">o</tspan>)</text><text x="59" y="756" font-size="15" font-weight="400" fill="#141413" text-anchor="start" >ã<tspan baseline-shift="sub" font-size="72%">t</tspan> = a<tspan baseline-shift="sub" font-size="72%">t−δ<tspan baseline-shift="sub" font-size="72%">a</tspan></tspan></text><text x="59" y="789" font-size="15" font-weight="400" fill="#141413" text-anchor="start" >s<tspan baseline-shift="sub" font-size="72%">t+1</tspan> ~ P<tspan baseline-shift="sub" font-size="72%">0</tspan><tspan baseline-shift="super" font-size="72%">(κ<tspan baseline-shift="sub" font-size="72%">t</tspan>)</tspan>(· | s<tspan baseline-shift="sub" font-size="72%">t</tspan>, ã<tspan baseline-shift="sub" font-size="72%">t</tspan>)</text>
+      </g>
+      <g class="lc" style="--i:12">
+        <rect x="549" y="615" width="490" height="200" rx="9" fill="#f2eae4" stroke="#8a5a3c" stroke-width="1.6"/>
+        <text x="567" y="651" font-size="18" font-weight="700" fill="#8a5a3c" text-anchor="start" >Semantic shift</text>
+        <rect x="990" y="635" width="31" height="22" rx="4" fill="#faf9f5" stroke="#8a5a3c" stroke-width="1.2"/>
+        <text x="1005.6" y="650" font-size="13" font-weight="700" fill="#8a5a3c" text-anchor="middle" >θ<tspan baseline-shift="super" font-size="72%">z</tspan></text>
+        <text x="567" y="679" font-size="14" font-weight="400" fill="#5e5d59" text-anchor="start" font-style="italic" >the scene, the appearance and the task layout</text>
+        <text x="567" y="723" font-size="15" font-weight="400" fill="#141413" text-anchor="start" >o<tspan baseline-shift="sub" font-size="72%">t</tspan> ~ O<tspan baseline-shift="sub" font-size="72%">θ<tspan baseline-shift="super" font-size="72%">z</tspan></tspan>(· | s<tspan baseline-shift="sub" font-size="72%">t</tspan>)</text><text x="567" y="756" font-size="15" font-weight="400" fill="#141413" text-anchor="start" >s<tspan baseline-shift="sub" font-size="72%">t+1</tspan> ~ P<tspan baseline-shift="sub" font-size="72%">θ<tspan baseline-shift="super" font-size="72%">z</tspan></tspan>(· | x<tspan baseline-shift="sub" font-size="72%">t</tspan>)</text><text x="567" y="789" font-size="15" font-weight="400" fill="#141413" text-anchor="start" >(r<tspan baseline-shift="sub" font-size="72%">t</tspan>, c<tspan baseline-shift="sub" font-size="72%">t</tspan>) ~ (R<tspan baseline-shift="sub" font-size="72%">θ<tspan baseline-shift="super" font-size="72%">z</tspan></tspan>, C<tspan baseline-shift="sub" font-size="72%">θ<tspan baseline-shift="super" font-size="72%">z</tspan></tspan>)(· | y<tspan baseline-shift="sub" font-size="72%">t</tspan>)</text>
+      </g>
+      <g class="lc" style="--i:13"><text x="540" y="850" font-size="14" font-weight="400" fill="#5e5d59" text-anchor="middle" xml:space="preserve" >x<tspan baseline-shift="sub" font-size="72%">t</tspan> = (s<tspan baseline-shift="sub" font-size="72%">t</tspan>, ã<tspan baseline-shift="sub" font-size="72%">t</tspan>)        y<tspan baseline-shift="sub" font-size="72%">t</tspan> = (s<tspan baseline-shift="sub" font-size="72%">t</tspan>, ã<tspan baseline-shift="sub" font-size="72%">t</tspan>, s<tspan baseline-shift="sub" font-size="72%">t+1</tspan>)        θ with a superscript is the parameter of the shift</text></g>
+    </svg>
+    </div>
+    <!-- shift-loop:end -->
 
     <p class="more"><a class="btn" href="docs/shifts/">Sources by mode</a></p>
   </div>

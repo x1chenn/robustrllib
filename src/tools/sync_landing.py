@@ -168,7 +168,8 @@ def main():
     refs = yaml.safe_load(open(SRC / "data" / "references.yaml"))
     html = LANDING.read_text()
     # The book is not indented: it holds <pre> blocks, where leading spaces would show.
-    html = replace(html, BOOK, book_html(spec, refs))
+    # the landing copy lies closed until it scrolls into view (book.js reads the attribute)
+    html = replace(html, BOOK, book_html(spec, refs).replace('id="algorithm-book"', 'id="algorithm-book" data-open-on-view=""', 1))
     html = replace(html, TABLE, table_html(spec))
     html = replace(html, TOOLBOX, toolbox_html(yaml.safe_load(open(SRC / "data" / "shifts.yaml"))))
     results = gen_results.build()

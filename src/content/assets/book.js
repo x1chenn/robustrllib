@@ -12,6 +12,9 @@
   var prevButton = book.querySelector(".rl-book-controls .rl-prev");
   var nextButton = book.querySelector(".rl-book-controls .rl-next");
   var WIDE = 760;        // the book lies open when the column is at least this wide
+  // With data-open-on-view the book lies closed, its cover up, until it scrolls into view.
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var opened = !book.hasAttribute("data-open-on-view") || reduced;
   var last = spreads.length - 1;
   var current = 0;
   var shelf = null;      // the element that holds the leaves, in wide mode
@@ -42,6 +45,7 @@
       var back = document.createElement("div");
       back.className = "rl-face rl-back";
       if (k >= 1) { front.appendChild(copy(spreads[k - 1], ".rl-right")); }
+      else { front.classList.add("rl-cover"); front.appendChild(cover()); }
       if (k <= last) { back.appendChild(copy(spreads[k], ".rl-left")); }
       leaf.appendChild(front);
       leaf.appendChild(back);
@@ -58,6 +62,23 @@
       shelf.appendChild(edge);
     });
     stage.insertBefore(shelf, stage.firstChild);
+  }
+
+  /* The front cover, shown while the book lies closed. */
+  function cover() {
+    var art = document.createElement("div");
+    art.className = "rl-cover-front";
+    var groups = {};
+    spreads.forEach(function (s) { if (s.getAttribute("data-group") !== "contents") { groups[s.getAttribute("data-group")] = true; } });
+    var kicker = document.createElement("p"); kicker.className = "rl-cover-kicker"; kicker.textContent = "RobustRLlib";
+    var title = document.createElement("p"); title.className = "rl-cover-title"; title.textContent = "Algorithms";
+    var sub = document.createElement("p"); sub.className = "rl-cover-sub";
+    var line = spreads[0].querySelector(".rl-book-title");   // "22 algorithms in four groups"
+    sub.textContent = line ? line.textContent : (spreads.length - 1) + " methods  \u00b7  " + Object.keys(groups).length + " groups";
+    var blocks = document.createElement("div"); blocks.className = "rl-cover-blocks";
+    Object.keys(groups).forEach(function (g) { var b = document.createElement("i"); b.style.background = "var(--rl-g-" + g + ")"; blocks.appendChild(b); });
+    art.appendChild(kicker); art.appendChild(title); art.appendChild(sub); art.appendChild(blocks);
+    return art;
   }
 
   function copy(spread, selector) {
@@ -82,10 +103,10 @@
 
   function rest() {
     leaves.forEach(function (item, k) {
-      var turned = k <= current;
+      var turned = k <= current && (k > 0 || opened);
       item.leaf.style.transitionDelay = "0ms";
       item.leaf.style.zIndex = String(turned ? k + 1 : leaves.length - k);
-      setHidden(item.front, !(k === current + 1));
+      setHidden(item.front, !(k === current + 1 || (k === 0 && !opened)));
       setHidden(item.back, !(k === current));
     });
   }
@@ -99,7 +120,7 @@
     var forward = to > from;
     var moving = [];
     for (var k = 0; k < leaves.length; k++) {
-      var shouldBeTurned = k <= to;
+      var shouldBeTurned = k <= to && (k > 0 || opened);
       var isTurned = leaves[k].leaf.classList.contains("is-flipped");
       if (shouldBeTurned !== isTurned) { moving.push(k); }
     }
@@ -144,6 +165,7 @@
     if (target === current) { return; }
     var from = current;
     current = target;
+    opened = true;     // a page turn opens a closed book on the way
     if (shelf) { turn(from, target); }
     describe();
     if (!silent && window.history && window.history.replaceState) {
@@ -192,7 +214,7 @@
       shelf.style.display = wide ? "" : "none";
       leaves.forEach(function (item, k) {
         item.leaf.style.transition = "none";
-        item.leaf.classList.toggle("is-flipped", k <= current);
+        item.leaf.classList.toggle("is-flipped", k <= current && (k > 0 || opened));
       });
       rest();
       fit();
@@ -246,8 +268,32 @@
 
   var start = indexOfId(window.location.hash.slice(1));
   if (start > 0) { current = start; }
+  if (start >= 0) { opened = true; }   // a deep link lands on an open book
   layout();
   describe();
+
+  /* The closed book opens once about half of it is in view. */
+  function open() {
+    if (opened) { return; }
+    opened = true;
+    if (!shelf || shelf.style.display === "none") { return; }
+    var first = leaves[0];
+    first.leaf.style.transitionDelay = "0ms";
+    first.leaf.style.zIndex = "1000";
+    setHidden(first.front, false);
+    setHidden(first.back, false);
+    first.leaf.classList.add("is-flipped");
+    window.clearTimeout(settle);
+    settle = window.setTimeout(rest, 800);
+  }
+  if (!opened) {
+    if (window.IntersectionObserver) {
+      var io = new window.IntersectionObserver(function (entries) {
+        if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); window.setTimeout(open, 300); }
+      }, { threshold: 0.45 });
+      io.observe(stage);
+    } else { open(); }
+  }
   // A spread that is not showing cannot be scrolled to, so the book is: now, and once
   // more when the images above it have loaded and moved it down the page.
   function reveal() { if (book.scrollIntoView) { book.scrollIntoView(); } }
