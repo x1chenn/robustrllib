@@ -124,7 +124,7 @@ and `sync_landing.py` writes into the page:
 | Chart | Section | Data | What the reader chooses |
 |---|---|---|---|
 | Library-wide results | Findings | `part1_master.csv`, the 220-condition selection | regime, task family, task, shift axis, severity quartile, order |
-| Channel leaderboard | Findings | `part2_cells_long*.csv`, `part2_training_long.csv`, `part2_semantic_long.csv` | shift source; the paper's channel score, a whole grid, or one cell; regime; standard references |
+| Channel leaderboard | Findings | `part2_cells_long*.csv`, `part2_training_long.csv` | shift source; the paper's channel score or one of its configurations (the paper's 22 per regime); regime; standard references |
 | Isolated and compound shifts | Findings | `part3_profile_channels.csv` | scenario; score or retention |
 
 Every chart has a table twin (the *Table* button), a tooltip on hover and on keyboard

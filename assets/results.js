@@ -66,6 +66,7 @@
   var FAMILY_SHORT = { standard: "Standard", learner_on: "Learner-centric", data_on: "Environment-centric",
                        learner_off: "Learner-centric", data_off: "Data-centric", generative: "Generative" };
   var FAMILY_TAG = { standard: "standard", learner_on: "learner", data_on: "environment", learner_off: "learner", data_off: "data", generative: "generative" };
+  function familyText(m) { return FAMILY_SHORT[m.family] + " (" + m.regime + ")"; }
   function pageOf(m) { return m.page ? "docs/algorithms/" + m.page + "/" : null; }
 
   // ---- one tooltip for every chart
@@ -284,7 +285,7 @@
         wrap.appendChild(legend(L.families.map(function (f) { return { color: FAMILY_COLOR[f.key], label: f.label }; }).concat([{ tick: true, label: "Nominal (no shift)" }])));
         if (!entries.length) { wrap.appendChild(el("p", { class: "viz-empty", text: "No condition matches this selection." })); return wrap; }
         wrap.appendChild(barChart(entries.map(function (e) {
-          return { name: e.rec.name, sub: FAMILY_SHORT[e.rec.family], value: e.value, nominal: e.nominal,
+          return { name: e.rec.name, sub: familyText(e.rec), value: e.value, nominal: e.nominal,
                    color: FAMILY_COLOR[e.rec.family],
                    rows: function () { return [{ text: e.rec.name + " · " + familyOf(e.rec).label + " · " + e.rec.regime, strong: true },
                                                { text: "Score " + fmt(e.value) + " under shift", color: FAMILY_COLOR[e.rec.family] },
@@ -314,18 +315,12 @@
     function viewsFor(channel) {
       var kind = P.channels.filter(function (c) { return c.key === channel; })[0].kind, out = [];
       if (kind === "frozen") {
-        out.push({ value: "paper:" + channel, label: "Channel score — the paper's five cells, equally weighted" });
-        P.grids.filter(function (g) { return g.channel === channel; }).forEach(function (g) {
-          out.push({ value: "grid:" + g.key, label: g.label + " — mean over every cell" });
-          P.cells.forEach(function (c, i) {
-            if (c.grid === g.key) { out.push({ value: "cell:" + i, label: g.label + ": " + c.label + (c.selected ? " •" : "") }); }
-          });
+        out.push({ value: "paper:" + channel, label: "Channel score — the five configurations, equally weighted" });
+        P.cells.forEach(function (c, i) {
+          if (c.channel === channel) { out.push({ value: "cell:" + i, label: c.gridlabel + ": " + c.label }); }
         });
-      } else if (kind === "training") {
-        out.push({ value: "paper:" + channel, label: "Channel score — mean over the training ladder" });
-        P.arms.forEach(function (a, i) { if (a.channel === channel) { out.push({ value: "arm:" + i, label: a.label }); } });
       } else {
-        out.push({ value: "paper:theta_z", label: "Shifted binding, normalized by the reference at nominal" });
+        out.push({ value: "paper:" + channel, label: "Channel score — trained under the shift, evaluated at nominal" });
       }
       return out;
     }
@@ -333,13 +328,10 @@
       var p = view.split(":"), kind = p[0], id = p[1];
       if (kind === "paper") {
         var ch = P.channels.filter(function (c) { return c.key === id; })[0];
-        if (ch.kind === "frozen") { return "The paper's channel score: the five selected cells of the " + ch.label.toLowerCase() + " on Hopper-v5, equally weighted per seed; mean ± sd across five training seeds, twenty episodes per cell. Both ATLA rows rest on three observation cells: the adversarial arm cannot run on a recurrent policy."; }
-        if (ch.kind === "training") { return "Trained under the shift, evaluated at nominal: the mean over the ladder of the per-arm nominal score; ± across the ladder. Only the methods that were retrained appear."; }
-        return "The door task with the scene rebound: shifted binding score normalized by the reference method at nominal, mean ± sd across seeds, collapsed seeds left out. Online methods only.";
+        if (ch.kind === "frozen") { return "The paper's channel score: the five configurations of the " + ch.label.toLowerCase() + " on Hopper-v5, equally weighted per seed, averaged over five training seeds and twenty episodes per configuration. Both ATLA rows rest on three observation configurations: the adversarial arm cannot run on a recurrent policy."; }
+        return "One configuration of the paper's grid: trained under the shift (three reward corruptions, or reward delays of 4 to 64 steps), then evaluated at nominal; the mean over that ladder. Only the methods that were retrained appear.";
       }
-      if (kind === "grid") { return "Mean over every measured cell of this grid, cells equally weighted per seed; mean ± sd across five seeds."; }
-      if (kind === "cell") { var c = P.cells[+id]; return c.label + (c.diagnostic ? " (a diagnostic cell, not reported in the paper)" : c.selected ? " (one of the paper's five cells)" : "") + ": mean ± sd across five seeds, twenty episodes each."; }
-      if (kind === "arm") { return P.arms[+id].label + ": trained under this arm, evaluated at nominal; mean ± sd across seeds."; }
+      if (kind === "cell") { var c = P.cells[+id]; return c.gridlabel + ", " + c.label + ": one of the paper's 22 configurations per regime, averaged over five seeds and twenty episodes."; }
       return "";
     }
     function render() {
@@ -354,24 +346,23 @@
         select("Regime", [{ value: "both", label: "Online and offline" }, { value: "online", label: "Online" }, { value: "offline", label: "Offline" }], state.regime, function (v) { state.regime = v; render(); }),
         select("Standard references", [{ value: "show", label: "With standard references" }, { value: "hide", label: "Robust methods only" }], state.standard, function (v) { state.standard = v; render(); }),
       ];
-      var semantic = state.view === "paper:theta_z";
       mount(host, controls, describe(state.view), function () {
         var wrap = el("div", { class: "viz-chart" });
         var present = DATA.library.families.filter(function (f) { return rows.some(function (e) { return e.rec.family === f.key; }); });
-        wrap.appendChild(legend(present.map(function (f) { return { color: FAMILY_COLOR[f.key], label: f.label }; }).concat(semantic ? [] : [{ tick: true, label: "Nominal (no shift)" }, { color: null, label: "— ± sd across seeds" }])));
+        wrap.appendChild(legend(present.map(function (f) { return { color: FAMILY_COLOR[f.key], label: f.label }; }).concat([{ tick: true, label: "Nominal (no shift)" }])));
         if (!rows.length) { wrap.appendChild(el("p", { class: "viz-empty", text: "No method has a value here." })); return wrap; }
         wrap.appendChild(barChart(rows.map(function (e) {
-          var nom = semantic ? null : (P.nominal[e.mi] ? P.nominal[e.mi][0] : null);
-          return { name: e.rec.name, sub: FAMILY_SHORT[e.rec.family], value: e.value, sd: e.sd, nominal: nom,
+          var nom = P.nominal[e.mi] ? P.nominal[e.mi][0] : null;
+          return { name: e.rec.name, sub: familyText(e.rec), value: e.value, nominal: nom,
                    color: FAMILY_COLOR[e.rec.family],
-                   rows: function () { return [{ text: e.rec.name + " · " + familyOf(e.rec).label + " · " + e.rec.regime, strong: true },
-                                               { text: "Score " + fmt(e.value) + " ± " + fmt(e.sd) + " (n = " + e.n + ")", color: FAMILY_COLOR[e.rec.family] },
+                   rows: function () { return [{ text: e.rec.name + " · " + familyOf(e.rec).label, strong: true },
+                                               { text: "Score " + fmt(e.value) + " (n = " + e.n + ")", color: FAMILY_COLOR[e.rec.family] },
                                                nom === null ? null : { text: "Score " + fmt(nom) + " at nominal" }].filter(Boolean); } };
         }), { title: "Channel leaderboard: normalized score per method" }));
         return wrap;
       }, function () {
-        return table(["Method", "Family", "Regime", "Score", "± sd", "n", semantic ? "" : "Score at nominal"].filter(Boolean),
-          rows.map(function (e) { var nom = P.nominal[e.mi]; return [e.rec.name, familyOf(e.rec).label, e.rec.regime, fmt(e.value), fmt(e.sd), String(e.n)].concat(semantic ? [] : [nom ? fmt(nom[0]) : "—"]); }));
+        return table(["Method", "Family", "Regime", "Score", "n", "Score at nominal"],
+          rows.map(function (e) { var nom = P.nominal[e.mi]; return [e.rec.name, familyOf(e.rec).label, e.rec.regime, fmt(e.value), String(e.n), nom ? fmt(nom[0]) : "—"]; }));
       });
     }
     host.addEventListener("viz:render", render);
@@ -411,7 +402,7 @@
                     { text: state.measure === "score" ? "Retention " + fmt(v.retention) + " % of nominal" : "Score " + fmt(v.score) },
                     pred === undefined ? null : { text: "Independence prediction " + fmt(pred) + (state.measure === "score" ? "" : " %") }].filter(Boolean); } };
         });
-        return { name: rec.name, sub: FAMILY_TAG[rec.family], values: vals };
+        return { name: rec.name, sub: FAMILY_TAG[rec.family] + " · " + rec.regime, values: vals };
       });
       var controls = [
         select("Scenario", K.blocks.map(function (b) { return { value: b.key, label: b.label }; }), state.block, function (v) { state.block = v; render(); }),

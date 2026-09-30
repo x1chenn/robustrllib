@@ -9,10 +9,11 @@ assets/results.js draws. Three parts, each with the aggregation of the paper:
   library    Part 1, the library-wide grid: every (method, task, axis, condition) cell
              of the pre-registered selection plus the nominal cells. The page aggregates
              condition -> axis -> task -> method with equal weights, as the paper does.
-  channels   Part 2, the isolated shifts on Hopper: mean +- sd across seeds for every
-             cell of every grid, the paper's channel score (its five cells, equally
-             weighted, per seed), the mean over a whole grid, the two training-time
-             channels and the semantic shift on the door task.
+  channels   Part 2, the isolated shifts on Hopper, the 22 configurations the paper
+             reports per regime: the five selected cells of each frozen-policy channel
+             (mean +- sd across seeds), the paper's channel score (the five cells equally
+             weighted, per seed), and the two training-time channels as one configuration
+             each (trained under the shift, evaluated at nominal, +- across the ladder).
   compound   Part 3, the compound scenarios: nominal, each isolated shift, the compound
              cell and the independence prediction, per method and block.
 
@@ -33,9 +34,9 @@ SRC = Path(__file__).resolve().parents[1]
 DATA = SRC / "data" / "results"
 
 FAMILY = {
-    "standard": "Standard RL", "learner_on": "Learner-centric (online)",
-    "data_on": "Environment-centric", "learner_off": "Learner-centric (offline)",
-    "data_off": "Data-centric", "generative": "Generative model",
+    "standard": "Standard RL (online / offline)", "learner_on": "Learner-centric (online)",
+    "data_on": "Environment-centric (online)", "learner_off": "Learner-centric (offline)",
+    "data_off": "Data-centric (offline)", "generative": "Generative model (offline)",
 }
 FAMILY_ORDER = ["standard", "learner_on", "data_on", "learner_off", "data_off", "generative"]
 
@@ -75,7 +76,6 @@ CHANNELS = [
     ("theta_tau_exec", "Latency shift · execution", "frozen"),
     ("theta_r", "Reward/cost shift · in training", "training"),
     ("theta_tau_credit", "Latency shift · credit, in training", "training"),
-    ("theta_z", "Semantic shift · door task", "semantic"),
 ]
 GRID = {
     "spec_obsadv_hopper": ("theta_o", "Observation noise"),
@@ -205,13 +205,13 @@ def channels():
         methods.add(key, method_record(key, r["regime"], family_of(key)))
         per_seed[key][r["seed"]][(r["grid"], r["cell"])] = float(r["score"])
 
+    # the cells the paper reports: the five of each channel, in the order of the selection
     cell_index = Index()
     for grid, (channel, glabel) in GRID.items():
-        for cell, (mode, label) in CELL.items():
-            if any((grid, cell) in seeds for m in per_seed for seeds in per_seed[m].values()):
-                cell_index.add((grid, cell), {"grid": grid, "cell": cell, "channel": channel, "mode": mode,
-                                              "label": label, "selected": cell in SELECTED[grid],
-                                              "diagnostic": cell.startswith("cmd_")})
+        for cell in SELECTED[grid]:
+            mode, label = CELL[cell]
+            cell_index.add((grid, cell), {"grid": grid, "cell": cell, "channel": channel, "mode": mode,
+                                          "label": label, "gridlabel": glabel})
     grids = [{"key": g, "channel": c, "label": l} for g, (c, l) in GRID.items()]
 
     values = []          # [method, view, mean, sd, n]; view = "cell:i" | "grid:<grid>" | "paper:<channel>"
@@ -228,12 +228,6 @@ def channels():
              if any(c == "nominal" for (_g, c) in s)]
         if v:
             nominal[mi] = list(mean_sd(v))
-        # the whole grid, cells equally weighted, per seed
-        for grid in GRID:
-            per = [st.mean(x for (g, c), x in s.items() if g == grid and c != "nominal")
-                   for s in seeds.values() if any(g == grid and c != "nominal" for (g, c) in s)]
-            if per:
-                values.append([mi, f"grid:{grid}", *mean_sd(per)])
         # the paper's channel score: its selected cells, equally weighted, per seed
         for channel, _label, kind in CHANNELS:
             if kind != "frozen":
@@ -259,23 +253,12 @@ def channels():
         mi = methods(m)
         per_arm = {}
         for (channel, arm), v in byarm.items():
-            values.append([mi, f"arm:{arms((channel, arm))}", *mean_sd(v)])
             per_arm.setdefault(channel, []).append(st.mean(v))
         for channel, ladder in per_arm.items():
             values.append([mi, f"paper:{channel}", *mean_sd(ladder)])
 
-    # the semantic shift on the door task: the source paper's normalization, collapsed seeds left out
-    sem = defaultdict(list)
-    for r in rows("part2_semantic_long.csv"):
-        if r["collapsed"] == "1":
-            continue
-        sem[r["display"]].append(float(r["shifted_norm"]))
-    for m, v in sem.items():
-        mi = methods.add(m, method_record(m, "online", FAMILY_OF.get(DISPLAY.get(m, m), "learner_on")))
-        values.append([mi, "paper:theta_z", *mean_sd(v)])
-
     return {"channels": [{"key": k, "label": l, "kind": kind} for k, l, kind in CHANNELS],
-            "grids": grids, "cells": cell_index.records, "arms": arms.records,
+            "grids": grids, "cells": cell_index.records,
             "methods": methods.records, "nominal": nominal,
             "columns": ["method", "view", "mean", "sd", "n"], "rows": values}
 
