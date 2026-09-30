@@ -13,7 +13,7 @@ The site has two parts that share one colour system:
 ## Structure
 
 ```
-├── index.html                # landing page; the block between the `algo-book` markers is GENERATED
+├── index.html                # landing page; the blocks between the `algo-book` and `algo-table` markers are GENERATED
 ├── 404.html                  # BUILT: copy of the documentation's not-found page
 ├── assets/                   # landing page style and its two figures
 ├── docs/                     # BUILT documentation. Never edit by hand.
@@ -45,7 +45,7 @@ The site has two parts that share one colour system:
     ├── theme/                # the site's own theme: main.html, 404.html, css/, js/, fonts/
     └── tools/
         ├── gen_algorithms.py # data -> method pages, group overviews, algorithm book
-        ├── sync_landing.py   # data -> algorithm book on the landing page
+        ├── sync_landing.py   # data -> algorithm book and table on the landing page
         ├── render_figures.py # LaTeX -> SVG; needs pdflatex, run only when a figure changes
         ├── finalize.py       # makes the built output reproducible
         ├── check_site.py     # pre-publish scan
@@ -102,10 +102,17 @@ spreads.
 
 ## Landing page
 
-The landing page is short on purpose. It holds the abstract, the highlights with the
-comparison of benchmarks, the algorithm book, the shift sources and modes, the findings as
-one line each, a quick start and the BibTeX entry. Explanations belong to the documentation,
+The landing page is short on purpose. It opens with the title, one sentence and a drawing:
+an open book with a pulse line (the library), the scenes it reaches in an arc above it, the
+shifts flying at it from the left, and the numbers of the benchmark on chips around it. The
+drawing is an inline SVG in `index.html`; on phones its chips give way to a row of pills.
+Then come the abstract, the highlights with the comparison of benchmarks, the algorithm
+book and the table of the robust methods, the shift sources and modes, the findings as one
+line each, a quick start and the BibTeX entry. Explanations belong to the documentation,
 and every block of the landing page links to the page that explains it.
+
+The page is one column bounded by hairlines on a warm, light ground, with large, tightly set
+headings; every colour and size is in `assets/style.css`.
 
 ## Branches
 
@@ -139,7 +146,7 @@ python3 -m http.server 8000
 | Add or change an algorithm | `src/data/algorithms.yaml`, and `nav` in `src/mkdocs.yml` for a new one | `build.sh` |
 | Update the numbers | replace the table in `src/data/results/` | `build.sh` |
 | Add a topic page | new file under `src/content/`, and `nav` in `src/mkdocs.yml` | `build.sh` |
-| Change the landing page | `index.html`, `assets/style.css`; never the block between the `algo-book` markers | `build.sh` |
+| Change the landing page | `index.html`, `assets/style.css`; never the blocks between the `algo-book` and `algo-table` markers | `build.sh` |
 
 Numbers are never typed into a page. `gen_algorithms.py` computes them from
 `src/data/results/` and refuses to write pages when the headline numbers of the
