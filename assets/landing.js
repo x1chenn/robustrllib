@@ -156,8 +156,31 @@
     window.requestAnimationFrame(function () { panel.classList.remove("is-changing"); });
   }
 
+  // ---- task support: filters, and the selected source dims the tasks that do not carry it
+  var taskState = { family: "all", regime: "all" };
+  var taskCards = Array.prototype.slice.call(box.querySelectorAll(".tb-task"));
+  var familyButtons = Array.prototype.slice.call(box.querySelectorAll(".tb-family"));
+  var regimeButtons = Array.prototype.slice.call(box.querySelectorAll(".tb-regime"));
+  var emptyNote = box.querySelector(".tb-tasks-empty");
+  function renderTasks() {
+    var shown = 0;
+    taskCards.forEach(function (card) {
+      var okFamily = taskState.family === "all" || card.getAttribute("data-family") === taskState.family;
+      var okRegime = taskState.regime === "all" || card.getAttribute("data-regime").split(" ").indexOf(taskState.regime) >= 0;
+      var on = okFamily && okRegime;
+      card.hidden = !on;
+      if (on) { shown += 1; }
+      card.classList.toggle("is-dim", card.getAttribute("data-shifts").split(" ").indexOf(state.source) < 0);
+    });
+    familyButtons.forEach(function (b) { b.classList.toggle("is-active", b.getAttribute("data-family") === taskState.family); });
+    regimeButtons.forEach(function (b) { b.classList.toggle("is-active", b.getAttribute("data-regime") === taskState.regime); });
+    if (emptyNote) { emptyNote.hidden = shown > 0; }
+  }
+  familyButtons.forEach(function (b) { b.addEventListener("click", function () { taskState.family = b.getAttribute("data-family"); renderTasks(); }); });
+  regimeButtons.forEach(function (b) { b.addEventListener("click", function () { taskState.regime = b.getAttribute("data-regime"); renderTasks(); }); });
+
   sourceButtons.forEach(function (b) {
-    b.addEventListener("click", function () { state.source = b.getAttribute("data-source"); render(); });
+    b.addEventListener("click", function () { state.source = b.getAttribute("data-source"); render(); renderTasks(); });
   });
   modeButtons.forEach(function (b) {
     b.addEventListener("click", function () {
@@ -167,4 +190,5 @@
   });
   box.classList.add("is-live");
   render();
+  renderTasks();
 }());

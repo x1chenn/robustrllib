@@ -126,6 +126,50 @@ def toolbox_panel(source, mode_key, modes):
         f'<a href="{esc(mode["page"])}">{esc(mode["name"])} mode</a></p></div>')
 
 
+FAMILIES = ["Locomotion", "Manipulation", "Navigation", "Vehicle control", "Humanoid", "Vision-language-action"]
+
+
+def task_card(task, sources):
+    """One task of the support block, as the script renders it."""
+    media = task["media"]
+    if media.endswith((".mp4", ".webm")):
+        fig = f'<video src="{esc(media)}" autoplay muted loop playsinline preload="metadata"></video>'
+    else:
+        fig = f'<img src="{esc(media)}" alt="{esc(task["caption"])}" loading="lazy">'
+    dots = "".join(f'<span class="tb-dot tb-{k}" title="{esc(next(s["name"] for s in sources if s["key"] == k))}"></span>'
+                   for k in task["shifts"])
+    parts = ", ".join(f"Part {n}" for n in task["parts"])
+    return (f'<article class="tb-task" data-family="{esc(task["family"])}" data-regime="{esc(" ".join(task["regime"]))}" '
+            f'data-shifts="{esc(" ".join(task["shifts"]))}">'
+            f'<figure class="tb-task-media">{fig}</figure>'
+            f'<h4>{esc(task["name"])}</h4>'
+            f'<p class="tb-task-meta">{esc(task["family"])} · {esc(task["backend"])} · {esc(" / ".join(task["regime"]))}</p>'
+            f'<p class="tb-task-axes">{esc(", ".join(task["axes"]))}</p>'
+            f'<p class="tb-task-foot"><span class="tb-task-dots">{dots}</span><span class="tb-task-parts">{esc(parts)}</span></p>'
+            f'</article>')
+
+
+def tasks_html(tasks, sources):
+    out = ['  <div class="tb-tasks" id="tb-tasks">',
+           '    <p class="tb-subheading">Task support</p>',
+           '    <p class="tb-tasks-note">Every task the paper reports, with the shift sources the toolbox offers on it. A source selected above dims the tasks that do not carry it.</p>',
+           '    <div class="tb-row"><span class="tb-label">Family</span><div class="tb-buttons" role="group" aria-label="Task family">',
+           '      <button type="button" class="tb-btn tb-family is-active" data-family="all">All</button>']
+    for f in FAMILIES:
+        out.append(f'      <button type="button" class="tb-btn tb-family" data-family="{esc(f)}">{esc(f)}</button>')
+    out.append('    </div></div>')
+    out.append('    <div class="tb-row"><span class="tb-label">Regime</span><div class="tb-buttons" role="group" aria-label="Regime">')
+    for key, label in (("all", "All"), ("online", "Online"), ("offline", "Offline")):
+        out.append(f'      <button type="button" class="tb-btn tb-regime{" is-active" if key == "all" else ""}" data-regime="{key}">{label}</button>')
+    out.append('    </div></div>')
+    out.append('    <div class="tb-task-grid">')
+    out.extend("      " + task_card(t, sources) for t in tasks)
+    out.append('    </div>')
+    out.append('    <p class="tb-tasks-empty" hidden>No task matches this filter.</p>')
+    out.append('  </div>')
+    return out
+
+
 def toolbox_html(data):
     modes, sources = data["modes"], data["sources"]
     first = sources[0]
@@ -150,6 +194,7 @@ def toolbox_html(data):
     out.append('  <div class="tb-panel" id="tb-panel" aria-live="polite">')
     out.append(toolbox_panel(first, first_mode, modes))
     out.append('  </div>')
+    out.extend(tasks_html(data["tasks"], sources))
     out.append('  <script type="application/json" id="shift-data">' + json.dumps(data, ensure_ascii=False).replace("</", "<\\/") + '</script>')
     out.append('</div>')
     return "\n".join("    " + line for line in out)
@@ -171,7 +216,9 @@ def main():
     # the landing copy lies closed until it scrolls into view (book.js reads the attribute)
     html = replace(html, BOOK, book_html(spec, refs).replace('id="algorithm-book"', 'id="algorithm-book" data-open-on-view=""', 1))
     html = replace(html, TABLE, table_html(spec))
-    html = replace(html, TOOLBOX, toolbox_html(yaml.safe_load(open(SRC / "data" / "shifts.yaml"))))
+    shifts = yaml.safe_load(open(SRC / "data" / "shifts.yaml"))
+    shifts["tasks"] = yaml.safe_load(open(SRC / "data" / "tasks.yaml"))["tasks"]
+    html = replace(html, TOOLBOX, toolbox_html(shifts))
     results = gen_results.build()
     print(gen_results.check(results))
     payload = json.dumps(results, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
