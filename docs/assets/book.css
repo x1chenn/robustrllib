@@ -11,13 +11,14 @@
 }
 
 :root {
-  --rl-g-contents: #475569;
-  --rl-g-standard: #6b7280;
-  --rl-g-robust-online: #2f7fc1;
-  --rl-g-robust-offline: #d6557a;
-  --rl-g-robust-safe: #8b5fc7;
+  /* the labels of the groups, in the warm palette of the site */
+  --rl-g-contents: #5e5d59;
+  --rl-g-standard: #87867f;
+  --rl-g-robust-online: #c96442;
+  --rl-g-robust-offline: #8c6a8f;
+  --rl-g-robust-safe: #6f9a63;
   --rl-paper: #fffdf8;
-  --rl-cover: #2f3b4a;
+  --rl-cover: #30302e;
   /* one colour per family, shared with the badges of the method pages */
   --rl-fam-standard: #b7b7b7;
   --rl-fam-learner: #a9cbe5;
@@ -126,9 +127,9 @@
 .rl-book .rl-page ul li { margin-left: 18px; list-style: disc; }
 .rl-book .rl-page .rl-book-more a {
   display: inline-block; padding: 6px 13px; border-radius: 6px; font-weight: 700; font-size: 12.5px;
-  color: #ffffff; background: #2980b9; text-decoration: none;
+  color: #faf9f5; background: #c96442; text-decoration: none;
 }
-.rl-book .rl-page .rl-book-more a:hover { background: #1f6da0; color: #ffffff; text-decoration: none; }
+.rl-book .rl-page .rl-book-more a:hover { background: #a8502f; color: #faf9f5; text-decoration: none; }
 .rl-book .rl-book-toc { columns: 2; column-gap: 18px; }
 .rl-book .rl-book-toc p { break-inside: avoid; margin: 0 0 8px; }
 .rl-book-toc .rl-book-tocg { display: block; font-weight: 700; margin-bottom: 2px; }
@@ -191,7 +192,7 @@
   position: absolute; top: 0; bottom: 0; width: 44px; z-index: 2000; border: 0; padding: 0;
   background: transparent; cursor: pointer; color: transparent; font-size: 26px; font-weight: 700;
 }
-.rl-book-edge:hover:not(:disabled), .rl-book-edge:focus-visible { color: #2980b9; background: rgba(41, 128, 185, .07); }
+.rl-book-edge:hover:not(:disabled), .rl-book-edge:focus-visible { color: #c96442; background: rgba(201, 100, 66, .08); }
 .rl-book-edge:disabled { cursor: default; }
 .rl-book-edge.rl-prev { left: 0; border-radius: 4px 0 0 4px; }
 .rl-book-edge.rl-next { right: 0; border-radius: 0 4px 4px 0; }

@@ -126,7 +126,9 @@ at about 400 px wide) and change `image` and `caption` in `shifts.yaml`, then ru
 
 Everything on the page, from the title to the footer, has one width (1040 px with its
 padding), on a warm, light ground with hairlines between the parts; every colour and size is
-in `assets/style.css`.
+in `assets/style.css`. The colours are warm neutrals with one terracotta accent, shared with
+the documentation (`src/theme/css/site.css`) and the book (`src/content/assets/book.css`);
+only the emblem keeps its blue.
 
 ## Branches
 
