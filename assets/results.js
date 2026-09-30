@@ -319,8 +319,10 @@
         P.cells.forEach(function (c, i) {
           if (c.channel === channel) { out.push({ value: "cell:" + i, label: c.gridlabel + ": " + c.label }); }
         });
-      } else {
+      } else if (kind === "training") {
         out.push({ value: "paper:" + channel, label: "Channel score — trained under the shift, evaluated at nominal" });
+      } else {
+        out.push({ value: "paper:" + channel, label: "Shifted binding score — the source paper's normalization" });
       }
       return out;
     }
@@ -329,7 +331,8 @@
       if (kind === "paper") {
         var ch = P.channels.filter(function (c) { return c.key === id; })[0];
         if (ch.kind === "frozen") { return "The paper's channel score: the five configurations of the " + ch.label.toLowerCase() + " on Hopper-v5, equally weighted per seed, averaged over five training seeds and twenty episodes per configuration. Both ATLA rows rest on three observation configurations: the adversarial arm cannot run on a recurrent policy."; }
-        return "One configuration of the paper's grid: trained under the shift (three reward corruptions, or reward delays of 4 to 64 steps), then evaluated at nominal; the mean over that ladder. Only the methods that were retrained appear.";
+        if (ch.kind === "training") { return "One configuration of the paper's grid: trained under the shift (three reward corruptions, or reward delays of 4 to 64 steps), then evaluated at nominal; the mean over that ladder. Only the methods that were retrained appear."; }
+        return "The door task with the scene rebound (robosuite DoorCausal), evaluated online only: the shifted binding score divided by the SAC nominal, the source paper's own normalization, over the seeds whose training had not collapsed. As in the paper, the causal method and its two references.";
       }
       if (kind === "cell") { var c = P.cells[+id]; return c.gridlabel + ", " + c.label + ": one of the paper's 22 configurations per regime, averaged over five seeds and twenty episodes."; }
       return "";
@@ -346,13 +349,14 @@
         select("Regime", [{ value: "both", label: "Online and offline" }, { value: "online", label: "Online" }, { value: "offline", label: "Offline" }], state.regime, function (v) { state.regime = v; render(); }),
         select("Standard references", [{ value: "show", label: "With standard references" }, { value: "hide", label: "Robust methods only" }], state.standard, function (v) { state.standard = v; render(); }),
       ];
+      var semantic = state.view === "paper:theta_z";   // another task, another normalization: no Hopper nominal
       mount(host, controls, describe(state.view), function () {
         var wrap = el("div", { class: "viz-chart" });
         var present = DATA.library.families.filter(function (f) { return rows.some(function (e) { return e.rec.family === f.key; }); });
-        wrap.appendChild(legend(present.map(function (f) { return { color: FAMILY_COLOR[f.key], label: f.label }; }).concat([{ tick: true, label: "Nominal (no shift)" }])));
+        wrap.appendChild(legend(present.map(function (f) { return { color: FAMILY_COLOR[f.key], label: f.label }; }).concat(semantic ? [] : [{ tick: true, label: "Nominal (no shift)" }])));
         if (!rows.length) { wrap.appendChild(el("p", { class: "viz-empty", text: "No method has a value here." })); return wrap; }
         wrap.appendChild(barChart(rows.map(function (e) {
-          var nom = P.nominal[e.mi] ? P.nominal[e.mi][0] : null;
+          var nom = !semantic && P.nominal[e.mi] ? P.nominal[e.mi][0] : null;
           return { name: e.rec.name, sub: familyText(e.rec), value: e.value, nominal: nom,
                    color: FAMILY_COLOR[e.rec.family],
                    rows: function () { return [{ text: e.rec.name + " · " + familyOf(e.rec).label, strong: true },
@@ -362,7 +366,7 @@
         return wrap;
       }, function () {
         return table(["Method", "Family", "Regime", "Score", "n", "Score at nominal"],
-          rows.map(function (e) { var nom = P.nominal[e.mi]; return [e.rec.name, familyOf(e.rec).label, e.rec.regime, fmt(e.value), String(e.n), nom ? fmt(nom[0]) : "—"]; }));
+          rows.map(function (e) { var nom = semantic ? null : P.nominal[e.mi]; return [e.rec.name, familyOf(e.rec).label, e.rec.regime, fmt(e.value), String(e.n), nom ? fmt(nom[0]) : "—"]; }));
       });
     }
     host.addEventListener("viz:render", render);

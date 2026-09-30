@@ -12,8 +12,9 @@ assets/results.js draws. Three parts, each with the aggregation of the paper:
   channels   Part 2, the isolated shifts on Hopper, the 22 configurations the paper
              reports per regime: the five selected cells of each frozen-policy channel
              (mean +- sd across seeds), the paper's channel score (the five cells equally
-             weighted, per seed), and the two training-time channels as one configuration
-             each (trained under the shift, evaluated at nominal, +- across the ladder).
+             weighted, per seed), the two training-time channels as one configuration
+             each (trained under the shift, evaluated at nominal, +- across the ladder),
+             and the semantic shift on the door task, online only, as the paper prints it.
   compound   Part 3, the compound scenarios: nominal, each isolated shift, the compound
              cell and the independence prediction, per method and block.
 
@@ -76,7 +77,11 @@ CHANNELS = [
     ("theta_tau_exec", "Latency shift · execution", "frozen"),
     ("theta_r", "Reward/cost shift · in training", "training"),
     ("theta_tau_credit", "Latency shift · credit, in training", "training"),
+    ("theta_z", "Semantic shift · door task", "semantic"),
 ]
+# The semantic shift is measured on robosuite DoorCausal, the task built for the causal
+# method; the paper's table prints that method and its two references only.
+SEMANTIC_ROWS = ["RSC-SAC", "PPO", "SAC"]
 GRID = {
     "spec_obsadv_hopper": ("theta_o", "Observation noise"),
     "spec_obsadv_mad_hopper": ("theta_o", "Observation attack (MAD-PGD)"),
@@ -256,6 +261,17 @@ def channels():
             per_arm.setdefault(channel, []).append(st.mean(v))
         for channel, ladder in per_arm.items():
             values.append([mi, f"paper:{channel}", *mean_sd(ladder)])
+
+    # the semantic shift: the source paper's normalization (the SAC nominal as the shared
+    # denominator), over the seeds whose training had not collapsed
+    sem = defaultdict(list)
+    for r in rows("part2_semantic_long.csv"):
+        if r["display"] in SEMANTIC_ROWS and r["collapsed"] == "0":
+            sem[r["display"]].append(float(r["shifted_norm"]))
+    for m in SEMANTIC_ROWS:
+        if sem[m]:
+            mi = methods.add(m, method_record(m, "online", family_of(m)))
+            values.append([mi, "paper:theta_z", *mean_sd(sem[m])])
 
     return {"channels": [{"key": k, "label": l, "kind": kind} for k, l, kind in CHANNELS],
             "grids": grids, "cells": cell_index.records,
