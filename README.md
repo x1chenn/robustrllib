@@ -102,14 +102,16 @@ spreads.
 
 ## Landing page
 
-The landing page is short on purpose. It opens with the title, one sentence and a drawing:
-an open book with a pulse line (the library), the scenes it reaches in an arc above it, the
-shifts flying at it from the left, and the numbers of the benchmark on chips around it. The
-drawing is an inline SVG in `index.html`; on phones its chips give way to a row of pills.
-Then come the abstract, the highlights with the comparison of benchmarks, the algorithm
-book and the table of the robust methods, the shift sources and modes, the findings as one
-line each, a quick start and the BibTeX entry. Explanations belong to the documentation,
-and every block of the landing page links to the page that explains it.
+The landing page is short on purpose. It opens with the title, one sentence, the drawing
+and the numbers of the benchmark. The drawing is an inline SVG in `index.html`: an open
+book with a shield on one page and a score that moves under shift on the other, and above
+it four scenes a shift comes from. The small mark before the name, a book under four
+blocks, is the same drawing reduced; the documentation's theme carries it too.
+Then come the abstract, the highlights with the paper's overview figure and the comparison
+of benchmarks, the algorithm book and the table of the robust methods, the shift sources
+and modes, the findings as one line each, a quick start and the BibTeX entry. Explanations
+belong to the documentation, and every block of the landing page links to the page that
+explains it.
 
 Everything on the page, from the title to the footer, has one width (1040 px with its
 padding), on a warm, light ground with hairlines between the parts; every colour and size is

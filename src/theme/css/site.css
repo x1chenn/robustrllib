@@ -86,11 +86,12 @@ a:hover { color: var(--bk-primary-dark); text-decoration: underline; }
 /* ---- the name of the site: in the bar, and again on top of the left column, where
         it stays when the bar has scrolled away ---- */
 .bk-brand {
-  display: flex; align-items: baseline; gap: .45rem; height: var(--bk-bar-height);
+  display: flex; align-items: center; gap: .45rem; height: var(--bk-bar-height);
   padding: 0 1rem; line-height: var(--bk-bar-height); white-space: nowrap;
   font-size: 1.1rem; color: var(--bk-text);
 }
 .bk-brand:hover { color: var(--bk-text); text-decoration: none; }
+.bk-brand .mark { flex: none; width: 28px; height: 25px; margin-right: .15rem; }
 .bk-brand-name { font-weight: 700; letter-spacing: -.02em; }
 .bk-brand-mark { color: var(--bk-primary); }
 .bk-brand-kind { color: var(--bk-muted); }
