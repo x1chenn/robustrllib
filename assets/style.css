@@ -364,7 +364,7 @@ footer::before { content: ""; display: block; max-width: 960px; margin: 0 auto 2
 }
 .loop-scene .le { opacity: 0; transition: opacity .45s ease; transition-delay: calc(var(--i, 0) * .26s); }
 .loop-scene .le path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .55s ease; transition-delay: calc(var(--i, 0) * .26s + .1s); }
-.loop-scene .le-dash path { stroke-dasharray: .028 .018; stroke-dashoffset: 0; }
+.loop-scene .le-dash path { stroke-dasharray: .011 .008; stroke-dashoffset: 0; }
 .loop-scene .lp { opacity: 0; transition: opacity .6s ease; }
 .loop-scene.play .ln, .loop-scene.play .lt, .loop-scene.play .lc { opacity: 1; transform: none; }
 .loop-scene.play .le { opacity: 1; }
