@@ -111,8 +111,9 @@ book and the table of the robust methods, the shift sources and modes, the findi
 line each, a quick start and the BibTeX entry. Explanations belong to the documentation,
 and every block of the landing page links to the page that explains it.
 
-The page is one column bounded by hairlines on a warm, light ground, with large, tightly set
-headings; every colour and size is in `assets/style.css`.
+Everything on the page, from the title to the footer, has one width (1040 px with its
+padding), on a warm, light ground with hairlines between the parts; every colour and size is
+in `assets/style.css`.
 
 ## Branches
 
