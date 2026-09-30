@@ -6,14 +6,19 @@
 Rewrites two blocks of ../index.html: between the `algo-book` markers, the book of the
 All Methods page (the same generator writes it, and the same Markdown extensions as in
 mkdocs.yml turn it into HTML; only the addresses differ, because the landing page sits
-one directory above the documentation), and between the `algo-table` markers, the
-paper's structural comparison of the robust methods, one row per method.
+one directory above the documentation); between the `algo-table` markers, the
+paper's structural comparison of the robust methods, one row per method; and between
+the `shift-toolbox` markers, the shift toolbox from data/shifts.yaml, with the
+first source and mode already shown, so that the page reads without scripts.
 """
 from __future__ import annotations
 
 import re
 import sys
 from pathlib import Path
+
+import html as htmlmod
+import json
 
 import markdown
 import yaml
@@ -22,6 +27,7 @@ SRC = Path(__file__).resolve().parents[1]
 LANDING = SRC.parent / "index.html"
 BOOK = ("<!-- algo-book:start -->", "<!-- algo-book:end -->")
 TABLE = ("<!-- algo-table:start -->", "<!-- algo-table:end -->")
+TOOLBOX = ("<!-- shift-toolbox:start -->", "<!-- shift-toolbox:end -->")
 
 CLAIMED = {"dynamic": "Dynamic shift", "observation": "Observation shift", "semantics": "Semantic shift"}
 # The table holds robust methods only, so the group follows from the setting.
@@ -97,6 +103,56 @@ def table_html(spec):
     return "\n".join("    " + r for r in rows)
 
 
+def esc(text):
+    return htmlmod.escape(str(text), quote=True)
+
+
+def toolbox_panel(source, mode_key, modes):
+    """The example panel for one source and one mode, as the script renders it."""
+    mode = next(m for m in modes if m["key"] == mode_key)
+    entry = source["modes"][mode_key]
+    names = "".join(f"<code>{esc(n)}</code>" for n in entry.get("names", []))
+    return (
+        f'<figure class="tb-figure"><img src="{esc(source["example"]["image"])}" alt="{esc(source["example"]["caption"])}">'
+        f'<figcaption>{esc(source["example"]["caption"])}</figcaption></figure>\n'
+        f'<div class="tb-detail">'
+        f'<p class="tb-title"><b>{esc(source["name"])}</b> · {esc(mode["name"])}</p>'
+        f'<p class="tb-blurb">{esc(entry.get("note", ""))}</p>'
+        + (f'<p class="tb-names">{names}</p>' if names else "")
+        + f'<pre class="code tb-code">{esc(entry["code"])}</pre>'
+        f'<p class="tb-links"><a href="{esc(source["page"])}">{esc(source["name"])} in the tutorial</a> · '
+        f'<a href="{esc(mode["page"])}">{esc(mode["name"])} mode</a></p></div>')
+
+
+def toolbox_html(data):
+    modes, sources = data["modes"], data["sources"]
+    first = sources[0]
+    first_mode = next(m["key"] for m in modes if m["key"] in first["modes"])
+    out = ['<div class="toolbox" id="shift-toolbox">',
+           '  <p class="tb-heading">Shift toolbox</p>',
+           '  <div class="tb-row"><span class="tb-label">Sources</span><div class="tb-buttons" role="tablist" aria-label="Shift sources">']
+    for i, src in enumerate(sources):
+        out.append(f'    <button type="button" class="tb-btn tb-source{" is-active" if i == 0 else ""}" '
+                   f'data-source="{src["key"]}" role="tab" aria-selected="{"true" if i == 0 else "false"}">'
+                   f'<span class="tb-dot tb-{src["key"]}"></span>{esc(src["name"])}</button>')
+    out.append('  </div></div>')
+    out.append('  <div class="tb-row"><span class="tb-label">Modes</span><div class="tb-buttons" role="tablist" aria-label="Shift modes">')
+    for m in modes:
+        on = m["key"] in first["modes"]
+        disabled = "" if on else ' aria-disabled="true"'
+        active = " is-active" if m["key"] == first_mode else ""
+        selected = "true" if m["key"] == first_mode else "false"
+        out.append(f'    <button type="button" class="tb-btn tb-mode{active}" data-mode="{m["key"]}" '
+                   f'role="tab" aria-selected="{selected}"{disabled}>{esc(m["name"])}</button>')
+    out.append('  </div></div>')
+    out.append('  <div class="tb-panel" id="tb-panel" aria-live="polite">')
+    out.append(toolbox_panel(first, first_mode, modes))
+    out.append('  </div>')
+    out.append('  <script type="application/json" id="shift-data">' + json.dumps(data, ensure_ascii=False).replace("</", "<\\/") + '</script>')
+    out.append('</div>')
+    return "\n".join("    " + line for line in out)
+
+
 def replace(html, markers, body):
     start, end = markers
     block = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
@@ -112,8 +168,9 @@ def main():
     # The book is not indented: it holds <pre> blocks, where leading spaces would show.
     html = replace(html, BOOK, book_html(spec, refs))
     html = replace(html, TABLE, table_html(spec))
+    html = replace(html, TOOLBOX, toolbox_html(yaml.safe_load(open(SRC / "data" / "shifts.yaml"))))
     LANDING.write_text(html)
-    print(f"synced algorithm book and table in {LANDING.name}")
+    print(f"synced algorithm book, table and shift toolbox in {LANDING.name}")
 
 
 if __name__ == "__main__":

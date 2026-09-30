@@ -13,9 +13,9 @@ The site has two parts that share one colour system:
 ## Structure
 
 ```
-├── index.html                # landing page; the blocks between the `algo-book` and `algo-table` markers are GENERATED
+├── index.html                # landing page; the blocks between the `algo-book`, `algo-table` and `shift-toolbox` markers are GENERATED
 ├── 404.html                  # BUILT: copy of the documentation's not-found page
-├── assets/                   # landing page style and its two figures
+├── assets/                   # landing page style, script, two figures, and shifts/ (one drawing per shift source)
 ├── docs/                     # BUILT documentation. Never edit by hand.
 └── src/
     ├── mkdocs.yml            # navigation, Markdown extensions
@@ -40,12 +40,13 @@ The site has two parts that share one colour system:
     ├── figures/              # LaTeX sources of the diagrams and formulas
     ├── data/
     │   ├── algorithms.yaml   # one record per algorithm: the single source of truth
+    │   ├── shifts.yaml       # the shift toolbox of the landing page: sources, modes, examples
     │   ├── references.yaml   # original papers
     │   └── results/          # frozen result table that every number is computed from
     ├── theme/                # the site's own theme: main.html, 404.html, css/, js/, fonts/
     └── tools/
         ├── gen_algorithms.py # data -> method pages, group overviews, algorithm book
-        ├── sync_landing.py   # data -> algorithm book and table on the landing page
+        ├── sync_landing.py   # data -> algorithm book, table and shift toolbox on the landing page
         ├── render_figures.py # LaTeX -> SVG; needs pdflatex, run only when a figure changes
         ├── finalize.py       # makes the built output reproducible
         ├── check_site.py     # pre-publish scan
@@ -107,11 +108,21 @@ and the numbers of the benchmark. The drawing is an inline SVG in `index.html`: 
 book with a shield on one page and a score that moves under shift on the other, and above
 it four scenes a shift comes from. The small mark before the name, a book under four
 blocks, is the same drawing reduced; the documentation's theme carries it too.
-Then come the abstract, the highlights with the paper's overview figure and the comparison
-of benchmarks, the algorithm book and the table of the robust methods, the shift sources
-and modes, the findings as one line each, a quick start and the BibTeX entry. Explanations
+Then come the abstract with the paper's overview figure, the highlights with the
+comparison of benchmarks, the algorithm book and the table of the robust methods, the shift
+toolbox, the findings as one line each, a quick start and the BibTeX entry. Explanations
 belong to the documentation, and every block of the landing page links to the page that
 explains it.
+
+## Shift toolbox
+
+The toolbox on the landing page is generated from `src/data/shifts.yaml`: six sources, five
+modes, and for each pair the mode names the code accepts, a sentence, and an example
+`ShiftSpec`. A click on a source shows which modes it offers; a click on a mode shows the
+example. Without scripts the page shows the first pair. Each source has a picture
+(`example.image`) with a caption; the pictures under `assets/shifts/` are drawings that stand
+in for rendered scenes. To replace one, put the rendering next to them (any size; it is shown
+at about 400 px wide) and change `image` and `caption` in `shifts.yaml`, then run `build.sh`.
 
 Everything on the page, from the title to the footer, has one width (1040 px with its
 padding), on a warm, light ground with hairlines between the parts; every colour and size is
@@ -149,7 +160,8 @@ python3 -m http.server 8000
 | Add or change an algorithm | `src/data/algorithms.yaml`, and `nav` in `src/mkdocs.yml` for a new one | `build.sh` |
 | Update the numbers | replace the table in `src/data/results/` | `build.sh` |
 | Add a topic page | new file under `src/content/`, and `nav` in `src/mkdocs.yml` | `build.sh` |
-| Change the landing page | `index.html`, `assets/style.css`; never the blocks between the `algo-book` and `algo-table` markers | `build.sh` |
+| Change the landing page | `index.html`, `assets/style.css`; never the generated blocks | `build.sh` |
+| Change the shift toolbox | `src/data/shifts.yaml`; a rendering into `assets/shifts/` | `build.sh` |
 
 Numbers are never typed into a page. `gen_algorithms.py` computes them from
 `src/data/results/` and refuses to write pages when the headline numbers of the
