@@ -246,14 +246,11 @@ recipe behind this one entry.</p>
 <td><code>experiment/</code></td>
 <td>The three references, the budget and hyperparameter overrides</td>
 </tr>
-<tr>
-<td>DR</td>
-<td><code>dr/</code></td>
-<td>Randomization ranges for online training, as a list of shifts</td>
-</tr>
 </tbody>
 </table>
-<p>The experiment file ties the cards together.</p>
+<p>The experiment file ties the cards together. One method, <a href="../robust-online/dr/">DR</a>, reads a
+file of its own on top of these: the randomization ranges it trains under, kept in <code>dr/</code> and
+described with the method <a href="#an-online-method-with-a-training-environment">below</a>.</p>
 <div class="highlight"><span class="filename">robustrllib/configs/experiment/rorl_hopper.yaml</span><pre><span></span><code><span class="c1"># Official Hopper-medium RORL hyperparameters on benchmark Minari data.</span>
 <span class="nt">algorithm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/algorithm/rorl.yaml</span>
 <span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">robust_gymnasium/configs/task/hopper_minari_medium.yaml</span>

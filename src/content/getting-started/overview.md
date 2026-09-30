@@ -106,7 +106,7 @@ The code has four parts. **Configuration** selects what runs, **Algorithms** and
 | Algorithm interface | `robustrllib.algos` | `Algo`: `train`, `predict`, `save`, `load` | The contract a method implements to enter the library |
 | Training runtime | `robustrllib.training` | `TrainerAdapter`, `run_trainer` | Launches a run, writes checkpoints, resumes |
 | Method implementations | `baselines/<method>/` | `train_<method>.py -c <experiment.yaml>` | The native training recipe of each method |
-| Configuration | `robustrllib/configs/` | Cards: `algorithm`, `task`, `eval`, `experiment`, `dr` | What to train, on which task, evaluated on which grid |
+| Configuration | `robustrllib/configs/` | Cards: `algorithm`, `task`, `eval`, `experiment` | What to train, on which task, evaluated on which grid |
 | Evaluation | `baselines/eval_final.py` | `-c <experiment.yaml> --run-dir <dir>` | Runs the frozen checkpoint on every condition of a grid |
 | Metrics | `robustrllib.metrics` | `normalize`, `condition_metrics`, `summary_metrics` | Turns returns into the reported scores |
 

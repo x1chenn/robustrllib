@@ -23,9 +23,10 @@ recipe behind this one entry.
 | Task | `task/` | Environment id and, for offline methods, the dataset |
 | Eval | `eval/` | The perturbation grid a frozen policy is scored on |
 | Experiment | `experiment/` | The three references, the budget and hyperparameter overrides |
-| DR | `dr/` | Randomization ranges for online training, as a list of shifts |
 
-The experiment file ties the cards together.
+The experiment file ties the cards together. One method, [DR](robust-online/dr.md), reads a
+file of its own on top of these: the randomization ranges it trains under, kept in `dr/` and
+described with the method [below](#an-online-method-with-a-training-environment).
 
 ```yaml title="robustrllib/configs/experiment/rorl_hopper.yaml"
 # Official Hopper-medium RORL hyperparameters on benchmark Minari data.

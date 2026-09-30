@@ -42,11 +42,12 @@ The site has two parts that share one colour system:
     │   ├── algorithms.yaml   # one record per algorithm: the single source of truth
     │   ├── shifts.yaml       # the shift toolbox of the landing page: sources, modes, examples
     │   ├── references.yaml   # original papers
-    │   └── results/          # frozen result table that every number is computed from
+    │   └── results/          # frozen result tables that every number is computed from
     ├── theme/                # the site's own theme: main.html, 404.html, css/, js/, fonts/
     └── tools/
         ├── gen_algorithms.py # data -> method pages, group overviews, algorithm book
-        ├── sync_landing.py   # data -> algorithm book, table and shift toolbox on the landing page
+        ├── gen_results.py    # frozen tables -> the JSON behind the charts of the landing page
+        ├── sync_landing.py   # data -> algorithm book, table, shift toolbox and results on the landing page
         ├── render_figures.py # LaTeX -> SVG; needs pdflatex, run only when a figure changes
         ├── finalize.py       # makes the built output reproducible
         ├── check_site.py     # pre-publish scan
@@ -113,6 +114,30 @@ comparison of benchmarks, the algorithm book and the table of the robust methods
 toolbox, the findings as one line each, a quick start and the BibTeX entry. Explanations
 belong to the documentation, and every block of the landing page links to the page that
 explains it.
+
+## Result charts
+
+Three charts on the landing page are drawn from the frozen tables in `src/data/results/`
+by `assets/results.js` (plain SVG, no library), with the JSON that `gen_results.py` builds
+and `sync_landing.py` writes into the page:
+
+| Chart | Section | Data | What the reader chooses |
+|---|---|---|---|
+| Library-wide results | Algorithms | `part1_master.csv`, the 220-condition selection | regime, task family, task, shift axis, severity quartile, order |
+| Channel leaderboard | Findings | `part2_cells_long*.csv`, `part2_training_long.csv`, `part2_semantic_long.csv` | shift source; the paper's channel score, a whole grid, or one cell; regime; standard references |
+| Isolated and compound shifts | Findings | `part3_profile_channels.csv` | scenario; score or retention |
+
+Every chart has a table twin (the *Table* button), a tooltip on hover and on keyboard
+focus, and a legend. The aggregation is the paper's: conditions within an axis, axes within
+a task, tasks with equal weight (Part 1); the five selected cells of a channel, equally
+weighted per seed, then mean ± sd across seeds (Part 2). `gen_results.py` recomputes the
+paper's channel scores and stops the build if they differ from `part2_channel_summary.csv`.
+`part2_cells_long_standard.csv` holds the standard references (IQL, SynthER, MOPO, PPO, SAC)
+on the same grids, read from the same evaluation files with the same normalization; the
+paper's tables show the robust methods only.
+
+The chart colours are categorical slots checked for colour-vision safety (the families in
+their fixed order; the shift cells in the order they appear); text never wears a data colour.
 
 ## Shift toolbox
 

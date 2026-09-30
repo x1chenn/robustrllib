@@ -28,6 +28,7 @@ LANDING = SRC.parent / "index.html"
 BOOK = ("<!-- algo-book:start -->", "<!-- algo-book:end -->")
 TABLE = ("<!-- algo-table:start -->", "<!-- algo-table:end -->")
 TOOLBOX = ("<!-- shift-toolbox:start -->", "<!-- shift-toolbox:end -->")
+RESULTS = ("<!-- results-data:start -->", "<!-- results-data:end -->")
 
 CLAIMED = {"dynamic": "Dynamic shift", "observation": "Observation shift", "semantics": "Semantic shift"}
 # The table holds robust methods only, so the group follows from the setting.
@@ -43,6 +44,7 @@ GROUPS = [
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gen_algorithms import book  # noqa: E402
+import gen_results  # noqa: E402
 
 
 def extensions():
@@ -169,8 +171,12 @@ def main():
     html = replace(html, BOOK, book_html(spec, refs))
     html = replace(html, TABLE, table_html(spec))
     html = replace(html, TOOLBOX, toolbox_html(yaml.safe_load(open(SRC / "data" / "shifts.yaml"))))
+    results = gen_results.build()
+    print(gen_results.check(results))
+    payload = json.dumps(results, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    html = replace(html, RESULTS, '<script type="application/json" id="results-data">' + payload + "</script>")
     LANDING.write_text(html)
-    print(f"synced algorithm book, table and shift toolbox in {LANDING.name}")
+    print(f"synced algorithm book, table, shift toolbox and results in {LANDING.name}")
 
 
 if __name__ == "__main__":
