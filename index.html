@@ -73,7 +73,6 @@
     <li class="hero-scene scene-book">
       <img src="assets/figures/hero-book.svg" width="350" height="217" alt="An open book with a shield labeled robustRL and a performance curve labeled Evaluation">
     </li>
-    <li class="hero-metric metric-robust"><b data-count="16">16</b><span>robust methods</span><small class="hero-tags"><i style="--i:0">Learner-centric</i><i style="--i:1">Environment-centric</i><i style="--i:2">Data-centric</i><i style="--i:3">Generative</i><i style="--i:4">Safe</i></small></li>
     <li class="hero-scene scene-arm">
       <img src="assets/figures/hero-arm.svg" width="145" height="125" alt="A robot arm reaching for a displaced object">
     </li>
@@ -160,6 +159,48 @@
   <div class="wrap">
     <p class="eyebrow">Algorithms</p>
     <h2>Twenty-two algorithms, one spread each.</h2>
+    <h3>Contents</h3>
+    <p class="sub">The robust methods by family, with the shift each one claims and the base algorithm it is built on.</p>
+    <!-- algo-table:start -->
+    <div class="table-scroll">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Family</th><th>Method</th><th>Claimed<br>robustness</th><th>Base<br>algorithm</th>
+            <th class="c">Shifted-env<br>rollout</th><th class="c">Adversarial<br>network</th><th class="c">Learned<br>model</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="grp"><td colspan="7">Robust Offline — learns from a fixed dataset without environment interaction</td></tr>
+          <tr><td rowspan="3" class="nw">Learner-centric</td><td class="nw"><a href="docs/algorithms/robust-offline/rfqi/"><b>RFQI</b></a></td><td>Dynamic shift</td><td>FQI</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+          <tr><td class="nw"><a href="docs/algorithms/robust-offline/rorl/"><b>RORL</b></a></td><td>Observation shift</td><td>SAC</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+          <tr><td class="nw"><a href="docs/algorithms/robust-offline/atla-iql/"><b>ATLA-IQL</b></a></td><td>Observation shift</td><td>IQL</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
+          <tr><td rowspan="2" class="nw">Data-centric</td><td class="nw"><a href="docs/algorithms/robust-offline/rsc-iql/"><b>RSC-IQL</b></a></td><td>Semantic shift</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
+          <tr><td class="nw"><a href="docs/algorithms/robust-offline/rambo/"><b>RAMBO</b></a></td><td>Dynamic shift</td><td>SAC</td><td class="c"></td><td class="c tick">✓</td><td class="c tick">✓</td></tr>
+          <tr><td rowspan="3" class="nw">Data-centric · generative</td><td class="nw"><a href="docs/algorithms/robust-offline/romb/"><b>ROMB</b></a></td><td>Dynamic shift</td><td>IQL</td><td class="c"></td><td class="c tick">✓</td><td class="c tick">✓</td></tr>
+          <tr><td class="nw"><a href="docs/algorithms/robust-offline/fwm/"><b>FWM</b></a></td><td>Dynamic shift</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
+          <tr><td class="nw"><a href="docs/algorithms/robust-offline/plr-pvl/"><b>PLR-PVL</b></a></td><td>Dynamic shift</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
+          <tr class="grp"><td colspan="7">Robust Online — learns through continued environment interaction</td></tr>
+          <tr><td rowspan="3" class="nw">Learner-centric</td><td class="nw"><a href="docs/algorithms/robust-online/atla/"><b>ATLA</b></a></td><td>Observation shift</td><td>PPO</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
+          <tr><td class="nw"><a href="docs/algorithms/robust-online/atla-sa/"><b>ATLA-SA</b></a></td><td>Observation shift</td><td>PPO</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
+          <tr><td class="nw"><a href="docs/algorithms/robust-online/rsc/"><b>RSC</b></a></td><td>Semantic shift</td><td>SAC</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
+          <tr><td rowspan="2" class="nw">Environment-centric</td><td class="nw"><a href="docs/algorithms/robust-online/rarl/"><b>RARL</b></a></td><td>Dynamic shift</td><td>PPO / TRPO</td><td class="c tick">✓</td><td class="c tick">✓</td><td class="c"></td></tr>
+          <tr><td class="nw"><a href="docs/algorithms/robust-online/dr/"><b>DR</b></a></td><td>Dynamic shift</td><td>SAC / PPO</td><td class="c tick">✓</td><td class="c"></td><td class="c"></td></tr>
+          <tr class="grp"><td colspan="7">Robust Safe — adds a cost constraint that must hold under shift</td></tr>
+          <tr><td rowspan="2" class="nw">Robust safe</td><td class="nw"><a href="docs/algorithms/robust-safe/ramu/"><b>RAMU</b></a></td><td>Dynamic shift</td><td>PPO</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+          <tr><td class="nw"><a href="docs/algorithms/robust-safe/spidr/"><b>SPiDR</b></a></td><td>Dynamic shift</td><td>PPO</td><td class="c tick">✓</td><td class="c"></td><td class="c tick">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbl-note">
+      <em>Shifted-env rollout</em>: rollouts collected from a deliberately perturbed environment.
+      <em>Adversarial network</em>: a learned adversary optimised against the policy.
+      <em>Learned model</em>: a trained next-state predictor used by the robustness mechanism.
+      The six standard references are on the <a href="docs/algorithms/">algorithm pages</a>.
+    </p>
+<!-- algo-table:end -->
+
+    <h3>The book</h3>
     <p class="sub">The labels on the edge of the book open the four groups: standard, robust online, robust offline and robust safe.</p>
 
 <!-- algo-book:start -->
@@ -1274,47 +1315,6 @@ python<span class="w"> </span>baselines/evaluate.py<span class="w"> </span><span
 </div>
 <!-- algo-book:end -->
 
-    <h3>Contents</h3>
-    <p class="sub">The robust methods by family, with the shift each one claims and the base algorithm it is built on.</p>
-    <!-- algo-table:start -->
-    <div class="table-scroll">
-      <table class="data">
-        <thead>
-          <tr>
-            <th>Family</th><th>Method</th><th>Claimed<br>robustness</th><th>Base<br>algorithm</th>
-            <th class="c">Shifted-env<br>rollout</th><th class="c">Adversarial<br>network</th><th class="c">Learned<br>model</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="grp"><td colspan="7">Robust Offline — learns from a fixed dataset without environment interaction</td></tr>
-          <tr><td rowspan="3" class="nw">Learner-centric</td><td class="nw"><a href="docs/algorithms/robust-offline/rfqi/"><b>RFQI</b></a></td><td>Dynamic shift</td><td>FQI</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
-          <tr><td class="nw"><a href="docs/algorithms/robust-offline/rorl/"><b>RORL</b></a></td><td>Observation shift</td><td>SAC</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
-          <tr><td class="nw"><a href="docs/algorithms/robust-offline/atla-iql/"><b>ATLA-IQL</b></a></td><td>Observation shift</td><td>IQL</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
-          <tr><td rowspan="2" class="nw">Data-centric</td><td class="nw"><a href="docs/algorithms/robust-offline/rsc-iql/"><b>RSC-IQL</b></a></td><td>Semantic shift</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
-          <tr><td class="nw"><a href="docs/algorithms/robust-offline/rambo/"><b>RAMBO</b></a></td><td>Dynamic shift</td><td>SAC</td><td class="c"></td><td class="c tick">✓</td><td class="c tick">✓</td></tr>
-          <tr><td rowspan="3" class="nw">Data-centric · generative</td><td class="nw"><a href="docs/algorithms/robust-offline/romb/"><b>ROMB</b></a></td><td>Dynamic shift</td><td>IQL</td><td class="c"></td><td class="c tick">✓</td><td class="c tick">✓</td></tr>
-          <tr><td class="nw"><a href="docs/algorithms/robust-offline/fwm/"><b>FWM</b></a></td><td>Dynamic shift</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
-          <tr><td class="nw"><a href="docs/algorithms/robust-offline/plr-pvl/"><b>PLR-PVL</b></a></td><td>Dynamic shift</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
-          <tr class="grp"><td colspan="7">Robust Online — learns through continued environment interaction</td></tr>
-          <tr><td rowspan="3" class="nw">Learner-centric</td><td class="nw"><a href="docs/algorithms/robust-online/atla/"><b>ATLA</b></a></td><td>Observation shift</td><td>PPO</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
-          <tr><td class="nw"><a href="docs/algorithms/robust-online/atla-sa/"><b>ATLA-SA</b></a></td><td>Observation shift</td><td>PPO</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
-          <tr><td class="nw"><a href="docs/algorithms/robust-online/rsc/"><b>RSC</b></a></td><td>Semantic shift</td><td>SAC</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
-          <tr><td rowspan="2" class="nw">Environment-centric</td><td class="nw"><a href="docs/algorithms/robust-online/rarl/"><b>RARL</b></a></td><td>Dynamic shift</td><td>PPO / TRPO</td><td class="c tick">✓</td><td class="c tick">✓</td><td class="c"></td></tr>
-          <tr><td class="nw"><a href="docs/algorithms/robust-online/dr/"><b>DR</b></a></td><td>Dynamic shift</td><td>SAC / PPO</td><td class="c tick">✓</td><td class="c"></td><td class="c"></td></tr>
-          <tr class="grp"><td colspan="7">Robust Safe — adds a cost constraint that must hold under shift</td></tr>
-          <tr><td rowspan="2" class="nw">Robust safe</td><td class="nw"><a href="docs/algorithms/robust-safe/ramu/"><b>RAMU</b></a></td><td>Dynamic shift</td><td>PPO</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
-          <tr><td class="nw"><a href="docs/algorithms/robust-safe/spidr/"><b>SPiDR</b></a></td><td>Dynamic shift</td><td>PPO</td><td class="c tick">✓</td><td class="c"></td><td class="c tick">✓</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="tbl-note">
-      <em>Shifted-env rollout</em>: rollouts collected from a deliberately perturbed environment.
-      <em>Adversarial network</em>: a learned adversary optimised against the policy.
-      <em>Learned model</em>: a trained next-state predictor used by the robustness mechanism.
-      The six standard references are on the <a href="docs/algorithms/">algorithm pages</a>.
-    </p>
-<!-- algo-table:end -->
-
     <p class="more"><a class="btn" href="docs/algorithms/">All methods in the tutorial</a></p>
   </div>
 </section>
@@ -1560,7 +1560,7 @@ python<span class="w"> </span>baselines/evaluate.py<span class="w"> </span><span
 <section id="quickstart">
   <div class="wrap">
     <p class="eyebrow">Quick start</p>
-    <h2>Declare a shift, train, evaluate.</h2>
+    <h2>Robust RL for distribution shift</h2>
 
     <div class="cols2">
       <div>
