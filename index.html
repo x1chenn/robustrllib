@@ -61,17 +61,27 @@
     </div>
   </div>
 
-  <div class="hero-stage">
-    <img class="hero-art" src="assets/figures/hero-editorial.svg" width="900" height="430"
-         alt="An illustrated field guide to robust reinforcement learning: an open book labeled robustRL beneath a shield and Evaluation beneath a performance curve, surrounded by a car in rain, a four-legged robot stepping over rocks, a robot arm, and a maze with a successful route and two wrong turns.">
-  </div>
-
-  <ul class="stats" aria-label="The benchmark in numbers">
-    <li><b data-count="22">22</b><span>algorithms</span></li>
-    <li><b data-count="16">16</b><span>robust methods</span></li>
-    <li><b data-count="6">6</b><span>shift sources</span></li>
-    <li><b data-count="5">5</b><span>shift modes</span></li>
-    <li><b data-count="273">273</b><span>configurations</span></li>
+  <ul class="hero-stage hero-collage" data-no-reveal aria-label="The benchmark in numbers and illustrated environments">
+    <li class="hero-metric metric-algorithms"><b data-count="22">22</b><span>algorithms</span><small class="hero-tags"><i style="--i:0">Standard</i><i style="--i:1">Robust online</i><i style="--i:2">Robust offline</i><i style="--i:3">Robust safe</i></small></li>
+    <li class="hero-scene scene-robot">
+      <img src="assets/figures/hero-robot.svg" width="155" height="125" alt="A four-legged robot stepping over rocks">
+    </li>
+    <li class="hero-scene scene-driving">
+      <img src="assets/figures/hero-driving.svg" width="160" height="140" alt="A car driving through rain">
+    </li>
+    <li class="hero-metric metric-sources"><b data-count="6">6</b><span>shift sources</span><small class="hero-tags"><i style="--i:0">Dynamic</i><i style="--i:1">Observation</i><i style="--i:2">Action</i><i style="--i:3">Reward/cost</i><i style="--i:4">Latency</i><i style="--i:5">Semantic</i></small></li>
+    <li class="hero-scene scene-book">
+      <img src="assets/figures/hero-book.svg" width="350" height="217" alt="An open book with a shield labeled robustRL and a performance curve labeled Evaluation">
+    </li>
+    <li class="hero-metric metric-robust"><b data-count="16">16</b><span>robust methods</span><small class="hero-tags"><i style="--i:0">Learner-centric</i><i style="--i:1">Environment-centric</i><i style="--i:2">Data-centric</i><i style="--i:3">Generative</i><i style="--i:4">Safe</i></small></li>
+    <li class="hero-scene scene-arm">
+      <img src="assets/figures/hero-arm.svg" width="145" height="125" alt="A robot arm reaching for a displaced object">
+    </li>
+    <li class="hero-scene scene-maze">
+      <img src="assets/figures/hero-maze.svg" width="155" height="125" alt="A maze with a successful route and two wrong turns">
+    </li>
+    <li class="hero-metric metric-modes"><b data-count="5">5</b><span>shift modes</span><small class="hero-tags"><i style="--i:0">Stochastic</i><i style="--i:1">Adversarial</i><i style="--i:2">Parametric</i><i style="--i:3">Non-stationary</i><i style="--i:4">Composition</i></small></li>
+    <li class="hero-metric metric-configurations"><b data-count="273">273</b><span>configurations</span><small class="hero-tags"><i style="--i:0">220 library-wide</i><i style="--i:1">44 isolated</i><i style="--i:2">9 compound</i></small></li>
   </ul>
 </header>
 
@@ -1318,7 +1328,7 @@ python<span class="w"> </span>baselines/run_baseline.py<span class="w"> </span><
 <section id="shifts">
   <div class="wrap">
     <p class="eyebrow">Expandable shift toolbox</p>
-    <h2>6 shift sources, 5 modes, and room for new tasks.</h2>
+    <h2>6 shift sources, 5 modes, 6 task families.</h2>
     <p class="sub">Six sources and five modes compose into deployment-like environments on any task the toolbox knows; a new task or simulator plugs in through one adapter. Pick a source, then a mode, to see what the toolbox offers and how it is declared.</p>
 
     <!-- shift-toolbox:start -->

@@ -7,6 +7,83 @@
   var observe = window.IntersectionObserver && !reduced;
   document.documentElement.classList.add("has-js");
 
+  // ---- the hero floats briefly, then settles into illustrations / book / numbers
+  (function () {
+    var scene = document.querySelector(".hero-collage");
+    if (scene && (reduced || typeof scene.animate !== "function")) { scene.classList.add("is-settled"); }
+    if (!scene || reduced || typeof scene.animate !== "function") { return; }
+    var motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var width = scene.clientWidth, height = scene.clientHeight;
+    var animations = [], observer = null, started = false, done = false;
+    var visible = !window.IntersectionObserver, ready = false;
+
+    function settle() {
+      if (done) { return; }
+      done = true;
+      scene.classList.add("is-settled");   // the tags of the numbers come in now
+      if (observer) { observer.disconnect(); }
+      animations.forEach(function (animation) { animation.cancel(); });
+      window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", visibility);
+      if (motion.removeEventListener) { motion.removeEventListener("change", preference); }
+    }
+    function play() {
+      if (done || started || !ready || !visible || document.hidden) { return; }
+      started = true;
+      animations.forEach(function (animation) { animation.play(); });
+      Promise.all(animations.map(function (animation) { return animation.finished; })).then(settle, settle);
+    }
+    function resize() {
+      // A changed viewport should land cleanly in its new responsive layout.
+      if (scene.clientWidth !== width) { settle(); }
+    }
+    function preference(event) { if (event.matches) { settle(); } }
+    function visibility() {
+      if (done) { return; }
+      if (!started) { play(); return; }
+      animations.forEach(function (animation) {
+        if (document.hidden) { animation.pause(); } else { animation.play(); }
+      });
+    }
+    function transform(x, y, angle) {
+      return "translate(" + x + "px, " + y + "px) rotate(" + angle + "deg)";
+    }
+
+    Array.prototype.forEach.call(scene.children, function (item) {
+      var style = window.getComputedStyle(item);
+      var x = width * parseFloat(style.getPropertyValue("--from-x")) / 100 - item.offsetLeft;
+      var y = height * parseFloat(style.getPropertyValue("--from-y")) / 100 - item.offsetTop;
+      var angle = parseFloat(style.getPropertyValue("--tilt")) || 0;
+      var order = parseFloat(style.getPropertyValue("--order")) || 0;
+      var drift = item.classList.contains("scene-book") ? 0 : (item.classList.contains("hero-metric") ? 7 : 3);
+      var animation = item.animate([
+        { transform: transform(x, y, angle), offset: 0, easing: "ease-in-out" },
+        { transform: transform(x, y - drift, angle - (drift ? 1 : 0)), offset: .18, easing: "ease-in-out" },
+        { transform: transform(x, y + drift * .4, angle), offset: .36, easing: "cubic-bezier(.22, 1, .36, 1)" },
+        { transform: "translate(0px, 0px) rotate(0deg)", offset: 1 }
+      ], { duration: 3000, delay: order * 80, fill: "both" });
+      animation.pause();
+      animation.currentTime = 0;
+      // Resizing before first visibility can cancel a still-paused animation.
+      animation.finished.catch(function () {});
+      animations.push(animation);
+    });
+
+    window.addEventListener("resize", resize, { passive: true });
+    document.addEventListener("visibilitychange", visibility);
+    if (motion.addEventListener) { motion.addEventListener("change", preference); }
+    if (window.IntersectionObserver) {
+      observer = new window.IntersectionObserver(function (entries) {
+        visible = entries.some(function (entry) { return entry.isIntersecting; });
+        if (visible) { observer.disconnect(); play(); }
+      }, { threshold: .15 });
+      observer.observe(scene);
+    }
+    Promise.all(Array.prototype.map.call(scene.querySelectorAll("img"), function (img) {
+      return img.decode ? img.decode().catch(function () {}) : Promise.resolve();
+    })).then(function () { ready = true; play(); });
+  }());
+
   // ---- every block of a section comes in when it scrolls into view, one after another
   (function () {
     var wraps = document.querySelectorAll("section > .wrap, .hero");

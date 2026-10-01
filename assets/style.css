@@ -112,18 +112,53 @@ h4 { margin: 0 0 8px; font-size: 18px; font-weight: 700; letter-spacing: -.015em
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .hero .lead { max-width: 660px; margin: 0 auto; font-size: 17px; line-height: 1.6; color: var(--ink-2); }
-.hero-stage { position: relative; max-width: 700px; margin: 6px auto 0; }
-.hero-art { display: block; width: 100%; height: auto; overflow: hidden; }
-.stats {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; list-style: none;
-  max-width: 960px; margin: 18px auto 0; padding: 0;
+/* The resting composition also works without JavaScript. Intro positions are
+   measured once by landing.js and animated with transforms, without reflow. */
+.hero-stage {
+  position: relative; max-width: 960px; aspect-ratio: 960 / 540;
+  margin: 36px auto 96px; padding: 0; list-style: none;   /* the margin below holds the tags of the numbers */
 }
-.stats li {
-  padding: 18px 12px 16px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line-soft);
-  box-shadow: rgba(0, 0, 0, .05) 0 4px 24px; text-align: center;
+.hero-collage > li {
+  position: absolute; left: var(--x); top: var(--y); width: var(--w);
 }
-.stats b { display: block; font-size: 34px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; color: var(--ink); }
-.stats span { display: block; margin-top: 4px; font-size: 14px; font-weight: 600; color: var(--muted); }
+.hero-scene img { display: block; width: 100%; height: auto; }
+.hero-metric {
+  --y: 81%; --w: 17.6%; z-index: 2;
+  padding: 14px 8px 13px; border-radius: 8px 11px 9px 12px;
+  background: var(--card); border: 1px solid var(--line);
+  box-shadow: 1px 3px 0 rgba(77, 76, 72, .035); text-align: center;
+}
+.hero-metric b {
+  display: block; font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 3.6vw, 38px); font-weight: 400;
+  font-variant-numeric: lining-nums tabular-nums; line-height: 1.05; color: var(--ink-2);
+}
+.hero-metric span {
+  display: block; margin-top: 5px; font-size: clamp(11px, 1.3vw, 13px);
+  font-weight: 400; line-height: 1.35; color: var(--muted);
+}
+.metric-algorithms { --x: 0%; --from-x: 2; --from-y: 44; --tilt: -7; --order: 0; }
+.metric-robust { --x: 20.6%; --from-x: 11; --from-y: 67; --tilt: 4; --order: 1; }
+.metric-sources { --x: 41.2%; --from-x: 41; --from-y: 0; --tilt: 5; --order: 2; }
+.metric-modes { --x: 61.8%; --from-x: 80; --from-y: 44; --tilt: -5; --order: 3; }
+.metric-configurations { --x: 82.4%; --from-x: 72; --from-y: 68; --tilt: 6; --order: 4; }
+/* the colour sits on the library: the algorithms and the robust methods */
+.metric-algorithms, .metric-robust { background: #f6e9e2; border-color: #e3bfae; }
+.metric-algorithms b, .metric-robust b { color: var(--blue); }
+/* what each number holds, shown once the cards have settled */
+.hero-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 3px; margin: 8px -2px 0; }
+.hero-tags i {
+  font-style: normal; font-size: 10.5px; line-height: 1.25; padding: 2px 6px; border-radius: 999px;
+  background: var(--bg); border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap;
+}
+.metric-algorithms .hero-tags i, .metric-robust .hero-tags i { background: #fbf3ee; border-color: #e3bfae; color: #8a4a2f; }
+.has-js .hero-collage:not(.is-settled) .hero-tags i { opacity: 0; transform: translateY(5px); }
+.hero-tags i { transition: opacity .4s ease, transform .4s ease; transition-delay: calc(var(--i, 0) * 70ms); }
+.scene-driving { --x: 15%; --y: 9%; --w: 16%; --from-x: 13; --from-y: 18; --tilt: -4; --order: 0; }
+.scene-robot { --x: 33%; --y: 0%; --w: 14%; --from-x: 27; --from-y: 16; --tilt: 3; --order: 1; }
+.scene-arm { --x: 52%; --y: 1%; --w: 14%; --from-x: 59; --from-y: 14; --tilt: -3; --order: 2; }
+.scene-maze { --x: 70%; --y: 9%; --w: 16%; --from-x: 76; --from-y: 18; --tilt: 4; --order: 3; }
+.scene-book { --x: 32%; --y: 34%; --w: 36%; --from-x: 32; --from-y: 34; --tilt: 0; --order: 0; }
 
 /* ---------------- abstract ---------------- */
 .abstract { font-size: 17.5px; line-height: 1.7; color: var(--ink-2); }
@@ -322,7 +357,6 @@ footer::before { content: ""; display: block; max-width: 960px; margin: 0 auto 2
   .cols3 > div { padding: 18px 0; border-left: 0; border-top: 1px solid var(--line); }
   .channels, .channels.five { grid-template-columns: 1fr 1fr; }
   .cols2 { grid-template-columns: 1fr; }
-  .stats { grid-template-columns: repeat(3, 1fr); }
   .tb-panel { grid-template-columns: 1fr; }
   .tb-row { flex-direction: column; gap: 6px; }
   .tb-label { padding-top: 0; }
@@ -333,11 +367,29 @@ footer::before { content: ""; display: block; max-width: 960px; margin: 0 auto 2
   .hero { padding-top: 40px; }
   section { padding: 48px 0; }
   section::before { margin-bottom: 48px; }
-  .stats { grid-template-columns: repeat(2, 1fr); }
-  .stats li:last-child { grid-column: span 2; }
   .brand .mark { width: 26px; height: 24px; }
   .channels, .channels.five { grid-template-columns: 1fr; }
   .btn-row .btn { padding: 10px 16px; font-size: 14px; }
+}
+@media (max-width: 640px) {
+  .hero-collage {
+    max-width: 420px; height: 550px; aspect-ratio: auto; margin-top: 28px;
+  }
+  .hero-collage { height: 760px; }
+  .hero-metric { --w: 32%; padding: 12px 5px; min-height: 87px; }
+  .hero-tags i { font-size: 9.5px; padding: 1px 5px; }
+  .hero-metric b { font-size: 30px; }
+  .hero-metric span { font-size: 11px; overflow-wrap: anywhere; }
+  .metric-algorithms { --x: 0%; --y: 52%; --from-x: 0; --from-y: 1; }
+  .metric-robust { --x: 34%; --y: 52%; --from-x: 0; --from-y: 79; }
+  .metric-sources { --x: 68%; --y: 52%; --from-x: 35; --from-y: 0; }
+  .metric-modes { --x: 17%; --y: 78%; --from-x: 70; --from-y: 1; }
+  .metric-configurations { --x: 51%; --y: 78%; --from-x: 70; --from-y: 79; }
+  .scene-driving { --x: 0%; --y: 12%; --w: 25%; --from-x: 0; --from-y: 25; }
+  .scene-robot { --x: 26%; --y: 3%; --w: 23%; --from-x: 25; --from-y: 20; }
+  .scene-arm { --x: 51%; --y: 3%; --w: 23%; --from-x: 52; --from-y: 20; }
+  .scene-maze { --x: 75%; --y: 12%; --w: 25%; --from-x: 75; --from-y: 25; }
+  .scene-book { --x: 17%; --y: 28%; --w: 66%; --from-x: 17; --from-y: 43; }
 }
 
 /* task support, inside the toolbox */

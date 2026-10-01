@@ -4,7 +4,7 @@
   <!-- Warm paper, quiet pigment, and deliberately irregular pen contours. -->
   <g stroke="#4d4c48" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
     <!-- Driving in changing weather. -->
-    <g transform="translate(172 105) rotate(-9 60 60)">
+    <g id="scene-driving" transform="translate(172 105) rotate(-9 60 60)">
       <path d="M-5 57C-13 27 7 8 36 9C60-5 106 6 116 38C132 63 106 94 76 100C44 110 5 91-5 57Z" fill="#e8e6dc" stroke="none"/>
       <path d="M13 37C1 39-3 25 7 21C5 10 20 5 28 13C37 3 52 11 51 20C66 19 67 34 55 36C40 38 25 35 13 37Z" fill="#faf9f5"/>
       <path d="M13 47L10 55M29 45L26 56M45 46L42 53M58 43L55 51" stroke="#87867f" stroke-width="2"/>
@@ -18,7 +18,7 @@
     </g>
 
     <!-- A small field robot stepping over a rocky obstacle. -->
-    <g transform="translate(326 37) rotate(-4 58 61)">
+    <g id="scene-robot" transform="translate(326 37) rotate(-4 58 61)">
       <path d="M6 38C23 5 70 2 101 22C128 44 116 80 91 92C59 111 4 88 6 38Z" fill="#eddfc6" stroke="none"/>
       <path d="M7 107C43 105 90 109 137 107" stroke="#87867f" stroke-width="1.7"/>
       <path d="M78 107L84 96L96 88L110 92L120 106L99 109Z" fill="#c2b08b" stroke-width="2.1"/>
@@ -38,7 +38,7 @@
     </g>
 
     <!-- Reaching for an object whose position has shifted. -->
-    <g transform="translate(503 38) rotate(6 55 60)">
+    <g id="scene-arm" transform="translate(503 38) rotate(6 55 60)">
       <path d="M9 29C28 10 70 1 94 20C118 39 117 73 96 93C74 112 33 102 16 83C4 70-7 48 9 29Z" fill="#dfe4d8" stroke="none"/>
       <path d="M-1 108C37 106 72 110 116 106" stroke="#87867f" stroke-width="1.6"/>
       <path d="M62 91L92 91L98 103L57 103Z" fill="#8b9980"/>
@@ -54,7 +54,7 @@
     </g>
 
     <!-- Maze navigation: a successful route and two failed explorations. -->
-    <g transform="translate(643 117) rotate(10 53 46)">
+    <g id="scene-maze" transform="translate(643 117) rotate(10 53 46)">
       <path d="M-10 28C1 2 38-7 73 4C106 13 127 45 109 76C95 99 44 104 17 88C-8 75-20 48-10 28Z" fill="#eee2d7" stroke="none"/>
       <path d="M2 8L97 9L98 84L3 85Z" fill="#faf9f5" stroke="none"/>
       <path d="M5 64L5 10L50 9L95 10M95 28L96 55L95 82L49 83L5 82"/>
@@ -84,7 +84,7 @@
     </g>
 
     <!-- A clothbound field guide, open at the robustness chapter. -->
-    <g>
+    <g id="scene-book">
       <path d="M280 376C335 365 397 381 449 394C505 378 573 369 623 377C593 390 517 405 453 408C389 405 321 393 280 376Z" fill="#e8e6dc" stroke="none"/>
       <path d="M297 224C350 210 407 227 452 250C501 224 555 211 605 221L613 369C548 363 499 384 452 398C404 382 349 365 289 371Z" fill="#8b9980"/>
       <path d="M305 219C359 210 412 229 452 249C501 225 551 211 596 216L604 361C550 359 499 376 453 391C410 375 352 356 298 363Z" fill="#e8e6dc" stroke-width="1.8"/>
