@@ -40,17 +40,29 @@
   // ---- the hero floats briefly, then settles into illustrations / book / numbers
   (function () {
     var scene = document.querySelector(".hero-collage");
-    if (scene && (reduced || typeof scene.animate !== "function")) { scene.classList.add("is-settled"); }
+    if (scene && (reduced || typeof scene.animate !== "function")) { scene.classList.add("is-unfolding", "is-settled"); }
     if (!scene || reduced || typeof scene.animate !== "function") { return; }
     var motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     var width = scene.clientWidth, height = scene.clientHeight;
     var animations = [], observer = null, started = false, done = false;
+    var cardAnimations = [], unfoldFrame = null, duration = 3000;
     var visible = !window.IntersectionObserver, ready = false;
 
+    function unfold() {
+      if (done) { return; }
+      // The easing makes the cards look aligned before their motion fully ends.
+      // Start expanding during that tail, using animation time so hidden tabs stay in sync.
+      if (cardAnimations.every(function (card) { return card.animation.currentTime >= card.unfoldAt; })) {
+        scene.classList.add("is-unfolding");
+        return;
+      }
+      unfoldFrame = window.requestAnimationFrame(unfold);
+    }
     function settle() {
       if (done) { return; }
       done = true;
-      scene.classList.add("is-settled");   // the tags of the numbers come in now
+      scene.classList.add("is-unfolding", "is-settled");
+      if (unfoldFrame !== null) { window.cancelAnimationFrame(unfoldFrame); }
       if (observer) { observer.disconnect(); }
       animations.forEach(function (animation) { animation.cancel(); });
       window.removeEventListener("resize", resize);
@@ -61,6 +73,7 @@
       if (done || started || !ready || !visible || document.hidden) { return; }
       started = true;
       animations.forEach(function (animation) { animation.play(); });
+      unfoldFrame = window.requestAnimationFrame(unfold);
       Promise.all(animations.map(function (animation) { return animation.finished; })).then(settle, settle);
     }
     function resize() {
@@ -91,12 +104,15 @@
         { transform: transform(x, y - drift, angle - (drift ? 1 : 0)), offset: .18, easing: "ease-in-out" },
         { transform: transform(x, y + drift * .4, angle), offset: .36, easing: "cubic-bezier(.22, 1, .36, 1)" },
         { transform: "translate(0px, 0px) rotate(0deg)", offset: 1 }
-      ], { duration: 3000, delay: order * 80, fill: "both" });
+      ], { duration: duration, delay: order * 80, fill: "both" });
       animation.pause();
       animation.currentTime = 0;
       // Resizing before first visibility can cancel a still-paused animation.
       animation.finished.catch(function () {});
       animations.push(animation);
+      if (item.classList.contains("hero-metric")) {
+        cardAnimations.push({ animation: animation, unfoldAt: order * 80 + duration * .7 });
+      }
     });
 
     window.addEventListener("resize", resize, { passive: true });
@@ -117,22 +133,45 @@
   // ---- every block of a section comes in when it scrolls into view, one after another
   (function () {
     var wraps = document.querySelectorAll("section > .wrap, .hero");
-    var items = [];
+    var items = [], findings = [], nextFinding = 0, lastFinding = -1, findingsTimer = null;
+    function show(el) {
+      el.classList.add("is-visible");
+      el.dispatchEvent(new CustomEvent("reveal:start"));
+    }
+    function revealFindings() {
+      findingsTimer = null;
+      while (nextFinding <= lastFinding) {
+        var item = findings[nextFinding++];
+        show(item);
+        // Scrolling directly to a later block should not wait for offscreen content.
+        if (item.getBoundingClientRect().bottom > 0) {
+          findingsTimer = window.setTimeout(revealFindings, 180);
+          return;
+        }
+      }
+    }
     Array.prototype.forEach.call(wraps, function (wrap) {
       var i = 0;
       Array.prototype.forEach.call(wrap.children, function (child) {
         if (child.matches("script, style, .rl-book, [data-no-reveal]")) { return; }
         child.classList.add("reveal");
-        child.style.setProperty("--d", String(Math.min(i, 6)));
+        var isFinding = wrap.parentElement && wrap.parentElement.id === "findings";
+        child.style.setProperty("--d", isFinding ? "0" : String(Math.min(i, 6)));
+        if (isFinding) { findings.push(child); }
         items.push(child);
         i += 1;
       });
     });
-    if (!observe) { items.forEach(function (el) { el.classList.add("is-visible"); }); return; }
+    if (!observe) { items.forEach(show); return; }
     var io = new window.IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) { entry.target.classList.add("is-visible"); io.unobserve(entry.target); }
+        if (entry.isIntersecting) {
+          var index = findings.indexOf(entry.target);
+          if (index < 0) { show(entry.target); } else { lastFinding = Math.max(lastFinding, index); }
+          io.unobserve(entry.target);
+        }
       });
+      if (findingsTimer === null) { revealFindings(); }
     }, { threshold: 0.1, rootMargin: "0px 0px -36px 0px" });
     items.forEach(function (el) { io.observe(el); });
   }());

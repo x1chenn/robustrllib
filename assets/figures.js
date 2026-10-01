@@ -29,7 +29,7 @@
   }
   function fmt(v, d) { return (Math.round(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d); }
   function scale(d0, d1, r0, r1) { return function (v) { return r0 + (v - d0) / (d1 - d0) * (r1 - r0); }; }
-  function delay(el, s) { el.style.transitionDelay = s + "s"; el.style.animationDelay = s + "s"; return el; }
+  function delay(el, s) { s *= 1.25; el.style.transitionDelay = s + "s"; el.style.animationDelay = s + "s"; return el; }
   function ticks(lo, hi, step) { var out = []; for (var v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) { out.push(Math.round(v * 1e6) / 1e6); } return out; }
   function marker(kind, cx, cy, r) {
     var pts, k;
@@ -52,6 +52,12 @@
     svg.classList.add("fig-svg");
     host.replaceChildren(svg);
     if (reduced || !window.IntersectionObserver) { svg.classList.add("is-on"); return; }
+    var reveal = host.closest("#findings .reveal");
+    if (reveal) {
+      if (reveal.classList.contains("is-visible")) { svg.classList.add("is-on"); }
+      else { reveal.addEventListener("reveal:start", function () { svg.classList.add("is-on"); }, { once: true }); }
+      return;
+    }
     var io = new window.IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { svg.classList.add("is-on"); io.disconnect(); } });
     }, { threshold: 0.35 });

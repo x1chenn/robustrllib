@@ -144,20 +144,23 @@ h4 { margin: 0 0 8px; font-size: 18px; font-weight: 700; letter-spacing: -.015em
 /* the colour sits on the library: the algorithms and the robust methods */
 .metric-algorithms { background: #f6e9e2; border-color: #e3bfae; }
 .metric-algorithms b { color: var(--blue); }
-/* what each number holds, shown once the cards have settled */
+/* Tags unfold as the cards finish aligning, keeping the intro continuous. */
 .hero-tags {
   display: flex; flex-wrap: wrap; justify-content: center; align-content: flex-start;
   gap: 3px; margin: 8px -2px 0; height: var(--hero-tags-height, auto); overflow: hidden;
-  transition: height .75s ease, margin-top .75s ease;
+  transition: height 1s cubic-bezier(.4, 0, .2, 1), margin-top 1s cubic-bezier(.4, 0, .2, 1);
 }
 .hero-tags i {
   font-style: normal; font-size: 10.5px; line-height: 1.25; padding: 2px 6px; border-radius: 999px;
   background: var(--bg); border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap;
 }
 .metric-algorithms .hero-tags i { background: #fbf3ee; border-color: #e3bfae; color: #8a4a2f; }
-.has-js .hero-collage:not(.is-settled) .hero-tags { height: 0; margin-top: 0; }
-.has-js .hero-collage:not(.is-settled) .hero-tags i { opacity: 0; transform: translateY(5px); }
-.hero-tags i { transition: opacity .4s ease, transform .4s ease; transition-delay: calc(var(--i, 0) * 70ms); }
+.has-js .hero-collage:not(.is-unfolding) .hero-tags { height: 0; margin-top: 0; }
+.has-js .hero-collage:not(.is-unfolding) .hero-tags i { opacity: 0; transform: translateY(5px); }
+.hero-tags i {
+  transition: opacity .45s ease, transform .55s cubic-bezier(.4, 0, .2, 1);
+  transition-delay: calc(150ms + var(--i, 0) * 80ms);
+}
 .scene-driving { --x: 15%; --y: 9%; --w: 16%; --from-x: 13; --from-y: 18; --tilt: -4; --order: 0; }
 .scene-robot { --x: 33%; --y: 0%; --w: 14%; --from-x: 27; --from-y: 16; --tilt: 3; --order: 1; }
 .scene-arm { --x: 52%; --y: 1%; --w: 14%; --from-x: 59; --from-y: 14; --tilt: -3; --order: 2; }
@@ -215,11 +218,11 @@ figure img { display: block; width: 100%; height: auto; border-radius: 6px; }
 .fig-svg.is-on .fig-line { stroke-dashoffset: 0 !important; }
 .fig-svg .fig-wipe { transform: scaleX(0); transition: transform 2.4s cubic-bezier(.4, .05, .6, .95) .25s; }
 .fig-svg.is-on .fig-wipe { transform: scaleX(1); }
-:where(#fig-gain-decay, #fig-part4) .fig-svg .fig-bar { transition-duration: .4s; }
-:where(#fig-gain-decay, #fig-part4) .fig-svg .fig-late { transition-duration: .2s; }
-:where(#fig-gain-decay, #fig-part4) .fig-svg .fig-wipe { transition-duration: .9s; transition-delay: .1s; }
-:where(#fig-part4) .fig-svg .fig-line { transition-duration: .9s; transition-delay: .1s; }
-:where(#fig-part4) .fig-svg .fig-pop { transition-duration: .14s, .2s; }
+:where(#fig-gain-decay, #fig-part4) .fig-svg .fig-bar { transition-duration: .5s; transition-timing-function: ease-in-out; }
+:where(#fig-gain-decay, #fig-part4) .fig-svg .fig-late { transition-duration: .25s; }
+:where(#fig-gain-decay, #fig-part4) .fig-svg .fig-wipe { transition-duration: 1.125s; transition-delay: .125s; transition-timing-function: ease-in-out; }
+:where(#fig-part4) .fig-svg .fig-line { transition-duration: 1.125s; transition-delay: .125s; transition-timing-function: ease-in-out; }
+:where(#fig-part4) .fig-svg .fig-pop { transition-duration: .175s, .25s; }
 @media (prefers-reduced-motion: reduce) { .fig-svg .fig-bar, .fig-svg .fig-late, .fig-svg .fig-pop, .fig-svg .fig-line, .fig-svg .fig-wipe { transition: none; } }
 figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; text-align: center; }
 .fig-narrow { max-width: 820px; margin-left: auto; margin-right: auto; }
@@ -453,15 +456,17 @@ footer::before { content: ""; display: block; max-width: 960px; margin: 0 auto 2
 }
 .has-js .reveal.is-visible { opacity: 1; transform: none; }
 
-/* Wait for viewport entry, then stagger the bars over a 1.2-second reveal. */
+/* Findings share one ordered reveal and the same 1.5-second chart timeline. */
+.has-js :where(#findings) .reveal { transition-duration: .4s; transition-delay: 0s; }
+#findings { --viz-grow-duration: .7s; --viz-grow-easing: ease-in-out; }
 .viz-svg .viz-bar-row, .viz-svg .viz-col {
   animation: viz-appear .4s ease var(--viz-delay, 0s) both; animation-play-state: paused;
 }
 .viz-svg path.viz-fill {
-  transform-box: fill-box; transform-origin: left center;
-  animation: viz-grow .4s cubic-bezier(.2, .7, .2, 1) var(--viz-delay, 0s) both; animation-play-state: paused;
+  transform-box: view-box; transform-origin: 0 0;
+  animation: viz-grow var(--viz-grow-duration, .4s) var(--viz-grow-easing, cubic-bezier(.2, .7, .2, 1)) var(--viz-delay, 0s) both; animation-play-state: paused;
 }
-.viz-svg .viz-col path.viz-fill { transform-origin: center bottom; animation-name: viz-rise; }
+.viz-svg .viz-col path.viz-fill { animation-name: viz-rise; }
 .viz-svg.is-on .viz-bar-row, .viz-svg.is-on .viz-col, .viz-svg.is-on path.viz-fill { animation-play-state: running; }
 @keyframes viz-appear { from { opacity: 0; } to { opacity: 1; } }
 @keyframes viz-grow { from { transform: scaleX(0); } }
