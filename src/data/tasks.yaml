@@ -58,17 +58,28 @@ tasks:
     poster: assets/tasks/pusher.jpg
     caption: A seven-joint arm pushes an object to a goal; the compound deployment profiles of Peng et al.
   - key: pointmaze
-    name: PointMaze-v3
+    name: PointMaze_UMaze-v3
     family: Navigation
     backend: MuJoCo
-    regime: [online, offline]
+    regime: [online]
     parts: [1]
-    datasets: [open, umaze]
     axes: [actuator gear, dry friction, adversary]
     shifts: [dynamic, observation, action, reward-cost, latency]
     media: assets/tasks/pointmaze.mp4
     poster: assets/tasks/pointmaze.jpg
-    caption: A point mass steered through a maze to a goal.
+    caption: A point mass steered around the wall of a U-shaped maze to a goal that moves after every success.
+  - key: pointmaze_open
+    name: PointMaze_Open-v3
+    family: Navigation
+    backend: MuJoCo
+    regime: [offline]
+    parts: [1]
+    datasets: [open]
+    axes: [actuator gear, dry friction, adversary]
+    shifts: [dynamic, observation, action, reward-cost, latency]
+    media: assets/tasks/pointmaze_open.mp4
+    poster: assets/tasks/pointmaze_open.jpg
+    caption: A point mass steered across an open arena to a goal that moves after every success.
   - key: fetchreach
     name: FetchReachDense-v3
     family: Manipulation
