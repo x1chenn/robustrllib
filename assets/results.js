@@ -332,7 +332,7 @@
         var ch = P.channels.filter(function (c) { return c.key === id; })[0];
         if (ch.kind === "frozen") { return "The paper's channel score: the five configurations of the " + ch.label.toLowerCase() + " on Hopper-v5, equally weighted per seed, averaged over five training seeds and twenty episodes per configuration. Both ATLA rows rest on three observation configurations: the adversarial arm cannot run on a recurrent policy."; }
         if (ch.kind === "training") { return "One configuration of the paper's grid: trained under the shift (three reward corruptions, or reward delays of 4 to 64 steps), then evaluated at nominal; the mean over that ladder. Only the methods that were retrained appear."; }
-        return "The door task with the scene rebound (robosuite DoorCausal), evaluated online only: the shifted binding score divided by the SAC nominal, the source paper's own normalization, over the seeds whose training had not collapsed. As in the paper, the causal method and its two references.";
+        return "The door task with the scene rebound (robosuite DoorCausal), evaluated online only: the shifted binding score divided by the SAC nominal, the source paper's own normalization, over seeds 0, 1, 42, 2024 and 3407, collapsed runs left out; the semantic panel of the paper's figure.";
       }
       if (kind === "cell") { var c = P.cells[+id]; return c.gridlabel + ", " + c.label + ": one of the paper's 22 configurations per regime, averaged over five seeds and twenty episodes."; }
       return "";

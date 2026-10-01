@@ -14,7 +14,8 @@ assets/results.js draws. Three parts, each with the aggregation of the paper:
              (mean +- sd across seeds), the paper's channel score (the five cells equally
              weighted, per seed), the two training-time channels as one configuration
              each (trained under the shift, evaluated at nominal, +- across the ladder),
-             and the semantic shift on the door task, online only, as the paper prints it.
+             and the semantic shift on the door task, online only, as the paper's figure prints it
+             (seeds 0, 1, 42, 2024, 3407).
   compound   Part 3, the compound scenarios: nominal, each isolated shift, the compound
              cell and the independence prediction, per method and block.
 
@@ -79,9 +80,14 @@ CHANNELS = [
     ("theta_tau_credit", "Latency shift · credit, in training", "training"),
     ("theta_z", "Semantic shift · door task", "semantic"),
 ]
-# The semantic shift is measured on robosuite DoorCausal, the task built for the causal
-# method; the paper's table prints that method and its two references only.
-SEMANTIC_ROWS = ["RSC-SAC", "PPO", "SAC"]
+# The semantic shift is measured on robosuite DoorCausal. The site shows what the paper's
+# figure shows: the causal method, its two references and ATLA-SA-PPO, over the seeds the
+# figure aggregates, normalized by the SAC nominal over those seeds.
+SEMANTIC_ROWS = ["RSC-SAC", "PPO", "SAC", "ATLA-SA-PPO"]
+SEMANTIC_SEEDS = {"0", "1", "42", "2024", "3407"}
+SEMANTIC_COLLAPSE = 20.0          # a nominal binding score below this is a collapsed run
+# the semantic panel of the paper's figure, to check the recomputation against
+PAPER_SEMANTIC = {"RSC-SAC": (65.8, 28.8), "PPO": (45.5, 25.4), "SAC": (47.9, 17.3), "ATLA-SA-PPO": (55.0, 19.6)}
 GRID = {
     "spec_obsadv_hopper": ("theta_o", "Observation noise"),
     "spec_obsadv_mad_hopper": ("theta_o", "Observation attack (MAD-PGD)"),
@@ -262,12 +268,16 @@ def channels():
         for channel, ladder in per_arm.items():
             values.append([mi, f"paper:{channel}", *mean_sd(ladder)])
 
-    # the semantic shift: the source paper's normalization (the SAC nominal as the shared
-    # denominator), over the seeds whose training had not collapsed
+    # the semantic shift: the source paper's normalization -- the shifted binding score over
+    # the mean nominal score of SAC, a denominator shared across methods -- over the seeds of
+    # the paper's figure whose training had not collapsed
+    raw = [r for r in rows("part2_semantic_long.csv") if r["seed"] in SEMANTIC_SEEDS]
+    den = st.mean(float(r["nominal_hhl"]) for r in raw
+                  if r["display"] == "SAC" and float(r["nominal_hhl"]) >= SEMANTIC_COLLAPSE)
     sem = defaultdict(list)
-    for r in rows("part2_semantic_long.csv"):
-        if r["display"] in SEMANTIC_ROWS and r["collapsed"] == "0":
-            sem[r["display"]].append(float(r["shifted_norm"]))
+    for r in raw:
+        if r["display"] in SEMANTIC_ROWS and float(r["nominal_hhl"]) >= SEMANTIC_COLLAPSE:
+            sem[r["display"]].append(100.0 * float(r["shifted_hhr"]) / den)
     for m in SEMANTIC_ROWS:
         if sem[m]:
             mi = methods.add(m, method_record(m, "online", family_of(m)))
@@ -310,6 +320,11 @@ def check(doc):
     ch = doc["channels"]
     worst = 0.0
     for mi, view, mean, sd, n in ch["rows"]:
+        if view == "paper:theta_z":       # checked against the paper's figure instead
+            name = ch["methods"][mi]["key"]
+            ref = PAPER_SEMANTIC[name]
+            worst = max(worst, abs(mean - ref[0]), abs(sd - ref[1]))
+            continue
         if not view.startswith("paper:"):
             continue
         name = ch["methods"][mi]["key"]
