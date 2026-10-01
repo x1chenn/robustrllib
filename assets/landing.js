@@ -235,10 +235,12 @@
 
   // ---- task support: filters, and the selected source dims the tasks that do not carry it
   var taskState = { family: "all", regime: "all" };
-  var taskCards = Array.prototype.slice.call(box.querySelectorAll(".tb-task"));
-  var familyButtons = Array.prototype.slice.call(box.querySelectorAll(".tb-family"));
-  var regimeButtons = Array.prototype.slice.call(box.querySelectorAll(".tb-regime"));
-  var emptyNote = box.querySelector(".tb-tasks-empty");
+  //      (the block sits below the loop of the six sources, outside the toolbox card)
+  var tasksBox = document.getElementById("tb-tasks") || box;
+  var taskCards = Array.prototype.slice.call(tasksBox.querySelectorAll(".tb-task"));
+  var familyButtons = Array.prototype.slice.call(tasksBox.querySelectorAll(".tb-family"));
+  var regimeButtons = Array.prototype.slice.call(tasksBox.querySelectorAll(".tb-regime"));
+  var emptyNote = tasksBox.querySelector(".tb-tasks-empty");
   function renderTasks() {
     var shown = 0;
     taskCards.forEach(function (card) {
