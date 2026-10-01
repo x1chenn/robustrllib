@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="A unified library and benchmark for robust reinforcement learning algorithms.">
+  <title>Evaluation Protocol - RobustRLlib Tutorial</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="../../css/site.css">
+  <link rel="stylesheet" href="../../assets/pygments.css">
+  <link rel="stylesheet" href="../../assets/rl.css">
+  <link rel="stylesheet" href="../../assets/book.css">
+</head>
+<body class="bk">
+<a class="bk-skip" href="#bk-content">Skip to the text</a>
+
+<header class="bk-topbar">
+  <div class="bk-topbar-inner">
+    <button type="button" class="bk-icon-button bk-topbar-menu" id="bk-toggle-nav" aria-controls="bk-sidebar" aria-label="Show or hide the pages" title="Pages">
+      <span class="fa fa-bars" aria-hidden="true"></span>
+    </button>
+    <a class="bk-brand" href="../..">
+  <svg class="mark" viewBox="0 0 44 40" width="30" height="27" aria-hidden="true">
+        <g transform="translate(22,9)">
+        <rect x="-19" y="-3" width="8" height="6" rx="1.5" transform="rotate(-16 -15 0)" fill="#eb8787" stroke="#5e5d59" stroke-width="1.1"/>
+        <rect x="-9" y="-7" width="8" height="6" rx="1.5" transform="rotate(-5 -5 -4)" fill="#cde4be" stroke="#5e5d59" stroke-width="1.1"/>
+        <rect x="1" y="-7" width="8" height="6" rx="1.5" transform="rotate(5 5 -4)" fill="#bcd6eb" stroke="#5e5d59" stroke-width="1.1"/>
+        <rect x="11" y="-3" width="8" height="6" rx="1.5" transform="rotate(16 15 0)" fill="#d5c8ed" stroke="#5e5d59" stroke-width="1.1"/>
+        </g>
+        <path d="M4 16 L3 34 L22 38 L41 34 L40 16 L22 20 Z" fill="#c96442" stroke="#3d3d3a" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M22 20 L41 16 L40 16 L41 34 L22 38 Z" fill="#d97757" stroke="#3d3d3a" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M6 13 Q14 11 22 17 L22 35 Q14 30 5 31 Z" fill="#faf9f5" stroke="#3d3d3a" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M38 13 Q30 11 22 17 L22 35 Q30 30 39 31 Z" fill="#faf9f5" stroke="#3d3d3a" stroke-width="2.4" stroke-linejoin="round"/>
+        </svg>
+  <span class="bk-brand-name"><span class="bk-brand-mark">Robust</span>RLlib</span>
+  <span class="bk-brand-kind">Tutorial</span>
+</a>
+    <span class="bk-topbar-space"></span>
+    <a class="bk-topbar-link" href="/robustrllib/">Project Page</a>
+  </div>
+</header>
+
+<div class="bk-page">
+
+  <aside class="bk-sidebar-drawer" id="bk-sidebar" aria-label="Pages of the tutorial">
+    <div class="bk-sidebar">
+      <a class="bk-brand" href="../..">
+  <svg class="mark" viewBox="0 0 44 40" width="30" height="27" aria-hidden="true">
+        <g transform="translate(22,9)">
+        <rect x="-19" y="-3" width="8" height="6" rx="1.5" transform="rotate(-16 -15 0)" fill="#eb8787" stroke="#5e5d59" stroke-width="1.1"/>
+        <rect x="-9" y="-7" width="8" height="6" rx="1.5" transform="rotate(-5 -5 -4)" fill="#cde4be" stroke="#5e5d59" stroke-width="1.1"/>
+        <rect x="1" y="-7" width="8" height="6" rx="1.5" transform="rotate(5 5 -4)" fill="#bcd6eb" stroke="#5e5d59" stroke-width="1.1"/>
+        <rect x="11" y="-3" width="8" height="6" rx="1.5" transform="rotate(16 15 0)" fill="#d5c8ed" stroke="#5e5d59" stroke-width="1.1"/>
+        </g>
+        <path d="M4 16 L3 34 L22 38 L41 34 L40 16 L22 20 Z" fill="#c96442" stroke="#3d3d3a" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M22 20 L41 16 L40 16 L41 34 L22 38 Z" fill="#d97757" stroke="#3d3d3a" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M6 13 Q14 11 22 17 L22 35 Q14 30 5 31 Z" fill="#faf9f5" stroke="#3d3d3a" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M38 13 Q30 11 22 17 L22 35 Q30 30 39 31 Z" fill="#faf9f5" stroke="#3d3d3a" stroke-width="2.4" stroke-linejoin="round"/>
+        </svg>
+  <span class="bk-brand-name"><span class="bk-brand-mark">Robust</span>RLlib</span>
+  <span class="bk-brand-kind">Tutorial</span>
+</a>
+      <button type="button" class="bk-search-button" id="bk-search-open" aria-haspopup="dialog">
+        <span class="fa fa-search" aria-hidden="true"></span>
+        <span class="bk-search-label">Search</span>
+      </button>
+      <nav class="bk-nav" aria-label="Pages">
+        <ul class="bk-nav-list bk-nav-depth-0">
+  <li><a class="bk-nav-link" href="../..">Home</a></li>
+</ul>
+        <p class="bk-caption">Getting Started</p>
+        <ul class="bk-nav-list bk-nav-depth-1">
+  <li><a class="bk-nav-link" href="../../getting-started/overview/">Overview</a></li>
+  <li><a class="bk-nav-link" href="../../getting-started/quick-start/">Quick Start</a></li>
+</ul>
+        <p class="bk-caption">Algorithms</p>
+        <ul class="bk-nav-list bk-nav-depth-1">
+  <li><a class="bk-nav-link" href="../../algorithms/">All Methods</a></li>
+  <li class="bk-nav-group">
+    <details>
+      <summary>Standard</summary>
+      <ul class="bk-nav-list bk-nav-depth-2">
+  <li><a class="bk-nav-link" href="../../algorithms/standard/">Overview</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/standard/iql/">IQL</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/standard/td3bc/">TD3+BC</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/standard/mopo/">MOPO</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/standard/synther/">SynthER</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/standard/ppo/">PPO</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/standard/sac/">SAC</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="bk-nav-group">
+    <details>
+      <summary>Robust Online</summary>
+      <ul class="bk-nav-list bk-nav-depth-2">
+  <li><a class="bk-nav-link" href="../../algorithms/robust-online/">Overview</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-online/atla/">ATLA</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-online/atla-sa/">ATLA-SA</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-online/rsc/">RSC</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-online/rarl/">RARL</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-online/dr/">DR</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="bk-nav-group">
+    <details>
+      <summary>Robust Offline</summary>
+      <ul class="bk-nav-list bk-nav-depth-2">
+  <li><a class="bk-nav-link" href="../../algorithms/robust-offline/">Overview</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-offline/rfqi/">RFQI</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-offline/rorl/">RORL</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-offline/atla-iql/">ATLA-IQL</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-offline/rsc-iql/">RSC-IQL</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-offline/rambo/">RAMBO</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-offline/romb/">ROMB</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-offline/fwm/">FWM</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-offline/plr-pvl/">PLR-PVL</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="bk-nav-group">
+    <details>
+      <summary>Robust Safe</summary>
+      <ul class="bk-nav-list bk-nav-depth-2">
+  <li><a class="bk-nav-link" href="../../algorithms/robust-safe/">Overview</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-safe/ramu/">RAMU</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/robust-safe/spidr/">SPiDR</a></li>
+</ul>
+    </details>
+  </li>
+  <li><a class="bk-nav-link" href="../../algorithms/run-a-method/">Train an algorithm</a></li>
+  <li><a class="bk-nav-link" href="../../algorithms/add-an-algorithm/">Add a new algorithm</a></li>
+</ul>
+        <p class="bk-caption">Shift Sources and Modes</p>
+        <ul class="bk-nav-list bk-nav-depth-1">
+  <li><a class="bk-nav-link" href="../../shifts/">Overview</a></li>
+  <li class="bk-nav-group">
+    <details>
+      <summary>Shift Sources</summary>
+      <ul class="bk-nav-list bk-nav-depth-2">
+  <li><a class="bk-nav-link" href="../../shifts/sources/dynamic/">Dynamic shift</a></li>
+  <li><a class="bk-nav-link" href="../../shifts/sources/observation/">Observation shift</a></li>
+  <li><a class="bk-nav-link" href="../../shifts/sources/action/">Action shift</a></li>
+  <li><a class="bk-nav-link" href="../../shifts/sources/reward-cost/">Reward/cost shift</a></li>
+  <li><a class="bk-nav-link" href="../../shifts/sources/latency/">Latency shift</a></li>
+  <li><a class="bk-nav-link" href="../../shifts/sources/semantic/">Semantic shift</a></li>
+</ul>
+    </details>
+  </li>
+  <li class="bk-nav-group">
+    <details>
+      <summary>Shift Modes</summary>
+      <ul class="bk-nav-list bk-nav-depth-2">
+  <li><a class="bk-nav-link" href="../../shifts/modes/stochastic/">Stochastic</a></li>
+  <li><a class="bk-nav-link" href="../../shifts/modes/adversarial/">Adversarial</a></li>
+  <li><a class="bk-nav-link" href="../../shifts/modes/parametric/">Parametric</a></li>
+  <li><a class="bk-nav-link" href="../../shifts/modes/non-stationary/">Non-stationary</a></li>
+  <li><a class="bk-nav-link" href="../../shifts/modes/composition/">Composition</a></li>
+</ul>
+    </details>
+  </li>
+  <li><a class="bk-nav-link" href="../../shifts/add-a-backend/">Add a physics simulation</a></li>
+</ul>
+        <p class="bk-caption">Evaluation</p>
+        <ul class="bk-nav-list bk-nav-depth-1">
+  <li><a class="bk-nav-link is-active" href="./" aria-current="page">Evaluation Protocol</a></li>
+</ul>
+      </nav>
+    </div>
+  </aside>
+
+  <div class="bk-main">
+    <div class="bk-content">
+      <div class="bk-tools">
+        <button type="button" class="bk-icon-button" id="bk-toggle-toc" aria-controls="bk-toc" aria-label="Show or hide the contents of this page" title="On this page">
+          <span class="fa fa-list-ul" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <main class="bk-article" id="bk-content">
+        <h1 id="evaluation-protocol">Evaluation Protocol<a class="headerlink" href="#evaluation-protocol" title="Permanent link">&para;</a></h1>
+<p>Every score of the benchmark is produced by one evaluator under one protocol. A policy is
+trained on the nominal task, its final checkpoint is frozen, and the checkpoint is scored on a
+grid of shift conditions.</p>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Evaluation protocol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interface</td>
+<td><code>baselines/evaluate.py --run &lt;run directory&gt; [--eval &lt;grid&gt;]</code></td>
+</tr>
+<tr>
+<td>Checkpoint</td>
+<td>The final checkpoint of the run; never selected on evaluation results (RFQI keeps its own best-checkpoint rule)</td>
+</tr>
+<tr>
+<td>Conditions</td>
+<td>The <code>grid</code> of an eval card; each condition is a list of shifts</td>
+</tr>
+<tr>
+<td>Episodes</td>
+<td>20 per condition, deterministic actions, the task's time limit</td>
+</tr>
+<tr>
+<td>Seeds</td>
+<td>A fixed evaluation seed, offset by the episode index; conditions are paired</td>
+</tr>
+<tr>
+<td>Score</td>
+<td>The return rescaled so that a random policy scores 0 and the reference policy scores 100; not clipped</td>
+</tr>
+</tbody>
+</table>
+<p>The same evaluator scores every method of <code>baselines/</code>, offline and online: it loads the
+checkpoint with the class the method's algorithm card names, so it never depends on how the
+method was trained. The Isaac Lab and VLA studies have evaluators of their own, described in
+<code>isaac/README.md</code> and <code>vla/README.md</code> of the repository.</p>
+<h2 id="evaluation-grids">Evaluation grids<a class="headerlink" href="#evaluation-grids" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>episodes</code></td>
+<td>int</td>
+<td>Episodes per condition</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>int</td>
+<td>Evaluation seed; every episode is reset with this seed plus its episode index</td>
+</tr>
+<tr>
+<td><code>grid</code></td>
+<td>list</td>
+<td>The conditions</td>
+</tr>
+<tr>
+<td><code>grid[].name</code></td>
+<td>str</td>
+<td>Name of the condition</td>
+</tr>
+<tr>
+<td><code>grid[].shifts</code></td>
+<td>list</td>
+<td>Shifts in dictionary form, as in <a href="../../shifts/">Shift Sources and Modes</a>; an empty list is the nominal condition</td>
+</tr>
+<tr>
+<td><code>grid[].env_kwargs</code></td>
+<td>dict</td>
+<td>Optional; constructor arguments of the condition, for a parameter an environment reads only when it is built</td>
+</tr>
+<tr>
+<td><code>grid[].env_id</code></td>
+<td>str</td>
+<td>Optional; another registered variant of the task, as for the semantic channel</td>
+</tr>
+<tr>
+<td><code>grid[].axis</code>, <code>quartile</code>, <code>severity</code>, <code>channel</code></td>
+<td></td>
+<td>Optional labels, copied into the result</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Card</th>
+<th>Conditions</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>part1_&lt;task&gt;.yaml</code></td>
+<td>The rungs of the library-wide grid, by axis and severity quartile</td>
+<td>Part 1</td>
+</tr>
+<tr>
+<td><code>part2_hopper.yaml</code></td>
+<td>Five cells of each frozen-policy channel</td>
+<td>Part 2</td>
+</tr>
+<tr>
+<td><code>part2_doorcausal.yaml</code></td>
+<td>The trained and the inverted semantic binding</td>
+<td>Part 2, semantic channel</td>
+</tr>
+<tr>
+<td><code>part3_hopper.yaml</code>, <code>part3_pusher.yaml</code></td>
+<td>Each channel of a reference profile, then all of them jointly</td>
+<td>Part 3</td>
+</tr>
+<tr>
+<td><code>nominal.yaml</code></td>
+<td>The nominal condition</td>
+<td>Training-time channels</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpts leave out most conditions.</p>
+<div class="highlight"><span class="filename">robustrllib/configs/eval/part1_mujoco.yaml (excerpt)</span><pre><span></span><code><span class="nt">episodes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10000</span>
+<span class="nt">grid</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nominal</span>
+<span class="w">  </span><span class="nt">shifts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gravity_0.9</span>
+<span class="w">  </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gravity</span>
+<span class="w">  </span><span class="nt">quartile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9</span>
+<span class="w">  </span><span class="nt">shifts</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dynamics</span>
+<span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scale</span>
+<span class="w">    </span><span class="nt">params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">param</span><span class="p">:</span><span class="w"> </span><span class="nv">gravity</span><span class="p p-Indicator">,</span><span class="nt"> factor</span><span class="p">:</span><span class="w"> </span><span class="nv">0.9</span><span class="p p-Indicator">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">robustrllib/configs/eval/part2_hopper.yaml (excerpt)</span><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">act_delay_8ms</span>
+<span class="w">  </span><span class="nt">channel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">theta_tau</span>
+<span class="w">  </span><span class="nt">shifts</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">latency</span>
+<span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fixed</span>
+<span class="w">    </span><span class="nt">params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">steps</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">}</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gear_ramp_0.8</span>
+<span class="w">  </span><span class="nt">channel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">theta_p</span>
+<span class="w">  </span><span class="nt">shifts</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dynamics</span>
+<span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scale</span>
+<span class="w">    </span><span class="nt">params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">param</span><span class="p">:</span><span class="w"> </span><span class="nv">actuator_gear</span><span class="p p-Indicator">,</span><span class="nt"> index</span><span class="p">:</span><span class="w"> </span><span class="nv">all</span><span class="p p-Indicator">,</span><span class="nt"> factor</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">}</span>
+<span class="w">    </span><span class="nt">schedule</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="nv">linear</span><span class="p p-Indicator">,</span><span class="nt"> start</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="nt"> end</span><span class="p">:</span><span class="w"> </span><span class="nv">0.8</span><span class="p p-Indicator">,</span><span class="nt"> t0</span><span class="p">:</span><span class="w"> </span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="nt"> t1</span><span class="p">:</span><span class="w"> </span><span class="nv">1000</span><span class="p p-Indicator">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">robustrllib/configs/eval/part1_carracing.yaml (excerpt)</span><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">friction_0.6</span>
+<span class="w">  </span><span class="nt">axis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">friction</span>
+<span class="w">  </span><span class="nt">quartile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">  </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span>
+<span class="w">  </span><span class="nt">env_kwargs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">friction_scale</span><span class="p">:</span><span class="w"> </span><span class="nv">0.6</span><span class="p p-Indicator">}</span>
+<span class="w">  </span><span class="nt">shifts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+</code></pre></div>
+<p>The three excerpts are a Dynamic shift in the Parametric mode, a Latency shift and a Dynamic shift
+in the Non-stationary mode, and a condition CarRacing reads when it builds the track.
+<code>part1_mujoco.yaml</code> holds the nominal condition and three axes, gravity, limb length and actuator
+gear, each at eight factors from 0.6 to 1.4: 25 conditions.</p>
+<p>A grid is checked before a long evaluation by building each condition once.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">robustrllib</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_env</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">"robustrllib/configs/task/hopper.yaml"</span><span class="p">))</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">"robustrllib/configs/eval/part1_mujoco.yaml"</span><span class="p">))[</span><span class="s2">"grid"</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">condition</span> <span class="ow">in</span> <span class="n">grid</span><span class="p">:</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">make_env</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">shifts</span><span class="o">=</span><span class="n">condition</span><span class="p">[</span><span class="s2">"shifts"</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>25
+</code></pre></div>
+<h2 id="run-an-evaluation">Run an evaluation<a class="headerlink" href="#run-an-evaluation" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>baselines/evaluate.py<span class="w"> </span>--run<span class="w"> </span>runs/rorl_hopper/seed0
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>What the evaluator does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Reads <code>config.yaml</code> of the run and takes the highest-numbered file in <code>ckpt/</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Loads the policy with the class named in the algorithm card</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Builds the task card's environment with the condition's shifts, one fresh environment per condition</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Runs the episodes; every reset reseeds the task and every shift wrapper</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Prints a report and writes <code>eval/&lt;grid&gt;.json</code> into the run directory</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--run</code></td>
+<td>The training run directory, with <code>config.yaml</code> and <code>ckpt/</code></td>
+</tr>
+<tr>
+<td><code>--eval</code></td>
+<td>Another grid to evaluate on; the result is named after it</td>
+</tr>
+<tr>
+<td><code>--episodes</code></td>
+<td>Override the number of episodes of the grid</td>
+</tr>
+<tr>
+<td><code>--ckpt</code></td>
+<td>An explicit checkpoint, for diagnostics</td>
+</tr>
+<tr>
+<td><code>--device</code></td>
+<td>Device of the policy</td>
+</tr>
+</tbody>
+</table>
+<p>The Part 2 and Part 3 grids score the Part 1 Hopper runs a second and a third time.</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>baselines/evaluate.py<span class="w"> </span>--run<span class="w"> </span>runs/rorl_hopper/seed0<span class="w"> </span>--eval<span class="w"> </span>robustrllib/configs/eval/part2_hopper.yaml
+python<span class="w"> </span>baselines/evaluate.py<span class="w"> </span>--run<span class="w"> </span>runs/rorl_hopper/seed0<span class="w"> </span>--eval<span class="w"> </span>robustrllib/configs/eval/part3_hopper.yaml
+</code></pre></div>
+<p>Two kinds of shift need more than a frozen policy and a condition.</p>
+<table>
+<thead>
+<tr>
+<th>Shift</th>
+<th>How it is scored</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Observation shift in the Adversarial mode</td>
+<td>The evaluator binds the policy's own actor, which the loader exposes as <code>actor</code>; a recurrent policy has none, and the condition is reported as skipped</td>
+</tr>
+<tr>
+<td>Reward/cost shift, and Latency shift with the mode name <code>delay</code></td>
+<td>A frozen policy does not read the reward: the method trains under the shift (<code>baselines/train.py --train-shift</code>) and is evaluated on <code>nominal.yaml</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="result-file">Result file<a class="headerlink" href="#result-file" title="Permanent link">&para;</a></h2>
+<p><code>eval/&lt;grid&gt;.json</code> records the protocol next to the numbers. Values are replaced by their types.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"run"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rorl_hopper"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"checkpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"runs/rorl_hopper/seed0/ckpt/update_3000000.pt"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"seed"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"episodes"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"nominal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"return_mean"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;float&gt;"</span><span class="p">,</span><span class="w"> </span><span class="nt">"return_std"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;float&gt;"</span><span class="p">,</span><span class="w"> </span><span class="nt">"return_min"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;float&gt;"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"cvar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;float&gt;"</span><span class="p">,</span><span class="w"> </span><span class="nt">"n_episodes"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="nt">"score"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;float&gt;"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"episode_length_mean"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;float&gt;"</span><span class="p">,</span><span class="w"> </span><span class="nt">"returns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"&lt;float&gt;"</span><span class="p">,</span><span class="w"> </span><span class="s2">"..."</span><span class="p">]},</span>
+<span class="w">    </span><span class="nt">"gravity_0.9"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"..."</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"axis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gravity"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quartile"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">"severity"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Scope</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>return_mean</code>, <code>return_std</code>, <code>return_min</code></td>
+<td>Condition</td>
+<td>Raw return over the episodes of the condition</td>
+</tr>
+<tr>
+<td><code>cvar</code></td>
+<td>Condition</td>
+<td>Mean of the worst tenth of the episodes</td>
+</tr>
+<tr>
+<td><code>score</code></td>
+<td>Condition</td>
+<td>The normalized score of <code>return_mean</code></td>
+</tr>
+<tr>
+<td><code>success_rate</code></td>
+<td>Condition</td>
+<td>Share of episodes that report success, on goal-conditioned tasks</td>
+</tr>
+<tr>
+<td><code>episode_length_mean</code></td>
+<td>Condition</td>
+<td>Steps until termination or truncation</td>
+</tr>
+<tr>
+<td><code>returns</code></td>
+<td>Condition</td>
+<td>The return of every episode</td>
+</tr>
+</tbody>
+</table>
+<p>The normalized score uses one fixed pair of reference returns per environment, shared by every
+method and condition: the return of a random policy and the return of a reference policy. The
+score is the return minus the random reference, divided by the distance between the two
+references, times 100.</p>
+<div class="highlight"><pre><span></span><code><span class="n">R_MIN</span><span class="p">,</span> <span class="n">R_MAX</span> <span class="o">=</span> <span class="o">-</span><span class="mf">20.27</span><span class="p">,</span> <span class="mf">3234.3</span>          <span class="c1"># Hopper-v5</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">normalized</span><span class="p">(</span><span class="n">ret</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">ret</span> <span class="o">-</span> <span class="n">R_MIN</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">R_MAX</span> <span class="o">-</span> <span class="n">R_MIN</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">ret</span> <span class="ow">in</span> <span class="p">(</span><span class="n">R_MIN</span><span class="p">,</span> <span class="n">R_MAX</span><span class="p">,</span> <span class="mf">3600.0</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ret</span><span class="si">:</span><span class="s2">12.3f</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">normalized</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>     -20.270 -&gt;    0.0
+    3234.300 -&gt;  100.0
+    3600.000 -&gt;  111.2
+</code></pre></div>
+<p><strong>The score is not clipped.</strong> A return above the reference gives a score above 100, and a
+return below the random reference gives a negative score.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The pair of each task is the <code>score</code> entry of its task card. For <code>Hopper-v5</code> it is the D4RL
+reference return of a random and of an expert policy.</p>
+</div>
+<h2 id="protocol-defaults">Protocol defaults<a class="headerlink" href="#protocol-defaults" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Checkpoint</td>
+<td>The highest-numbered file in <code>ckpt/</code></td>
+<td>The final checkpoint; no selection on results</td>
+</tr>
+<tr>
+<td>Episodes</td>
+<td>20 per condition</td>
+<td>The <code>episodes</code> key of the grid</td>
+</tr>
+<tr>
+<td>Evaluation seed</td>
+<td>The <code>seed</code> key of the grid, 10000 for every grid</td>
+<td>The same initial states for every method</td>
+</tr>
+<tr>
+<td>Episode seed</td>
+<td>Evaluation seed plus episode index</td>
+<td>Paired conditions</td>
+</tr>
+<tr>
+<td>Actions</td>
+<td><code>predict(obs, deterministic=True)</code></td>
+<td>No sampling noise in the score</td>
+</tr>
+<tr>
+<td>Horizon</td>
+<td>The time limit of the task card's environment</td>
+<td>The horizon of the tasks</td>
+</tr>
+<tr>
+<td>Device</td>
+<td><code>cpu</code></td>
+<td>Evaluation of small policies</td>
+</tr>
+<tr>
+<td>Output</td>
+<td><code>eval/&lt;grid&gt;.json</code></td>
+<td>One result per run and grid</td>
+</tr>
+<tr>
+<td>Training seeds</td>
+<td>Five per method and task</td>
+<td>The replication unit</td>
+</tr>
+</tbody>
+</table>
+<h2 id="combine-training-runs">Combine training runs<a class="headerlink" href="#combine-training-runs" title="Permanent link">&para;</a></h2>
+<p>A reported number is the mean over the training seeds of the normalized score.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"runs/rorl_hopper/seed*/eval/part1_mujoco.json"</span><span class="p">))</span>
+<span class="n">runs</span> <span class="o">=</span> <span class="p">[</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">))</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">runs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"conditions"</span><span class="p">]:</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">run</span><span class="p">[</span><span class="s2">"conditions"</span><span class="p">][</span><span class="n">name</span><span class="p">][</span><span class="s2">"score"</span><span class="p">]</span> <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">runs</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">16s</span><span class="si">}{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="si">:</span><span class="s2">7.1f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span><span class="w"> </span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+<p><code>ddof=1</code> gives the sample standard deviation across training seeds.</p>
+<h2 id="reproducible-reporting">Reproducible reporting<a class="headerlink" href="#reproducible-reporting" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The replication unit is an independently trained policy; the spread of a score is taken
+  across training seeds.</li>
+<li>Episodes of one checkpoint are not independent samples, and their spread is not reported as
+  the uncertainty of a method.</li>
+<li>The evaluated checkpoint is the final one; evaluation results are never used to select a
+  checkpoint.</li>
+<li>Every method is scored on the same grid, with the same evaluation seed and the same number of
+  episodes.</li>
+<li>Scores are normalized with the fixed reference pair of the environment and are not clipped.</li>
+<li>A result from an explicit checkpoint is reported as a diagnostic, not as the protocol score.</li>
+</ul>
+      </main>
+
+      <footer class="bk-footer">
+        <nav class="bk-related" aria-label="Previous and next page">
+          <a class="bk-prev" href="../../shifts/add-a-backend/">
+            <span class="fa fa-arrow-left" aria-hidden="true"></span>
+            <span class="bk-related-text"><span class="bk-related-label">Previous</span><span class="bk-related-title">Add a physics simulation</span></span>
+          </a>
+        </nav>
+        <p class="bk-footnote">RobustRLlib · Anonymous submission under double-blind review.</p>
+      </footer>
+    </div>
+
+    <aside class="bk-toc-drawer" id="bk-toc" aria-label="Contents of this page">
+      <div class="bk-toc">
+        <p class="bk-toc-title">On this page</p>
+        <nav class="bk-toc-tree" aria-label="Sections">
+          <ul class="bk-toc-list bk-toc-depth-1">
+  <li><a class="bk-toc-link" href="#summary">Summary</a>
+  </li>
+  <li><a class="bk-toc-link" href="#evaluation-grids">Evaluation grids</a>
+  </li>
+  <li><a class="bk-toc-link" href="#run-an-evaluation">Run an evaluation</a>
+  </li>
+  <li><a class="bk-toc-link" href="#result-file">Result file</a>
+  </li>
+  <li><a class="bk-toc-link" href="#metrics">Metrics</a>
+  </li>
+  <li><a class="bk-toc-link" href="#protocol-defaults">Protocol defaults</a>
+  </li>
+  <li><a class="bk-toc-link" href="#combine-training-runs">Combine training runs</a>
+  </li>
+  <li><a class="bk-toc-link" href="#reproducible-reporting">Reproducible reporting</a>
+  </li>
+</ul>
+        </nav>
+      </div>
+    </aside>
+  </div>
+
+</div>
+
+<div class="bk-backdrop" id="bk-backdrop" hidden></div>
+<div class="bk-search" id="bk-search" role="dialog" aria-modal="true" aria-label="Search the tutorial" hidden>
+  <div class="bk-search-panel">
+    <div class="bk-search-field">
+      <span class="fa fa-search" aria-hidden="true"></span>
+      <input type="search" id="mkdocs-search-query" name="q" placeholder="Search the tutorial" aria-label="Search the tutorial" autocomplete="off" spellcheck="false">
+      <button type="button" class="bk-icon-button" id="bk-search-close" aria-label="Close the search"><span class="fa fa-times" aria-hidden="true"></span></button>
+    </div>
+    <div class="bk-search-results" id="mkdocs-search-results" data-no-results-text="Nothing found"></div>
+  </div>
+</div>
+
+<script>var base_url = "../..";</script>
+<script src="../../js/site.js"></script>
+<script src="../../search/main.js"></script>
+</body>
+</html>
