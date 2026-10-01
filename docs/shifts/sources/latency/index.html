@@ -188,8 +188,14 @@ long a control period lasts, and when a reward is paid. A delay changes the loop
 closes around the plant, which noise on an observation or an action cannot imitate.</p>
 <p><img alt="The loop between agent and environment, with the Latency shift highlighted" src="../../../assets/figures/shift-loop-latency.svg" width="760" /></p>
 <p><em>The Latency shift acts on timing: the delay of the observation, the delay of the action and the control period.</em></p>
-<p><img alt="Two curves over time: the time stamp the policy issued a command for and the time stamp at which it is executed" src="../../../assets/figures/latency.png" width="720" /></p>
-<p><em>Execution latency separates the time a command is issued from the time it takes effect.</em></p>
+<figure class="rl-shift-comparison rl-shift-comparison-tall">
+  <div class="rl-shift-clips">
+    <div><span>Nominal</span><video src="../../../../assets/shifts/halfcheetah_sac_nominal_8s.mp4" poster="../../../../assets/shifts/halfcheetah_sac_nominal_8s.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="HalfCheetah with nominal control timing"></video></div>
+    <div><span>Shifted</span><video src="../../../../assets/shifts/halfcheetah_sac_latency_8s.mp4" poster="../../../../assets/shifts/halfcheetah_sac_latency_8s.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="HalfCheetah with action latency"></video></div>
+  </div>
+  <figcaption>HalfCheetah under nominal control and action latency.</figcaption>
+</figure>
+
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

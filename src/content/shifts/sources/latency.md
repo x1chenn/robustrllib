@@ -8,9 +8,13 @@ closes around the plant, which noise on an observation or an action cannot imita
 
 *The Latency shift acts on timing: the delay of the observation, the delay of the action and the control period.*
 
-![Two curves over time: the time stamp the policy issued a command for and the time stamp at which it is executed](../../assets/figures/latency.png){ width="720" }
-
-*Execution latency separates the time a command is issued from the time it takes effect.*
+<figure class="rl-shift-comparison rl-shift-comparison-tall">
+  <div class="rl-shift-clips">
+    <div><span>Nominal</span><video src="../../../../assets/shifts/halfcheetah_sac_nominal_8s.mp4" poster="../../../../assets/shifts/halfcheetah_sac_nominal_8s.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="HalfCheetah with nominal control timing"></video></div>
+    <div><span>Shifted</span><video src="../../../../assets/shifts/halfcheetah_sac_latency_8s.mp4" poster="../../../../assets/shifts/halfcheetah_sac_latency_8s.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="HalfCheetah with action latency"></video></div>
+  </div>
+  <figcaption>HalfCheetah under nominal control and action latency.</figcaption>
+</figure>
 
 ## Properties
 
