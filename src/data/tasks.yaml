@@ -6,8 +6,8 @@
 # shifts   the shift sources the toolbox offers on this task (keys of shifts.yaml)
 # parts    the parts of the paper that report it: 1 library-wide, 2 isolated shifts,
 #          3 compound shifts, 4 Isaac Lab and VLA
-# media    a looping render (gif/mp4) or a drawing; the drawings are placeholders
-#          until the scene is rendered from a checkpoint
+# media    a short looping render of a trained policy (mp4); provenance of every clip in
+#          RobustRLlib_ICLR27/task_renders/PROVENANCE.md (outside the repository)
 # poster   for a video: the still shown before it plays
 tasks:
   - key: hopper
@@ -19,7 +19,8 @@ tasks:
     datasets: [medium, medium-expert, expert]
     axes: [gravity, morphology, actuator gear]
     shifts: [dynamic, observation, action, reward-cost, latency]
-    media: assets/tasks/hopper.gif
+    media: assets/tasks/hopper.mp4
+    poster: assets/tasks/hopper.jpg
     caption: The one-legged hopper of MuJoCo; the task of the isolated-shift channels.
   - key: walker2d
     name: Walker2d-v5
@@ -30,7 +31,8 @@ tasks:
     datasets: [medium, medium-expert]
     axes: [gravity, morphology, actuator gear]
     shifts: [dynamic, observation, action, reward-cost, latency]
-    media: assets/tasks/walker2d.gif
+    media: assets/tasks/walker2d.mp4
+    poster: assets/tasks/walker2d.jpg
     caption: A planar biped.
   - key: halfcheetah
     name: HalfCheetah-v5
@@ -41,7 +43,8 @@ tasks:
     datasets: [medium, medium-expert]
     axes: [gravity, morphology, actuator gear]
     shifts: [dynamic, observation, action, reward-cost, latency]
-    media: assets/tasks/halfcheetah.gif
+    media: assets/tasks/halfcheetah.mp4
+    poster: assets/tasks/halfcheetah.jpg
     caption: A planar quadruped that runs.
   - key: pusher
     name: Pusher-v5s
@@ -51,7 +54,8 @@ tasks:
     parts: [3]
     axes: [dynamics, observation, control rate, goal displacement]
     shifts: [dynamic, observation, action, reward-cost, latency]
-    media: assets/tasks/pusher.gif
+    media: assets/tasks/pusher.mp4
+    poster: assets/tasks/pusher.jpg
     caption: A seven-joint arm pushes an object to a goal; the compound deployment profiles of Peng et al.
   - key: pointmaze
     name: PointMaze-v3
@@ -62,7 +66,8 @@ tasks:
     datasets: [open, umaze]
     axes: [actuator gear, dry friction, adversary]
     shifts: [dynamic, observation, action, reward-cost, latency]
-    media: assets/tasks/pointmaze.svg
+    media: assets/tasks/pointmaze.mp4
+    poster: assets/tasks/pointmaze.jpg
     caption: A point mass steered through a maze to a goal.
   - key: fetchreach
     name: FetchReachDense-v3
@@ -72,7 +77,8 @@ tasks:
     parts: [1]
     axes: [actuator gear, morphology]
     shifts: [dynamic, observation, action, reward-cost, latency]
-    media: assets/tasks/fetchreach.svg
+    media: assets/tasks/fetchreach.mp4
+    poster: assets/tasks/fetchreach.jpg
     caption: A mobile manipulator reaches a target with its gripper.
   - key: door
     name: AdroitHandDoor-v1
@@ -83,7 +89,8 @@ tasks:
     datasets: [human, cloned, expert]
     axes: [actuator gear, latch]
     shifts: [dynamic, observation, action, reward-cost, latency]
-    media: assets/tasks/door.svg
+    media: assets/tasks/door.mp4
+    poster: assets/tasks/door.jpg
     caption: A 24-joint hand unlatches and opens a door.
   - key: lunarlander
     name: LunarLanderContinuous-v3
@@ -94,17 +101,19 @@ tasks:
     datasets: [medium, medium-expert, expert, medium-replay]
     axes: [engine power, gravity, wind]
     shifts: [dynamic, observation, action, reward-cost, latency]
-    media: assets/tasks/lunarlander.svg
+    media: assets/tasks/lunarlander.mp4
+    poster: assets/tasks/lunarlander.jpg
     caption: A lander touches down between the flags.
   - key: carracing
-    name: CarRacing-v3
+    name: CarRacing-v2
     family: Vehicle control
     backend: Box2D
     regime: [online]
     parts: [1]
     axes: [friction, actuator gear, morphology]
     shifts: [dynamic, observation, action, reward-cost, latency]
-    media: assets/tasks/carracing.svg
+    media: assets/tasks/carracing.mp4
+    poster: assets/tasks/carracing.jpg
     caption: A car driven from pixels around a procedurally generated track.
   - key: doorcausal
     name: DoorCausal
@@ -114,7 +123,8 @@ tasks:
     parts: [2]
     axes: [scene rebound, appearance]
     shifts: [dynamic, observation, action, reward-cost, latency, semantic]
-    media: assets/tasks/doorcausal.svg
+    media: assets/tasks/doorcausal.mp4
+    poster: assets/tasks/doorcausal.jpg
     caption: A goal-conditioned door task whose scene semantics can be rebound; the semantic-shift channel.
   - key: g1
     name: Unitree G1 locomotion
