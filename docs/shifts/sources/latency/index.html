@@ -482,20 +482,19 @@ more. The <code>frame_skip</code> of the task is back at its nominal value after
 [0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
 </code></pre></div>
 <p>Both release rules pay out everything that is still withheld when the episode terminates or is
-truncated, so <strong>the undiscounted return of a complete episode is preserved</strong>. A trainer that
-takes only an environment id receives the delay through the registered ids
-<code>HopperRewardDelay4-v5</code>, <code>HopperRewardDelay16-v5</code>, <code>HopperRewardDelay32-v5</code> and
-<code>HopperRewardDelay64-v5</code>; a trainer that learns from a dataset receives it through the
-<code>reward_channel</code> key of the experiment file.</p>
-<div class="highlight"><span class="filename">robustrllib/configs/dr/rdelay16.yaml (comments omitted)</span><pre><span></span><code><span class="nt">randomization</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
-<span class="nt">extra_shifts</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="nv">latency</span><span class="p p-Indicator">,</span><span class="nt"> mode</span><span class="p">:</span><span class="w"> </span><span class="nv">delay</span><span class="p p-Indicator">,</span><span class="nt"> params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">steps</span><span class="p">:</span><span class="w"> </span><span class="nv">16</span><span class="p p-Indicator">,</span><span class="nt"> release</span><span class="p">:</span><span class="w"> </span><span class="nv">interval</span><span class="p p-Indicator">}}</span>
-<span class="nt">curriculum</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="nv">constant</span><span class="p p-Indicator">,</span><span class="nt"> end</span><span class="p">:</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">}</span>
+truncated, so <strong>the undiscounted return of a complete episode is preserved</strong>. The delay acts
+while a method trains: <code>robustrllib/configs/train_shifts.yaml</code> defines the arms the benchmark
+uses, and <code>baselines/train.py --train-shift reward_delay_16</code> selects one. An online method trains
+on its environment with the shift stacked on it; an offline method receives it on the rewards of
+its dataset, along each recorded episode.</p>
+<div class="highlight"><span class="filename">robustrllib/configs/train_shifts.yaml (excerpt)</span><pre><span></span><code><span class="nt">reward_delay_16</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">latency</span>
+<span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">delay</span>
+<span class="w">  </span><span class="nt">params</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">steps</span><span class="p">:</span><span class="w"> </span><span class="nv">16</span><span class="p p-Indicator">,</span><span class="nt"> release</span><span class="p">:</span><span class="w"> </span><span class="nv">interval</span><span class="p p-Indicator">}</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code>ShiftSpec("reward", "delay", ...)</code> is the earlier spelling of the mode name <code>delay</code> and
-builds the same wrapper.</p>
+<p><code>ShiftSpec("reward", "delay", ...)</code> builds the same wrapper as the target <code>latency</code>.</p>
 </div>
 <h2 id="rules">Rules<a class="headerlink" href="#rules" title="Permanent link">&para;</a></h2>
 <ul>
