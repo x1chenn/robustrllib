@@ -41,6 +41,7 @@ The site has two parts that share one colour system:
     ├── data/
     │   ├── algorithms.yaml   # one record per algorithm: the single source of truth
     │   ├── shifts.yaml       # the shift toolbox of the landing page: sources, modes, examples
+    │   ├── tasks.yaml        # the task-support block of the shift toolbox
     │   ├── references.yaml   # original papers
     │   └── results/          # frozen result tables that every number is computed from
     ├── theme/                # the site's own theme: main.html, 404.html, css/, js/, fonts/
@@ -61,7 +62,8 @@ The documentation has a theme of its own (`src/theme/`), in the form of the Gymn
 documentation: a bar across the top, the pages on a grey ground on the left, the text in
 the middle, the sections of the current page on the right. The window widths at which the
 side columns move behind buttons are in `css/site.css`. The theme loads nothing from outside
-the site: system fonts, and the icon font and the book's typeface are in `theme/fonts/`.
+the site: system fonts, the icon font and the book's typeface in `theme/fonts/`, and Inter for the
+formulas of the landing page in `assets/fonts/` (SIL Open Font License).
 The search is MkDocs' own, in a dialog that opens from the field on the left or with Ctrl+K.
 
 ## Page form

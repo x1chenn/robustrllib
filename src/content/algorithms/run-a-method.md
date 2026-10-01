@@ -26,7 +26,7 @@ recipe behind this one entry.
 
 The experiment file ties the cards together. One method, [DR](robust-online/dr.md), reads a
 file of its own on top of these: the randomization ranges it trains under, kept in `dr/` and
-described with the method [below](#an-online-method-with-a-training-environment).
+described with the method [below](#online-methods).
 
 ```yaml title="robustrllib/configs/experiment/rorl_hopper.yaml"
 # Official Hopper-medium RORL hyperparameters on benchmark Minari data.

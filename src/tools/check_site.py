@@ -9,23 +9,34 @@ for identity strings, machine-specific paths and external URLs. It also follows
 every link from the landing page into the documentation, which the documentation
 build cannot see. Exits non-zero on any finding, so it can gate a push.
 
-Add a term to IDENTITY whenever a new collaborator, machine or account joins.
+The names of people, accounts, institutions and projects are NOT in this file: GitHub
+Pages serves every file of the repository, so a list of them here would publish exactly
+what the scan protects. They are read from a private list outside the repository
+(`../site_identity_terms.txt` next to the repository, or the path in
+$SITE_IDENTITY_TERMS), one regular expression per line. Without that list the scan
+still checks the generic patterns below and says so.
 """
 from __future__ import annotations
 
+import os
 import re
 import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
+PRIVATE_TERMS = Path(os.environ.get("SITE_IDENTITY_TERMS", REPO.parent / "site_identity_terms.txt"))
 
-# Matched case-insensitively against text files.
-IDENTITY = [
-    r"jhu\b", r"johns\s*hopkins", r"hopkins", r"\barch\s+cluster", r"rockfish",
-    r"xchen\d+", r"x1chenn", r"chauncy", r"shangding", r"gshangd", r"fengqi",
-    r"louishurris", r"zshen\d+", r"lshi\d+",
-    r"saferl", r"sail[-_ ]research", r"cheetahclaws",
-    r"robust-gymnasium-v2", r"2502\.19652",
+
+def private_terms():
+    if not PRIVATE_TERMS.exists():
+        print(f"note: no private term list at {PRIVATE_TERMS}; names are not checked", file=sys.stderr)
+        return []
+    lines = (l.strip() for l in PRIVATE_TERMS.read_text().splitlines())
+    return [l for l in lines if l and not l.startswith("#")]
+
+
+# Matched case-insensitively against text files: generic patterns, plus the private list.
+IDENTITY = private_terms() + [
     r"login\d+\.", r"\.cluster\b", r"#SBATCH", r"\bsbatch\b",
     r"wandb\.(ai|me)", r"huggingface\.co", r"drive\.google", r"overleaf",
     r"[a-z0-9._-]+@[a-z0-9-]+\.(edu|com|org|net|cn)\b",
@@ -49,7 +60,7 @@ TEXT_EXT = {".html", ".htm", ".css", ".js", ".json", ".md", ".yml", ".yaml", ".t
 # because minified code contains arbitrary character runs and vendor links.
 VENDORED = ("docs/search/", "docs/assets/pygments.css", "src/content/assets/pygments.css", "assets/fonts/")
 SKIP_DIRS = {".git", "__pycache__", ".venv", ".venv-site", "node_modules"}
-# This file lists the forbidden terms, so it would flag itself.
+# This file names the generic patterns, so it would flag itself.
 SELF = "src/tools/check_site.py"
 
 
