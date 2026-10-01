@@ -133,7 +133,9 @@ def task_card(task, sources):
     """One task of the support block, as the script renders it."""
     media = task["media"]
     if media.endswith((".mp4", ".webm")):
-        fig = f'<video src="{esc(media)}" autoplay muted loop playsinline preload="metadata"></video>'
+        poster = f' poster="{esc(task["poster"])}"' if task.get("poster") else ""
+        fig = (f'<video src="{esc(media)}"{poster} autoplay muted loop playsinline preload="metadata" '
+               f'aria-label="{esc(task["caption"])}"></video>')
     else:
         fig = f'<img src="{esc(media)}" alt="{esc(task["caption"])}" loading="lazy">'
     dots = "".join(f'<span class="tb-dot tb-{k}" title="{esc(next(s["name"] for s in sources if s["key"] == k))}"></span>'

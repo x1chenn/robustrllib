@@ -8,6 +8,7 @@
 #          3 compound shifts, 4 Isaac Lab and VLA
 # media    a looping render (gif/mp4) or a drawing; the drawings are placeholders
 #          until the scene is rendered from a checkpoint
+# poster   for a video: the still shown before it plays
 tasks:
   - key: hopper
     name: Hopper-v5
@@ -123,7 +124,8 @@ tasks:
     parts: [4]
     axes: [terrain, pushes, physical parameters, cost constraint]
     shifts: [dynamic, observation, action, reward-cost, latency, semantic]
-    media: assets/tasks/g1.svg
+    media: assets/tasks/g1.mp4
+    poster: assets/tasks/g1.jpg
     caption: A humanoid walks on shifted terrain under a cost constraint; the robust safe methods.
   - key: drawer
     name: Drawer opening
@@ -133,15 +135,17 @@ tasks:
     parts: [4]
     axes: [physical parameters, object placement, cost constraint]
     shifts: [dynamic, observation, action, reward-cost, latency, semantic]
-    media: assets/tasks/drawer.svg
+    media: assets/tasks/drawer.mp4
+    poster: assets/tasks/drawer.jpg
     caption: An arm opens a drawer whose physics and placement shift; the robust safe methods.
-  - key: robocasa
-    name: RoboCasa · DrinkwareConsolidation
+  - key: vla
+    name: Insert mouse battery (π0.5)
     family: Vision-language-action
-    backend: RoboCasa
+    backend: Bimanual arms
     regime: [evaluation]
     parts: [4]
-    axes: [lighting, camera, object placement]
+    axes: [execution delay, command noise, proprioception noise, image blur, brightness, gravity, damping, dry friction]
     shifts: [dynamic, observation, action, latency, semantic]
-    media: assets/tasks/robocasa.svg
-    caption: A vision-language-action policy in a kitchen scene whose appearance and layout shift.
+    media: assets/tasks/vla.mp4
+    poster: assets/tasks/vla.jpg
+    caption: A demonstration of the bimanual insert-mouse-battery task from the RSS 2026 post-training challenge, top camera at four times speed; a fine-tuned π0.5 policy is evaluated on it under eight shift axes.
