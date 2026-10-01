@@ -1527,16 +1527,16 @@ python<span class="w"> </span>baselines/evaluate.py<span class="w"> </span><span
     <h2>What the capability map shows.</h2>
 
     <figure>
-      <div class="framed"><img src="assets/figures/part1_decay_gain_paired.png" alt="Robustness across severity quartiles and mechanism family gains."></div>
-      <figcaption>Robustness across severity and mechanism families.</figcaption>
+      <div class="framed"><img src="assets/figures/part1_gain_decay_paired.png" alt="Mechanism family gains, and robustness across shift-magnitude quartiles."></div>
+      <figcaption>Mechanism families and robustness across shift magnitude.</figcaption>
     </figure>
 
-    <h3>Library-wide results</h3>
-    <p class="sub">Every algorithm under the library-wide grid of 220 conditions: pick a regime, a task, a shift axis or a severity, and read the same numbers as a table.</p>
+    <h3>Robust RL algorithm library evaluation</h3>
+    <p class="sub">Every algorithm under the library-wide grid of 220 conditions: pick a regime, a task, a shift axis or a magnitude, and read the same numbers as a table.</p>
     <div class="viz" id="viz-library" data-view="chart"></div>
 
     <h3>Channel leaderboard</h3>
-    <p class="sub">The isolated shifts: the paper's 44 configurations on Hopper-v5 (22 per regime) and the semantic shift on the door task, one shift source at a time, every method that was run, ranked. Choose the paper's channel score or one configuration at one severity.</p>
+    <p class="sub">The isolated shifts: the paper's 44 configurations on Hopper-v5 (22 per regime) and the semantic shift on the door task, one shift source at a time, every method that was run, ranked. Choose the paper's channel score or one configuration at one magnitude.</p>
     <div class="viz" id="viz-channels" data-view="chart"></div>
 
     <h3>Isolated and compound shifts</h3>
@@ -1545,7 +1545,7 @@ python<span class="w"> </span>baselines/evaluate.py<span class="w"> </span><span
 
     <h3>What the paper concludes</h3>
     <ol class="find">
-      <li><b>Robust RL helps at every severity, but both degrade as shifts intensify.</b></li>
+      <li><b>Robust RL helps at every magnitude, but both degrade as shifts intensify.</b></li>
       <li><b>Dynamics-aware mechanisms are stronger under dynamics shifts.</b></li>
       <li><b>Claimed channels do not fully predict empirical strengths.</b></li>
       <li><b>Online robust methods generally yield larger gains over their base learners than offline methods.</b></li>
