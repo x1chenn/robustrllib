@@ -118,12 +118,12 @@ figure.hero-video .play {
 figure.hero-video .play::after { content: ""; position: absolute; left: 29px; top: 23px; border-left: 20px solid var(--ink); border-top: 13px solid transparent; border-bottom: 13px solid transparent; }
 figure.hero-video.is-blocked .play { display: block; }
 
-/* ---- contributions */
-.contrib { display: grid; grid-template-columns: repeat(3, 1fr); margin: 40px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
-.contrib li { padding: 22px 24px 4px; }
-.contrib li:first-child { padding-left: 0; }
-.contrib li + li { border-left: 1px solid var(--line); }
-.contrib h4 { font-size: 17px; line-height: 1.35; min-height: 2.7em; margin-bottom: 8px; }   /* two lines each, so the texts start level */
+/* ---- contributions: the numbers' motif again (a short bar, then the title), titles in blue, no frames */
+figure.overview { margin: 40px 0 0; }
+.contrib { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin: 36px 0 0; padding: 0; list-style: none; }
+.contrib li { padding: 0; }
+.contrib li::before { content: ""; display: block; width: 44px; height: 4px; margin: 0 0 16px; border-radius: 2px; background: var(--link); }
+.contrib h4 { font-size: 18px; line-height: 1.35; min-height: 2.7em; margin-bottom: 8px; color: var(--link); }   /* two lines each, so the texts start level */
 .contrib p { font-size: 15.5px; line-height: 1.55; color: var(--muted); margin: 0; }
 
 /* ---- figures */
@@ -225,7 +225,7 @@ table.data tr.shift-demo > td { padding: 6px 0 22px; }
 .task-legend li { gap: 6px; }
 .task-empty { color: var(--muted); }
 @media (max-width: 900px) { .task-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 760px) { .contrib h4 { min-height: 0; } .contrib li { padding: 16px 0; } .contrib li + li { border-left: 0; border-top: 1px solid var(--line); } }
+@media (max-width: 760px) { .contrib { gap: 24px; } .contrib h4 { min-height: 0; } }
 @media (max-width: 560px) { .task-grid { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2, 1fr); row-gap: 30px; } .stats li:last-child { grid-column: span 2; } .stats b { font-size: 38px; } }
 
 /* ---- results */
