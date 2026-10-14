@@ -1,5 +1,5 @@
 /* The project page: a white ground, one reading column, black text, hairlines between
-   the parts, and a single animated workflow. Family colours are the paper's figure palette and are the only
+   the parts, no motion. Family colours are the paper's figure palette and are the only
    colours on the page besides links. Fonts are self-hosted; nothing loads from outside. */
 
 @font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/inter-latin-wght-normal.woff2") format("woff2"); }
@@ -104,6 +104,17 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .links a.primary:hover { background: #000; }
 .links a .soon { font-weight: 450; color: var(--faint); font-size: 13px; margin-left: 6px; }
 .links a.primary .soon { color: #bfc4c9; }
+
+/* ---- the hero video: the one moving element of the page */
+figure.hero-video { margin: 34px 0 0; }
+figure.hero-video video { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+figure.hero-video { position: relative; }
+figure.hero-video .play {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 72px; height: 72px; border-radius: 50%;
+  border: 1.5px solid var(--ink); background: rgba(255, 255, 255, .92); cursor: pointer; display: none; padding: 0;
+}
+figure.hero-video .play::after { content: ""; position: absolute; left: 29px; top: 23px; border-left: 20px solid var(--ink); border-top: 13px solid transparent; border-bottom: 13px solid transparent; }
+figure.hero-video.is-blocked .play { display: block; }
 
 /* ---- contributions */
 .contrib { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 36px; margin: 40px 0 0; padding: 0; list-style: none; }
