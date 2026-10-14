@@ -91,6 +91,14 @@ ul.plain li { margin: 0 0 6px; }
 
 /* ---- sections */
 section { padding: 52px 0; border-top: 1px solid var(--line); }
+/* section titles: black, bold, Times New Roman (Liberation Serif and Tinos are its metric twins on Linux) */
+section > .wrap > h2, section > .wrap > h3 { font-family: "Times New Roman", Times, "Liberation Serif", Tinos, serif; font-weight: 700; color: #000; letter-spacing: 0; }
+section > .wrap > h2 { font-size: 31px; line-height: 1.2; }
+section > .wrap > h3 { font-size: 22px; }
+/* related benchmarks on the light blue used before; hairlines tinted to match */
+#comparison { background: #eef4fb; }
+#comparison table.data th, #comparison table.data td { border-bottom-color: #d6e3f2; }
+#comparison table.data thead th { border-bottom-color: var(--ink); }
 header.intro { padding: 64px 0 48px; }
 footer { border-top: 1px solid var(--line); padding: 28px 0 44px; font-size: 14px; color: var(--muted); }
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
@@ -127,10 +135,11 @@ figure.hero-video.is-blocked .play { display: block; }
 
 /* ---- contributions: the numbers' motif again (a short bar, then the title), titles in blue, no frames */
 figure.overview { margin: 40px 0 0; }
-.contrib { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin: 36px 0 0; padding: 0; list-style: none; }
+figure.overview figcaption { text-align: center; }
+.contrib { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 36px 0 0; padding: 0; list-style: none; }
 .contrib li { padding: 0; }
-.contrib li::before { content: ""; display: block; width: 44px; height: 4px; margin: 0 0 16px; border-radius: 2px; background: var(--link); }
-.contrib h4 { font-size: 18px; line-height: 1.35; min-height: 2.7em; margin-bottom: 8px; color: var(--link); }   /* two lines each, so the texts start level */
+.contrib li::before { content: ""; display: block; width: 100%; height: 4px; margin: 0 0 16px; border-radius: 2px; background: var(--link); }   /* as wide as the text below */
+.contrib h4 { font-size: min(16.5px, calc((100vw - 88px) * .0204)); line-height: 1.35; white-space: nowrap; margin-bottom: 8px; color: var(--link); }   /* one line each; shrinks with the column */
 .contrib p { font-size: 15.5px; line-height: 1.55; color: var(--muted); margin: 0; }
 
 /* ---- figures */
@@ -232,7 +241,7 @@ table.data tr.shift-demo > td { padding: 6px 0 22px; }
 .task-legend li { gap: 6px; }
 .task-empty { color: var(--muted); }
 @media (max-width: 900px) { .task-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 760px) { .contrib { gap: 24px; } .contrib h4 { min-height: 0; } }
+@media (max-width: 760px) { .contrib { gap: 24px; } .contrib h4 { font-size: 17px; white-space: normal; } }
 @media (max-width: 560px) { .task-grid { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2, 1fr); } .stats li + li { border-left: 0; } .stats li:nth-child(even) { border-left: 1px solid var(--line); } .stats li:nth-child(n+3) { border-top: 1px solid var(--line); } .stats li:last-child { grid-column: span 2; } .stats b { font-size: 32px; } }
 
 /* ---- results */
@@ -293,6 +302,7 @@ table.data tr.shift-demo > td { padding: 6px 0 22px; }
   h1.lockup .logo { width: 60px; height: 60px; }
   .masthead .subtitle { font-size: 25px; }
   h2 { font-size: 23px; }
+  section > .wrap > h2 { font-size: 26px; }
   nav.top ul { gap: 14px; font-size: 13.5px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
   nav.top ul::-webkit-scrollbar { display: none; }
   nav.top li a { white-space: nowrap; }

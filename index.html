@@ -73,8 +73,7 @@
 
     <figure class="bordered overview">
       <img src="assets/figures/figure1.png" alt="Overview of RobustRLlib: an algorithm library, a composable shift toolbox and one evaluation platform.">
-      <figcaption><b>Overview.</b> An algorithm library organized by mechanism, a shift toolbox that reaches the observation,
-        action, dynamics, reward/cost, latency and semantic channels, and one train–disrupt–evaluate protocol.</figcaption>
+      <figcaption><b>Overview of RobustRLlib.</b></figcaption>
     </figure>
 
     <ol class="contrib">
@@ -113,7 +112,7 @@ pip install pyyaml torch minari</pre>
     </div>
 
     <div class="step">
-      <h4><span class="n">2</span>Declare a shifted environment</h4>
+      <h4><span class="n">2</span>Create a shifted environment</h4>
 <pre class="code"><span class="kw">from</span> robustrllib <span class="kw">import</span> make_robust, ShiftSpec
 
 <span class="cm"># A deployment condition is an ordered list of shifts; the list order is the stacking order.</span>
@@ -168,7 +167,7 @@ python baselines/evaluate.py --run runs/rorl_hopper/seed0</pre>
 <section id="algorithms">
   <div class="wrap">
     <p class="kicker">Algorithms</p>
-    <h2>Robust RL algorithm library</h2>
+    <h2>Robust RL algorithm library construction</h2>
     <p>The sixteen robust methods are grouped by data regime and by where robustness enters: the learner,
       the environment it collects from, or the data it learns from. Each row names the shift the method
       claims and the base algorithm it is built on.</p>
@@ -310,7 +309,7 @@ shift = ShiftSpec(&quot;appearance&quot;, &quot;hue&quot;,
 <section id="results">
   <div class="wrap">
     <p class="kicker">Results</p>
-    <h2>A capability map of robust RL.</h2>
+    <h2>A capability map of robust RL algorithms.</h2>
     <p>Every number comes from the same protocol: the frozen checkpoint of each method, 20 paired episodes
       per condition, five training seeds, and the normalized score in which 0 is a random policy and 100
       the reference policy, unclipped. Shift magnitudes are grouped into quartiles Q1–Q4 by displacement
