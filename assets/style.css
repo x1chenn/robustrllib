@@ -88,14 +88,13 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 44px; font-size: 14p
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
 /* ---- the numbers: five cards of one width, each with its parts as small tags */
-/* Numbers: five equal columns, no frame; a short bar above each number; algorithms in blue, the rest in ink */
-.stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 36px 0 0; padding: 0; list-style: none; }
-.stats li { min-width: 0; padding: 0 8px; text-align: center; }
-.stats li::before { content: ""; display: block; width: 44px; height: 4px; margin: 0 auto 16px; border-radius: 2px; background: var(--ink); }
-.stats b { display: block; font-size: 50px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
-.stats li.lead::before { background: var(--link); }
+/* Numbers: one rounded frame, five equal cells split by hairlines; algorithms in blue, the rest in ink */
+.stats { display: grid; grid-template-columns: repeat(5, 1fr); margin: 36px 0 0; padding: 0; list-style: none; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.stats li { min-width: 0; padding: 22px 8px 20px; text-align: center; }
+.stats li + li { border-left: 1px solid var(--line); }
+.stats b { display: block; font-size: 38px; font-weight: 700; letter-spacing: -.02em; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
 .stats li.lead b { color: var(--link); }
-.stats span { display: block; margin-top: 12px; font-size: 11.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); line-height: 1.45; }
+.stats span { display: block; margin-top: 10px; font-size: 11.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); line-height: 1.45; }
 
 /* ---- links row under the title */
 .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 0; }
@@ -226,7 +225,7 @@ table.data tr.shift-demo > td { padding: 6px 0 22px; }
 .task-empty { color: var(--muted); }
 @media (max-width: 900px) { .task-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 760px) { .contrib { gap: 24px; } .contrib h4 { min-height: 0; } }
-@media (max-width: 560px) { .task-grid { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2, 1fr); row-gap: 30px; } .stats li:last-child { grid-column: span 2; } .stats b { font-size: 38px; } }
+@media (max-width: 560px) { .task-grid { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2, 1fr); } .stats li + li { border-left: 0; } .stats li:nth-child(even) { border-left: 1px solid var(--line); } .stats li:nth-child(n+3) { border-top: 1px solid var(--line); } .stats li:last-child { grid-column: span 2; } .stats b { font-size: 32px; } }
 
 /* ---- results */
 .module-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 0 0 18px; }
