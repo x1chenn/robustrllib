@@ -101,14 +101,12 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 /* ---- links row under the title */
 .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 0; }
 .links a {
-  display: inline-block; padding: 8px 16px; border: 1px solid var(--line-strong); border-radius: 6px;
-  color: var(--ink); font-size: 15px; font-weight: 550;
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 999px;
+  background: #2b2d30; color: #fff; font-size: 15px; font-weight: 550; line-height: 1.2;
 }
-.links a:hover { border-color: var(--ink); text-decoration: none; }
-.links a.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
-.links a.primary:hover { background: #000; }
-.links a .soon { font-weight: 450; color: var(--faint); font-size: 13px; margin-left: 6px; }
-.links a.primary .soon { color: #bfc4c9; }
+.links a:hover { background: #000; color: #fff; text-decoration: none; }
+.links .ico { width: 17px; height: 17px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.links a .soon { font-weight: 450; color: #aeb4ba; font-size: 13px; margin-left: -2px; }
 
 /* ---- the hero video: the one moving element of the page */
 figure.hero-video { margin: 34px 0 0; }
