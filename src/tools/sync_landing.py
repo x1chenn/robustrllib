@@ -132,23 +132,17 @@ def task_card(task, sources):
 
 
 def tasks_html(tasks, sources):
-    """The task cards with their looping renders, and two rows of filter buttons."""
+    """The task cards with their looping renders, one tab per task family."""
     out = ['<div class="tasks" id="tasks">',
-           '  <div class="filters">',
-           '    <div class="filter-row"><span class="filter-label">Family</span><div class="filter-buttons" role="group" aria-label="Task family">',
-           '      <button type="button" class="fbtn is-active" data-family="all">All</button>']
-    for f in FAMILIES:
-        out.append(f'      <button type="button" class="fbtn" data-family="{esc(f)}">{esc(f)}</button>')
-    out.append('    </div></div>')
-    out.append('    <div class="filter-row"><span class="filter-label">Regime</span><div class="filter-buttons" role="group" aria-label="Regime">')
-    for key, label in (("all", "All"), ("online", "Online"), ("offline", "Offline")):
-        out.append(f'      <button type="button" class="fbtn{" is-active" if key == "all" else ""}" data-regime="{key}">{label}</button>')
-    out.append('    </div></div>')
+           '  <div class="filter-buttons" role="tablist" aria-label="Task family">']
+    for i, f in enumerate(FAMILIES):
+        n = sum(1 for t in tasks if t["family"] == f)
+        out.append(f'    <button type="button" class="fbtn{" is-active" if i == 0 else ""}" role="tab" '
+                   f'aria-selected="{"true" if i == 0 else "false"}" data-family="{esc(f)}">{esc(f)} <span>{n}</span></button>')
     out.append('  </div>')
     out.append('  <div class="task-grid">')
     out.extend("    " + task_card(t, sources) for t in tasks)
     out.append('  </div>')
-    out.append('  <p class="task-empty" hidden>No task matches this filter.</p>')
     legend = "".join(f'<li><i class="dot dot-{esc(s["key"])}"></i>{esc(s["name"])}</li>' for s in sources)
     out.append(f'  <ul class="legend task-legend">{legend}</ul>')
     out.append('</div>')

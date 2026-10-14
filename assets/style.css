@@ -89,6 +89,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 /* ---- the five numbers */
 .stats { display: flex; flex-wrap: wrap; gap: 0; margin: 30px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .stats li { flex: 1 1 0; padding: 16px 18px 14px 0; }
+.stats li.wide { flex: 2.4 1 0; }
+.stats i { font-style: normal; color: var(--faint); font-weight: 400; padding: 0 2px; }
 .stats li + li { padding-left: 18px; border-left: 1px solid var(--line); }
 .stats b { display: block; font-size: 38px; font-weight: 700; letter-spacing: -.03em; line-height: 1; }
 .stats span { display: block; margin-top: 6px; font-size: 14px; color: var(--muted); }
@@ -107,7 +109,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
 /* ---- the hero video: the one moving element of the page */
 figure.hero-video { margin: 34px 0 0; }
-figure.hero-video video { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+figure.hero-video video { display: block; width: 100%; height: auto; border: 0; background: #fff; }
 figure.hero-video { position: relative; }
 figure.hero-video .play {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 72px; height: 72px; border-radius: 50%;
@@ -117,7 +119,7 @@ figure.hero-video .play::after { content: ""; position: absolute; left: 29px; to
 figure.hero-video.is-blocked .play { display: block; }
 
 /* ---- contributions */
-.contrib { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 36px; margin: 40px 0 0; padding: 0; list-style: none; }
+.contrib { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px 32px; margin: 40px 0 0; padding: 0; list-style: none; }
 .contrib li { padding-top: 14px; border-top: 2px solid var(--ink); }
 .contrib .num { display: block; font-size: 13px; font-weight: 650; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; }
 .contrib h4 { font-size: 17px; margin-bottom: 8px; }
@@ -126,7 +128,7 @@ figure.hero-video.is-blocked .play { display: block; }
 /* ---- figures */
 figure { margin: 26px 0; }
 figure img { display: block; width: 100%; height: auto; }
-figure.bordered img { border: 1px solid var(--line); border-radius: 4px; padding: 8px; background: #fff; }
+figure.bordered img { border: 0; padding: 0; background: transparent; }
 figcaption { margin-top: 10px; font-size: 14px; line-height: 1.55; color: var(--muted); }
 figcaption b { color: var(--ink-2); font-weight: 600; }
 
@@ -151,15 +153,15 @@ pre.code .out { color: var(--muted); }
 .linklist li span { display: block; color: var(--muted); font-size: 14px; margin-top: 2px; }
 
 /* ---- tables */
-.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 4px; }
+.table-scroll { overflow-x: auto; border: 0; }
 table.data { border-collapse: collapse; width: 100%; font-size: 14px; }
-table.data th, table.data td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
-table.data thead th { background: var(--surface); font-weight: 650; font-size: 13px; color: var(--ink-2); border-bottom: 1px solid var(--line-strong); }
+table.data th, table.data td { padding: 9px 12px 9px 0; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.data thead th { background: transparent; font-weight: 650; font-size: 13px; color: var(--ink-2); border-bottom: 1.5px solid var(--ink); }
 table.data tbody tr:last-child td { border-bottom: none; }
 table.data td.c, table.data th.c { text-align: center; }
 table.data td.nw { white-space: nowrap; }
-table.data tr.hi td { background: #f3f6fa; font-weight: 600; }
-table.data .grp td { background: var(--surface); font-weight: 650; font-size: 13px; color: var(--ink-2); }
+table.data tr.hi td { background: transparent; font-weight: 650; }
+table.data .grp td { background: transparent; padding-top: 20px; font-weight: 650; font-size: 13px; color: var(--ink-2); border-bottom: 1px solid var(--line-strong); }
 table.data td a { color: var(--ink); font-weight: 600; }
 table.data td a:hover { color: var(--link); }
 .tick { color: var(--ink); font-weight: 700; }
@@ -183,15 +185,15 @@ table.data td a:hover { color: var(--link); }
 .legend li { display: inline-flex; align-items: center; }
 
 /* ---- task cards */
-.filters { margin: 0 0 16px; }
-.filter-row { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin: 0 0 8px; }
-.filter-label { font-size: 12.5px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); min-width: 60px; }
+.tasks > .filter-buttons { margin: 0 0 16px; }
+.fbtn span { color: var(--faint); font-weight: 400; margin-left: 2px; }
+.fbtn.is-active span { color: #c9ced3; }
 .filter-buttons { display: flex; flex-wrap: wrap; gap: 6px; }
 .fbtn { padding: 5px 12px; border: 1px solid var(--line-strong); border-radius: 999px; background: #fff; font: inherit; font-size: 13.5px; font-weight: 500; color: var(--ink); cursor: pointer; }
 .fbtn:hover { border-color: var(--ink); }
 .fbtn.is-active { background: var(--ink); border-color: var(--ink); color: #fff; }
 .task-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.task { border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px 12px; background: #fff; }
+.task { padding: 0; background: transparent; }
 .task[hidden] { display: none; }
 .task-media { margin: 0 0 10px; }
 .task-media img, .task-media video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; background: var(--surface); }
@@ -230,7 +232,7 @@ table.data td a:hover { color: var(--link); }
   font: inherit; font-size: 14px; font-weight: 550; color: var(--ink); cursor: pointer;
 }
 .viz-toggle:hover { border-color: var(--ink); }
-.viz-body { border: 1px solid var(--line); border-radius: 4px; padding: 16px 18px 12px; background: #fff; }
+.viz-body { border: 0; padding: 4px 0 0; background: transparent; }
 .viz-chart { min-width: 0; }
 .viz-svg { display: block; width: 100%; height: auto; overflow: visible; font-family: var(--font); }
 .viz-svg .viz-tick { font-size: 11px; fill: var(--faint); font-variant-numeric: tabular-nums; }
@@ -268,6 +270,6 @@ table.data td a:hover { color: var(--link); }
   .contrib, .cols2 { grid-template-columns: 1fr; }
   .viz-filters { flex-direction: column; align-items: stretch; }
   .viz-filter select { width: 100%; max-width: 100%; }
-  .viz-body { padding: 10px; }
+  .viz-body { padding: 4px 0 0; }
   .viz-toggle { margin-left: 0; }
 }
