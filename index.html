@@ -75,20 +75,15 @@
     <ol class="contrib">
       <li>
         <h4>A robust RL algorithm library</h4>
-        <p>A mechanism-aware library of six standard and sixteen robust online, offline and safe RL
-          methods, each classified by data regime, targeted uncertainty, core mechanism and integration
-          form.</p>
+        <p>Robust online, offline and safe methods in one reusable codebase.</p>
       </li>
       <li>
         <h4>An enhanced evaluation platform</h4>
-        <p>Six shift sources, five shift modes and six task families that compose into a rich and
-          diverse set of perturbations, from standard control to humanoid and vision–language–action
-          tasks.</p>
+        <p>Shifts that compose, from standard control to Isaac Lab and VLA tasks.</p>
       </li>
       <li>
-        <h4>An up-to-date capability map of robust RL algorithms</h4>
-        <p>Evaluation over 273 perturbation configurations reveals the characteristics of each robustness
-          mechanism and the capability boundary of current robust RL algorithms.</p>
+        <h4>An up-to-date capability map</h4>
+        <p>Where current robust methods remain effective, and where gaps persist.</p>
       </li>
     </ol>
 
@@ -235,17 +230,40 @@ python baselines/evaluate.py --run runs/rorl_hopper/seed0</pre>
     </figure>
     <!-- shift-table:start -->
     <div class="table-scroll">
-      <table class="data">
+      <table class="data shift-table">
         <thead>
-          <tr><th>Shift source</th><th>What it perturbs</th><th>Target</th><th>Mode names</th></tr>
+          <tr><th>Shift source</th><th>What it perturbs</th><th>Target</th><th>Mode names</th><th class="c">Demo</th></tr>
         </thead>
         <tbody>
-          <tr><td class="nw"><i class="chip chip-src-dynamic"></i><a href="docs/shifts/sources/dynamic/">Dynamic shift</a></td><td>Physical parameters, external forces, the simulator state.</td><td class="nw"><code>dynamics, transition</code></td><td><code>gauss</code> <code>uniform</code> <code>loguniform</code> <code>push</code> <code>scale</code> <code>set</code> <code>translate</code></td></tr>
-          <tr><td class="nw"><i class="chip chip-src-observation"></i><a href="docs/shifts/sources/observation/">Observation shift</a></td><td>The observation returned to the policy.</td><td class="nw"><code>observation</code></td><td><code>gauss</code> <code>uniform</code> <code>relative</code> <code>bias</code> <code>adversarial</code> <code>shift</code></td></tr>
-          <tr><td class="nw"><i class="chip chip-src-action"></i><a href="docs/shifts/sources/action/">Action shift</a></td><td>The action between policy and simulator.</td><td class="nw"><code>action</code></td><td><code>gauss</code> <code>uniform</code> <code>adversarial</code> <code>oppose</code> <code>rotate</code> <code>oppose_goal</code> <code>shift</code></td></tr>
-          <tr><td class="nw"><i class="chip chip-src-reward-cost"></i><a href="docs/shifts/sources/reward-cost/">Reward/cost shift</a></td><td>The reward, or the cost of a constrained task.</td><td class="nw"><code>reward, cost</code></td><td><code>gauss</code> <code>uniform</code> <code>shift</code></td></tr>
-          <tr><td class="nw"><i class="chip chip-src-latency"></i><a href="docs/shifts/sources/latency/">Latency shift</a></td><td>When actions, observations and rewards arrive.</td><td class="nw"><code>latency</code></td><td><code>buffer</code> <code>substep</code> <code>interp</code> <code>fixed</code> <code>delay</code></td></tr>
-          <tr><td class="nw"><i class="chip chip-src-semantic"></i><a href="docs/shifts/sources/semantic/">Semantic shift</a></td><td>Colours, lights, cameras and object positions.</td><td class="nw"><code>appearance</code></td><td><code>gauss</code> <code>uniform</code> <code>loguniform</code> <code>hue</code> <code>tint</code> <code>swap</code> <code>scale</code> <code>set</code> <code>translate</code></td></tr>
+          <tr class="shift-row"><td class="nw"><i class="chip chip-src-dynamic"></i><a href="docs/shifts/sources/dynamic/">Dynamic shift</a></td><td>Physical parameters, external forces, the simulator state.</td><td class="nw"><code>dynamics, transition</code></td><td><code>gauss</code> <code>uniform</code> <code>loguniform</code> <code>push</code> <code>scale</code> <code>set</code> <code>translate</code></td><td class="c"><button type="button" class="demo-toggle" aria-expanded="false" aria-controls="demo-dynamic" aria-label="Show the demo of the Dynamic shift"></button></td></tr>
+          <tr class="shift-demo" id="demo-dynamic" hidden><td colspan="5"><div class="demo-body"><div class="demo-clips"><figure><figcaption>Nominal</figcaption><video data-src="assets/shifts/dynamic-carrace_nominal_web.mp4" poster="assets/shifts/dynamic-carrace_nominal_web.jpg" muted loop playsinline controls preload="none" aria-label="Nominal: CarRacing: shifted vehicle dynamics change the response to steering and throttle, making the car deviate from its nominal path."></video></figure><figure><figcaption>Shifted</figcaption><video data-src="assets/shifts/dynamic-carrace_shift_web.mp4" poster="assets/shifts/dynamic-carrace_shift_web.jpg" muted loop playsinline controls preload="none" aria-label="Shifted: CarRacing: shifted vehicle dynamics change the response to steering and throttle, making the car deviate from its nominal path."></video></figure></div><p class="demo-caption">CarRacing: shifted vehicle dynamics change the response to steering and throttle, making the car deviate from its nominal path.</p><p class="demo-head">Declare it</p><pre class="code">from robustrllib import make_robust, ShiftSpec
+
+shift = ShiftSpec(&quot;dynamics&quot;, &quot;scale&quot;,
+          {&quot;param&quot;: &quot;gravity&quot;, &quot;factor&quot;: 1.3})</pre></div></td></tr>
+          <tr class="shift-row"><td class="nw"><i class="chip chip-src-observation"></i><a href="docs/shifts/sources/observation/">Observation shift</a></td><td>The observation returned to the policy.</td><td class="nw"><code>observation</code></td><td><code>gauss</code> <code>uniform</code> <code>relative</code> <code>bias</code> <code>adversarial</code> <code>shift</code></td><td class="c"><button type="button" class="demo-toggle" aria-expanded="false" aria-controls="demo-observation" aria-label="Show the demo of the Observation shift"></button></td></tr>
+          <tr class="shift-demo" id="demo-observation" hidden><td colspan="5"><div class="demo-body"><div class="demo-clips"><figure><figcaption>Nominal</figcaption><video data-src="assets/shifts/observation-hopper_nominal_web.mp4" poster="assets/shifts/observation-hopper_nominal_web.jpg" muted loop playsinline controls preload="none" aria-label="Nominal: Hopper under nominal and noisy observations (Gaussian noise, sigma 0.10, on every observation)."></video></figure><figure><figcaption>Shifted</figcaption><video data-src="assets/shifts/observation-hopper_shift_web.mp4" poster="assets/shifts/observation-hopper_shift_web.jpg" muted loop playsinline controls preload="none" aria-label="Shifted: Hopper under nominal and noisy observations (Gaussian noise, sigma 0.10, on every observation)."></video></figure></div><p class="demo-caption">Hopper under nominal and noisy observations (Gaussian noise, sigma 0.10, on every observation).</p><p class="demo-head">The shift in this clip</p><pre class="code">env = make_robust(&quot;Hopper-v5&quot;, shifts=[
+    ShiftSpec(&quot;observation&quot;, &quot;gauss&quot;, {&quot;sigma&quot;: 0.10}),
+], seed=0)</pre></div></td></tr>
+          <tr class="shift-row"><td class="nw"><i class="chip chip-src-action"></i><a href="docs/shifts/sources/action/">Action shift</a></td><td>The action between policy and simulator.</td><td class="nw"><code>action</code></td><td><code>gauss</code> <code>uniform</code> <code>adversarial</code> <code>oppose</code> <code>rotate</code> <code>oppose_goal</code> <code>shift</code></td><td class="c"><button type="button" class="demo-toggle" aria-expanded="false" aria-controls="demo-action" aria-label="Show the demo of the Action shift"></button></td></tr>
+          <tr class="shift-demo" id="demo-action" hidden><td colspan="5"><div class="demo-body"><div class="demo-clips"><figure><figcaption>Nominal</figcaption><video data-src="assets/shifts/action-maze_nominal_web.mp4" poster="assets/shifts/action-maze_nominal_web.jpg" muted loop playsinline controls preload="none" aria-label="Nominal: PointMaze under nominal and shifted actions."></video></figure><figure><figcaption>Shifted</figcaption><video data-src="assets/shifts/action-maze_shift_web.mp4" poster="assets/shifts/action-maze_shift_web.jpg" muted loop playsinline controls preload="none" aria-label="Shifted: PointMaze under nominal and shifted actions."></video></figure></div><p class="demo-caption">PointMaze under nominal and shifted actions.</p><p class="demo-head">Declare it</p><pre class="code">from robustrllib import make_robust, ShiftSpec
+
+shift = ShiftSpec(&quot;action&quot;, &quot;shift&quot;,
+          {&quot;shift&quot;: 0.05, &quot;clip_first&quot;: True})</pre></div></td></tr>
+          <tr class="shift-row"><td class="nw"><i class="chip chip-src-reward-cost"></i><a href="docs/shifts/sources/reward-cost/">Reward/cost shift</a></td><td>The reward, or the cost of a constrained task.</td><td class="nw"><code>reward, cost</code></td><td><code>gauss</code> <code>uniform</code> <code>shift</code></td><td class="c"><button type="button" class="demo-toggle" aria-expanded="false" aria-controls="demo-reward-cost" aria-label="Show the demo of the Reward/cost shift"></button></td></tr>
+          <tr class="shift-demo" id="demo-reward-cost" hidden><td colspan="5"><div class="demo-body"><div class="demo-clips"><figure><figcaption>Nominal</figcaption><video data-src="assets/shifts/reward-hopper_nominal_web.mp4" poster="assets/shifts/reward-hopper_nominal_web.jpg" muted loop playsinline controls preload="none" aria-label="Nominal: Hopper policies trained with the reward on time and with the reward released every 64 steps, both on the nominal task."></video></figure><figure><figcaption>Shifted</figcaption><video data-src="assets/shifts/reward-hopper_shift_web.mp4" poster="assets/shifts/reward-hopper_shift_web.jpg" muted loop playsinline controls preload="none" aria-label="Shifted: Hopper policies trained with the reward on time and with the reward released every 64 steps, both on the nominal task."></video></figure></div><p class="demo-caption">Hopper policies trained with the reward on time and with the reward released every 64 steps, both on the nominal task.</p><p class="demo-head">The shift in this clip</p><pre class="code"># train_shifts.yaml, arm reward_delay_64
+ShiftSpec(&quot;latency&quot;, &quot;delay&quot;, {&quot;steps&quot;: 64, &quot;release&quot;: &quot;interval&quot;})
+
+python baselines/train.py -c robustrllib/configs/experiment/sac_hopper.yaml \
+    --seed 0 --train-shift reward_delay_64</pre></div></td></tr>
+          <tr class="shift-row"><td class="nw"><i class="chip chip-src-latency"></i><a href="docs/shifts/sources/latency/">Latency shift</a></td><td>When actions, observations and rewards arrive.</td><td class="nw"><code>latency</code></td><td><code>buffer</code> <code>substep</code> <code>interp</code> <code>fixed</code> <code>delay</code></td><td class="c"><button type="button" class="demo-toggle" aria-expanded="false" aria-controls="demo-latency" aria-label="Show the demo of the Latency shift"></button></td></tr>
+          <tr class="shift-demo" id="demo-latency" hidden><td colspan="5"><div class="demo-body"><div class="demo-clips"><figure><figcaption>Nominal</figcaption><video data-src="assets/shifts/halfcheetah_sac_nominal_8s.mp4" poster="assets/shifts/halfcheetah_sac_nominal_8s.jpg" muted loop playsinline controls preload="none" aria-label="Nominal: HalfCheetah: actions reach the simulator 0.20–0.40 s late, disrupting gait timing and forward motion."></video></figure><figure><figcaption>Shifted</figcaption><video data-src="assets/shifts/halfcheetah_sac_latency_8s.mp4" poster="assets/shifts/halfcheetah_sac_latency_8s.jpg" muted loop playsinline controls preload="none" aria-label="Shifted: HalfCheetah: actions reach the simulator 0.20–0.40 s late, disrupting gait timing and forward motion."></video></figure></div><p class="demo-caption">HalfCheetah: actions reach the simulator 0.20–0.40 s late, disrupting gait timing and forward motion.</p><p class="demo-head">Declare it</p><pre class="code">from robustrllib import make_robust, ShiftSpec
+
+shift = ShiftSpec(&quot;latency&quot;, &quot;fixed&quot;, {&quot;steps&quot;: 2})</pre></div></td></tr>
+          <tr class="shift-row"><td class="nw"><i class="chip chip-src-semantic"></i><a href="docs/shifts/sources/semantic/">Semantic shift</a></td><td>Colours, lights, cameras and object positions.</td><td class="nw"><code>appearance</code></td><td><code>gauss</code> <code>uniform</code> <code>loguniform</code> <code>hue</code> <code>tint</code> <code>swap</code> <code>scale</code> <code>set</code> <code>translate</code></td><td class="c"><button type="button" class="demo-toggle" aria-expanded="false" aria-controls="demo-semantic" aria-label="Show the demo of the Semantic shift"></button></td></tr>
+          <tr class="shift-demo" id="demo-semantic" hidden><td colspan="5"><div class="demo-body"><div class="demo-clips"><figure><figcaption>Nominal</figcaption><video data-src="assets/shifts/fetchreach_semantic_nominal.mp4" poster="assets/shifts/fetchreach_semantic_nominal.jpg" muted loop playsinline controls preload="none" aria-label="Nominal: FetchReach: the shift moves the reaching target in the scene, changing where the robot arm must move to complete the task."></video></figure><figure><figcaption>Shifted</figcaption><video data-src="assets/shifts/fetchreach_semantic_shift.mp4" poster="assets/shifts/fetchreach_semantic_shift.jpg" muted loop playsinline controls preload="none" aria-label="Shifted: FetchReach: the shift moves the reaching target in the scene, changing where the robot arm must move to complete the task."></video></figure></div><p class="demo-caption">FetchReach: the shift moves the reaching target in the scene, changing where the robot arm must move to complete the task.</p><p class="demo-head">Declare it</p><pre class="code">from robustrllib import make_robust, ShiftSpec
+
+shift = ShiftSpec(&quot;appearance&quot;, &quot;hue&quot;,
+          {&quot;geom&quot;: &quot;torso_geom&quot;, &quot;degrees&quot;: 120})</pre></div></td></tr>
         </tbody>
       </table>
     </div>
@@ -417,6 +435,7 @@ python baselines/evaluate.py --run runs/rorl_hopper/seed0</pre>
 <!-- results-data:end -->
 <script src="assets/results.js" defer></script>
 <script src="assets/tasks.js" defer></script>
+<script src="assets/shifts.js" defer></script>
 
 </body>
 </html>

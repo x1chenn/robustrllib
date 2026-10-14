@@ -86,25 +86,41 @@ def table_html(spec):
 
 
 def shifts_html(data):
-    """One row per shift source: what it perturbs, the targets in code, the mode names."""
-    rows = ['<div class="table-scroll">', '  <table class="data">', "    <thead>",
-            "      <tr><th>Shift source</th><th>What it perturbs</th><th>Target</th><th>Mode names</th></tr>",
+    """One row per shift source, each with an expandable demo: nominal and shifted clips and code."""
+    rows = ['<div class="table-scroll">', '  <table class="data shift-table">', "    <thead>",
+            '      <tr><th>Shift source</th><th>What it perturbs</th><th>Target</th><th>Mode names</th>'
+            '<th class="c">Demo</th></tr>',
             "    </thead>", "    <tbody>"]
     targets = {"dynamic": "dynamics, transition", "observation": "observation", "action": "action",
                "reward-cost": "reward, cost", "latency": "latency", "semantic": "appearance"}
     for s in data["sources"]:
         names = []
         for mode in ("stochastic", "adversarial", "parametric"):
-            entry = s["modes"].get(mode) or {}
-            names += entry.get("names", [])
-        seen, uniq = set(), []
-        for n in names:
-            if n not in seen:
-                seen.add(n); uniq.append(n)
+            names += (s["modes"].get(mode) or {}).get("names", [])
+        uniq = list(dict.fromkeys(names))
         codes = " ".join(f"<code>{esc(n)}</code>" for n in uniq)
-        rows.append(f'      <tr><td class="nw"><i class="chip chip-src-{esc(s["key"])}"></i>'
+        key = esc(s["key"])
+        rows.append(f'      <tr class="shift-row"><td class="nw"><i class="chip chip-src-{key}"></i>'
                     f'<a href="{esc(s["page"])}">{esc(s["name"])}</a></td>'
-                    f'<td>{esc(s["blurb"])}</td><td class="nw"><code>{esc(targets[s["key"]])}</code></td><td>{codes}</td></tr>')
+                    f'<td>{esc(s["blurb"])}</td><td class="nw"><code>{esc(targets[s["key"]])}</code></td><td>{codes}</td>'
+                    f'<td class="c"><button type="button" class="demo-toggle" aria-expanded="false" '
+                    f'aria-controls="demo-{key}" aria-label="Show the demo of the {esc(s["name"])}"></button></td></tr>')
+        ex = s["example"]
+        clips = "".join(
+            f'<figure><figcaption>{label}</figcaption><video data-src="{esc(ex["videos"][k])}" poster="{esc(ex["posters"][k])}" '
+            f'muted loop playsinline controls preload="none" aria-label="{label}: {esc(ex["caption"])}"></video></figure>'
+            for k, label in (("nominal", "Nominal"), ("shifted", "Shifted")))
+        if ex.get("demo_code"):
+            head, code = "The shift in this clip", ex["demo_code"]
+        else:
+            mode = s["modes"].get("parametric") or next(v for v in s["modes"].values() if v.get("code"))
+            head = "Declare it"
+            code = "from robustrllib import make_robust, ShiftSpec\n\nshift = " + mode["code"]
+        rows.append(f'      <tr class="shift-demo" id="demo-{key}" hidden><td colspan="5"><div class="demo-body">'
+                    f'<div class="demo-clips">{clips}</div>'
+                    f'<p class="demo-caption">{esc(ex["caption"])}</p>'
+                    f'<p class="demo-head">{head}</p><pre class="code">{esc(code)}</pre>'
+                    f'</div></td></tr>')
     rows += ["    </tbody>", "  </table>", "</div>"]
     return "\n".join("    " + r for r in rows)
 
