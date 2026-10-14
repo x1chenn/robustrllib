@@ -52,26 +52,27 @@
       <a href="#bibtex">BibTeX</a>
     </div>
 
-    <link rel="stylesheet" href="assets/hero-loop.css">
-    <figure class="hero-loop" aria-label="From an algorithm to a robustness capability map">
-      <div class="hero-loop-stage">
-        <img class="hero-loop-poster" src="assets/hero-loop-poster.svg" width="1000" height="600" alt="A blue walking robot and a floating little devil operating six shift switches. The workflow goes from algorithm selection to shift evaluation and a capability map.">
-      </div>
-      <figcaption class="hero-loop-caption">
-        <span class="hero-loop-summary">Choose a policy. Change its world. Map its limits.</span>
-        <span class="hero-loop-disclaimer">Illustrative workflow · not experimental results</span>
-      </figcaption>
-      <div class="hero-loop-controls" hidden>
-        <div class="hero-loop-chapters" aria-label="Animation chapters">
-          <button type="button" data-time="0" aria-label="Show algorithm library"><span>01</span> Library</button>
-          <button type="button" data-time="6.5" aria-label="Show walking policy"><span>02</span> Policy</button>
-          <button type="button" data-time="11" aria-label="Show shift toolbox"><span>03</span> Shifts</button>
-          <button type="button" data-time="20.5" aria-label="Show capability map"><span>04</span> Map</button>
-        </div>
-        <button type="button" class="hero-loop-pause" aria-label="Pause animation">Pause <span aria-hidden="true">Ⅱ</span></button>
-      </div>
+    <figure class="hero-video" id="hero-video">
+      <video src="assets/hero.mp4" poster="assets/hero.jpg" autoplay muted loop playsinline preload="auto"
+             aria-label="Twenty-two algorithms, a policy trained in simulation, the shift toolbox switching on six shift sources, the policy failing under shift, and the benchmark."></video>
+      <button type="button" class="play" aria-label="Play the video"></button>
     </figure>
-    <script src="assets/hero-loop.js" defer></script>
+    <script>
+      (function () {
+        // Autoplay of a muted video is allowed everywhere, but a browser setting or a reduced-motion
+        // preference can still block it; then a play button appears and a click starts the loop.
+        var fig = document.getElementById("hero-video"), v = fig.querySelector("video"), btn = fig.querySelector(".play");
+        v.muted = true;
+        function tryPlay() {
+          var p = v.play();
+          if (p && p.catch) { p.then(function () { fig.classList.remove("is-blocked"); }).catch(function () { fig.classList.add("is-blocked"); }); }
+        }
+        btn.addEventListener("click", tryPlay);
+        v.addEventListener("click", function () { if (v.paused) { tryPlay(); } });
+        document.addEventListener("visibilitychange", function () { if (!document.hidden && v.paused) { tryPlay(); } });
+        if (document.readyState === "complete") { tryPlay(); } else { window.addEventListener("load", tryPlay); }
+      }());
+    </script>
 
     <ol class="contrib">
       <li>
