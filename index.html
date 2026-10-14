@@ -52,27 +52,26 @@
       <a href="#bibtex">BibTeX</a>
     </div>
 
-    <figure class="hero-video" id="hero-video">
-      <video src="assets/hero.mp4" poster="assets/hero.jpg" autoplay muted loop playsinline preload="auto"
-             aria-label="Twenty-two algorithms, a policy trained in simulation, the shift toolbox switching on six shift sources, the policy failing under shift, and the benchmark."></video>
-      <button type="button" class="play" aria-label="Play the video"></button>
+    <link rel="stylesheet" href="assets/hero-loop.css">
+    <figure class="hero-loop" aria-label="From an algorithm to a robustness capability map">
+      <div class="hero-loop-stage">
+        <img class="hero-loop-poster" src="assets/hero-loop-poster.svg" width="1000" height="600" alt="A blue walking robot and a floating little devil operating six shift switches. The workflow goes from algorithm selection to shift evaluation and a capability map.">
+      </div>
+      <figcaption class="hero-loop-caption">
+        <span class="hero-loop-summary">Choose a policy. Change its world. Map its limits.</span>
+        <span class="hero-loop-disclaimer">Illustrative workflow · not experimental results</span>
+      </figcaption>
+      <div class="hero-loop-controls" hidden>
+        <div class="hero-loop-chapters" aria-label="Animation chapters">
+          <button type="button" data-time="0" aria-label="Show algorithm library"><span>01</span> Library</button>
+          <button type="button" data-time="6.5" aria-label="Show walking policy"><span>02</span> Policy</button>
+          <button type="button" data-time="11" aria-label="Show shift toolbox"><span>03</span> Shifts</button>
+          <button type="button" data-time="20.5" aria-label="Show capability map"><span>04</span> Map</button>
+        </div>
+        <button type="button" class="hero-loop-pause" aria-label="Pause animation">Pause <span aria-hidden="true">Ⅱ</span></button>
+      </div>
     </figure>
-    <script>
-      (function () {
-        // Autoplay of a muted video is allowed everywhere, but a browser setting or a reduced-motion
-        // preference can still block it; then a play button appears and a click starts the loop.
-        var fig = document.getElementById("hero-video"), v = fig.querySelector("video"), btn = fig.querySelector(".play");
-        v.muted = true;
-        function tryPlay() {
-          var p = v.play();
-          if (p && p.catch) { p.then(function () { fig.classList.remove("is-blocked"); }).catch(function () { fig.classList.add("is-blocked"); }); }
-        }
-        btn.addEventListener("click", tryPlay);
-        v.addEventListener("click", function () { if (v.paused) { tryPlay(); } });
-        document.addEventListener("visibilitychange", function () { if (!document.hidden && v.paused) { tryPlay(); } });
-        if (document.readyState === "complete") { tryPlay(); } else { window.addEventListener("load", tryPlay); }
-      }());
-    </script>
+    <script src="assets/hero-loop.js" defer></script>
 
     <ol class="contrib">
       <li>
@@ -190,8 +189,7 @@ python baselines/evaluate.py --run runs/rorl_hopper/seed0</pre>
     <h2>Twenty-two algorithms, organized by mechanism.</h2>
     <p>The sixteen robust methods are grouped by data regime and by where robustness enters: the learner,
       the environment it collects from, or the data it learns from. Each row names the shift the method
-      claims and the base algorithm it is built on; the colour of a family is used for it throughout the
-      results.</p>
+      claims and the base algorithm it is built on.</p>
     <!-- algo-table:start -->
     <div class="table-scroll">
       <table class="data">
@@ -203,22 +201,22 @@ python baselines/evaluate.py --run runs/rorl_hopper/seed0</pre>
         </thead>
         <tbody>
           <tr class="grp"><td colspan="7">Robust online — learns through continued environment interaction</td></tr>
-          <tr><td rowspan="3" class="nw"><i class="chip chip-learner-on"></i>Learner-centric</td><td class="nw"><a href="docs/algorithms/robust-online/atla/">ATLA</a></td><td>Observation shift</td><td>PPO</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
+          <tr><td rowspan="3" class="nw">Learner-centric</td><td class="nw"><a href="docs/algorithms/robust-online/atla/">ATLA</a></td><td>Observation shift</td><td>PPO</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
           <tr><td class="nw"><a href="docs/algorithms/robust-online/atla-sa/">ATLA-SA</a></td><td>Observation shift</td><td>PPO</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
           <tr><td class="nw"><a href="docs/algorithms/robust-online/rsc/">RSC</a></td><td>Semantic shift</td><td>SAC</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
-          <tr><td rowspan="2" class="nw"><i class="chip chip-env"></i>Environment-centric</td><td class="nw"><a href="docs/algorithms/robust-online/rarl/">RARL</a></td><td>Dynamic shift</td><td>PPO / TRPO</td><td class="c tick">✓</td><td class="c tick">✓</td><td class="c"></td></tr>
+          <tr><td rowspan="2" class="nw">Environment-centric</td><td class="nw"><a href="docs/algorithms/robust-online/rarl/">RARL</a></td><td>Dynamic shift</td><td>PPO / TRPO</td><td class="c tick">✓</td><td class="c tick">✓</td><td class="c"></td></tr>
           <tr><td class="nw"><a href="docs/algorithms/robust-online/dr/">DR</a></td><td>Dynamic shift</td><td>SAC / PPO</td><td class="c tick">✓</td><td class="c"></td><td class="c"></td></tr>
           <tr class="grp"><td colspan="7">Robust offline — learns from a fixed dataset without environment interaction</td></tr>
-          <tr><td rowspan="3" class="nw"><i class="chip chip-learner-off"></i>Learner-centric</td><td class="nw"><a href="docs/algorithms/robust-offline/rfqi/">RFQI</a></td><td>Dynamic shift</td><td>FQI</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+          <tr><td rowspan="3" class="nw">Learner-centric</td><td class="nw"><a href="docs/algorithms/robust-offline/rfqi/">RFQI</a></td><td>Dynamic shift</td><td>FQI</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
           <tr><td class="nw"><a href="docs/algorithms/robust-offline/rorl/">RORL</a></td><td>Observation shift</td><td>SAC</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
           <tr><td class="nw"><a href="docs/algorithms/robust-offline/atla-iql/">ATLA-IQL</a></td><td>Observation shift</td><td>IQL</td><td class="c"></td><td class="c tick">✓</td><td class="c"></td></tr>
-          <tr><td rowspan="2" class="nw"><i class="chip chip-data"></i>Data-centric</td><td class="nw"><a href="docs/algorithms/robust-offline/rsc-iql/">RSC-IQL</a></td><td>Semantic shift</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
+          <tr><td rowspan="2" class="nw">Data-centric</td><td class="nw"><a href="docs/algorithms/robust-offline/rsc-iql/">RSC-IQL</a></td><td>Semantic shift</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
           <tr><td class="nw"><a href="docs/algorithms/robust-offline/rambo/">RAMBO</a></td><td>Dynamic shift</td><td>SAC</td><td class="c"></td><td class="c tick">✓</td><td class="c tick">✓</td></tr>
-          <tr><td rowspan="3" class="nw"><i class="chip chip-generative"></i>Data-centric · generative</td><td class="nw"><a href="docs/algorithms/robust-offline/romb/">ROMB</a></td><td>Dynamic shift</td><td>IQL</td><td class="c"></td><td class="c tick">✓</td><td class="c tick">✓</td></tr>
+          <tr><td rowspan="3" class="nw">Data-centric · generative</td><td class="nw"><a href="docs/algorithms/robust-offline/romb/">ROMB</a></td><td>Dynamic shift</td><td>IQL</td><td class="c"></td><td class="c tick">✓</td><td class="c tick">✓</td></tr>
           <tr><td class="nw"><a href="docs/algorithms/robust-offline/fwm/">FWM</a></td><td>Dynamic shift</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
           <tr><td class="nw"><a href="docs/algorithms/robust-offline/plr-pvl/">PLR-PVL</a></td><td>Dynamic shift</td><td>IQL</td><td class="c"></td><td class="c"></td><td class="c tick">✓</td></tr>
           <tr class="grp"><td colspan="7">Robust safe — adds a cost constraint that must hold under shift</td></tr>
-          <tr><td rowspan="2" class="nw"><i class="chip chip-safe"></i>Robust safe</td><td class="nw"><a href="docs/algorithms/robust-safe/ramu/">RAMU</a></td><td>Dynamic shift</td><td>PPO</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
+          <tr><td rowspan="2" class="nw">Robust safe</td><td class="nw"><a href="docs/algorithms/robust-safe/ramu/">RAMU</a></td><td>Dynamic shift</td><td>PPO</td><td class="c"></td><td class="c"></td><td class="c"></td></tr>
           <tr><td class="nw"><a href="docs/algorithms/robust-safe/spidr/">SPiDR</a></td><td>Dynamic shift</td><td>PPO</td><td class="c tick">✓</td><td class="c"></td><td class="c tick">✓</td></tr>
         </tbody>
       </table>

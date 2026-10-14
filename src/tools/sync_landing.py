@@ -69,8 +69,7 @@ def table_html(spec):
                        if a["regime"] == regime and a["family"] == fam]
             for i, a in enumerate(members):
                 t = a["traits"]
-                head = (f'<td rowspan="{len(members)}" class="nw"><i class="chip chip-{colour}"></i>{fam_label}</td>'
-                        if i == 0 else "")
+                head = (f'<td rowspan="{len(members)}" class="nw">{fam_label}</td>' if i == 0 else "")
                 rows.append(
                     f'      <tr>{head}<td class="nw"><a href="docs/algorithms/{GROUP[a["regime"]]}/{a["slug"]}/">{a["name"]}</a></td>'
                     f'<td>{CLAIMED[a["claimed"]]}</td><td>{a["base"]}</td>'
