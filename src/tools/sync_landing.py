@@ -30,17 +30,18 @@ SHIFTS = ("<!-- shift-table:start -->", "<!-- shift-table:end -->")
 TASKS = ("<!-- task-cards:start -->", "<!-- task-cards:end -->")
 RESULTS = ("<!-- results-data:start -->", "<!-- results-data:end -->")
 
-CLAIMED = {"dynamic": "Dynamic shift", "observation": "Observation shift", "semantics": "Semantic shift"}
+# The column head says "Claimed robustness", so the cells name the source alone.
+CLAIMED = {"dynamic": "Dynamic", "observation": "Observation", "semantics": "Semantic"}
 # The table holds robust methods only, so the group follows from the setting.
 GROUP = {"offline": "robust-offline", "online": "robust-online", "safe": "robust-safe"}
 # (regime, group label, blurb, [(family key, family label, colour token)])
 GROUPS = [
-    ("online", "Robust online", "learns through continued environment interaction",
+    ("online", "Robust Online", "learns through continued environment interaction",
      [("learner", "Learner-centric", "learner-on"), ("environment", "Environment-centric", "env")]),
-    ("offline", "Robust offline", "learns from a fixed dataset without environment interaction",
+    ("offline", "Robust Offline", "learns from a fixed dataset without environment interaction",
      [("learner", "Learner-centric", "learner-off"), ("data", "Data-centric", "data"),
-      ("generative", "Data-centric · generative", "generative")]),
-    ("safe", "Robust safe", "adds a cost constraint that must hold under shift",
+      ("generative", 'Data-centric<br><span class="sub">(generative model)</span>', "generative")]),
+    ("safe", "Robust Safe", "adds a cost constraint that must hold under shift",
      [("safe", "Robust safe", "safe")]),
 ]
 
@@ -57,13 +58,16 @@ def tick(flag):
 
 
 def table_html(spec):
-    rows = ['<div class="table-scroll">', '  <table class="data">', "    <thead>", "      <tr>",
-            "        <th>Family</th><th>Method</th><th>Claimed<br>robustness</th><th>Base<br>algorithm</th>",
+    rows = ['<div class="table-scroll">', '  <table class="data algo">',
+            '    <colgroup><col class="c-fam"><col class="c-method"><col class="c-claim"><col class="c-base">'
+            '<col class="c-trait"><col class="c-trait"><col class="c-trait"></colgroup>',
+            "    <thead>", "      <tr>",
+            "        <th>Family</th><th>Method</th><th>Claimed robustness</th><th>Base algorithm</th>",
             '        <th class="c">Shifted-env<br>rollout</th><th class="c">Adversarial<br>network</th>'
             '<th class="c">Learned<br>model</th>',
             "      </tr>", "    </thead>", "    <tbody>"]
     for regime, label, blurb, families in GROUPS:
-        rows.append(f'      <tr class="grp"><td colspan="7">{label} — {blurb}</td></tr>')
+        rows.append(f'      <tr class="grp grp-{regime}"><td colspan="7"><b>{label}</b>{blurb}</td></tr>')
         for fam, fam_label, colour in families:
             members = [a for a in spec["algorithms"]
                        if a["regime"] == regime and a["family"] == fam]
@@ -71,7 +75,7 @@ def table_html(spec):
                 t = a["traits"]
                 head = (f'<td rowspan="{len(members)}" class="nw">{fam_label}</td>' if i == 0 else "")
                 rows.append(
-                    f'      <tr>{head}<td class="nw"><a href="docs/algorithms/{GROUP[a["regime"]]}/{a["slug"]}/">{a["name"]}</a></td>'
+                    f'      <tr class="in-{regime}">{head}<td class="nw"><a href="docs/algorithms/{GROUP[a["regime"]]}/{a["slug"]}/">{a["name"]}</a></td>'
                     f'<td>{CLAIMED[a["claimed"]]}</td><td>{a["base"]}</td>'
                     f'{tick(t["rollout"])}{tick(t["adversary"])}{tick(t["model"])}</tr>')
     rows += ["    </tbody>", "  </table>", "</div>",
