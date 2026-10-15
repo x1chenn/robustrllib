@@ -37,7 +37,7 @@
 {#- The name of the site, written as on the project page. -#}
 {%- macro brand() -%}
 <a class="bk-brand" href="{{ nav.homepage.url|url if nav.homepage else base_url }}">
-  <img class="mark" src="{{ 'assets/favicon.svg'|url }}" alt="" width="28" height="28">
+  <img class="mark" src="{{ 'assets/favicon.svg'|url }}" alt="" width="32" height="32">
   <span class="bk-brand-name"><span class="bk-brand-mark">RobustRL</span>lib</span>
   <span class="bk-brand-kind">Tutorial</span>
 </a>
@@ -63,9 +63,9 @@
   <meta name="description" content="{{ config.site_description }}">
   {%- endif %}
   <title>{% block title %}{% if page and page.title and not page.is_homepage %}{{ page.title|striptags }} - {% endif %}{{ config.site_name }}{% endblock %}</title>
-  <link rel="icon" type="image/svg+xml" href="{{ 'assets/favicon.svg'|url }}?v=3">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/favicon-32.png'|url }}?v=3">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ 'assets/apple-touch-icon.png'|url }}?v=3">
+  <link rel="icon" type="image/svg+xml" href="{{ 'assets/favicon.svg'|url }}?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'assets/favicon-32.png'|url }}?v=4">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ 'assets/apple-touch-icon.png'|url }}?v=4">
   <link rel="stylesheet" href="{{ 'css/site.css'|url }}">
   {%- for path in config.extra_css %}
   <link rel="stylesheet" href="{{ path|url }}">

@@ -62,7 +62,7 @@ nav.top {
 }
 nav.top .wrap { display: flex; align-items: center; height: 100%; gap: 22px; }
 nav.top .brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 17px; color: var(--ink); letter-spacing: -.01em; }
-nav.top .brand .logo { width: 26px; height: 26px; flex: none; }
+nav.top .brand .logo { width: 30px; height: 30px; flex: none; }
 nav.top .brand:hover { text-decoration: none; }
 .wm { color: var(--link); }   /* the name: RobustRL in blue, lib in ink */
 nav.top ul { display: flex; gap: 20px; list-style: none; margin: 0 0 0 auto; padding: 0; font-size: 14.5px; }
@@ -75,7 +75,7 @@ h1 { margin: 0 0 6px; font-size: 44px; line-height: 1.1; font-weight: 700; lette
 /* masthead, centred as on the OmniPiano project page: logo lockup, title, byline, buttons */
 header.intro .masthead { text-align: center; }
 h1.lockup { display: inline-flex; align-items: center; gap: 18px; margin: 0 0 20px; font-size: 64px; line-height: 1; letter-spacing: -.03em; }
-h1.lockup .logo { width: 88px; height: 88px; flex: none; }   /* the site logo: the agent on a sim | real sphere */
+h1.lockup .logo { width: 104px; height: 104px; flex: none; }   /* the site logo: the agent on a sim | real sphere */
 .masthead .subtitle { margin: 0 auto 14px; max-width: 900px; font-size: 36px; line-height: 1.22; font-weight: 600; color: var(--ink); letter-spacing: -.02em; }
 .masthead .byline { margin: 0; font-size: 17px; font-weight: 600; color: var(--ink-2); }
 .masthead .links { justify-content: center; margin-top: 26px; }
@@ -316,7 +316,7 @@ table.data tr.shift-demo > td { padding: 6px 0 22px; }
   body { font-size: 16px; }
   h1 { font-size: 34px; }
   h1.lockup { font-size: 44px; gap: 12px; }
-  h1.lockup .logo { width: 60px; height: 60px; }
+  h1.lockup .logo { width: 72px; height: 72px; }
   .masthead .subtitle { font-size: 25px; }
   h2 { font-size: 23px; }
   section > .wrap > h2 { font-size: 26px; }

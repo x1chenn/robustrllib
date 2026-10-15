@@ -92,7 +92,7 @@ a:hover { color: var(--bk-primary-dark); text-decoration: underline; }
   font-size: 1.1rem; color: var(--bk-text);
 }
 .bk-brand:hover { color: var(--bk-text); text-decoration: none; }
-.bk-brand .mark { flex: none; width: 28px; height: 28px; margin-right: .2rem; }
+.bk-brand .mark { flex: none; width: 32px; height: 32px; margin-right: .2rem; }
 .bk-brand-name { font-weight: 700; letter-spacing: -.02em; }
 .bk-brand-mark { color: var(--bk-primary); }
 .bk-brand-kind { color: var(--bk-muted); }
