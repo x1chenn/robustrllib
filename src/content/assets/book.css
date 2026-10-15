@@ -212,9 +212,12 @@
 .rl-book .rl-cover-blocks { display: flex; gap: 8px; }
 .rl-book .rl-cover-blocks i { display: block; width: 28px; height: 18px; border-radius: 4px; }
 
-@media (prefers-reduced-motion: reduce) {
-  .rl-book .rl-leaf { transition: none; }
-}
+/* narrow: the page that comes up swings in from its spine (see swing() in book.js) */
+@keyframes rl-swing-next { from { transform: perspective(1600px) rotateY(75deg); opacity: .3; } to { transform: perspective(1600px) rotateY(0); opacity: 1; } }
+@keyframes rl-swing-prev { from { transform: perspective(1600px) rotateY(-75deg); opacity: .3; } to { transform: perspective(1600px) rotateY(0); opacity: 1; } }
+.rl-book.is-live.is-narrow .rl-spread.rl-swing-next { transform-origin: left center; animation: rl-swing-next .6s cubic-bezier(.35, .1, .2, 1); }
+.rl-book.is-live.is-narrow .rl-spread.rl-swing-prev { transform-origin: right center; animation: rl-swing-prev .6s cubic-bezier(.35, .1, .2, 1); }
+/* The page turn plays only when the reader turns a page, so it stays under reduced motion too. */
 @media print {
   .rl-book.is-live .rl-spread { display: grid !important; margin: 0 0 12px; }
   .rl-book .rl-leaves, .rl-book-controls, .rl-book-tabs, .rl-book-hint { display: none !important; }
