@@ -1,0 +1,82 @@
+/* The results pages: static sheets of figures, tables and short text, one page per question. No script.
+   Colours and the page frame come from the landing page's stylesheet. */
+header.page { padding: 52px 0 36px; }
+header.page h1 { margin: 0 0 24px; font-family: "Source Serif 4", Georgia, "Times New Roman", serif; font-size: 42px; line-height: 1.14; font-weight: 600; letter-spacing: -.01em; color: #000; }
+header.page.sub h1 { font-size: 34px; line-height: 1.2; max-width: 900px; margin-bottom: 18px; }
+header.page .kicker a { color: var(--muted); }
+header.page .kicker a:hover { color: var(--ink); }
+header.page .lede { max-width: 840px; margin: 0; font-size: 17.5px; line-height: 1.6; color: var(--ink-2); }
+ol.modules { margin: 0 0 18px; padding-left: 24px; max-width: 800px; font-size: 17px; line-height: 1.55; }
+ol.modules > li { margin: 0 0 9px; padding-left: 4px; }
+ol.modules a { color: var(--ink); font-weight: 600; }
+ol.modules a:hover { color: var(--link); }
+p.finding b:first-child, ul.changes li b:first-child { color: #000; }
+ul.changes { max-width: 860px; }
+ul.changes li { margin: 0 0 9px; }
+figure a { display: block; }
+figure a:hover { text-decoration: none; }
+figure .stack a + a { margin-top: 18px; }
+figure.narrow a { max-width: 460px; margin: 0 auto; }
+p.more { margin: 30px 0 0; font-size: 15.5px; color: var(--muted); }
+p.more a { font-weight: 600; }
+figure .pair { display: grid; grid-template-columns: 36fr 56fr; gap: 6%; align-items: center; }
+.tcap { margin: 0 0 10px; font-size: 14px; line-height: 1.55; color: var(--muted); }
+.tcap b { color: var(--ink-2); font-weight: 600; }
+table.data td.num, table.data th.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+table.data td.num:last-child, table.data th.num:last-child { padding-right: 0; }
+table.data .sd { color: var(--muted); }
+table.data tr.base td { font-weight: 600; }
+.tablewrap { margin: 26px 0; max-width: 560px; }
+.tablewrap.wide { max-width: 820px; }
+.tablewrap.setup { max-width: none; margin: 18px 0 26px; }
+.tablewrap.setup td { vertical-align: top; }
+.tablewrap.setup code { font-size: 12.5px; background: none; padding: 0; }
+/* tables with a meter per row: a pale track up to the nominal score, a dark fill up to the score under the compound
+   shift. One hue, two steps; the left end is the baseline and stays square. The tables are stacked, never side by
+   side, so that every bar of the page starts at the same place and uses the same scale. */
+.panels { margin: 24px 0 34px; }
+.panels .tablewrap { margin: 0 0 26px; max-width: none; }
+table.meters { table-layout: fixed; }
+table.meters col.c-method { width: 22%; }
+table.meters col.c-meter { width: 42%; }
+table.meters col.c-num { width: 12%; }
+table.meters th, table.meters td { padding-top: 6px; padding-bottom: 6px; }
+table.meters td.meter { vertical-align: middle; padding-right: 22px; }
+table.meters .track { display: block; height: 8px; border-radius: 0 4px 4px 0; background: #d6e3f2; }
+table.meters .fill { display: block; height: 8px; border-radius: 0 4px 4px 0; background: var(--link); }
+table.meters .tag { margin-left: 7px; font-size: 12px; color: var(--muted); }
+/* order of the rows: three radio buttons, hidden but reachable by keyboard; their labels are the buttons */
+.sortable > input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+.sortable tbody { display: none; }
+#by-retention:checked ~ .panels tbody.by-retention,
+#by-compound:checked ~ .panels tbody.by-compound,
+#by-nominal:checked ~ .panels tbody.by-nominal { display: table-row-group; }
+p.sortby { margin: 12px 0 0; font-size: 14px; color: var(--ink-2); }
+p.sortby label { display: inline-block; margin-left: 8px; padding: 3px 12px; border: 1px solid var(--line-strong); border-radius: 999px; background: #fff; color: var(--ink-2); font-weight: 550; cursor: pointer; }
+p.sortby label:hover { border-color: var(--ink); }
+#by-retention:checked ~ .sortby label[for="by-retention"],
+#by-compound:checked ~ .sortby label[for="by-compound"],
+#by-nominal:checked ~ .sortby label[for="by-nominal"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+#by-retention:focus-visible ~ .sortby label[for="by-retention"],
+#by-compound:focus-visible ~ .sortby label[for="by-compound"],
+#by-nominal:focus-visible ~ .sortby label[for="by-nominal"] { outline: 2px solid var(--link); outline-offset: 2px; }
+p.key { margin: 26px 0 6px; font-size: 14px; color: var(--ink-2); }
+p.key .sw { display: inline-block; width: 26px; height: 8px; border-radius: 0 4px 4px 0; margin: 0 8px 0 0; vertical-align: 1px; }
+p.key .sw-track { background: #d6e3f2; }
+p.key .sw-fill { background: var(--link); margin-left: 22px; }
+@media (max-width: 760px) {
+  header.page h1 { font-size: 32px; }
+  header.page.sub h1 { font-size: 26px; }
+  header.page .lede { font-size: 16.5px; }
+  ol.modules { font-size: 16px; }
+  figure .pair { grid-template-columns: 1fr; gap: 18px; }
+  table.meters { font-size: 13px; }
+  table.meters col.c-method { width: 29%; }
+  table.meters col.c-meter { width: 17%; }
+  table.meters col.c-num { width: 18%; }
+  table.meters th, table.meters td { padding-right: 6px; }
+  table.meters th { font-size: 11px; }
+  table.meters td.meter { padding-right: 8px; }
+  table.meters td.nw { white-space: normal; }
+  table.meters .tag { display: block; margin-left: 0; }
+}
